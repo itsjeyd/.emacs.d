@@ -51,6 +51,9 @@
 ;;;;;;;;;;;;;;;;;;;;;;;
 (add-to-list 'load-path "/home/tim/.emacs.d/idle-require/")
 (require 'idle-require)
+(idle-require-mode t)
+(setq idle-require-idle-delay "10")
+(setq idle-require-load-break "0.5")
 
 
 ;;;;;;;;;;;
