@@ -46,6 +46,13 @@
  )
 
 
+;;;;;;;;;;;;;;;;;;;;;;;
+;;; Library Loading ;;;
+;;;;;;;;;;;;;;;;;;;;;;;
+(add-to-list 'load-path "/home/tim/.emacs.d/idle-require/")
+(require 'idle-require)
+
+
 ;;;;;;;;;;;
 ;;; LKB ;;;
 ;;;;;;;;;;;
