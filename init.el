@@ -24,6 +24,14 @@
  )
 
 
+;;;;;;;;;;;;;
+;;; Paths ;;;
+;;;;;;;;;;;;;
+
+(add-to-list 'load-path "~/elisp/")
+(add-to-list 'load-path "~/.emacs.d/")
+
+
 ;;;;;;;;;;;;;;;
 ;;; Buffers ;;;
 ;;;;;;;;;;;;;;;
@@ -173,7 +181,6 @@
            (custom-face-attributes-get (car face) frame))))
 
 ; Add a couple more themes
-(add-to-list 'load-path "/home/tim/elisp/")
 (load "color-theme-colorful-obsolescence")
 (load "color-theme-zenburn")
 
@@ -475,7 +482,6 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;;; Auto-complete ;;;
-(add-to-list 'load-path "~/.emacs.d/")
 (require 'auto-complete-config)
 (add-to-list 'ac-dictionary-directories "~/.emacs.d/ac-dict")
 (ac-config-default)
