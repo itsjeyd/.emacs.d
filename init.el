@@ -10,20 +10,15 @@
  '(ido-create-new-buffer (quote always))
  '(ido-enable-flex-matching t)
  '(ido-mode (quote both) nil (ido))
- '(indent-tabs-mode nil)
  '(minibuffer-complete-cycle t nil (minibuffer-complete-cycle))
  '(savehist-mode t nil (savehist))
  '(scroll-bar-mode nil)
  '(scroll-margin 1)
  '(scroll-preserve-screen-position t)
  '(scroll-step 1)
- '(sentence-end-double-space nil)
- '(set-mark-command-repeat-pop t)
- '(tab-width 4)
  '(tags-revert-without-query t)
  '(tool-bar-mode nil)
  '(tooltip-use-echo-area t)
- '(x-select-enable-clipboard t))
 (custom-set-faces
   ;; custom-set-faces was added by Custom.
   ;; If you edit it by hand, you could mess it up, so be careful.
@@ -42,6 +37,44 @@
 ; Variables
 (setq confirm-nonexistent-file-or-buffer nil)
 (setq revert-without-query (quote (".*")))
+
+
+;;;;;;;;;;;;;;;
+;;; Editing ;;;
+;;;;;;;;;;;;;;;
+
+; Functions
+(put 'narrow-to-region 'disabled nil)
+
+; Key Bindings
+(global-set-key (kbd "M-g c") 'goto-char)
+(global-unset-key (kbd "M-g g"))
+(global-unset-key (kbd "M-g M-g"))
+(global-set-key (kbd "M-g l") 'goto-line)
+(global-set-key (kbd "M-s t t") 'toggle-truncate-lines)
+
+; Mark Lines
+(require 'mark-lines)
+(global-set-key (kbd "M-s m") 'mark-lines-next-line)
+
+; Move Text
+(require 'move-text)
+(global-set-key (kbd "M-s u") 'move-text-up)
+(global-set-key (kbd "M-s d") 'move-text-down)
+
+; Variables
+(setq indent-tabs-mode nil)
+(setq sentence-end-double-space nil)
+(setq set-mark-command-repeat-pop t)
+(setq tab-width 4)
+(setq x-select-enable-clipboard t)
+
+; Wrap Region
+(add-to-list 'load-path "~/elisp/wrap-region")
+(require 'wrap-region)
+(wrap-region-add-wrapper "*" "*")
+(wrap-region-add-wrapper "/" "/")
+(wrap-region-add-wrapper "=" "=")
 
 
 ;;;;;;;;;;;;;;;;
@@ -140,23 +173,6 @@
 ;;; Shell Command Completion ;;;
 (require 'shell-command)
 (shell-command-completion-mode)
-
-
-;;;;;;;;;;;;;;;;;;
-;;; Mark Lines ;;;
-;;;;;;;;;;;;;;;;;;
-(require 'mark-lines)
-(global-set-key (kbd "M-s m") 'mark-lines-next-line)
-
-
-;;;;;;;;;;;;;;;;;;;
-;;; Wrap Region ;;;
-;;;;;;;;;;;;;;;;;;;
-(add-to-list 'load-path "/home/tim/elisp/wrap-region")
-(require 'wrap-region)
-(wrap-region-add-wrapper "*" "*")
-(wrap-region-add-wrapper "/" "/")
-(wrap-region-add-wrapper "=" "=")
 
 
 ;;;;;;;;;;;
@@ -356,16 +372,6 @@
 (setq TeX-electric-sub-and-superscript t)
 
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;; Global Key Bindings ;;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;
-(global-set-key (kbd "M-g c") 'goto-char)
-(global-unset-key (kbd "M-g g"))
-(global-unset-key (kbd "M-g M-g"))
-(global-set-key (kbd "M-g l") 'goto-line)
-(global-set-key (kbd "M-s t t") 'toggle-truncate-lines)
-
-
 ;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Keyboard Macros ;;;
 ;;;;;;;;;;;;;;;;;;;;;;;
@@ -521,7 +527,6 @@
 ;;;;;;;;;;;;
 ;;; MISC ;;;
 ;;;;;;;;;;;;
-(put 'narrow-to-region 'disabled nil)
 
 ;;; Prompts
 (fset 'yes-or-no-p 'y-or-n-p)
@@ -610,10 +615,6 @@
 
 (global-set-key (kbd "M-s s w") 'swap-windows)
 
-;;; Move Lines
-(require 'move-text)
-(global-set-key (kbd "M-s u") 'move-text-up)
-(global-set-key (kbd "M-s d") 'move-text-down)
 
 
 ;;;;;;;;;;;;;;;;;;;;
