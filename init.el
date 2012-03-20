@@ -7,7 +7,6 @@
  '(history-delete-duplicates t)
  '(history-length t)
  '(hscroll-margin 1)
- '(minibuffer-complete-cycle t nil (minibuffer-complete-cycle))
  '(savehist-mode t nil (savehist))
  '(scroll-margin 1)
  '(scroll-preserve-screen-position t)
