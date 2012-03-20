@@ -7,9 +7,6 @@
  '(history-delete-duplicates t)
  '(history-length t)
  '(hscroll-margin 1)
- '(ido-create-new-buffer (quote always))
- '(ido-enable-flex-matching t)
- '(ido-mode (quote both) nil (ido))
  '(minibuffer-complete-cycle t nil (minibuffer-complete-cycle))
  '(savehist-mode t nil (savehist))
  '(scroll-bar-mode nil)
@@ -232,31 +229,36 @@
 ;;; Ido ;;;
 ;;;;;;;;;;;
 
-;;; Ido Functionality for M-x
-(global-set-key
- (kbd "<menu>")
- (lambda ()
-   (interactive)
-   (call-interactively
-    (intern
-     (ido-completing-read
-      "M-x "
-      (all-completions "" obarray 'commandp))))))
-
+; Functions
 (defun mx-ido()
   (interactive)
   (call-interactively
    (intern
     (ido-completing-read
-     "How can I help you, Sir? "
+     "M-x "
      (all-completions "" obarray 'commandp)))))
 
-(global-set-key (kbd "M-x") 'mx-ido)
+(defun ido-recentf-open ()
+  "Use `ido-completing-read' to \\[find-file] a recent file"
+  (interactive)
+  (if (find-file (ido-completing-read "Find recent file: " recentf-list))
+      (message "Opening file...")
+    (message "Aborting")))
 
-;;; Ido-Ubiquitous
-(add-to-list 'load-path "/home/tim/elisp/ido-ubiquitous/")
+; Key Bindings
+(global-set-key (kbd "M-x") 'mx-ido)
+(global-set-key (kbd "<menu>") 'mx-ido)
+
+; Ubiquitous
+(add-to-list 'load-path "~/elisp/ido-ubiquitous/")
 (require 'ido-ubiquitous)
 (ido-ubiquitous)
+
+; Variables
+(setq ido-create-new-buffer (quote always))
+(setq ido-enable-flex-matching t)
+(ido-mode (quote both))
+
 
 
 ;;;;;;;;;;;;;
@@ -613,13 +615,6 @@
 
 ; 50 files ought to be enough.
 (setq recentf-max-saved-items 50)
-
-(defun ido-recentf-open ()
-  "Use `ido-completing-read' to \\[find-file] a recent file"
-  (interactive)
-  (if (find-file (ido-completing-read "Find recent file: " recentf-list))
-      (message "Opening file...")
-    (message "Aborting")))
 
 
 
