@@ -3,7 +3,6 @@
   ;; If you edit it by hand, you could mess it up, so be careful.
   ;; Your init file should contain only one such instance.
   ;; If there is more than one, they won't work right.
- '(column-number-mode t)
  '(confirm-nonexistent-file-or-buffer nil)
  '(desktop-save-mode t)
  '(history-delete-duplicates t)
@@ -26,7 +25,6 @@
  '(tags-revert-without-query t)
  '(tool-bar-mode nil)
  '(tooltip-use-echo-area t)
- '(uniquify-buffer-name-style (quote forward) nil (uniquify))
  '(x-select-enable-clipboard t))
 (custom-set-faces
   ;; custom-set-faces was added by Custom.
@@ -34,6 +32,18 @@
   ;; Your init file should contain only one such instance.
   ;; If there is more than one, they won't work right.
  )
+
+
+;;;;;;;;;;;;;;;;
+;;; Modeline ;;;
+;;;;;;;;;;;;;;;;
+
+; Unique Buffer Names
+(require 'uniquify)
+(setq uniquify-buffer-name-style (quote forward))
+
+; Variables
+(column-number-mode t)
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;
@@ -520,8 +530,6 @@
 (add-hook 'lisp-mode-hook 'show-paren-mode)
 (add-hook 'octave-mode-hook 'show-paren-mode)
 
-;;; Unique Buffer Names
-(require 'uniquify)
 
 ;;; Key Chords
 (require 'key-chord)
