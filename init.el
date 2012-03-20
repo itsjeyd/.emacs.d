@@ -8,7 +8,6 @@
  '(column-number-mode t)
  '(confirm-nonexistent-file-or-buffer nil)
  '(desktop-save-mode t)
- '(dired-recursive-copies (quote always))
  '(history-delete-duplicates t)
  '(history-length t)
  '(hscroll-margin 1)
@@ -17,7 +16,6 @@
  '(ido-mode (quote both) nil (ido))
  '(indent-tabs-mode nil)
  '(minibuffer-complete-cycle t nil (minibuffer-complete-cycle))
- '(openwith-associations (quote (("\\.\\(?:pdf\\|ps\\)\\'" "evince" (file)) ("\\.djvu\\'" "djview4" (file)) ("\\.\\(?:mp3\\|wav\\|flac\\)\\'" "clementine" (file)) ("\\.\\(?:mpe?g\\|avi\\|wmv\\|flv\\|mov\\|mp4\\)\\'" "vlc" (file)) ("\\.\\(?:jpe?g\\|png\\|bmp\\)\\'" "viewnior" (file)) ("\\.chm\\'" "chmsee" (file)) ("\\.\\(?:odt\\|doc\\|docx\\)\\'" "ooffice" ("-writer" file)) ("\\.\\(?:ods\\|xls\\|xlsx\\)\\'" "ooffice" ("-calc" file)) ("\\.\\(?:odp\\|pps\\|ppt\\|pptx\\)\\'" "ooffice" ("-impress" file)) ("\\.odb\\'" "ooffice" ("-base" file)))))
  '(revert-without-query (quote (".*")))
  '(savehist-mode t nil (savehist))
  '(scroll-bar-mode nil)
@@ -178,14 +176,27 @@
 ;;; Dired ;;;
 ;;;;;;;;;;;;;
 
-;;; File Associations ;;;
+; File Associations
 (require 'openwith)
 (openwith-mode t)
+(setq openwith-associations (quote (("\\.\\(?:pdf\\|ps\\)\\'" "evince" (file))
+                                    ("\\.djvu\\'" "djview4" (file))
+                                    ("\\.\\(?:mp3\\|wav\\|flac\\)\\'" "clementine" (file))
+                                    ("\\.\\(?:mpe?g\\|avi\\|wmv\\|flv\\|mov\\|mp4\\)\\'" "vlc" (file))
+                                    ("\\.\\(?:jpe?g\\|png\\|bmp\\)\\'" "viewnior" (file))
+                                    ("\\.chm\\'" "chmsee" (file))
+                                    ("\\.\\(?:odt\\|doc\\|docx\\)\\'" "ooffice" ("-writer" file))
+                                    ("\\.\\(?:ods\\|xls\\|xlsx\\)\\'" "ooffice" ("-calc" file))
+                                    ("\\.\\(?:odp\\|pps\\|ppt\\|pptx\\)\\'" "ooffice" ("-impress" file))
+                                    ("\\.odb\\'" "ooffice" ("-base" file)))))
 
-;;; Hidden Files ;;;
+; Hidden Files
 (require 'dired-x)
 (setq dired-omit-files "^\\...+$")
 (add-hook 'dired-mode-hook (lambda () (dired-omit-mode 1)))
+
+; Variables
+(setq dired-recursive-copies (quote always))
 
 
 ;;;;;;;;;;;;;;;;
