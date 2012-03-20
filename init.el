@@ -450,22 +450,6 @@
 (setq TeX-electric-sub-and-superscript t)
 
 
-;;;;;;;;;;;;;;;;;;;;;;;
-;;; Keyboard Macros ;;;
-;;;;;;;;;;;;;;;;;;;;;;;
-(fset 'python-hide-class-body
-   "\261\C-x$")
-(global-set-key (kbd "C-c s d c") 'python-hide-class-body) ; "Selective Display: Classes"
-
-(fset 'python-hide-function-bodies
-   "\265\C-x$")
-(global-set-key (kbd "C-c s d f") 'python-hide-function-bodies) ; "Selective Display: Functions"
-
-(fset 'python-show-all
-   "\C-x$")
-(global-set-key (kbd "C-c s d a") 'python-show-all) ; "Selective Display: All"
-
-
 ;;;;;;;;;;;;;
 ;;; Fixes ;;;
 ;;;;;;;;;;;;;
@@ -498,6 +482,19 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;;; Auto-complete ;;;
+; Macros
+(fset 'python-hide-class-body
+   "\261\C-x$")
+(global-set-key (kbd "C-c s d c") 'python-hide-class-body) ; "Selective Display: Classes"
+
+(fset 'python-hide-function-bodies
+   "\265\C-x$")
+(global-set-key (kbd "C-c s d f") 'python-hide-function-bodies) ; "Selective Display: Functions"
+
+(fset 'python-show-all
+   "\C-x$")
+(global-set-key (kbd "C-c s d a") 'python-show-all) ; "Selective Display: All"
+
 (require 'auto-complete-config)
 (add-to-list 'ac-dictionary-directories "~/.emacs.d/ac-dict")
 (ac-config-default)
