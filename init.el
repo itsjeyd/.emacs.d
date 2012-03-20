@@ -89,10 +89,63 @@
 (column-number-mode t)
 
 
+;;;;;;;;;;;;;;;;;;;;;;;;
+;;; Windows + Frames ;;;
+;;;;;;;;;;;;;;;;;;;;;;;;
+
+; Macros
+(fset 'kill-buffer-close-window
+   (lambda (&optional arg) "Keyboard macro. Kills the current
+   buffer and closes the window it was displayed in. Should only
+   be used if the frame is displaying more than one
+   window." (interactive "p") (kmacro-exec-ring-item (quote ([24
+   107 return 24 48] 0 "%d")) arg)))
+(global-set-key (kbd "C-S-k") 'kill-buffer-close-window)
+
+(fset 'kill-other-buffer-close-window
+   (lambda (&optional arg) "Keyboard macro. Kills the next buffer
+   in line and closes the associated window. I.e., if there are
+   two windows, the active one stays intact, the inactive one is
+   closed. If there are several windows, the one that would be
+   reached by issuing C-x o once is closed, all others stay
+   intact. Should only be used if the frame is displaying more
+   than one window." (interactive "p") (kmacro-exec-ring-item (quote ([24
+   111 24 107 return 24 48] 0 "%d")) arg)))
+(global-set-key (kbd "C-S-o k") 'kill-other-buffer-close-window)
+
+(fset 'ver-to-hor-split
+   (lambda (&optional arg) "Keyboard macro. Go from a horizontal
+   bar splitting two windows to a vertical one, preserving the
+   buffers shown in the two windows" (interactive "p") (kmacro-exec-ring-item (quote ([24
+   98 18 19 return 24 98 return 24 49 24 51 24 111 24 98 return
+   24 111] 0 "%d")) arg)))
+(global-set-key (kbd "C-x C-3") 'ver-to-hor-split)
+
+; Swapping windows
+(defun swap-windows ()
+ "If you have 2 windows, this function swaps them."
+ (interactive)
+ (cond ((not (= (count-windows) 2))
+        (message "You need exactly 2 windows to do this."))
+       (t
+        (let* ((w1 (first (window-list)))
+               (w2 (second (window-list)))
+               (b1 (window-buffer w1))
+               (b2 (window-buffer w2))
+               (s1 (window-start w1))
+               (s2 (window-start w2)))
+          (set-window-buffer w1 b2)
+          (set-window-buffer w2 b1)
+          (set-window-start w1 s2)
+          (set-window-start w2 s1)))))
+
+(global-set-key (kbd "M-s s w") 'swap-windows)
+
+
 ;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Library Loading ;;;
 ;;;;;;;;;;;;;;;;;;;;;;;
-(add-to-list 'load-path "/home/tim/.emacs.d/idle-require/")
+(add-to-list 'load-path "~/.emacs.d/idle-require/")
 (require 'idle-require)
 (idle-require-mode t)
 (setq idle-require-idle-delay "10")
@@ -375,33 +428,6 @@
 ;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Keyboard Macros ;;;
 ;;;;;;;;;;;;;;;;;;;;;;;
-(fset 'kill-buffer-close-window
-   (lambda (&optional arg) "Keyboard macro. Kills the current
-   buffer and closes the window it was displayed in. Should only
-   be used if the frame is displaying more than one
-   window." (interactive "p") (kmacro-exec-ring-item (quote ([24
-   107 return 24 48] 0 "%d")) arg)))
-(global-set-key (kbd "C-S-k") 'kill-buffer-close-window)
-
-(fset 'kill-other-buffer-close-window
-   (lambda (&optional arg) "Keyboard macro. Kills the next buffer
-   in line and closes the associated window. I.e., if there are
-   two windows, the active one stays intact, the inactive one is
-   closed. If there are several windows, the one that would be
-   reached by issuing C-x o once is closed, all others stay
-   intact. Should only be used if the frame is displaying more
-   than one window." (interactive "p") (kmacro-exec-ring-item (quote ([24
-   111 24 107 return 24 48] 0 "%d")) arg)))
-(global-set-key (kbd "C-S-o k") 'kill-other-buffer-close-window)
-
-(fset 'ver-to-hor-split
-   (lambda (&optional arg) "Keyboard macro. Go from a horizontal
-   bar splitting two windows to a vertical one, preserving the
-   buffers shown in the two windows" (interactive "p") (kmacro-exec-ring-item (quote ([24
-   98 18 19 return 24 98 return 24 49 24 51 24 111 24 98 return
-   24 111] 0 "%d")) arg)))
-(global-set-key (kbd "C-x C-3") 'ver-to-hor-split)
-
 (fset 'python-hide-class-body
    "\261\C-x$")
 (global-set-key (kbd "C-c s d c") 'python-hide-class-body) ; "Selective Display: Classes"
@@ -594,26 +620,6 @@
   (if (find-file (ido-completing-read "Find recent file: " recentf-list))
       (message "Opening file...")
     (message "Aborting")))
-
-;;; Swap windows
-(defun swap-windows ()
- "If you have 2 windows, this function swaps them."
- (interactive)
- (cond ((not (= (count-windows) 2))
-        (message "You need exactly 2 windows to do this."))
-       (t
-        (let* ((w1 (first (window-list)))
-               (w2 (second (window-list)))
-               (b1 (window-buffer w1))
-               (b2 (window-buffer w2))
-               (s1 (window-start w1))
-               (s2 (window-start w2)))
-          (set-window-buffer w1 b2)
-          (set-window-buffer w2 b1)
-          (set-window-start w1 s2)
-          (set-window-start w2 s1)))))
-
-(global-set-key (kbd "M-s s w") 'swap-windows)
 
 
 
