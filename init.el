@@ -9,13 +9,10 @@
  '(hscroll-margin 1)
  '(minibuffer-complete-cycle t nil (minibuffer-complete-cycle))
  '(savehist-mode t nil (savehist))
- '(scroll-bar-mode nil)
  '(scroll-margin 1)
  '(scroll-preserve-screen-position t)
  '(scroll-step 1)
  '(tags-revert-without-query t)
- '(tool-bar-mode nil)
- '(tooltip-use-echo-area t)
 (custom-set-faces
   ;; custom-set-faces was added by Custom.
   ;; If you edit it by hand, you could mess it up, so be careful.
@@ -80,6 +77,14 @@
 (wrap-region-add-wrapper "*" "*")
 (wrap-region-add-wrapper "/" "/")
 (wrap-region-add-wrapper "=" "=")
+
+
+;;;;;;;;;;;;;;;;;
+;;; Interface ;;;
+;;;;;;;;;;;;;;;;;
+(scroll-bar-mode nil)
+(tool-bar-mode nil)
+(setq tooltip-use-echo-area t)
 
 
 ;;;;;;;;;;;;;;;;
