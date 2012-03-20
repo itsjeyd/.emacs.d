@@ -3,7 +3,6 @@
   ;; If you edit it by hand, you could mess it up, so be careful.
   ;; Your init file should contain only one such instance.
   ;; If there is more than one, they won't work right.
- '(confirm-nonexistent-file-or-buffer nil)
  '(desktop-save-mode t)
  '(history-delete-duplicates t)
  '(history-length t)
@@ -13,7 +12,6 @@
  '(ido-mode (quote both) nil (ido))
  '(indent-tabs-mode nil)
  '(minibuffer-complete-cycle t nil (minibuffer-complete-cycle))
- '(revert-without-query (quote (".*")))
  '(savehist-mode t nil (savehist))
  '(scroll-bar-mode nil)
  '(scroll-margin 1)
@@ -32,6 +30,18 @@
   ;; Your init file should contain only one such instance.
   ;; If there is more than one, they won't work right.
  )
+
+
+;;;;;;;;;;;;;;;
+;;; Buffers ;;;
+;;;;;;;;;;;;;;;
+
+; Key Bindings
+(global-set-key (kbd "M-s r b") 'revert-buffer)
+
+; Variables
+(setq confirm-nonexistent-file-or-buffer nil)
+(setq revert-without-query (quote (".*")))
 
 
 ;;;;;;;;;;;;;;;;
@@ -354,7 +364,6 @@
 (global-unset-key (kbd "M-g M-g"))
 (global-set-key (kbd "M-g l") 'goto-line)
 (global-set-key (kbd "M-s t t") 'toggle-truncate-lines)
-(global-set-key (kbd "M-s r b") 'revert-buffer)
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;
