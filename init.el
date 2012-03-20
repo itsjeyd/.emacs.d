@@ -592,11 +592,11 @@
 (add-hook 'octave-mode-hook 'show-paren-mode)
 
 
-;;; Key Chords
-(require 'key-chord)
-(key-chord-mode 1)
-(key-chord-define-global "bk" 'browse-kill-ring)
+;;;;;;;;;;;;;;;;;
+;;; Utilities ;;;
+;;;;;;;;;;;;;;;;;
 
+; Functions
 (defun google ()
   "Googles a query or region if any."
   (interactive)
@@ -617,6 +617,10 @@
         (buffer-substring (region-beginning) (region-end))
       (read-string "StartPage: ")))))
 
+; Packages
+(require 'key-chord)
+(key-chord-mode 1)
+(key-chord-define-global "bk" 'browse-kill-ring)
 
 
 ;;;;;;;;;;;;;;;;;;;;
