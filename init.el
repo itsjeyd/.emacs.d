@@ -226,13 +226,14 @@
 ;;; Emacs Goodies ;;;
 ;;;;;;;;;;;;;;;;;;;;;
 
-;;; Browse Kill Ring ;;;
+; Browse Kill Ring
 (require 'browse-kill-ring)
 
-;;; Minibuffer Completion Cycling ;;;
+; Minibuffer Completion Cycling
 (require 'minibuffer-complete-cycle)
+(setq minibuffer-complete-cycle t)
 
-;;; Shell Command Completion ;;;
+; Shell Command Completion
 (require 'shell-command)
 (shell-command-completion-mode)
 
@@ -486,7 +487,6 @@
 ;;; Python Development ;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;;; Auto-complete ;;;
 ; Macros
 (fset 'python-hide-class-body
    "\261\C-x$")
@@ -500,12 +500,13 @@
    "\C-x$")
 (global-set-key (kbd "C-c s d a") 'python-show-all) ; "Selective Display: All"
 
+; Auto-complete
 (require 'auto-complete-config)
 (add-to-list 'ac-dictionary-directories "~/.emacs.d/ac-dict")
 (ac-config-default)
 (define-key ac-complete-mode-map [tab] 'ac-expand)
 
-;;; Ropemacs ;;;
+; Ropemacs
 (autoload 'pymacs-apply "pymacs")
 (autoload 'pymacs-call "pymacs")
 (autoload 'pymacs-eval "pymacs" nil t)
@@ -515,11 +516,11 @@
 (setq ropemacs-enable-autoimport t)
 
 
-;;; IPython ;;;
+; IPython
 (require 'ipython)
 (setq py-python-command-args '("-editor" "emacsclient" "-deep_reload" "--colors" "Linux"))
 
-;;; Anything ;;;
+;;; Anything
 ;; (require 'anything)
 ;; (require 'anything-ipython)
 ;; (add-hook 'python-mode-hook #'(lambda ()
@@ -531,7 +532,7 @@
 ;;                                 '(length initial-pattern)))
 ;; (require 'anything-config)
 
-;;; Pylookup ;;;
+; Pylookup
 (setq pylookup-dir "/home/tim/elisp/pylookup")
 (add-to-list 'load-path pylookup-dir)
 
@@ -548,25 +549,25 @@
 
 (global-set-key (kbd "C-c h") 'pylookup-lookup)
 
-;;; Autopair ;;;
+; Autopair
 (require 'autopair)
 (add-hook 'python-mode-hook 'autopair-mode)
 (add-hook 'emacs-lisp-mode-hook 'autopair-mode)
 (add-hook 'lisp-mode-hook 'autopair-mode)
 (add-hook 'octave-mode-hook 'autopair-mode)
 
-;;; Pylint ;;;
+; Pylint
 (require 'python-pylint)
 
-;;; Delete trailing whitespace ;;;
+; Delete trailing whitespace
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 
-;;; YaSnippet ;;;
+; YaSnippet
 (require 'yasnippet)
 (yas/initialize)
 (yas/load-directory "/usr/share/emacs/site-lisp/yasnippet/snippets/")
 
-;;; Subword Mode
+; Subword Mode
 (add-hook 'python-mode-hook 'subword-mode)
 
 
@@ -580,17 +581,16 @@
 ;;; MISC ;;;
 ;;;;;;;;;;;;
 
-;;; Prompts
+; Prompts
 (fset 'yes-or-no-p 'y-or-n-p)
 
-;;; Line Numbering
+; Line Numbering
 (add-hook 'python-mode-hook 'linum-mode)
 (add-hook 'emacs-lisp-mode-hook 'linum-mode)
 (add-hook 'lisp-mode-hook 'linum-mode)
 (add-hook 'octave-mode-hook 'linum-mode)
-(add-hook 'fundamental-mode-hook 'linum-mode)
 
-;;; Highlight Matching Parentheses
+; Highlight Matching Parentheses
 (add-hook 'python-mode-hook 'show-paren-mode)
 (add-hook 'emacs-lisp-mode-hook 'show-paren-mode)
 (add-hook 'lisp-mode-hook 'show-paren-mode)
