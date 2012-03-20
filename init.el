@@ -18,12 +18,6 @@
  '(indent-tabs-mode nil)
  '(minibuffer-complete-cycle t nil (minibuffer-complete-cycle))
  '(openwith-associations (quote (("\\.\\(?:pdf\\|ps\\)\\'" "evince" (file)) ("\\.djvu\\'" "djview4" (file)) ("\\.\\(?:mp3\\|wav\\|flac\\)\\'" "clementine" (file)) ("\\.\\(?:mpe?g\\|avi\\|wmv\\|flv\\|mov\\|mp4\\)\\'" "vlc" (file)) ("\\.\\(?:jpe?g\\|png\\|bmp\\)\\'" "viewnior" (file)) ("\\.chm\\'" "chmsee" (file)) ("\\.\\(?:odt\\|doc\\|docx\\)\\'" "ooffice" ("-writer" file)) ("\\.\\(?:ods\\|xls\\|xlsx\\)\\'" "ooffice" ("-calc" file)) ("\\.\\(?:odp\\|pps\\|ppt\\|pptx\\)\\'" "ooffice" ("-impress" file)) ("\\.odb\\'" "ooffice" ("-base" file)))))
- '(org-agenda-files (quote ("/storage/ORG/school.org" "/storage/ORG/job.org" "/storage/ORG/life.org" "/storage/ORG/read.org")))
- '(org-agenda-include-diary t)
- '(org-enforce-todo-dependencies t)
- '(org-file-apps (quote ((auto-mode . emacs) ("\\.mm\\'" . default) ("\\.x?html?\\'" . default) ("\\.pdf\\'" . default) ("\\.\\(?:mpe?g\\|avi\\|wmv\\|flv\\|mov\\|mp4\\)\\'" . "vlc %s") ("\\.\\(?:jpe?g\\|png\\|bmp\\)\\'" . "viewnior %s") ("\\.\\(?:mp3|wav\\|flac\\)\\'" . "clementine %s") ("\\.chm\\'" . default) ("\\.ps\\'" . default) ("\\.\\(?:odt\\|doc\\|docx\\)\\'" . default) ("\\.\\(?:ods\\|xls\\|xlsx\\)\\'" . default) ("\\.\\(?:odp\\|pps\\|ppt\\|pptx\\)\\'" . default) ("\\.odb\\'" . default))))
- '(org-track-ordered-property-with-tag t)
- '(org-use-speed-commands t)
  '(revert-without-query (quote (".*")))
  '(savehist-mode t nil (savehist))
  '(scroll-bar-mode nil)
@@ -197,7 +191,37 @@
 ;;;;;;;;;;;;;;;;
 ;;; Org Mode ;;;
 ;;;;;;;;;;;;;;;;
+
+; Hooks
+(add-hook 'org-mode-hook 'autopair-mode)
+(add-hook 'org-mode-hook 'linum-mode)
+(add-hook 'org-mode-hook 'show-paren-mode)
+
+; Key Bindings
 (global-set-key (kbd "C-c a") 'org-agenda)
+
+; Variables
+(setq org-agenda-files (quote
+                        ("/storage/ORG/school.org"
+                         "/storage/ORG/job.org"
+                         "/storage/ORG/life.org"
+                         "/storage/ORG/read.org")))
+(setq org-agenda-include-diary t)
+(setq org-enforce-todo-dependencies t)
+(setq org-file-apps (quote ((auto-mode . emacs)
+                            ("\\.mm\\'" . default)
+                            ("\\.x?html?\\'" . default)
+                            ("\\.pdf\\'" . default)
+                            ("\\.\\(?:mpe?g\\|avi\\|wmv\\|flv\\|mov\\|mp4\\)\\'" . "vlc %s")
+                            ("\\.\\(?:jpe?g\\|png\\|bmp\\)\\'" . "viewnior %s")
+                            ("\\.\\(?:mp3|wav\\|flac\\)\\'" . "clementine %s")
+                            ("\\.chm\\'" . default) ("\\.ps\\'" . default)
+                            ("\\.\\(?:odt\\|doc\\|docx\\)\\'" . default)
+                            ("\\.\\(?:ods\\|xls\\|xlsx\\)\\'" . default)
+                            ("\\.\\(?:odp\\|pps\\|ppt\\|pptx\\)\\'" . default)
+                            ("\\.odb\\'" . default))))
+(setq org-track-ordered-property-with-tag t)
+(setq org-use-speed-commands t)
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -338,7 +362,6 @@
 ;;; Autopair ;;;
 (require 'autopair)
 (add-hook 'python-mode-hook 'autopair-mode)
-(add-hook 'org-mode-hook 'autopair-mode)
 (add-hook 'emacs-lisp-mode-hook 'autopair-mode)
 (add-hook 'lisp-mode-hook 'autopair-mode)
 (add-hook 'octave-mode-hook 'autopair-mode)
@@ -374,7 +397,6 @@
 
 ;;; Line Numbering
 (add-hook 'python-mode-hook 'linum-mode)
-(add-hook 'org-mode-hook 'linum-mode)
 (add-hook 'emacs-lisp-mode-hook 'linum-mode)
 (add-hook 'lisp-mode-hook 'linum-mode)
 (add-hook 'octave-mode-hook 'linum-mode)
@@ -382,7 +404,6 @@
 
 ;;; Highlight Matching Parentheses
 (add-hook 'python-mode-hook 'show-paren-mode)
-(add-hook 'org-mode-hook 'show-paren-mode)
 (add-hook 'emacs-lisp-mode-hook 'show-paren-mode)
 (add-hook 'lisp-mode-hook 'show-paren-mode)
 (add-hook 'octave-mode-hook 'show-paren-mode)
