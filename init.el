@@ -11,7 +11,7 @@
  '(scroll-margin 1)
  '(scroll-preserve-screen-position t)
  '(scroll-step 1)
- '(tags-revert-without-query t)
+ '(tags-revert-without-query t))
 (custom-set-faces
   ;; custom-set-faces was added by Custom.
   ;; If you edit it by hand, you could mess it up, so be careful.
