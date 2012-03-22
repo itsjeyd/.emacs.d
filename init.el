@@ -452,6 +452,35 @@
 ;;; Python Development ;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+;;; Anything
+;; (require 'anything)
+;; (require 'anything-ipython)
+;; (add-hook 'python-mode-hook #'(lambda ()
+;;                                 (define-key py-mode-map (kbd "C-c c") 'anything-ipython-complete)))
+;; (add-hook 'py-shell-hook #'(lambda ()
+;;                              (define-key py-shell-map (kbd "C-c c") 'anything-ipython-complete)))
+;; (when (require 'anything-show-completion nil t)
+;;   (use-anything-show-completion 'anything-ipython-complete
+;;                                 '(length initial-pattern)))
+;; (require 'anything-config)
+
+; Auto-complete
+(require 'auto-complete-config)
+(add-to-list 'ac-dictionary-directories "~/.emacs.d/ac-dict")
+(ac-config-default)
+(define-key ac-complete-mode-map [tab] 'ac-expand)
+
+; Autopair
+(require 'autopair)
+(add-hook 'python-mode-hook 'autopair-mode)
+(add-hook 'emacs-lisp-mode-hook 'autopair-mode)
+(add-hook 'lisp-mode-hook 'autopair-mode)
+(add-hook 'octave-mode-hook 'autopair-mode)
+
+; IPython
+(require 'ipython)
+(setq py-python-command-args '("-editor" "emacsclient" "-deep_reload" "--colors" "Linux"))
+
 ; Macros
 (fset 'python-hide-class-body
    "\261\C-x$")
@@ -465,37 +494,8 @@
    "\C-x$")
 (global-set-key (kbd "C-c s d a") 'python-show-all) ; "Selective Display: All"
 
-; Auto-complete
-(require 'auto-complete-config)
-(add-to-list 'ac-dictionary-directories "~/.emacs.d/ac-dict")
-(ac-config-default)
-(define-key ac-complete-mode-map [tab] 'ac-expand)
-
-; Ropemacs
-(autoload 'pymacs-apply "pymacs")
-(autoload 'pymacs-call "pymacs")
-(autoload 'pymacs-eval "pymacs" nil t)
-(autoload 'pymacs-exec "pymacs" nil t)
-(autoload 'pymacs-load "pymacs" nil t)
-(pymacs-load "ropemacs" "rope-")
-(setq ropemacs-enable-autoimport t)
-
-
-; IPython
-(require 'ipython)
-(setq py-python-command-args '("-editor" "emacsclient" "-deep_reload" "--colors" "Linux"))
-
-;;; Anything
-;; (require 'anything)
-;; (require 'anything-ipython)
-;; (add-hook 'python-mode-hook #'(lambda ()
-;;                                 (define-key py-mode-map (kbd "C-c c") 'anything-ipython-complete)))
-;; (add-hook 'py-shell-hook #'(lambda ()
-;;                              (define-key py-shell-map (kbd "C-c c") 'anything-ipython-complete)))
-;; (when (require 'anything-show-completion nil t)
-;;   (use-anything-show-completion 'anything-ipython-complete
-;;                                 '(length initial-pattern)))
-;; (require 'anything-config)
+; Pylint
+(require 'python-pylint)
 
 ; Pylookup
 (setq pylookup-dir "/home/tim/elisp/pylookup")
@@ -514,26 +514,25 @@
 
 (global-set-key (kbd "C-c h") 'pylookup-lookup)
 
-; Autopair
-(require 'autopair)
-(add-hook 'python-mode-hook 'autopair-mode)
-(add-hook 'emacs-lisp-mode-hook 'autopair-mode)
-(add-hook 'lisp-mode-hook 'autopair-mode)
-(add-hook 'octave-mode-hook 'autopair-mode)
+; Ropemacs
+(autoload 'pymacs-apply "pymacs")
+(autoload 'pymacs-call "pymacs")
+(autoload 'pymacs-eval "pymacs" nil t)
+(autoload 'pymacs-exec "pymacs" nil t)
+(autoload 'pymacs-load "pymacs" nil t)
+(pymacs-load "ropemacs" "rope-")
+(setq ropemacs-enable-autoimport t)
 
-; Pylint
-(require 'python-pylint)
+; Subword Mode
+(add-hook 'python-mode-hook 'subword-mode)
 
-; Delete trailing whitespace
+; Whitespace
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 
 ; YaSnippet
 (require 'yasnippet)
 (yas/initialize)
 (yas/load-directory "/usr/share/emacs/site-lisp/yasnippet/snippets/")
-
-; Subword Mode
-(add-hook 'python-mode-hook 'subword-mode)
 
 
 ;;;;;;;;;;;;;;;
