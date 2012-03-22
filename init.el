@@ -388,12 +388,6 @@
 (add-hook 'lisp-mode-hook 'linum-mode)
 (add-hook 'octave-mode-hook 'linum-mode)
 
-; Highlight Matching Parentheses
-(add-hook 'python-mode-hook 'show-paren-mode)
-(add-hook 'emacs-lisp-mode-hook 'show-paren-mode)
-(add-hook 'lisp-mode-hook 'show-paren-mode)
-(add-hook 'octave-mode-hook 'show-paren-mode)
-
 
 ;;;;;;;;;;;;;;;;
 ;;; Modeline ;;;
@@ -451,6 +445,22 @@
 . "http://marmalade-repo.org/packages/"))
 
 
+;;;;;;;;;;;;;;;;;;;
+;;; Programming ;;;
+;;;;;;;;;;;;;;;;;;;
+
+; Autopair
+(require 'autopair)
+(add-hook 'emacs-lisp-mode-hook 'autopair-mode)
+(add-hook 'lisp-mode-hook 'autopair-mode)
+(add-hook 'octave-mode-hook 'autopair-mode)
+
+; Parens
+(add-hook 'emacs-lisp-mode-hook 'show-paren-mode)
+(add-hook 'lisp-mode-hook 'show-paren-mode)
+(add-hook 'octave-mode-hook 'show-paren-mode)
+
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Python Development ;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -474,11 +484,7 @@
 (define-key ac-complete-mode-map [tab] 'ac-expand)
 
 ; Autopair
-(require 'autopair)
 (add-hook 'python-mode-hook 'autopair-mode)
-(add-hook 'emacs-lisp-mode-hook 'autopair-mode)
-(add-hook 'lisp-mode-hook 'autopair-mode)
-(add-hook 'octave-mode-hook 'autopair-mode)
 
 ; IPython
 (require 'ipython)
@@ -496,6 +502,9 @@
 (fset 'python-show-all
    "\C-x$")
 (global-set-key (kbd "C-c s d a") 'python-show-all) ; "Selective Display: All"
+
+; Parens
+(add-hook 'python-mode-hook 'show-paren-mode)
 
 ; Pylint
 (require 'python-pylint)
