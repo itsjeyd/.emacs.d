@@ -4,10 +4,7 @@
   ;; Your init file should contain only one such instance.
   ;; If there is more than one, they won't work right.
  '(desktop-save-mode t)
- '(history-delete-duplicates t)
- '(history-length t)
  '(hscroll-margin 1)
- '(savehist-mode t nil (savehist))
  '(scroll-margin 1)
  '(scroll-preserve-screen-position t)
  '(scroll-step 1)
@@ -372,12 +369,22 @@
 (setq idle-require-load-break "0.5")
 
 
-;;;;;;;;;;;;
-;;; MISC ;;;
-;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;
+;;; Minibuffer ;;;
+;;;;;;;;;;;;;;;;;;
 
 ; Prompts
 (fset 'yes-or-no-p 'y-or-n-p)
+
+; Variables
+(savehist-mode t)
+(setq history-delete-duplicates t)
+(setq history-length t)
+
+
+;;;;;;;;;;;;
+;;; MISC ;;;
+;;;;;;;;;;;;
 
 ; Line Numbering
 (add-hook 'python-mode-hook 'linum-mode)
