@@ -40,133 +40,18 @@
 (setq revert-without-query (quote (".*")))
 
 
-;;;;;;;;;;;;;;;
-;;; Editing ;;;
-;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;
+;;; Byte-Compile ;;;
+;;;;;;;;;;;;;;;;;;;;
+(defun auto-recompile-emacs-file ()
+  (interactive)
+  (when (and buffer-file-name (string-match "\\.emacs" buffer-file-name))
+    (let ((byte-file (concat buffer-file-name "\\.elc")))
+      (if (or (not (file-exists-p byte-file))
+              (file-newer-than-file-p buffer-file-name byte-file))
+          (byte-compile-file buffer-file-name)))))
 
-; Functions
-(put 'narrow-to-region 'disabled nil)
-
-; Key Bindings
-(global-set-key (kbd "M-g c") 'goto-char)
-(global-unset-key (kbd "M-g g"))
-(global-unset-key (kbd "M-g M-g"))
-(global-set-key (kbd "M-g l") 'goto-line)
-(global-set-key (kbd "M-s t t") 'toggle-truncate-lines)
-
-; Mark Lines
-(require 'mark-lines)
-(global-set-key (kbd "M-s m") 'mark-lines-next-line)
-
-; Move Text
-(require 'move-text)
-(global-set-key (kbd "M-s u") 'move-text-up)
-(global-set-key (kbd "M-s d") 'move-text-down)
-
-; Variables
-(setq indent-tabs-mode nil)
-(setq sentence-end-double-space nil)
-(setq set-mark-command-repeat-pop t)
-(setq tab-width 4)
-(setq x-select-enable-clipboard t)
-
-; Wrap Region
-(add-to-list 'load-path "~/elisp/wrap-region")
-(require 'wrap-region)
-(wrap-region-add-wrapper "*" "*")
-(wrap-region-add-wrapper "/" "/")
-(wrap-region-add-wrapper "=" "=")
-
-
-;;;;;;;;;;;;;;;;;
-;;; Interface ;;;
-;;;;;;;;;;;;;;;;;
-(scroll-bar-mode nil)
-(tool-bar-mode nil)
-(setq tooltip-use-echo-area t)
-
-
-;;;;;;;;;;;;;;;;
-;;; Modeline ;;;
-;;;;;;;;;;;;;;;;
-
-; Unique Buffer Names
-(require 'uniquify)
-(setq uniquify-buffer-name-style (quote forward))
-
-; Variables
-(column-number-mode t)
-
-
-;;;;;;;;;;;;;;;;;;;;;;;;
-;;; Windows + Frames ;;;
-;;;;;;;;;;;;;;;;;;;;;;;;
-
-; Macros
-(fset 'kill-buffer-close-window
-   (lambda (&optional arg) "Keyboard macro. Kills the current
-   buffer and closes the window it was displayed in. Should only
-   be used if the frame is displaying more than one
-   window." (interactive "p") (kmacro-exec-ring-item (quote ([24
-   107 return 24 48] 0 "%d")) arg)))
-(global-set-key (kbd "C-S-k") 'kill-buffer-close-window)
-
-(fset 'kill-other-buffer-close-window
-   (lambda (&optional arg) "Keyboard macro. Kills the next buffer
-   in line and closes the associated window. I.e., if there are
-   two windows, the active one stays intact, the inactive one is
-   closed. If there are several windows, the one that would be
-   reached by issuing C-x o once is closed, all others stay
-   intact. Should only be used if the frame is displaying more
-   than one window." (interactive "p") (kmacro-exec-ring-item (quote ([24
-   111 24 107 return 24 48] 0 "%d")) arg)))
-(global-set-key (kbd "C-S-o k") 'kill-other-buffer-close-window)
-
-(fset 'ver-to-hor-split
-   (lambda (&optional arg) "Keyboard macro. Go from a horizontal
-   bar splitting two windows to a vertical one, preserving the
-   buffers shown in the two windows" (interactive "p") (kmacro-exec-ring-item (quote ([24
-   98 18 19 return 24 98 return 24 49 24 51 24 111 24 98 return
-   24 111] 0 "%d")) arg)))
-(global-set-key (kbd "C-x C-3") 'ver-to-hor-split)
-
-; Swapping windows
-(defun swap-windows ()
- "If you have 2 windows, this function swaps them."
- (interactive)
- (cond ((not (= (count-windows) 2))
-        (message "You need exactly 2 windows to do this."))
-       (t
-        (let* ((w1 (first (window-list)))
-               (w2 (second (window-list)))
-               (b1 (window-buffer w1))
-               (b2 (window-buffer w2))
-               (s1 (window-start w1))
-               (s2 (window-start w2)))
-          (set-window-buffer w1 b2)
-          (set-window-buffer w2 b1)
-          (set-window-start w1 s2)
-          (set-window-start w2 s1)))))
-
-(global-set-key (kbd "M-s s w") 'swap-windows)
-
-
-;;;;;;;;;;;;;;;;;;;;;;;
-;;; Library Loading ;;;
-;;;;;;;;;;;;;;;;;;;;;;;
-(add-to-list 'load-path "~/.emacs.d/idle-require/")
-(require 'idle-require)
-(idle-require-mode t)
-(setq idle-require-idle-delay "10")
-(setq idle-require-load-break "0.5")
-
-
-;;;;;;;;;;;
-;;; LKB ;;;
-;;;;;;;;;;;
-   (let ((root (getenv "DELPHINHOME")))
-     (if (file-exists-p (format "%s/lkb/etc/dot.emacs" root))
-       (load (format "%s/lkb/etc/dot.emacs" root) nil t t)))
+(add-hook 'after-save-hook 'auto-recompile-emacs-file)
 
 
 ;;;;;;;;;;;;;;;;;;;
@@ -216,9 +101,68 @@
 
 
 ;;;;;;;;;;;;;
-;;; Fonts ;;;
+;;; Dired ;;;
 ;;;;;;;;;;;;;
-(set-face-attribute 'default nil :font "Monaco-10")
+
+; File Associations
+(require 'openwith)
+(openwith-mode t)
+(setq openwith-associations (quote (("\\.\\(?:pdf\\|ps\\)\\'" "evince" (file))
+                                    ("\\.djvu\\'" "djview4" (file))
+                                    ("\\.\\(?:mp3\\|wav\\|flac\\)\\'" "clementine" (file))
+                                    ("\\.\\(?:mpe?g\\|avi\\|wmv\\|flv\\|mov\\|mp4\\)\\'" "vlc" (file))
+                                    ("\\.\\(?:jpe?g\\|png\\|bmp\\)\\'" "viewnior" (file))
+                                    ("\\.chm\\'" "chmsee" (file))
+                                    ("\\.\\(?:odt\\|doc\\|docx\\)\\'" "ooffice" ("-writer" file))
+                                    ("\\.\\(?:ods\\|xls\\|xlsx\\)\\'" "ooffice" ("-calc" file))
+                                    ("\\.\\(?:odp\\|pps\\|ppt\\|pptx\\)\\'" "ooffice" ("-impress" file))
+                                    ("\\.odb\\'" "ooffice" ("-base" file)))))
+
+; Hidden Files
+(require 'dired-x)
+(setq dired-omit-files "^\\...+$")
+(add-hook 'dired-mode-hook (lambda () (dired-omit-mode 1)))
+
+; Variables
+(setq dired-recursive-copies (quote always))
+
+
+;;;;;;;;;;;;;;;
+;;; Editing ;;;
+;;;;;;;;;;;;;;;
+
+; Functions
+(put 'narrow-to-region 'disabled nil)
+
+; Key Bindings
+(global-set-key (kbd "M-g c") 'goto-char)
+(global-unset-key (kbd "M-g g"))
+(global-unset-key (kbd "M-g M-g"))
+(global-set-key (kbd "M-g l") 'goto-line)
+(global-set-key (kbd "M-s t t") 'toggle-truncate-lines)
+
+; Mark Lines
+(require 'mark-lines)
+(global-set-key (kbd "M-s m") 'mark-lines-next-line)
+
+; Move Text
+(require 'move-text)
+(global-set-key (kbd "M-s u") 'move-text-up)
+(global-set-key (kbd "M-s d") 'move-text-down)
+
+; Variables
+(setq indent-tabs-mode nil)
+(setq sentence-end-double-space nil)
+(setq set-mark-command-repeat-pop t)
+(setq tab-width 4)
+(setq x-select-enable-clipboard t)
+
+; Wrap Region
+(add-to-list 'load-path "~/elisp/wrap-region")
+(require 'wrap-region)
+(wrap-region-add-wrapper "*" "*")
+(wrap-region-add-wrapper "/" "/")
+(wrap-region-add-wrapper "=" "=")
 
 
 ;;;;;;;;;;;;;;;;;;;;;
@@ -235,6 +179,33 @@
 ; Shell Command Completion
 (require 'shell-command)
 (shell-command-completion-mode)
+
+
+;;;;;;;;;;;;;
+;;; Fixes ;;;
+;;;;;;;;;;;;;
+
+;; NOTE: The following fix becomes obsolete when using python-mode.el
+;; instead of python.el!
+
+;; (defun python-reinstate-current-directory ()
+;;     "When running Python, add the current directory ('') to the
+;;     head of sys.path. For security reasons, run-python passes
+;;     arguments to the interpreter that explicitly remove '' from
+;;     sys.path. This means that, for example, using
+;;     `python-send-buffer' in a buffer visiting a module's code
+;;     will fail to find other modules in the same directory.
+
+;;     Adding this function to `inferior-python-mode-hook'
+;;     reinstates the current directory in Python's search path."
+;;     (python-send-string "sys.path[0:0] = ['']"))
+;; (add-hook 'inferior-python-mode-hook 'python-reinstate-current-directory)
+
+
+;;;;;;;;;;;;;
+;;; Fonts ;;;
+;;;;;;;;;;;;;
+(set-face-attribute 'default nil :font "Monaco-10")
 
 
 ;;;;;;;;;;;
@@ -272,84 +243,20 @@
 (ido-mode (quote both))
 
 
-;;;;;;;;;;;;;;;
-;;; Recentf ;;;
-;;;;;;;;;;;;;;;
-(require 'recentf)
-
-;; get rid of `find-file-read-only' and replace it with something
-;; more useful.
-(global-set-key (kbd "C-x C-r") 'ido-recentf-open)
-
-;; enable recent files mode.
-(recentf-mode t)
-
-; 50 files ought to be enough.
-(setq recentf-max-saved-items 50)
+;;;;;;;;;;;;;;;;;
+;;; Interface ;;;
+;;;;;;;;;;;;;;;;;
+(scroll-bar-mode nil)
+(tool-bar-mode nil)
+(setq tooltip-use-echo-area t)
 
 
-
-;;;;;;;;;;;;;
-;;; Dired ;;;
-;;;;;;;;;;;;;
-
-; File Associations
-(require 'openwith)
-(openwith-mode t)
-(setq openwith-associations (quote (("\\.\\(?:pdf\\|ps\\)\\'" "evince" (file))
-                                    ("\\.djvu\\'" "djview4" (file))
-                                    ("\\.\\(?:mp3\\|wav\\|flac\\)\\'" "clementine" (file))
-                                    ("\\.\\(?:mpe?g\\|avi\\|wmv\\|flv\\|mov\\|mp4\\)\\'" "vlc" (file))
-                                    ("\\.\\(?:jpe?g\\|png\\|bmp\\)\\'" "viewnior" (file))
-                                    ("\\.chm\\'" "chmsee" (file))
-                                    ("\\.\\(?:odt\\|doc\\|docx\\)\\'" "ooffice" ("-writer" file))
-                                    ("\\.\\(?:ods\\|xls\\|xlsx\\)\\'" "ooffice" ("-calc" file))
-                                    ("\\.\\(?:odp\\|pps\\|ppt\\|pptx\\)\\'" "ooffice" ("-impress" file))
-                                    ("\\.odb\\'" "ooffice" ("-base" file)))))
-
-; Hidden Files
-(require 'dired-x)
-(setq dired-omit-files "^\\...+$")
-(add-hook 'dired-mode-hook (lambda () (dired-omit-mode 1)))
-
-; Variables
-(setq dired-recursive-copies (quote always))
-
-
-;;;;;;;;;;;;;;;;
-;;; Org Mode ;;;
-;;;;;;;;;;;;;;;;
-
-; Hooks
-(add-hook 'org-mode-hook 'autopair-mode)
-(add-hook 'org-mode-hook 'linum-mode)
-(add-hook 'org-mode-hook 'show-paren-mode)
-
-; Key Bindings
-(global-set-key (kbd "C-c a") 'org-agenda)
-
-; Variables
-(setq org-agenda-files (quote
-                        ("/storage/ORG/school.org"
-                         "/storage/ORG/job.org"
-                         "/storage/ORG/life.org"
-                         "/storage/ORG/read.org")))
-(setq org-agenda-include-diary t)
-(setq org-enforce-todo-dependencies t)
-(setq org-file-apps (quote ((auto-mode . emacs)
-                            ("\\.mm\\'" . default)
-                            ("\\.x?html?\\'" . default)
-                            ("\\.pdf\\'" . default)
-                            ("\\.\\(?:mpe?g\\|avi\\|wmv\\|flv\\|mov\\|mp4\\)\\'" . "vlc %s")
-                            ("\\.\\(?:jpe?g\\|png\\|bmp\\)\\'" . "viewnior %s")
-                            ("\\.\\(?:mp3|wav\\|flac\\)\\'" . "clementine %s")
-                            ("\\.chm\\'" . default) ("\\.ps\\'" . default)
-                            ("\\.\\(?:odt\\|doc\\|docx\\)\\'" . default)
-                            ("\\.\\(?:ods\\|xls\\|xlsx\\)\\'" . default)
-                            ("\\.\\(?:odp\\|pps\\|ppt\\|pptx\\)\\'" . default)
-                            ("\\.odb\\'" . default))))
-(setq org-track-ordered-property-with-tag t)
-(setq org-use-speed-commands t)
+;;;;;;;;;;;
+;;; LKB ;;;
+;;;;;;;;;;;
+   (let ((root (getenv "DELPHINHOME")))
+     (if (file-exists-p (format "%s/lkb/etc/dot.emacs" root))
+       (load (format "%s/lkb/etc/dot.emacs" root) nil t t)))
 
 
 ;;;;;;;;;;;;;
@@ -455,32 +362,90 @@
 (setq TeX-electric-sub-and-superscript t)
 
 
-;;;;;;;;;;;;;
-;;; Fixes ;;;
-;;;;;;;;;;;;;
-
-;; NOTE: The following fix becomes obsolete when using python-mode.el
-;; instead of python.el!
-
-;; (defun python-reinstate-current-directory ()
-;;     "When running Python, add the current directory ('') to the
-;;     head of sys.path. For security reasons, run-python passes
-;;     arguments to the interpreter that explicitly remove '' from
-;;     sys.path. This means that, for example, using
-;;     `python-send-buffer' in a buffer visiting a module's code
-;;     will fail to find other modules in the same directory.
-
-;;     Adding this function to `inferior-python-mode-hook'
-;;     reinstates the current directory in Python's search path."
-;;     (python-send-string "sys.path[0:0] = ['']"))
-;; (add-hook 'inferior-python-mode-hook 'python-reinstate-current-directory)
+;;;;;;;;;;;;;;;;;;;;;;;
+;;; Library Loading ;;;
+;;;;;;;;;;;;;;;;;;;;;;;
+(add-to-list 'load-path "~/.emacs.d/idle-require/")
+(require 'idle-require)
+(idle-require-mode t)
+(setq idle-require-idle-delay "10")
+(setq idle-require-load-break "0.5")
 
 
-;;;;;;;;;;;
-;; Magit ;;
-;;;;;;;;;;;
-(require 'magit)
-(global-set-key (kbd "M-s g s") 'magit-status)
+;;;;;;;;;;;;
+;;; MISC ;;;
+;;;;;;;;;;;;
+
+; Prompts
+(fset 'yes-or-no-p 'y-or-n-p)
+
+; Line Numbering
+(add-hook 'python-mode-hook 'linum-mode)
+(add-hook 'emacs-lisp-mode-hook 'linum-mode)
+(add-hook 'lisp-mode-hook 'linum-mode)
+(add-hook 'octave-mode-hook 'linum-mode)
+
+; Highlight Matching Parentheses
+(add-hook 'python-mode-hook 'show-paren-mode)
+(add-hook 'emacs-lisp-mode-hook 'show-paren-mode)
+(add-hook 'lisp-mode-hook 'show-paren-mode)
+(add-hook 'octave-mode-hook 'show-paren-mode)
+
+
+;;;;;;;;;;;;;;;;
+;;; Modeline ;;;
+;;;;;;;;;;;;;;;;
+
+; Unique Buffer Names
+(require 'uniquify)
+(setq uniquify-buffer-name-style (quote forward))
+
+; Variables
+(column-number-mode t)
+
+
+;;;;;;;;;;;;;;;;
+;;; Org Mode ;;;
+;;;;;;;;;;;;;;;;
+
+; Hooks
+(add-hook 'org-mode-hook 'autopair-mode)
+(add-hook 'org-mode-hook 'linum-mode)
+(add-hook 'org-mode-hook 'show-paren-mode)
+
+; Key Bindings
+(global-set-key (kbd "C-c a") 'org-agenda)
+
+; Variables
+(setq org-agenda-files (quote
+                        ("/storage/ORG/school.org"
+                         "/storage/ORG/job.org"
+                         "/storage/ORG/life.org"
+                         "/storage/ORG/read.org")))
+(setq org-agenda-include-diary t)
+(setq org-enforce-todo-dependencies t)
+(setq org-file-apps (quote ((auto-mode . emacs)
+                            ("\\.mm\\'" . default)
+                            ("\\.x?html?\\'" . default)
+                            ("\\.pdf\\'" . default)
+                            ("\\.\\(?:mpe?g\\|avi\\|wmv\\|flv\\|mov\\|mp4\\)\\'" . "vlc %s")
+                            ("\\.\\(?:jpe?g\\|png\\|bmp\\)\\'" . "viewnior %s")
+                            ("\\.\\(?:mp3|wav\\|flac\\)\\'" . "clementine %s")
+                            ("\\.chm\\'" . default) ("\\.ps\\'" . default)
+                            ("\\.\\(?:odt\\|doc\\|docx\\)\\'" . default)
+                            ("\\.\\(?:ods\\|xls\\|xlsx\\)\\'" . default)
+                            ("\\.\\(?:odp\\|pps\\|ppt\\|pptx\\)\\'" . default)
+                            ("\\.odb\\'" . default))))
+(setq org-track-ordered-property-with-tag t)
+(setq org-use-speed-commands t)
+
+
+;;;;;;;;;;;;;;;;;;;;;;;
+;;; Package Manager ;;;
+;;;;;;;;;;;;;;;;;;;;;;;
+(require 'package)
+(add-to-list 'package-archives '("marmalade"
+. "http://marmalade-repo.org/packages/"))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -571,30 +536,26 @@
 (add-hook 'python-mode-hook 'subword-mode)
 
 
-;;;;;;;;;;;;;;;;;;;;
-;;; Emacs Server ;;;
-;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;
+;;; Recentf ;;;
+;;;;;;;;;;;;;;;
+(require 'recentf)
+
+;; get rid of `find-file-read-only' and replace it with something
+;; more useful.
+(global-set-key (kbd "C-x C-r") 'ido-recentf-open)
+
+;; enable recent files mode.
+(recentf-mode t)
+
+; 50 files ought to be enough.
+(setq recentf-max-saved-items 50)
+
+
+;;;;;;;;;;;;;;
+;;; Server ;;;
+;;;;;;;;;;;;;;
 (server-start)
-
-
-;;;;;;;;;;;;
-;;; MISC ;;;
-;;;;;;;;;;;;
-
-; Prompts
-(fset 'yes-or-no-p 'y-or-n-p)
-
-; Line Numbering
-(add-hook 'python-mode-hook 'linum-mode)
-(add-hook 'emacs-lisp-mode-hook 'linum-mode)
-(add-hook 'lisp-mode-hook 'linum-mode)
-(add-hook 'octave-mode-hook 'linum-mode)
-
-; Highlight Matching Parentheses
-(add-hook 'python-mode-hook 'show-paren-mode)
-(add-hook 'emacs-lisp-mode-hook 'show-paren-mode)
-(add-hook 'lisp-mode-hook 'show-paren-mode)
-(add-hook 'octave-mode-hook 'show-paren-mode)
 
 
 ;;;;;;;;;;;;;;;;;
@@ -628,23 +589,63 @@
 (key-chord-define-global "bk" 'browse-kill-ring)
 
 
-;;;;;;;;;;;;;;;;;;;;
-;;; Byte-Compile ;;;
-;;;;;;;;;;;;;;;;;;;;
-(defun auto-recompile-emacs-file ()
-  (interactive)
-  (when (and buffer-file-name (string-match "\\.emacs" buffer-file-name))
-    (let ((byte-file (concat buffer-file-name "\\.elc")))
-      (if (or (not (file-exists-p byte-file))
-              (file-newer-than-file-p buffer-file-name byte-file))
-          (byte-compile-file buffer-file-name)))))
-
-(add-hook 'after-save-hook 'auto-recompile-emacs-file)
-
-
 ;;;;;;;;;;;;;;;;;;;;;;;
-;;; Package Manager ;;;
+;;; Version Control ;;;
 ;;;;;;;;;;;;;;;;;;;;;;;
-(require 'package)
-(add-to-list 'package-archives '("marmalade"
-. "http://marmalade-repo.org/packages/"))
+
+; Packages
+(require 'magit)
+(global-set-key (kbd "M-s g s") 'magit-status)
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;
+;;; Windows + Frames ;;;
+;;;;;;;;;;;;;;;;;;;;;;;;
+
+; Macros
+(fset 'kill-buffer-close-window
+   (lambda (&optional arg) "Keyboard macro. Kills the current
+   buffer and closes the window it was displayed in. Should only
+   be used if the frame is displaying more than one
+   window." (interactive "p") (kmacro-exec-ring-item (quote ([24
+   107 return 24 48] 0 "%d")) arg)))
+(global-set-key (kbd "C-S-k") 'kill-buffer-close-window)
+
+(fset 'kill-other-buffer-close-window
+   (lambda (&optional arg) "Keyboard macro. Kills the next buffer
+   in line and closes the associated window. I.e., if there are
+   two windows, the active one stays intact, the inactive one is
+   closed. If there are several windows, the one that would be
+   reached by issuing C-x o once is closed, all others stay
+   intact. Should only be used if the frame is displaying more
+   than one window." (interactive "p") (kmacro-exec-ring-item (quote ([24
+   111 24 107 return 24 48] 0 "%d")) arg)))
+(global-set-key (kbd "C-S-o k") 'kill-other-buffer-close-window)
+
+(fset 'ver-to-hor-split
+   (lambda (&optional arg) "Keyboard macro. Go from a horizontal
+   bar splitting two windows to a vertical one, preserving the
+   buffers shown in the two windows" (interactive "p") (kmacro-exec-ring-item (quote ([24
+   98 18 19 return 24 98 return 24 49 24 51 24 111 24 98 return
+   24 111] 0 "%d")) arg)))
+(global-set-key (kbd "C-x C-3") 'ver-to-hor-split)
+
+; Swapping windows
+(defun swap-windows ()
+ "If you have 2 windows, this function swaps them."
+ (interactive)
+ (cond ((not (= (count-windows) 2))
+        (message "You need exactly 2 windows to do this."))
+       (t
+        (let* ((w1 (first (window-list)))
+               (w2 (second (window-list)))
+               (b1 (window-buffer w1))
+               (b2 (window-buffer w2))
+               (s1 (window-start w1))
+               (s2 (window-start w2)))
+          (set-window-buffer w1 b2)
+          (set-window-buffer w2 b1)
+          (set-window-start w1 s2)
+          (set-window-start w2 s1)))))
+
+(global-set-key (kbd "M-s s w") 'swap-windows)
