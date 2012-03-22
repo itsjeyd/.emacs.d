@@ -4,10 +4,6 @@
   ;; Your init file should contain only one such instance.
   ;; If there is more than one, they won't work right.
  '(desktop-save-mode t)
- '(hscroll-margin 1)
- '(scroll-margin 1)
- '(scroll-preserve-screen-position t)
- '(scroll-step 1)
  '(tags-revert-without-query t))
 (custom-set-faces
   ;; custom-set-faces was added by Custom.
@@ -556,6 +552,15 @@
 
 ; 50 files ought to be enough.
 (setq recentf-max-saved-items 50)
+
+
+;;;;;;;;;;;;;;;;;
+;;; Scrolling ;;;
+;;;;;;;;;;;;;;;;;
+(setq hscroll-margin 1)
+(setq scroll-margin 1)
+(setq scroll-preserve-screen-position t)
+(setq scroll-step 1)
 
 
 ;;;;;;;;;;;;;;
