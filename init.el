@@ -510,7 +510,7 @@
 (require 'python-pylint)
 
 ; Pylookup
-(setq pylookup-dir "/home/tim/elisp/pylookup")
+(setq pylookup-dir "~/.emacs.d/pylookup")
 (add-to-list 'load-path pylookup-dir)
 
 (eval-when-compile (require 'pylookup))
