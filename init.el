@@ -151,7 +151,7 @@
 (setq x-select-enable-clipboard t)
 
 ; Wrap Region
-(add-to-list 'load-path "~/elisp/wrap-region")
+(add-to-list 'load-path "~/.emacs.d/wrap-region")
 (require 'wrap-region)
 (wrap-region-add-wrapper "*" "*")
 (wrap-region-add-wrapper "/" "/")
@@ -226,7 +226,7 @@
 (global-set-key (kbd "<menu>") 'mx-ido)
 
 ; Ubiquitous
-(add-to-list 'load-path "~/elisp/ido-ubiquitous/")
+(add-to-list 'load-path "~/.emacs.d/ido-ubiquitous/")
 (require 'ido-ubiquitous)
 (ido-ubiquitous)
 
