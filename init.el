@@ -480,6 +480,7 @@
 ;; Magit ;;
 ;;;;;;;;;;;
 (require 'magit)
+(global-set-key (kbd "M-s g s") 'magit-status)
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;
