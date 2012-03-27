@@ -633,14 +633,6 @@ echo the result to the minibuffer"
 ;;;;;;;;;;;;;;;;;;;;;;;;
 
 ; Macros
-(fset 'kill-buffer-close-window
-   (lambda (&optional arg) "Keyboard macro. Kills the current
-   buffer and closes the window it was displayed in. Should only
-   be used if the frame is displaying more than one
-   window." (interactive "p") (kmacro-exec-ring-item (quote ([24
-   107 return 24 48] 0 "%d")) arg)))
-(global-set-key (kbd "C-S-k") 'kill-buffer-close-window)
-
 (fset 'kill-other-buffer-close-window
    (lambda (&optional arg) "Keyboard macro. Kills the next buffer
    in line and closes the associated window. I.e., if there are
