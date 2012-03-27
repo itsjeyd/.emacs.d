@@ -407,7 +407,6 @@
 ;;;;;;;;;;;;;;;;
 
 ; Hooks
-(add-hook 'org-mode-hook 'autopair-mode)
 (add-hook 'org-mode-hook 'linum-mode)
 (add-hook 'org-mode-hook 'show-paren-mode)
 
@@ -465,9 +464,7 @@
 
 ; Autopair
 (require 'autopair)
-(add-hook 'emacs-lisp-mode-hook 'autopair-mode)
-(add-hook 'lisp-mode-hook 'autopair-mode)
-(add-hook 'octave-mode-hook 'autopair-mode)
+(autopair-global-mode)
 
 ; Parens
 (add-hook 'emacs-lisp-mode-hook 'show-paren-mode)
@@ -495,9 +492,6 @@
 ;;   (use-anything-show-completion 'anything-ipython-complete
 ;;                                 '(length initial-pattern)))
 ;; (require 'anything-config)
-
-; Autopair
-(add-hook 'python-mode-hook 'autopair-mode)
 
 ; IPython
 (require 'ipython)
