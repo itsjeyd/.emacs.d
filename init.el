@@ -454,6 +454,12 @@
 ;;; Programming ;;;
 ;;;;;;;;;;;;;;;;;;;
 
+; Auto-complete
+(require 'auto-complete-config)
+(add-to-list 'ac-dictionary-directories "~/.emacs.d/ac-dict")
+(ac-config-default)
+(define-key ac-complete-mode-map [tab] 'ac-expand)
+
 ; Autopair
 (require 'autopair)
 (add-hook 'emacs-lisp-mode-hook 'autopair-mode)
@@ -481,12 +487,6 @@
 ;;   (use-anything-show-completion 'anything-ipython-complete
 ;;                                 '(length initial-pattern)))
 ;; (require 'anything-config)
-
-; Auto-complete
-(require 'auto-complete-config)
-(add-to-list 'ac-dictionary-directories "~/.emacs.d/ac-dict")
-(ac-config-default)
-(define-key ac-complete-mode-map [tab] 'ac-expand)
 
 ; Autopair
 (add-hook 'python-mode-hook 'autopair-mode)
