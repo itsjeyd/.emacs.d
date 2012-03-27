@@ -447,6 +447,7 @@
 ;;; Permissions ;;;
 ;;;;;;;;;;;;;;;;;;;
 (require 'tramp)
+; Usage: C-x C-f /sudo::/path/to/file
 
 
 ;;;;;;;;;;;;;;;;;;;
