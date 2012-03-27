@@ -536,6 +536,10 @@
 ; Subword Mode
 (add-hook 'python-mode-hook 'subword-mode)
 
+; Virtualenv (https://github.com/aculich/virtualenv.el)
+(add-to-list 'load-path "~/.emacs.d/virtualenv.el/")
+(load "virtualenv")
+
 ; Whitespace
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 
