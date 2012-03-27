@@ -1,1 +1,35 @@
-Coming Soon.
+* Packages
+I use the following add-on packages:
+
+| Package                           | Source                                      |
+|-----------------------------------+---------------------------------------------|
+| AUCTeX                            | apt-get install auctex                      |
+| auto-complete                     | [[http://cx4a.org/software/auto-complete/][home page]] / [[https://github.com/m2ym/auto-complete][GitHub repo]]                     |
+| autopair                          | [[http://autopair.googlecode.com/svn/trunk/autopair.el][autopair.el]] on GoogleCode                   |
+| browse-kill-ring                  | apt-get install emacs-goodies               |
+| color-theme                       | apt-get install emacs-goodies               |
+| color-theme-colorful-obsolescence | (can't find link for the version I'm using) |
+| color-theme-zenburn               | [[https://github.com/bbatsov/zenburn-emacs][zenburn-emacs]] on GitHub                     |
+| idle-require                      | [[https://github.com/emacsmirror/idle-require][idle-require]] on GitHub                      |
+| ido-ubiquitous                    | [[https://github.com/technomancy/ido-ubiquitous][ido-ubiquitous]] on GitHub                    |
+| ipython                           | apt-get install ipython                     |
+| key-chord                         | [[http://www.emacswiki.org/emacs/key-chord.el][key-chord.el]] on EmacsWiki                   |
+| magit                             | [[https://github.com/magit/magit][magit]] on GitHub                             |
+| mark-lines                        | [[http://www.emacswiki.org/emacs/mark-lines.el][mark-lines.el]] on EmacsWiki                  |
+| minibuffer-complete-cycle         | apt-get install emacs-goodies               |
+| move-text                         | [[http://www.emacswiki.org/emacs/move-text.el][move-text.el]] on EmacsWiki                   |
+| openwith                          | [[http://web.student.tuwien.ac.at/~e0225855/misc/openwith.el][openwith.el]]                                 |
+| package                           | [[http://bzr.savannah.gnu.org/lh/emacs/trunk/annotate/head:/lisp/emacs-lisp/package.el][package.el]] from GNU repos                   |
+| pylookup                          | [[https://github.com/tsgates/pylookup/][pylookup]] on GitHub                          |
+| pymacs                            | apt-get install pymacs                      |
+| python-mode                       | apt-get install python-mode                 |
+| python-pylint                     | [[https://github.com/emacsmirror/python-pylint][python-pylint]] on GitHub                     |
+| ropemacs                          | apt-get install pymacs                      |
+| shell-command                     | apt-get install emacs-goodies               |
+| vimgolf                           | Emacs Package Manager                       |
+| virtualenv                        | [[https://github.com/aculich/virtualenv.el][virtualenv.el]] on GitHub                     |
+| wrap-region                       | [[https://github.com/rejeep/wrap-region][wrap-region]] on GitHub                       |
+| yasnippet                         | apt-get install yasnippet                   |
+|-----------------------------------+---------------------------------------------|
+
+
