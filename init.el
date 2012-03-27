@@ -474,6 +474,11 @@
 (add-hook 'lisp-mode-hook 'show-paren-mode)
 (add-hook 'octave-mode-hook 'show-paren-mode)
 
+; YaSnippet
+(require 'yasnippet)
+(yas/initialize)
+(yas/load-directory "/usr/share/emacs/site-lisp/yasnippet/snippets/")
+
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Python Development ;;;
@@ -549,11 +554,6 @@
 ; Virtualenv (https://github.com/aculich/virtualenv.el)
 (add-to-list 'load-path "~/.emacs.d/virtualenv.el/")
 (load "virtualenv")
-
-; YaSnippet
-(require 'yasnippet)
-(yas/initialize)
-(yas/load-directory "/usr/share/emacs/site-lisp/yasnippet/snippets/")
 
 
 ;;;;;;;;;;;;;;;
