@@ -125,6 +125,9 @@
 ; Functions
 (put 'narrow-to-region 'disabled nil)
 
+; Hooks
+(add-hook 'before-save-hook 'delete-trailing-whitespace)
+
 ; Key Bindings
 (global-set-key (kbd "M-g c") 'goto-char)
 (global-unset-key (kbd "M-g g"))
@@ -546,9 +549,6 @@
 ; Virtualenv (https://github.com/aculich/virtualenv.el)
 (add-to-list 'load-path "~/.emacs.d/virtualenv.el/")
 (load "virtualenv")
-
-; Whitespace
-(add-hook 'before-save-hook 'delete-trailing-whitespace)
 
 ; YaSnippet
 (require 'yasnippet)
