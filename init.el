@@ -486,7 +486,7 @@
 
 ; IPython
 (require 'ipython)
-(setq py-python-command-args '("-editor" "emacsclient" "-deep_reload" "--colors" "Linux"))
+(setq py-python-command-args nil)
 
 ; Macros
 (fset 'python-hide-class-body
