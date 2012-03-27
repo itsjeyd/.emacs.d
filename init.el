@@ -493,6 +493,13 @@
 ;;                                 '(length initial-pattern)))
 ;; (require 'anything-config)
 
+; Autopair
+(add-hook 'python-mode-hook
+          #'(lambda ()
+              (setq autopair-handle-action-fns
+                    (list #'autopair-default-handle-action
+                          #'autopair-python-triple-quote-action))))
+
 ; IPython
 (require 'ipython)
 (setq py-python-command-args nil)
