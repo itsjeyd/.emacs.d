@@ -500,6 +500,12 @@
                     (list #'autopair-default-handle-action
                           #'autopair-python-triple-quote-action))))
 
+; Functions
+(defun set-py-which-bufname (name)
+  (interactive "sName: ")
+  (setq py-which-bufname name)
+  (message "Set py-which-bufname to %s" name))
+
 ; IPython
 (require 'ipython)
 (setq py-python-command-args nil)
