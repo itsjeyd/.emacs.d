@@ -408,7 +408,6 @@
 
 ; Hooks
 (add-hook 'org-mode-hook 'linum-mode)
-(add-hook 'org-mode-hook 'show-paren-mode)
 
 ; Key Bindings
 (global-set-key (kbd "C-c a") 'org-agenda)
@@ -467,9 +466,7 @@
 (autopair-global-mode)
 
 ; Parens
-(add-hook 'emacs-lisp-mode-hook 'show-paren-mode)
-(add-hook 'lisp-mode-hook 'show-paren-mode)
-(add-hook 'octave-mode-hook 'show-paren-mode)
+(show-paren-mode t)
 
 ; YaSnippet
 (require 'yasnippet)
@@ -522,9 +519,6 @@
 (fset 'python-show-all
    "\C-x$")
 (global-set-key (kbd "C-c s d a") 'python-show-all) ; "Selective Display: All"
-
-; Parens
-(add-hook 'python-mode-hook 'show-paren-mode)
 
 ; Pylint
 (require 'python-pylint)
