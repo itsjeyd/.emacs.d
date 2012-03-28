@@ -550,7 +550,7 @@
 (setq ropemacs-enable-autoimport t)
 
 ; Subword Mode
-(add-hook 'python-mode-hook 'subword-mode)
+(add-hook 'python-mode-hook (lambda () (subword-mode 1)))
 
 ; Virtualenv (https://github.com/aculich/virtualenv.el)
 (add-to-list 'load-path "~/.emacs.d/virtualenv.el/")
