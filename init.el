@@ -210,13 +210,6 @@
 (require 'smex)
 (smex-initialize)
 
-(defun ido-recentf-open ()
-  "Use `ido-completing-read' to \\[find-file] a recent file"
-  (interactive)
-  (if (find-file (ido-completing-read "Find recent file: " recentf-list))
-      (message "Opening file...")
-    (message "Aborting")))
-
 ; Key Bindings
 (global-set-key (kbd "M-x") 'smex)
 (global-set-key (kbd "<menu>") 'smex)
@@ -556,15 +549,21 @@
 ;;; Recentf ;;;
 ;;;;;;;;;;;;;;;
 (require 'recentf)
-
-;; get rid of `find-file-read-only' and replace it with something
-;; more useful.
-(global-set-key (kbd "C-x C-r") 'ido-recentf-open)
-
-;; enable recent files mode.
 (recentf-mode t)
 
-; 50 files ought to be enough.
+; Functions
+(defun ido-recentf-open ()
+  "Use `ido-completing-read' to \\[find-file] a recent file"
+  (interactive)
+  (if (find-file (ido-completing-read "Find recent file: " recentf-list))
+      (message "Opening file...")
+    (message "Aborting")))
+
+; Key Bindings
+(global-set-key (kbd "C-x C-r") 'ido-recentf-open)
+; NOTE: C-x C-r is bound to `find-file-read-only' by default
+
+; Variables
 (setq recentf-max-saved-items 50)
 
 
