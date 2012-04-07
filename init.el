@@ -213,6 +213,7 @@
 ; Key Bindings
 (global-set-key (kbd "M-x") 'smex)
 (global-set-key (kbd "<menu>") 'smex)
+(global-set-key (kbd "M-X") 'smex-major-mode-commands)
 
 ; Ubiquitous
 (add-to-list 'load-path "~/.emacs.d/ido-ubiquitous/")
