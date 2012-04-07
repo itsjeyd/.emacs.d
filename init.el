@@ -206,14 +206,9 @@
 ;;; Ido ;;;
 ;;;;;;;;;;;
 
-; Functions
-(defun mx-ido()
-  (interactive)
-  (call-interactively
-   (intern
-    (ido-completing-read
-     "M-x "
-     (all-completions "" obarray 'commandp)))))
+(add-to-list 'load-path "~/.emacs.d/smex/")
+(require 'smex)
+(smex-initialize)
 
 (defun ido-recentf-open ()
   "Use `ido-completing-read' to \\[find-file] a recent file"
@@ -223,8 +218,8 @@
     (message "Aborting")))
 
 ; Key Bindings
-(global-set-key (kbd "M-x") 'mx-ido)
-(global-set-key (kbd "<menu>") 'mx-ido)
+(global-set-key (kbd "M-x") 'smex)
+(global-set-key (kbd "<menu>") 'smex)
 
 ; Ubiquitous
 (add-to-list 'load-path "~/.emacs.d/ido-ubiquitous/")
