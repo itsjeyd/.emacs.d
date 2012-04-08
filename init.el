@@ -131,6 +131,11 @@ is replaced and the point is put before CHAR."
   (insert char)
   (forward-char -1))
 
+; Expand Region
+(add-to-list 'load-path "~/.emacs.d/expand-region.el/")
+(require 'expand-region)
+(global-set-key (kbd "C-@") 'er/expand-region)
+
 ; Hooks
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 
