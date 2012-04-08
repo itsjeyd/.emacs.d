@@ -469,6 +469,15 @@ is replaced and the point is put before CHAR."
 (yas/load-directory "/usr/share/emacs/site-lisp/yasnippet/snippets/")
 
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;; Project Managment ;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+; Projman
+(add-to-list 'load-path "~/.emacs.d/projman/")
+(require 'projman)
+
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Python Development ;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;
