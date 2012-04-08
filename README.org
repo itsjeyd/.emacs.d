@@ -21,6 +21,7 @@ I use the following add-on packages:
 | openwith                          | [[http://web.student.tuwien.ac.at/~e0225855/misc/openwith.el][openwith.el]]                                 |
 | package                           | [[http://bzr.savannah.gnu.org/lh/emacs/trunk/annotate/head:/lisp/emacs-lisp/package.el][package.el]] from GNU repos                   |
 | projman                           | [[https://github.com/emacsmirror/projman][projman]] on GitHub                           |
+|                                   | [[https://github.com/itsjeyd/projman][My fork]] uses ido instead of iswitchb        |
 | pylookup                          | [[https://github.com/tsgates/pylookup/][pylookup]] on GitHub                          |
 | pymacs                            | apt-get install pymacs                      |
 | python-mode                       | apt-get install python-mode                 |
