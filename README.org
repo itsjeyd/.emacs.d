@@ -20,12 +20,14 @@ I use the following add-on packages:
 | move-text                         | [[http://www.emacswiki.org/emacs/move-text.el][move-text.el]] on EmacsWiki                   |
 | openwith                          | [[http://web.student.tuwien.ac.at/~e0225855/misc/openwith.el][openwith.el]]                                 |
 | package                           | [[http://bzr.savannah.gnu.org/lh/emacs/trunk/annotate/head:/lisp/emacs-lisp/package.el][package.el]] from GNU repos                   |
+| projman                           | [[https://github.com/emacsmirror/projman][projman]] on GitHub                           |
 | pylookup                          | [[https://github.com/tsgates/pylookup/][pylookup]] on GitHub                          |
 | pymacs                            | apt-get install pymacs                      |
 | python-mode                       | apt-get install python-mode                 |
 | python-pylint                     | [[https://github.com/emacsmirror/python-pylint][python-pylint]] on GitHub                     |
 | ropemacs                          | apt-get install pymacs                      |
 | shell-command                     | apt-get install emacs-goodies               |
+| smex                              | [[https://github.com/nonsequitur/smex/][smex]] on GitHub                              |
 | vimgolf                           | Emacs Package Manager                       |
 | virtualenv                        | [[https://github.com/aculich/virtualenv.el][virtualenv.el]] on GitHub                     |
 | wrap-region                       | [[https://github.com/rejeep/wrap-region][wrap-region]] on GitHub                       |
