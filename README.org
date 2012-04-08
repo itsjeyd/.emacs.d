@@ -10,6 +10,7 @@ I use the following add-on packages:
 | color-theme                       | apt-get install emacs-goodies               |
 | color-theme-colorful-obsolescence | (can't find link for the version I'm using) |
 | color-theme-zenburn               | [[https://github.com/bbatsov/zenburn-emacs][zenburn-emacs]] on GitHub                     |
+| expand-region.el                  | [[https://github.com/magnars/expand-region.el][expand-region.el]] on GitHub                  |
 | idle-require                      | [[https://github.com/emacsmirror/idle-require][idle-require]] on GitHub                      |
 | ido-ubiquitous                    | [[https://github.com/technomancy/ido-ubiquitous][ido-ubiquitous]] on GitHub                    |
 | ipython                           | apt-get install ipython                     |
