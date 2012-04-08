@@ -476,6 +476,8 @@ is replaced and the point is put before CHAR."
 ; Projman
 (add-to-list 'load-path "~/.emacs.d/projman/")
 (require 'projman)
+(setq projman-close-buffers-when-close-project t)
+(setq projman-lazy-load-buffers nil)
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;
