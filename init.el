@@ -593,6 +593,11 @@ is replaced and the point is put before CHAR."
 ;;;;;;;;;;;;;;;;;
 ;;; Scrolling ;;;
 ;;;;;;;;;;;;;;;;;
+
+; Functions
+(put 'scroll-left 'disabled nil)
+
+; Variables
 (setq hscroll-margin 1)
 (setq scroll-margin 1)
 (setq scroll-preserve-screen-position t)
