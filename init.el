@@ -122,6 +122,11 @@
 ;;; Editing ;;;
 ;;;;;;;;;;;;;;;
 
+; Ace Jump
+(add-to-list 'load-path "~/.emacs.d/ace-jump-mode/")
+(require 'ace-jump-mode)
+(global-set-key (kbd "C-c SPC") 'ace-jump-mode)
+
 ; Functions
 (put 'narrow-to-region 'disabled nil)
 
