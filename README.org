@@ -3,6 +3,7 @@ I use the following add-on packages:
 
 | Package                           | Source                                      |
 |-----------------------------------+---------------------------------------------|
+| ace-jump-mode                     | [[https://github.com/winterTTr/ace-jump-mode][ace-jump-mode]] on GitHub                     |
 | AUCTeX                            | apt-get install auctex                      |
 | auto-complete                     | [[http://cx4a.org/software/auto-complete/][home page]] / [[https://github.com/m2ym/auto-complete][GitHub repo]]                     |
 | autopair                          | [[http://autopair.googlecode.com/svn/trunk/autopair.el][autopair.el]] on GoogleCode                   |
