@@ -424,6 +424,9 @@ is replaced and the point is put before CHAR."
 ;;; Org Mode ;;;
 ;;;;;;;;;;;;;;;;
 
+; CDLaTeX
+(require 'cdlatex)
+
 ; Hooks
 (add-hook 'org-mode-hook 'linum-mode)
 
