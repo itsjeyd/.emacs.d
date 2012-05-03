@@ -8,6 +8,7 @@ I use the following add-on packages:
 | auto-complete                     | [[http://cx4a.org/software/auto-complete/][home page]] / [[https://github.com/m2ym/auto-complete][GitHub repo]]                     |
 | autopair                          | [[http://autopair.googlecode.com/svn/trunk/autopair.el][autopair.el]] on GoogleCode                   |
 | browse-kill-ring                  | apt-get install emacs-goodies               |
+| cdlatex                           | [[http://staff.science.uva.nl/~dominik/Tools/cdlatex/cdlatex.el][cdlatex.el]] by Carsten Dominik               |
 | color-theme                       | apt-get install emacs-goodies               |
 | color-theme-colorful-obsolescence | (can't find link for the version I'm using) |
 | color-theme-zenburn               | [[https://github.com/bbatsov/zenburn-emacs][zenburn-emacs]] on GitHub                     |
