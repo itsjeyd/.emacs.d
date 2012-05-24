@@ -88,7 +88,7 @@
       (message "%S" (car theme-current)))
     (setq theme-current my-color-themes)
     (my-theme-set-default)
-    (global-set-key [f8] 'my-theme-cycle)
+    (global-set-key (kbd "<f8>") 'my-theme-cycle)
 
 
 ;;;;;;;;;;;;;
@@ -542,15 +542,15 @@ is replaced and the point is put before CHAR."
 ; Macros
 (fset 'python-hide-class-body
    "\261\C-x$")
-(global-set-key (kbd "C-c s d c") 'python-hide-class-body) ; "Selective Display: Classes"
+(define-key py-mode-map (kbd "M-s c") 'python-hide-class-body) ; "Selective Display: Classes"
 
 (fset 'python-hide-function-bodies
    "\265\C-x$")
-(global-set-key (kbd "C-c s d f") 'python-hide-function-bodies) ; "Selective Display: Functions"
+(define-key py-mode-map (kbd "M-s f") 'python-hide-function-bodies) ; "Selective Display: Functions"
 
 (fset 'python-show-all
    "\C-x$")
-(global-set-key (kbd "C-c s d a") 'python-show-all) ; "Selective Display: All"
+(define-key py-mode-map (kbd "M-s a") 'python-show-all) ; "Selective Display: All"
 
 ; Pylint
 (require 'python-pylint)
