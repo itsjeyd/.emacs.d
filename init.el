@@ -275,6 +275,9 @@ is replaced and the point is put before CHAR."
 ;;; LaTeX ;;;
 ;;;;;;;;;;;;;
 
+; Hooks
+(add-hook 'LaTeX-mode-hook 'turn-on-auto-fill)
+
 ; Variables
 (setq TeX-command-list (quote (("TeX" "%(PDF)%(tex) %`%S%(PDFout)%(mode)%' %t"
                                 TeX-run-TeX
@@ -429,6 +432,7 @@ is replaced and the point is put before CHAR."
 
 ; Hooks
 (add-hook 'org-mode-hook 'linum-mode)
+(add-hook 'org-mode-hook 'turn-on-auto-fill)
 
 ; Key Bindings
 (global-set-key (kbd "C-c a") 'org-agenda)
