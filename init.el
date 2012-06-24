@@ -544,7 +544,10 @@ is replaced and the point is put before CHAR."
       (list "pyflakes" (list local-file))))
   (add-to-list 'flymake-allowed-file-name-masks
                '("\\.py\\'" flymake-pyflakes-init)))
-(add-hook 'python-mode-hook 'flymake-mode)
+
+(add-hook 'python-mode-hook
+          (lambda ()
+            (unless (eq buffer-file-name nil) (flymake-mode t))))
 
 ; Functions
 (defun set-py-which-bufname (name)
