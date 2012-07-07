@@ -490,6 +490,10 @@ is replaced and the point is put before CHAR."
 (require 'autopair)
 (autopair-global-mode)
 
+; Django
+(add-to-list 'load-path "~/.emacs.d/pony-mode/src/")
+(require 'pony-mode)
+
 ; Parens
 (show-paren-mode t)
 
