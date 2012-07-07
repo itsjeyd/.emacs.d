@@ -23,6 +23,7 @@ I use the following add-on packages:
 | move-text                         | [[http://www.emacswiki.org/emacs/move-text.el][move-text.el]] on EmacsWiki                   |
 | openwith                          | [[http://web.student.tuwien.ac.at/~e0225855/misc/openwith.el][openwith.el]]                                 |
 | package                           | [[http://bzr.savannah.gnu.org/lh/emacs/trunk/annotate/head:/lisp/emacs-lisp/package.el][package.el]] from GNU repos                   |
+| pony-mode                         | [[https://github.com/davidmiller/pony-mode][pony-mode]] on GitHub                                  |
 | projman                           | [[https://github.com/emacsmirror/projman][projman]] on GitHub                           |
 |                                   | [[https://github.com/itsjeyd/projman][My fork]] uses ido instead of iswitchb        |
 | pylookup                          | [[https://github.com/tsgates/pylookup/][pylookup]] on GitHub                          |
