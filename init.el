@@ -62,6 +62,7 @@
 
 ; Add a couple more themes
 (load "color-theme-colorful-obsolescence")
+(load "color-theme-tangotango")
 (load "color-theme-zenburn")
 
 ; Set up list of favourite themes to cycle through
