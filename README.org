@@ -1,42 +1,42 @@
 * Packages
 I use the following add-on packages:
 
-| Package                           | Source                                      |
-|-----------------------------------+---------------------------------------------|
-| ace-jump-mode                     | [[https://github.com/winterTTr/ace-jump-mode][ace-jump-mode]] on GitHub                     |
-| AUCTeX                            | apt-get install auctex                      |
-| auto-complete                     | [[http://cx4a.org/software/auto-complete/][home page]] / [[https://github.com/m2ym/auto-complete][GitHub repo]]                     |
-| autopair                          | [[http://autopair.googlecode.com/svn/trunk/autopair.el][autopair.el]] on GoogleCode                   |
-| browse-kill-ring                  | apt-get install emacs-goodies               |
-| cdlatex                           | [[http://staff.science.uva.nl/~dominik/Tools/cdlatex/cdlatex.el][cdlatex.el]] by Carsten Dominik               |
-| color-theme                       | apt-get install emacs-goodies               |
-| color-theme-colorful-obsolescence | (can't find link for the version I'm using) |
-| color-theme-zenburn               | [[https://github.com/bbatsov/zenburn-emacs][zenburn-emacs]] on GitHub                     |
-| expand-region.el                  | [[https://github.com/magnars/expand-region.el][expand-region.el]] on GitHub                  |
-| idle-require                      | [[https://github.com/emacsmirror/idle-require][idle-require]] on GitHub                      |
-| ido-ubiquitous                    | [[https://github.com/technomancy/ido-ubiquitous][ido-ubiquitous]] on GitHub                    |
-| ipython                           | apt-get install ipython                     |
-| key-chord                         | [[http://www.emacswiki.org/emacs/key-chord.el][key-chord.el]] on EmacsWiki                   |
-| magit                             | [[https://github.com/magit/magit][magit]] on GitHub                             |
-| mark-lines                        | [[http://www.emacswiki.org/emacs/mark-lines.el][mark-lines.el]] on EmacsWiki                  |
-| minibuffer-complete-cycle         | apt-get install emacs-goodies               |
-| move-text                         | [[http://www.emacswiki.org/emacs/move-text.el][move-text.el]] on EmacsWiki                   |
-| openwith                          | [[http://web.student.tuwien.ac.at/~e0225855/misc/openwith.el][openwith.el]]                                 |
-| package                           | [[http://bzr.savannah.gnu.org/lh/emacs/trunk/annotate/head:/lisp/emacs-lisp/package.el][package.el]] from GNU repos                   |
-| pony-mode                         | [[https://github.com/davidmiller/pony-mode][pony-mode]] on GitHub                                  |
-| projman                           | [[https://github.com/emacsmirror/projman][projman]] on GitHub                           |
-|                                   | [[https://github.com/itsjeyd/projman][My fork]] uses ido instead of iswitchb        |
-| pylookup                          | [[https://github.com/tsgates/pylookup/][pylookup]] on GitHub                          |
-| pymacs                            | apt-get install pymacs                      |
-| python-mode                       | apt-get install python-mode                 |
-| python-pylint                     | [[https://github.com/emacsmirror/python-pylint][python-pylint]] on GitHub                     |
-| ropemacs                          | apt-get install pymacs                      |
-| shell-command                     | apt-get install emacs-goodies               |
-| smex                              | [[https://github.com/nonsequitur/smex/][smex]] on GitHub                              |
-| vimgolf                           | Emacs Package Manager                       |
-| virtualenv                        | [[https://github.com/aculich/virtualenv.el][virtualenv.el]] on GitHub                     |
-| wrap-region                       | [[https://github.com/rejeep/wrap-region][wrap-region]] on GitHub                       |
-| yasnippet                         | apt-get install yasnippet                   |
-|-----------------------------------+---------------------------------------------|
+| Package                           | Source                                      | Submodule |
+|-----------------------------------+---------------------------------------------+-----------|
+| ace-jump-mode                     | [[https://github.com/winterTTr/ace-jump-mode][ace-jump-mode]] on GitHub                     | yes       |
+| AUCTeX                            | apt-get install auctex                      | -         |
+| auto-complete                     | [[http://cx4a.org/software/auto-complete/][home page]] / [[https://github.com/m2ym/auto-complete][GitHub repo]]                     | -         |
+| autopair                          | [[http://autopair.googlecode.com/svn/trunk/autopair.el][autopair.el]] on GoogleCode                   | -         |
+| browse-kill-ring                  | apt-get install emacs-goodies               | -         |
+| cdlatex                           | [[http://staff.science.uva.nl/~dominik/Tools/cdlatex/cdlatex.el][cdlatex.el]] by Carsten Dominik               | -         |
+| color-theme                       | apt-get install emacs-goodies               | -         |
+| color-theme-colorful-obsolescence | (can't find link for the version I'm using) | no        |
+| color-theme-zenburn               | [[https://github.com/bbatsov/zenburn-emacs][zenburn-emacs]] on GitHub                     | no        |
+| expand-region.el                  | [[https://github.com/magnars/expand-region.el][expand-region.el]] on GitHub                  | yes       |
+| idle-require                      | [[https://github.com/emacsmirror/idle-require][idle-require]] on GitHub                      | yes       |
+| ido-ubiquitous                    | [[https://github.com/technomancy/ido-ubiquitous][ido-ubiquitous]] on GitHub                    | yes       |
+| ipython                           | apt-get install ipython                     | -         |
+| key-chord                         | [[http://www.emacswiki.org/emacs/key-chord.el][key-chord.el]] on EmacsWiki                   | -         |
+| magit                             | [[https://github.com/magit/magit][magit]] on GitHub                             | no        |
+| mark-lines                        | [[http://www.emacswiki.org/emacs/mark-lines.el][mark-lines.el]] on EmacsWiki                  | -         |
+| minibuffer-complete-cycle         | apt-get install emacs-goodies               | -         |
+| move-text                         | [[http://www.emacswiki.org/emacs/move-text.el][move-text.el]] on EmacsWiki                   | -         |
+| openwith                          | [[http://web.student.tuwien.ac.at/~e0225855/misc/openwith.el][openwith.el]]                                 | -         |
+| package                           | [[http://bzr.savannah.gnu.org/lh/emacs/trunk/annotate/head:/lisp/emacs-lisp/package.el][package.el]] from GNU repos                   | -         |
+| pony-mode                         | [[https://github.com/davidmiller/pony-mode][pony-mode]] on GitHub                         | no        |
+| projman                           | [[https://github.com/emacsmirror/projman][projman]] on GitHub                           | no        |
+|                                   | [[https://github.com/itsjeyd/projman][My fork]] uses ido instead of iswitchb        | no        |
+| pylookup                          | [[https://github.com/tsgates/pylookup/][pylookup]] on GitHub                          | no        |
+| pymacs                            | apt-get install pymacs                      | -         |
+| python-mode                       | apt-get install python-mode                 | -         |
+| python-pylint                     | [[https://github.com/emacsmirror/python-pylint][python-pylint]] on GitHub                     | yes       |
+| ropemacs                          | apt-get install pymacs                      | -         |
+| shell-command                     | apt-get install emacs-goodies               | -         |
+| smex                              | [[https://github.com/nonsequitur/smex/][smex]] on GitHub                              | yes       |
+| vimgolf                           | Emacs Package Manager                       | -         |
+| virtualenv                        | [[https://github.com/aculich/virtualenv.el][virtualenv.el]] on GitHub                     | no        |
+| wrap-region                       | [[https://github.com/rejeep/wrap-region][wrap-region]] on GitHub                       | no        |
+| yasnippet                         | apt-get install yasnippet                   | -         |
+|-----------------------------------+---------------------------------------------+-----------|
 
 
