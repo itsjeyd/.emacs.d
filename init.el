@@ -248,7 +248,7 @@ is replaced and the point is put before CHAR."
 ; Ubiquitous
 (add-to-list 'load-path "~/.emacs.d/ido-ubiquitous/")
 (require 'ido-ubiquitous)
-(ido-ubiquitous)
+(ido-ubiquitous-mode)
 
 ; Variables
 (setq ido-create-new-buffer (quote always))
