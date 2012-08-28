@@ -578,6 +578,7 @@ is replaced and the point is put before CHAR."
 (define-key py-mode-map (kbd "M-s a") 'python-show-all) ; "Selective Display: All"
 
 ; Pylint
+(add-to-list 'load-path "~/.emacs.d/python-pylint")
 (require 'python-pylint)
 
 ; Pylookup
