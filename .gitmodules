@@ -1,3 +1,6 @@
 [submodule "ido-ubiquitous"]
 	path = ido-ubiquitous
 	url = https://github.com/technomancy/ido-ubiquitous
+[submodule "ace-jump-mode"]
+	path = ace-jump-mode
+	url = https://github.com/winterTTr/ace-jump-mode
