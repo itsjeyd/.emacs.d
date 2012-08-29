@@ -5,12 +5,12 @@ I use the following add-on packages:
 |-----------------------------------+---------------------------------------------+-----------|
 | ace-jump-mode                     | [[https://github.com/winterTTr/ace-jump-mode][ace-jump-mode]] on GitHub                     | yes       |
 | AUCTeX                            | apt-get install auctex                      | -         |
-| auto-complete                     | [[http://cx4a.org/software/auto-complete/][home page]] / [[https://github.com/m2ym/auto-complete][GitHub repo]]                     | -         |
+| auto-complete                     | [[http://cx4a.org/software/auto-complete/][home page]] / [[https://github.com/m2ym/auto-complete][GitHub repo]]                     | no        |
 | autopair                          | [[http://autopair.googlecode.com/svn/trunk/autopair.el][autopair.el]] on GoogleCode                   | -         |
 | browse-kill-ring                  | apt-get install emacs-goodies               | -         |
 | cdlatex                           | [[http://staff.science.uva.nl/~dominik/Tools/cdlatex/cdlatex.el][cdlatex.el]] by Carsten Dominik               | -         |
 | color-theme                       | apt-get install emacs-goodies               | -         |
-| color-theme-colorful-obsolescence | (can't find link for the version I'm using) | no        |
+| color-theme-colorful-obsolescence | (can't find link for the version I'm using) | -         |
 | color-theme-zenburn               | [[https://github.com/bbatsov/zenburn-emacs][zenburn-emacs]] on GitHub                     | no        |
 | expand-region.el                  | [[https://github.com/magnars/expand-region.el][expand-region.el]] on GitHub                  | no        |
 | Highlight-Indentation-for-Emacs   | [[https://github.com/antonj/Highlight-Indentation-for-Emacs][Highlight-Indentation-for-Emacs]] on GitHub   | yes       |
