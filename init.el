@@ -495,6 +495,16 @@ is replaced and the point is put before CHAR."
 (add-to-list 'load-path "~/.emacs.d/pony-mode/src/")
 (require 'pony-mode)
 
+; Hooks
+(add-hook 'nxml-mode-hook (lambda ()
+			    (highlight-indentation-current-column-mode t)))
+
+; Indentation
+(add-to-list 'load-path "~/.emacs.d/Highlight-Indentation-for-Emacs")
+(require 'highlight-indentation)
+(set-face-background 'highlight-indentation-face "#888a85")
+(set-face-background 'highlight-indentation-current-column-face "#888a85")
+
 ; Parens
 (show-paren-mode t)
 
