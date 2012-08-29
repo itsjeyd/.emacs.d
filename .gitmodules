@@ -13,3 +13,6 @@
 [submodule "python-pylint"]
 	path = python-pylint
 	url = https://github.com/emacsmirror/python-pylint
+[submodule "Highlight-Indentation-for-Emacs"]
+	path = Highlight-Indentation-for-Emacs
+	url = https://github.com/antonj/Highlight-Indentation-for-Emacs
