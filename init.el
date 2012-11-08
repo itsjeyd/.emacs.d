@@ -237,6 +237,14 @@ is replaced and the point is put before CHAR."
 ;;; Programming ;;;
 ;;;;;;;;;;;;;;;;;;;
 
+; Auto-complete
+(add-to-list 'load-path "~/.emacs.d/elpa/popup-0.5/")
+(require 'popup)
+(add-to-list 'load-path "~/.emacs.d/elpa/auto-complete-1.4/")
+(require 'auto-complete-config)
+(add-to-list 'ac-dictionary-directories "~/.emacs.d/elpa/auto-complete-1.4/dict")
+(ac-config-default)
+
 ; Parens
 (show-paren-mode t)
 
