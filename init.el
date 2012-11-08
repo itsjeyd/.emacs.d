@@ -335,7 +335,6 @@ echo the result to the minibuffer"
 ;;;;;;;;;;;;;;;;;;;;;;;
 
 ; Packages
-(require 'magit)
 (global-set-key (kbd "M-s g s") 'magit-status)
 
 
