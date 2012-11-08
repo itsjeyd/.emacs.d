@@ -1,16 +1,14 @@
 (custom-set-variables
-  ;; custom-set-variables was added by Custom.
-  ;; If you edit it by hand, you could mess it up, so be careful.
-  ;; Your init file should contain only one such instance.
-  ;; If there is more than one, they won't work right.
- '(bibtex-maintain-sorted-entries t)
- '(desktop-save-mode t)
- '(tags-revert-without-query t))
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(custom-enabled-themes (quote (tango-dark))))
 (custom-set-faces
-  ;; custom-set-faces was added by Custom.
-  ;; If you edit it by hand, you could mess it up, so be careful.
-  ;; Your init file should contain only one such instance.
-  ;; If there is more than one, they won't work right.
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
  )
 
 
@@ -46,70 +44,9 @@
 (add-hook 'after-save-hook 'auto-recompile-emacs-file)
 
 
-;;;;;;;;;;;;;;;;;;;
-;;; Color Theme ;;;
-;;;;;;;;;;;;;;;;;;;
-(require 'color-theme)
-
-; Get rid of "Wrong type argument" error thrown by <M-x
-; color-theme-select RET> (NOTE that if color-theme-zenburn is
-; selected at startup, the error persists!):
-    (defun color-theme-face-attr-construct (face frame)
-       (if (atom face)
-           (custom-face-attributes-get face frame)
-         (if (and (consp face) (eq (car face) 'quote))
-             (custom-face-attributes-get (cadr face) frame)
-           (custom-face-attributes-get (car face) frame))))
-
-; Add a couple more themes
-(load "color-theme-colorful-obsolescence")
-(load "color-theme-tangotango")
-(load "color-theme-zenburn")
-
-; Set up list of favourite themes to cycle through
-(setq my-color-themes (list
-  'color-theme-colorful-obsolescence
-  'color-theme-zenburn
-  'color-theme-charcoal-black
-  'color-theme-comidia
-  'color-theme-late-night
-))
-(defun my-theme-set-default ()
-      (interactive)
-      (setq theme-current my-color-themes)
-      (funcall (car theme-current)))
-    (defun my-describe-theme ()
-      (interactive)
-      (message "%s" (car theme-current)))
-    (defun my-theme-cycle ()
-      (interactive)
-      (setq theme-current (cdr theme-current))
-      (if (null theme-current)
-      (setq theme-current my-color-themes))
-      (funcall (car theme-current))
-      (message "%S" (car theme-current)))
-    (setq theme-current my-color-themes)
-    (my-theme-set-default)
-    (global-set-key (kbd "<f8>") 'my-theme-cycle)
-
-
 ;;;;;;;;;;;;;
 ;;; Dired ;;;
 ;;;;;;;;;;;;;
-
-; File Associations
-(require 'openwith)
-(openwith-mode t)
-(setq openwith-associations (quote (("\\.\\(?:pdf\\|ps\\)\\'" "evince" (file))
-                                    ("\\.djvu\\'" "djview4" (file))
-                                    ("\\.\\(?:mp3\\|wav\\|flac\\)\\'" "clementine" (file))
-                                    ("\\.\\(?:mpe?g\\|avi\\|wmv\\|flv\\|mov\\|mp4\\)\\'" "vlc" (file))
-                                    ("\\.\\(?:jpe?g\\|png\\|bmp\\)\\'" "viewnior" (file))
-                                    ("\\.chm\\'" "chmsee" (file))
-                                    ("\\.\\(?:odt\\|doc\\|docx\\)\\'" "ooffice" ("-writer" file))
-                                    ("\\.\\(?:ods\\|xls\\|xlsx\\)\\'" "ooffice" ("-calc" file))
-                                    ("\\.\\(?:odp\\|pps\\|ppt\\|pptx\\)\\'" "ooffice" ("-impress" file))
-                                    ("\\.odb\\'" "ooffice" ("-base" file)))))
 
 ; Hidden Files
 (require 'dired-x)
@@ -123,11 +60,6 @@
 ;;;;;;;;;;;;;;;
 ;;; Editing ;;;
 ;;;;;;;;;;;;;;;
-
-; Ace Jump
-(add-to-list 'load-path "~/.emacs.d/ace-jump-mode/")
-(require 'ace-jump-mode)
-(global-set-key (kbd "M-s SPC") 'ace-jump-mode)
 
 ; Functions
 (put 'narrow-to-region 'disabled nil)
@@ -151,11 +83,6 @@ is replaced and the point is put before CHAR."
   (insert char)
   (forward-char -1))
 
-; Expand Region
-(add-to-list 'load-path "~/.emacs.d/expand-region.el/")
-(require 'expand-region)
-(global-set-key (kbd "C-@") 'er/expand-region)
-
 ; Hooks
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 
@@ -166,44 +93,11 @@ is replaced and the point is put before CHAR."
 (global-set-key (kbd "M-g l") 'goto-line)
 (global-set-key (kbd "M-s t t") 'toggle-truncate-lines)
 
-; Mark Lines
-(require 'mark-lines)
-(global-set-key (kbd "M-s m") 'mark-lines-next-line)
-
-; Move Text
-(require 'move-text)
-(global-set-key (kbd "M-s u") 'move-text-up)
-(global-set-key (kbd "M-s d") 'move-text-down)
-
 ; Variables
 (setq indent-tabs-mode nil)
 (setq sentence-end-double-space nil)
 (setq set-mark-command-repeat-pop t)
 (setq tab-width 4)
-(setq x-select-enable-clipboard t)
-
-; Wrap Region
-(add-to-list 'load-path "~/.emacs.d/wrap-region")
-(require 'wrap-region)
-(wrap-region-add-wrapper "*" "*")
-(wrap-region-add-wrapper "/" "/")
-(wrap-region-add-wrapper "=" "=")
-
-
-;;;;;;;;;;;;;;;;;;;;;
-;;; Emacs Goodies ;;;
-;;;;;;;;;;;;;;;;;;;;;
-
-; Browse Kill Ring
-(require 'browse-kill-ring)
-
-; Minibuffer Completion Cycling
-(require 'minibuffer-complete-cycle)
-(setq minibuffer-complete-cycle t)
-
-; Shell Command Completion
-(require 'shell-command)
-(shell-command-completion-mode)
 
 
 ;;;;;;;;;;;;;
@@ -237,20 +131,6 @@ is replaced and the point is put before CHAR."
 ;;; Ido ;;;
 ;;;;;;;;;;;
 
-(add-to-list 'load-path "~/.emacs.d/smex/")
-(require 'smex)
-(smex-initialize)
-
-; Key Bindings
-(global-set-key (kbd "M-x") 'smex)
-(global-set-key (kbd "<menu>") 'smex)
-(global-set-key (kbd "M-X") 'smex-major-mode-commands)
-
-; Ubiquitous
-(add-to-list 'load-path "~/.emacs.d/ido-ubiquitous/")
-(require 'ido-ubiquitous)
-(ido-ubiquitous-mode)
-
 ; Variables
 (setq ido-create-new-buffer (quote always))
 (setq ido-enable-flex-matching t)
@@ -260,133 +140,9 @@ is replaced and the point is put before CHAR."
 ;;;;;;;;;;;;;;;;;
 ;;; Interface ;;;
 ;;;;;;;;;;;;;;;;;
-(scroll-bar-mode nil)
-(tool-bar-mode nil)
-(setq tooltip-use-echo-area t)
-
-
-;;;;;;;;;;;
-;;; LKB ;;;
-;;;;;;;;;;;
-   (let ((root (getenv "DELPHINHOME")))
-     (if (file-exists-p (format "%s/lkb/etc/dot.emacs" root))
-       (load (format "%s/lkb/etc/dot.emacs" root) nil t t)))
-
-
-;;;;;;;;;;;;;
-;;; LaTeX ;;;
-;;;;;;;;;;;;;
-
-; Hooks
-(add-hook 'LaTeX-mode-hook 'turn-on-auto-fill)
-
-; Variables
-(setq TeX-command-list (quote (("TeX" "%(PDF)%(tex) %`%S%(PDFout)%(mode)%' %t"
-                                TeX-run-TeX
-                                nil
-                                (plain-tex-mode texinfo-mode ams-tex-mode)
-                                :help "Run plain TeX")
-                               ("LaTeX" "%`%l%(mode)%' %t"
-                                TeX-run-TeX
-                                nil
-                                (latex-mode doctex-mode)
-                                :help "Run LaTeX")
-                               ("Makeinfo" "makeinfo %t"
-                                TeX-run-compile
-                                nil
-                                (texinfo-mode)
-                                :help "Run Makeinfo with Info output")
-                               ("Makeinfo HTML" "makeinfo --html %t"
-                                TeX-run-compile
-                                nil
-                                (texinfo-mode)
-                                :help "Run Makeinfo with HTML output")
-                               ("AmSTeX" "%(PDF)amstex %`%S%(PDFout)%(mode)%' %t"
-                                TeX-run-TeX
-                                nil
-                                (ams-tex-mode)
-                                :help "Run AMSTeX")
-                               ("ConTeXt" "texexec --once --texutil %(execopts)%t"
-                                TeX-run-TeX
-                                nil
-                                (context-mode)
-                                :help "Run ConTeXt once")
-                               ("ConTeXt Full" "texexec %(execopts)%t"
-                                TeX-run-TeX
-                                nil
-                                (context-mode)
-                                :help "Run ConTeXt until completion")
-                               ("BibTeX" "bibtex %s"
-                                TeX-run-BibTeX
-                                nil
-                                t
-                                :help "Run BibTeX")
-                               ("View" "%V"
-                                TeX-run-discard
-                                t
-                                t
-                                :help "Run Viewer")
-                               ("Print" "%p"
-                                TeX-run-command
-                                t
-                                t
-                                :help "Print the file")
-                               ("Queue" "%q"
-                                TeX-run-background
-                                nil
-                                t
-                                :help "View the printer queue"
-                                :visible TeX-queue-command)
-                               ("File" "%(o?)dvips %d -o %f "
-                                TeX-run-command
-                                t
-                                t
-                                :help "Generate PostScript file")
-                               ("Index" "makeindex %s"
-                                TeX-run-command
-                                nil
-                                t
-                                :help "Create index file")
-                               ("Check" "lacheck %s"
-                                TeX-run-compile
-                                nil
-                                (latex-mode)
-                                :help "Check LaTeX file for correctness")
-                               ("Spell" "(TeX-ispell-document \"\")"
-                                TeX-run-function
-                                nil
-                                t
-                                :help "Spell-check the document")
-                               ("Clean" "TeX-clean"
-                                TeX-run-function
-                                nil
-                                t
-                                :help "Delete generated intermediate files")
-                               ("Clean All" "(TeX-clean t)"
-                                TeX-run-function
-                                nil
-                                t
-                                :help "Delete generated intermediate and output files")
-                               ("Other" ""
-                                TeX-run-command
-                                t
-                                t
-                                :help "Run an arbitrary command")
-                               ("XeLaTeX" "%`xelatex%(mode)%' %t"
-                                TeX-run-TeX
-                                nil
-                                t))))
-(setq TeX-electric-sub-and-superscript t)
-
-
-;;;;;;;;;;;;;;;;;;;;;;;
-;;; Library Loading ;;;
-;;;;;;;;;;;;;;;;;;;;;;;
-(add-to-list 'load-path "~/.emacs.d/idle-require/")
-(require 'idle-require)
-(idle-require-mode t)
-(setq idle-require-idle-delay "10")
-(setq idle-require-load-break "0.5")
+(set-scroll-bar-mode nil)
+(tool-bar-mode 0)
+(tooltip-mode 0)
 
 
 ;;;;;;;;;;;;;;;;;;
@@ -429,9 +185,6 @@ is replaced and the point is put before CHAR."
 ;;; Org Mode ;;;
 ;;;;;;;;;;;;;;;;
 
-; CDLaTeX
-(require 'cdlatex)
-
 ; Hooks
 (add-hook 'org-mode-hook 'linum-mode)
 (add-hook 'org-mode-hook 'turn-on-auto-fill)
@@ -447,18 +200,6 @@ is replaced and the point is put before CHAR."
                          "/storage/ORG/read.org")))
 (setq org-agenda-include-diary t)
 (setq org-enforce-todo-dependencies t)
-(setq org-file-apps (quote ((auto-mode . emacs)
-                            ("\\.mm\\'" . default)
-                            ("\\.x?html?\\'" . default)
-                            ("\\.pdf\\'" . default)
-                            ("\\.\\(?:mpe?g\\|avi\\|wmv\\|flv\\|mov\\|mp4\\)\\'" . "vlc %s")
-                            ("\\.\\(?:jpe?g\\|png\\|bmp\\)\\'" . "viewnior %s")
-                            ("\\.\\(?:mp3|wav\\|flac\\)\\'" . "clementine %s")
-                            ("\\.chm\\'" . default) ("\\.ps\\'" . default)
-                            ("\\.\\(?:odt\\|doc\\|docx\\)\\'" . default)
-                            ("\\.\\(?:ods\\|xls\\|xlsx\\)\\'" . default)
-                            ("\\.\\(?:odp\\|pps\\|ppt\\|pptx\\)\\'" . default)
-                            ("\\.odb\\'" . default))))
 (setq org-track-ordered-property-with-tag t)
 (setq org-use-speed-commands t)
 
@@ -467,9 +208,7 @@ is replaced and the point is put before CHAR."
 ;;; Package Manager ;;;
 ;;;;;;;;;;;;;;;;;;;;;;;
 (require 'package)
-(add-to-list 'package-archives '("marmalade"
-. "http://marmalade-repo.org/packages/"))
-
+(add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/"))
 
 ;;;;;;;;;;;;;;;;;;;
 ;;; Permissions ;;;
@@ -482,148 +221,23 @@ is replaced and the point is put before CHAR."
 ;;; Programming ;;;
 ;;;;;;;;;;;;;;;;;;;
 
-; Auto-complete
-(require 'auto-complete-config)
-(add-to-list 'ac-dictionary-directories "~/.emacs.d/ac-dict")
-(ac-config-default)
-(define-key ac-complete-mode-map [tab] 'ac-expand)
-
-; Autopair
-(require 'autopair)
-(autopair-global-mode)
-
-; Django
-(add-to-list 'load-path "~/.emacs.d/pony-mode/src/")
-(require 'pony-mode)
-
-; Hooks
-(add-hook 'nxml-mode-hook (lambda ()
-			    (highlight-indentation-current-column-mode t)))
-
-; Indentation
-(add-to-list 'load-path "~/.emacs.d/Highlight-Indentation-for-Emacs")
-(require 'highlight-indentation)
-(set-face-background 'highlight-indentation-face "#888a85")
-(set-face-background 'highlight-indentation-current-column-face "#888a85")
-
 ; Parens
 (show-paren-mode t)
-
-; YaSnippet
-(require 'yasnippet)
-(yas/initialize)
-(yas/load-directory "/usr/share/emacs/site-lisp/yasnippet/snippets/")
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;; Project Managment ;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-; Projman
-(add-to-list 'load-path "~/.emacs.d/projman/")
-(require 'projman)
-(setq projman-close-buffers-when-close-project t)
-(setq projman-lazy-load-buffers nil)
+(filesets-init)
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Python Development ;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;;; Anything
-;; (require 'anything)
-;; (require 'anything-ipython)
-;; (add-hook 'python-mode-hook #'(lambda ()
-;;                                 (define-key py-mode-map (kbd "C-c c") 'anything-ipython-complete)))
-;; (add-hook 'py-shell-hook #'(lambda ()
-;;                              (define-key py-shell-map (kbd "C-c c") 'anything-ipython-complete)))
-;; (when (require 'anything-show-completion nil t)
-;;   (use-anything-show-completion 'anything-ipython-complete
-;;                                 '(length initial-pattern)))
-;; (require 'anything-config)
-
-; Autopair
-(add-hook 'python-mode-hook
-          #'(lambda ()
-              (setq autopair-handle-action-fns
-                    (list #'autopair-default-handle-action
-                          #'autopair-python-triple-quote-action))))
-
-; Flymake
-(when (load "flymake" t)
-  (defun flymake-pyflakes-init ()
-    (let* ((temp-file (flymake-init-create-temp-buffer-copy
-                       'flymake-create-temp-inplace))
-           (local-file (file-relative-name
-                        temp-file
-                        (file-name-directory buffer-file-name))))
-      (list "pyflakes" (list local-file))))
-  (add-to-list 'flymake-allowed-file-name-masks
-               '("\\.py\\'" flymake-pyflakes-init)))
-
-(add-hook 'python-mode-hook
-          (lambda ()
-            (unless (eq buffer-file-name nil) (flymake-mode t))))
-
-; Functions
-(defun set-py-which-bufname (name)
-  (interactive "sName: ")
-  (setq py-which-bufname name)
-  (message "Set py-which-bufname to %s" name))
-
-; IPython
-(require 'ipython)
-(setq py-python-command-args nil)
-
-; Macros
-(fset 'python-hide-class-body
-   "\261\C-x$")
-(define-key py-mode-map (kbd "M-s c") 'python-hide-class-body) ; "Selective Display: Classes"
-
-(fset 'python-hide-function-bodies
-   "\265\C-x$")
-(define-key py-mode-map (kbd "M-s f") 'python-hide-function-bodies) ; "Selective Display: Functions"
-
-(fset 'python-show-all
-   "\C-x$")
-(define-key py-mode-map (kbd "M-s a") 'python-show-all) ; "Selective Display: All"
-
-; Pylint
-(add-to-list 'load-path "~/.emacs.d/python-pylint")
-(require 'python-pylint)
-
-; Pylookup
-(setq pylookup-dir "~/.emacs.d/pylookup")
-(add-to-list 'load-path pylookup-dir)
-
-(eval-when-compile (require 'pylookup))
-
-(setq pylookup-program (concat pylookup-dir "/pylookup.py"))
-(setq pylookup-db-file (concat pylookup-dir "/pylookup.db"))
-
-(autoload 'pylookup-lookup "pylookup"
-  "Lookup SEARCH-TERM in the Python HTML index." t)
-
-(autoload 'pylookup-update "pylookup"
-  "Run pylookup-update and create the database at `pylookup-db-file'." t)
-
-(global-set-key (kbd "C-c h") 'pylookup-lookup)
-
-; Ropemacs
-(autoload 'pymacs-apply "pymacs")
-(autoload 'pymacs-call "pymacs")
-(autoload 'pymacs-eval "pymacs" nil t)
-(autoload 'pymacs-exec "pymacs" nil t)
-(autoload 'pymacs-load "pymacs" nil t)
-(pymacs-load "ropemacs" "rope-")
-(setq ropemacs-enable-autoimport t)
-
 ; Subword Mode
 (add-hook 'python-mode-hook (lambda () (subword-mode 1)))
-
-; Virtualenv (https://github.com/aculich/virtualenv.el)
-(add-to-list 'load-path "~/.emacs.d/virtualenv.el/")
-(load "virtualenv")
 
 
 ;;;;;;;;;;;;;;;
@@ -654,12 +268,6 @@ is replaced and the point is put before CHAR."
 
 ; Functions
 (put 'scroll-left 'disabled nil)
-
-; Variables
-(setq hscroll-margin 1)
-(setq scroll-margin 1)
-(setq scroll-preserve-screen-position t)
-(setq scroll-step 1)
 
 
 ;;;;;;;;;;;;;;
@@ -705,20 +313,6 @@ echo the result to the minibuffer"
         (buffer-substring (region-beginning) (region-end))
       (read-string "StartPage: ")))))
 
-; Packages
-(require 'key-chord)
-(key-chord-mode 1)
-(key-chord-define-global "bk" 'browse-kill-ring)
-
-
-;;;;;;;;;;;;;;;;;;;;;;;
-;;; Version Control ;;;
-;;;;;;;;;;;;;;;;;;;;;;;
-
-; Packages
-(require 'magit)
-(global-set-key (kbd "M-s g s") 'magit-status)
-
 
 ;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Windows + Frames ;;;
@@ -743,23 +337,3 @@ echo the result to the minibuffer"
    98 18 19 return 24 98 return 24 49 24 51 24 111 24 98 return
    24 111] 0 "%d")) arg)))
 (global-set-key (kbd "C-x C-3") 'ver-to-hor-split)
-
-; Swapping windows
-(defun swap-windows ()
- "If you have 2 windows, this function swaps them."
- (interactive)
- (cond ((not (= (count-windows) 2))
-        (message "You need exactly 2 windows to do this."))
-       (t
-        (let* ((w1 (first (window-list)))
-               (w2 (second (window-list)))
-               (b1 (window-buffer w1))
-               (b2 (window-buffer w2))
-               (s1 (window-start w1))
-               (s2 (window-start w2)))
-          (set-window-buffer w1 b2)
-          (set-window-buffer w2 b1)
-          (set-window-start w1 s2)
-          (set-window-start w2 s1)))))
-
-(global-set-key (kbd "M-s s w") 'swap-windows)
