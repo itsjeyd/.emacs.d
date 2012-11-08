@@ -330,6 +330,15 @@ echo the result to the minibuffer"
       (read-string "StartPage: ")))))
 
 
+;;;;;;;;;;;;;;;;;;;;;;;
+;;; Version Control ;;;
+;;;;;;;;;;;;;;;;;;;;;;;
+
+; Packages
+(require 'magit)
+(global-set-key (kbd "M-s g s") 'magit-status)
+
+
 ;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Windows + Frames ;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;
