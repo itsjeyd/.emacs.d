@@ -131,6 +131,15 @@ is replaced and the point is put before CHAR."
 ;;; Ido ;;;
 ;;;;;;;;;;;
 
+(add-to-list 'load-path "~/.emacs.d/smex/")
+(require 'smex)
+(smex-initialize)
+
+; Key Bindings
+(global-set-key (kbd "M-x") 'smex)
+(global-set-key (kbd "<menu>") 'smex)
+(global-set-key (kbd "M-X") 'smex-major-mode-commands)
+
 ; Variables
 (setq ido-create-new-buffer (quote always))
 (setq ido-enable-flex-matching t)
