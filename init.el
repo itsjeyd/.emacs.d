@@ -140,6 +140,11 @@ is replaced and the point is put before CHAR."
 (global-set-key (kbd "<menu>") 'smex)
 (global-set-key (kbd "M-X") 'smex-major-mode-commands)
 
+; Ubiquitous
+(add-to-list 'load-path "~/.emacs.d/ido-ubiquitous/")
+(require 'ido-ubiquitous)
+(ido-ubiquitous-mode)
+
 ; Variables
 (setq ido-create-new-buffer (quote always))
 (setq ido-enable-flex-matching t)
