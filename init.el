@@ -132,6 +132,7 @@ is replaced and the point is put before CHAR."
 ;;;;;;;;;;;
 
 (ido-mode (quote both))
+(setq ido-use-virtual-buffers t)
 
 ; Smex
 (add-to-list 'load-path "~/.emacs.d/smex/")
