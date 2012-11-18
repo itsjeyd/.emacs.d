@@ -16,7 +16,6 @@ I use the following add-on packages:
 | mark-lines       | [[http://www.emacswiki.org/emacs/mark-lines.el][mark-lines.el]] on EmacsWiki           | -         |
 | move-text        | [[http://www.emacswiki.org/emacs/move-text.el][move-text.el]] on EmacsWiki            | -         |
 | openwith         | [[http://web.student.tuwien.ac.at/~e0225855/misc/openwith.el][openwith.el]]                          | -         |
-| package          | [[http://bzr.savannah.gnu.org/lh/emacs/trunk/annotate/head:/lisp/emacs-lisp/package.el][package.el]] from GNU repos            | -         |
 | pony-mode        | [[https://github.com/davidmiller/pony-mode][pony-mode]] on GitHub                  | no        |
 | projman          | [[https://github.com/emacsmirror/projman][projman]] on GitHub                    | no        |
 |                  | [[https://github.com/itsjeyd/projman][My fork]] uses ido instead of iswitchb | no        |
