@@ -1,6 +1,3 @@
-[submodule "idle-require"]
-	path = idle-require
-	url = https://github.com/emacsmirror/idle-require
 [submodule "python-pylint"]
 	path = python-pylint
 	url = https://github.com/emacsmirror/python-pylint
