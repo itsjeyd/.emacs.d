@@ -325,18 +325,6 @@ is replaced and the point is put before CHAR."
 ;;;;;;;;;;;;;;;;;
 
 ; Functions
-(defun count-words-buffer ()
-  "Count the number of words in the current buffer;
-echo the result to the minibuffer"
-  (interactive)
-  (save-excursion
-    (let ((count 0))
-      (goto-char (point-min))
-      (while (< (point) (point-max))
-        (forward-word 1)
-        (setq count (1+ count)))
-      (message "Buffer contains %d words. That's a lot of words!" count))))
-
 (defun google ()
   "Googles a query or region if any."
   (interactive)
