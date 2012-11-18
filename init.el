@@ -61,6 +61,9 @@
 ;;; Editing ;;;
 ;;;;;;;;;;;;;;;
 
+; Ace Jump
+(global-set-key (kbd "s-SPC") 'ace-jump-mode)
+
 ; Functions
 (put 'narrow-to-region 'disabled nil)
 
