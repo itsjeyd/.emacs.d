@@ -3,8 +3,7 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(custom-enabled-themes (quote (tango-dark)))
- '(ido-ubiquitous-command-exceptions (quote (sclang-dump-interface sclang-dump-full-interface))))
+ '(custom-enabled-themes (quote (tango-dark))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -144,6 +143,8 @@ is replaced and the point is put before CHAR."
 (add-to-list 'load-path "~/.emacs.d/elpa/ido-ubiquitous-1.5/")
 (require 'ido-ubiquitous)
 (ido-ubiquitous-mode)
+(setq ido-ubiquitous-command-exceptions
+      (quote (sclang-dump-interface sclang-dump-full-interface)))
 
 ; Variables
 (setq ido-create-new-buffer (quote always))
