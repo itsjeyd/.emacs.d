@@ -277,6 +277,12 @@ is replaced and the point is put before CHAR."
           (lambda ()
             (unless (eq buffer-file-name nil) (flymake-mode t))))
 
+; Key Bindings
+(require 'python)
+(define-key python-mode-map (kbd "M-s f n") 'flymake-goto-next-error)
+(define-key python-mode-map (kbd "M-s f p") 'flymake-goto-prev-error)
+(define-key python-mode-map (kbd "M-s f d") 'flymake-display-err-menu-for-current-line)
+
 ; Subword Mode
 (add-hook 'python-mode-hook (lambda () (subword-mode 1)))
 
