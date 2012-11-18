@@ -26,5 +26,5 @@ I use the following add-on packages:
 | vimgolf          | Emacs Package Manager                | -         |
 | virtualenv       | [[https://github.com/aculich/virtualenv.el][virtualenv.el]] on GitHub              | no        |
 | wrap-region      | [[https://github.com/rejeep/wrap-region][wrap-region]] on GitHub                | no        |
-| yasnippet        | apt-get install yasnippet            | -         |
+| yasnippet        | Emacs Package Manager                | -         |
 |------------------+--------------------------------------+-----------|
