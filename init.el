@@ -143,7 +143,7 @@ is replaced and the point is put before CHAR."
 (global-set-key (kbd "M-X") 'smex-major-mode-commands)
 
 ; Ubiquitous
-(add-to-list 'load-path "~/.emacs.d/elpa/ido-ubiquitous-1.5/")
+(add-to-list 'load-path "~/.emacs.d/elpa/ido-ubiquitous-1.6/")
 (require 'ido-ubiquitous)
 (ido-ubiquitous-mode)
 (setq ido-ubiquitous-command-exceptions
