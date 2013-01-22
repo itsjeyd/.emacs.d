@@ -261,6 +261,10 @@ is replaced and the point is put before CHAR."
 ;;; Python Development ;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+; Django
+(add-to-list 'load-path "~/.emacs.d/pony-mode/src")
+(require 'pony-mode)
+
 ; Flymake
 (when (load "flymake" t)
   (defun flymake-pyflakes-init ()
