@@ -3,5 +3,6 @@
 *elc
 
 # Folders
-elpa/*
-url/*
+elpa/
+pony-mode/
+url/
