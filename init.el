@@ -224,8 +224,19 @@ is replaced and the point is put before CHAR."
 ;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Package Manager ;;;
 ;;;;;;;;;;;;;;;;;;;;;;;
+
 (require 'package)
-(add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/"))
+(add-to-list 'package-archives
+             '("marmalade" . "http://marmalade-repo.org/packages/"))
+(add-to-list 'package-archives
+             '("melpa" . "http://melpa.milkbox.net/packages/") t)
+
+(defadvice package-compute-transaction
+  (before package-compute-transaction-reverse
+          (package-list requirements) activate compile)
+  "reverse the requirements"
+  (setq requirements (reverse requirements))
+  (print requirements))
 
 ;;;;;;;;;;;;;;;;;;;
 ;;; Permissions ;;;
