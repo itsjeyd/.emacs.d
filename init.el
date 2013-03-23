@@ -162,6 +162,33 @@ is replaced and the point is put before CHAR."
 (tooltip-mode 0)
 
 
+;;;;;;;;;;;;;;;;;;;;;;;;
+;;; Java Development ;;;
+;;;;;;;;;;;;;;;;;;;;;;;;
+
+; cl
+(add-to-list 'load-path "~/.emacs.d/elpa/cl-lib-0.2/")
+(require 'cl-lib)
+
+; Eclim
+(add-to-list 'load-path "~/.emacs.d/elpa/emacs-eclim-20130310.1237/")
+(require 'eclim)
+(global-eclim-mode)
+(setq help-at-pt-display-when-idle t)
+(setq help-at-pt-timer-delay 0.1)
+(help-at-pt-set-timer)
+
+; Eclimd
+(require 'eclimd)
+
+; Company
+(add-to-list 'load-path "~/.emacs.d/elpa/company-0.6/")
+(require 'company)
+(require 'company-emacs-eclim)
+(company-emacs-eclim-setup)
+(global-company-mode t)
+
+
 ;;;;;;;;;;;;;;;;;;
 ;;; Minibuffer ;;;
 ;;;;;;;;;;;;;;;;;;
@@ -256,6 +283,8 @@ is replaced and the point is put before CHAR."
 (require 'auto-complete-config)
 (add-to-list 'ac-dictionary-directories "~/.emacs.d/elpa/auto-complete-1.4/dict")
 (ac-config-default)
+(require 'ac-emacs-eclim-source)
+(ac-emacs-eclim-config)
 
 ; Parens
 (show-paren-mode t)
