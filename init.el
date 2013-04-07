@@ -114,7 +114,6 @@ is replaced and the point is put before CHAR."
 (global-set-key (kbd "M-s t t") 'toggle-truncate-lines)
 
 ; Variables
-(setq indent-tabs-mode nil)
 (setq sentence-end-double-space nil)
 (setq set-mark-command-repeat-pop t)
 (setq tab-width 4)
@@ -302,6 +301,9 @@ is replaced and the point is put before CHAR."
 (ac-config-default)
 (require 'ac-emacs-eclim-source)
 (ac-emacs-eclim-config)
+
+; Indentation
+(setq-default indent-tabs-mode nil)
 
 ; Parens
 (show-paren-mode t)
