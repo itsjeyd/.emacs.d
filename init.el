@@ -377,6 +377,9 @@ is replaced and the point is put before CHAR."
 ; Functions
 (put 'scroll-left 'disabled nil)
 
+; Variables
+(setq scroll-preserve-screen-position 1)
+
 
 ;;;;;;;;;;;;;;
 ;;; Server ;;;
