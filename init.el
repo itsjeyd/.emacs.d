@@ -33,7 +33,7 @@
 ;;;;;;;;;;;;;;;;;;;;
 ;;; Byte-Compile ;;;
 ;;;;;;;;;;;;;;;;;;;;
-(defun auto-recompile-emacs-file ()
+(defun auto-recompile-elisp-file ()
   (interactive)
   (when (and buffer-file-name (string-match "\\.el" buffer-file-name))
     (let ((byte-file (concat buffer-file-name "\\.elc")))
@@ -41,7 +41,7 @@
               (file-newer-than-file-p buffer-file-name byte-file))
           (byte-compile-file buffer-file-name)))))
 
-(add-hook 'after-save-hook 'auto-recompile-emacs-file)
+(add-hook 'after-save-hook 'auto-recompile-elisp-file)
 
 
 ;;;;;;;;;;;;;
