@@ -222,11 +222,7 @@ is replaced and the point is put before CHAR."
 ;;; MISC ;;;
 ;;;;;;;;;;;;
 
-; Line Numbering
-(add-hook 'python-mode-hook 'linum-mode)
-(add-hook 'emacs-lisp-mode-hook 'linum-mode)
-(add-hook 'lisp-mode-hook 'linum-mode)
-(add-hook 'octave-mode-hook 'linum-mode)
+
 
 
 ;;;;;;;;;;;;;;;;
@@ -246,7 +242,6 @@ is replaced and the point is put before CHAR."
 ;;;;;;;;;;;;;;;;
 
 ; Hooks
-(add-hook 'org-mode-hook 'linum-mode)
 (add-hook 'org-mode-hook 'turn-on-auto-fill)
 
 ; Key Bindings
