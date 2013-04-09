@@ -113,6 +113,9 @@ is replaced and the point is put before CHAR."
 (global-set-key (kbd "M-g l") 'goto-line)
 (global-set-key (kbd "M-s t t") 'toggle-truncate-lines)
 
+(define-key occur-mode-map "n" 'occur-next)
+(define-key occur-mode-map "p" 'occur-prev)
+
 ; Variables
 (setq sentence-end-double-space nil)
 (setq set-mark-command-repeat-pop t)
