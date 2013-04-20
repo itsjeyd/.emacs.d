@@ -44,6 +44,14 @@
 (add-hook 'after-save-hook 'auto-recompile-elisp-file)
 
 
+;;;;;;;;;;;;;;;;;;;
+;;; Common Lisp ;;;
+;;;;;;;;;;;;;;;;;;;
+
+(add-to-list 'load-path "~/.emacs.d/elpa/cl-lib-0.2/")
+(require 'cl-lib)
+
+
 ;;;;;;;;;;;;;
 ;;; Dired ;;;
 ;;;;;;;;;;;;;
