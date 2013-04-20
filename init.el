@@ -122,6 +122,13 @@ is replaced and the point is put before CHAR."
 (setq tab-width 4)
 
 
+;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; Elisp Development ;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(add-hook 'emacs-lisp-mode-hook 'turn-on-eldoc-mode)
+
+
 ;;;;;;;;;;;;;
 ;;; Fixes ;;;
 ;;;;;;;;;;;;;
