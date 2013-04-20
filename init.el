@@ -61,6 +61,12 @@
 (setq dired-omit-files "^\\...+$")
 (add-hook 'dired-mode-hook (lambda () (dired-omit-mode 1)))
 
+; Layout (source: whattheemacsd.com)
+(add-to-list 'load-path "~/.emacs.d/elpa/dired-details-20130328.1119/")
+(require 'dired-details)
+(setq-default dired-details-hidden-string "> ")
+(dired-details-install)
+
 ; Movement (source: whattheemacsd.com)
 (defun dired-jump-to-top ()
   (interactive)
