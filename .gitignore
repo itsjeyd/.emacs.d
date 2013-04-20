@@ -1,6 +1,10 @@
 # Files
 *~
+*dat
 *elc
+filesets-cache.el
+history
+tramp
 
 # Folders
 elpa/
