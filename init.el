@@ -367,7 +367,7 @@ is replaced and the point is put before CHAR."
 ; NOTE: C-x C-r is bound to `find-file-read-only' by default
 
 ; Variables
-(setq recentf-max-saved-items 50)
+(setq recentf-max-saved-items 100)
 
 
 ;;;;;;;;;;;;;;;;;
