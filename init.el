@@ -1,3 +1,5 @@
+(package-initialize)
+
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -49,7 +51,6 @@
 ;;; Common Lisp ;;;
 ;;;;;;;;;;;;;;;;;;;
 
-(add-to-list 'load-path "~/.emacs.d/elpa/cl-lib-0.2/")
 (require 'cl-lib)
 
 
@@ -63,7 +64,6 @@
 (add-hook 'dired-mode-hook (lambda () (dired-omit-mode 1)))
 
 ; Layout (source: whattheemacsd.com)
-(add-to-list 'load-path "~/.emacs.d/elpa/dired-details-20130328.1119/")
 (require 'dired-details)
 (setq-default dired-details-hidden-string "> ")
 (dired-details-install)
@@ -132,9 +132,6 @@ is replaced and the point is put before CHAR."
 (define-key occur-mode-map "p" 'occur-prev)
 
 ; Parens
-(add-to-list 'load-path "~/.emacs.d/elpa/dash-20130712.2307/")
-(require 'dash)
-(add-to-list 'load-path "~/.emacs.d/elpa/smartparens-20130715.1530/")
 (require 'smartparens-config)
 (smartparens-global-mode t)
 
@@ -191,7 +188,6 @@ is replaced and the point is put before CHAR."
 (global-set-key (kbd "M-X") 'smex-major-mode-commands)
 
 ; Ubiquitous
-(add-to-list 'load-path "~/.emacs.d/elpa/ido-ubiquitous-1.6/")
 (require 'ido-ubiquitous)
 (ido-ubiquitous-mode)
 (setq ido-ubiquitous-command-exceptions
@@ -215,11 +211,9 @@ is replaced and the point is put before CHAR."
 ;;;;;;;;;;;;;;;;;;;;;;;;
 
 ; cl
-(add-to-list 'load-path "~/.emacs.d/elpa/cl-lib-0.2/")
 (require 'cl-lib)
 
 ; Eclim
-(add-to-list 'load-path "~/.emacs.d/elpa/emacs-eclim-20130310.1237/")
 (require 'eclim)
 (global-eclim-mode)
 (setq help-at-pt-display-when-idle t)
@@ -234,7 +228,6 @@ is replaced and the point is put before CHAR."
 (require 'eclimd)
 
 ; Company
-(add-to-list 'load-path "~/.emacs.d/elpa/company-0.6/")
 (require 'company)
 (require 'company-emacs-eclim)
 (company-emacs-eclim-setup)
@@ -328,11 +321,7 @@ is replaced and the point is put before CHAR."
 ;;;;;;;;;;;;;;;;;;;
 
 ; Auto-complete
-(add-to-list 'load-path "~/.emacs.d/elpa/popup-0.5/")
-(require 'popup)
-(add-to-list 'load-path "~/.emacs.d/elpa/auto-complete-1.4/")
 (require 'auto-complete-config)
-(add-to-list 'ac-dictionary-directories "~/.emacs.d/elpa/auto-complete-1.4/dict")
 (ac-config-default)
 (require 'ac-emacs-eclim-source)
 (ac-emacs-eclim-config)
@@ -344,7 +333,6 @@ is replaced and the point is put before CHAR."
 (show-paren-mode t)
 
 ; yasnippet
-(add-to-list 'load-path "~/.emacs.d/elpa/yasnippet-0.8.0/")
 (require 'yasnippet)
 (yas-global-mode 1)
 
