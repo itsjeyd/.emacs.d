@@ -201,6 +201,7 @@ is replaced and the point is put before CHAR."
 ;;;;;;;;;;;;;;;;;
 ;;; Interface ;;;
 ;;;;;;;;;;;;;;;;;
+(setq inhibit-startup-screen t)
 (set-scroll-bar-mode nil)
 (tool-bar-mode 0)
 (tooltip-mode 0)
