@@ -131,6 +131,13 @@ is replaced and the point is put before CHAR."
 (define-key occur-mode-map "n" 'occur-next)
 (define-key occur-mode-map "p" 'occur-prev)
 
+; Parens
+(add-to-list 'load-path "~/.emacs.d/elpa/dash-20130712.2307/")
+(require 'dash)
+(add-to-list 'load-path "~/.emacs.d/elpa/smartparens-20130715.1530/")
+(require 'smartparens-config)
+(smartparens-global-mode t)
+
 ; Variables
 (setq sentence-end-double-space nil)
 (setq set-mark-command-repeat-pop t)
