@@ -277,6 +277,8 @@ is replaced and the point is put before CHAR."
 
 ; Key Bindings
 (define-key org-mode-map (kbd "C-c a") 'org-agenda)
+(define-key org-mode-map (kbd "C-c l") 'org-store-link)
+(define-key org-mode-map (kbd "M-s t l") 'org-toggle-link-display)
 
 ; Variables
 (setq org-agenda-files (quote
