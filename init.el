@@ -270,11 +270,13 @@ is replaced and the point is put before CHAR."
 ;;; Org Mode ;;;
 ;;;;;;;;;;;;;;;;
 
+(require 'org)
+
 ; Hooks
 (add-hook 'org-mode-hook 'turn-on-auto-fill)
 
 ; Key Bindings
-(global-set-key (kbd "C-c a") 'org-agenda)
+(define-key org-mode-map (kbd "C-c a") 'org-agenda)
 
 ; Variables
 (setq org-agenda-files (quote
