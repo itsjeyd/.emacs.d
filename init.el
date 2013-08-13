@@ -233,7 +233,7 @@ is replaced and the point is put before CHAR."
 (require 'company)
 (require 'company-emacs-eclim)
 (company-emacs-eclim-setup)
-(global-company-mode t)
+(add-hook 'eclim-mode-hook (lambda () (company-mode t)))
 
 
 ;;;;;;;;;;;;;;;;;;
