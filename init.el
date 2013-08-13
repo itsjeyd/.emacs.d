@@ -348,9 +348,9 @@ is replaced and the point is put before CHAR."
 (yas-global-mode 1)
 
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;;; Project Managment ;;;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; Project Management ;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (filesets-init)
 
