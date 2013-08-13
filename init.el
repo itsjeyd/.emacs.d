@@ -18,6 +18,7 @@
 ;;;;;;;;;;;;;
 ;;; Paths ;;;
 ;;;;;;;;;;;;;
+
 (add-to-list 'load-path "~/.emacs.d/")
 
 
@@ -37,6 +38,7 @@
 ;;;;;;;;;;;;;;;;;;;;
 ;;; Byte-Compile ;;;
 ;;;;;;;;;;;;;;;;;;;;
+
 (defun auto-recompile-elisp-file ()
   (interactive)
   (when (and buffer-file-name (string-match "\\.el" buffer-file-name))
@@ -180,6 +182,7 @@ is replaced and the point is put before CHAR."
 ;;;;;;;;;;;;;
 ;;; Fonts ;;;
 ;;;;;;;;;;;;;
+
 (set-face-attribute 'default nil :font "Monaco-10")
 
 
@@ -209,6 +212,7 @@ is replaced and the point is put before CHAR."
 ;;;;;;;;;;;;;;;;;
 ;;; Interface ;;;
 ;;;;;;;;;;;;;;;;;
+
 (setq inhibit-startup-screen t)
 (set-scroll-bar-mode nil)
 (tool-bar-mode 0)
@@ -318,6 +322,7 @@ is replaced and the point is put before CHAR."
   (setq requirements (reverse requirements))
   (print requirements))
 
+
 ;;;;;;;;;;;;;;;;;;;
 ;;; Permissions ;;;
 ;;;;;;;;;;;;;;;;;;;
@@ -390,6 +395,7 @@ is replaced and the point is put before CHAR."
 ;;;;;;;;;;;;;;;
 ;;; Recentf ;;;
 ;;;;;;;;;;;;;;;
+
 (require 'recentf)
 (recentf-mode t)
 
@@ -423,6 +429,7 @@ is replaced and the point is put before CHAR."
 ;;;;;;;;;;;;;;
 ;;; Server ;;;
 ;;;;;;;;;;;;;;
+
 (server-start)
 
 
