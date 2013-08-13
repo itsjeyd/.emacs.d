@@ -223,9 +223,6 @@ is replaced and the point is put before CHAR."
 ;;; Java Development ;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;
 
-; cl
-(require 'cl-lib)
-
 ; Eclim
 (require 'eclim)
 (global-eclim-mode)
