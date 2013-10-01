@@ -1,30 +1,7 @@
 * Packages
-I use the following add-on packages:
+I use the following add-on packages (coming soon):
 
-| Package          | Source                               | Submodule |
-|------------------+--------------------------------------+-----------|
-| ace-jump-mode    | Emacs Package Manager                | no        |
-| AUCTeX           | apt-get install auctex               | -         |
-| auto-complete    | Emacs Package Manager                | no        |
-| autopair         | [[http://autopair.googlecode.com/svn/trunk/autopair.el][autopair.el]] on GoogleCode            | -         |
-| browse-kill-ring | apt-get install emacs-goodies        | -         |
-| cdlatex          | [[http://staff.science.uva.nl/~dominik/Tools/cdlatex/cdlatex.el][cdlatex.el]] by Carsten Dominik        | -         |
-| ido-ubiquitous   | Emacs Package Manager                | no        |
-| ipython          | apt-get install ipython              | -         |
-| key-chord        | [[http://www.emacswiki.org/emacs/key-chord.el][key-chord.el]] on EmacsWiki            | -         |
-| magit            | Emacs Package Manager                | no        |
-| mark-lines       | [[http://www.emacswiki.org/emacs/mark-lines.el][mark-lines.el]] on EmacsWiki           | -         |
-| move-text        | [[http://www.emacswiki.org/emacs/move-text.el][move-text.el]] on EmacsWiki            | -         |
-| openwith         | [[http://web.student.tuwien.ac.at/~e0225855/misc/openwith.el][openwith.el]]                          | -         |
-| pony-mode        | [[https://github.com/davidmiller/pony-mode][pony-mode]] on GitHub                  | no        |
-| projman          | [[https://github.com/emacsmirror/projman][projman]] on GitHub                    | no        |
-|                  | [[https://github.com/itsjeyd/projman][My fork]] uses ido instead of iswitchb | no        |
-| pylookup         | [[https://github.com/tsgates/pylookup/][pylookup]] on GitHub                   | no        |
-| pymacs           | apt-get install pymacs               | -         |
-| python-mode      | apt-get install python-mode          | -         |
-| ropemacs         | apt-get install pymacs               | -         |
-| vimgolf          | Emacs Package Manager                | -         |
-| virtualenv       | [[https://github.com/aculich/virtualenv.el][virtualenv.el]] on GitHub              | no        |
-| wrap-region      | [[https://github.com/rejeep/wrap-region][wrap-region]] on GitHub                | no        |
-| yasnippet        | Emacs Package Manager                | -         |
-|------------------+--------------------------------------+-----------|
+| Package | Source | Submodule |
+|---------+--------+-----------|
+| ...     | ...    | ...       |
+|---------+--------+-----------|
