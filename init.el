@@ -440,7 +440,9 @@ is replaced and the point is put before CHAR."
 ;;; Server ;;;
 ;;;;;;;;;;;;;;
 
-(server-start)
+(require 'server)
+(or (server-running-p)
+    (server-start))
 
 
 ;;;;;;;;;;;;;;;;;
