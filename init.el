@@ -68,6 +68,19 @@
 ;;; Dired ;;;
 ;;;;;;;;;;;;;
 
+; File Associations
+(require 'openwith)
+(openwith-mode t)
+(setq openwith-associations
+      (quote (("\\.\\(?:pdf\\|ps\\)\\'" "okular" (file))
+              ("\\.\\(?:mp3\\|wav\\|flac\\)\\'" "gmusicbrowser" (file))
+              ("\\.\\(?:mpe?g\\|avi\\|wmv\\|flv\\|mov\\|mp4\\)\\'" "vlc" (file))
+              ("\\.\\(?:jpe?g\\|png\\|bmp\\)\\'" "gwenview" (file))
+              ("\\.chm\\'" "kchmviewer" (file))
+              ("\\.\\(?:odt\\|doc\\|docx\\)\\'" "libreoffice" ("--writer" file))
+              ("\\.\\(?:ods\\|xls\\|xlsx\\)\\'" "libreoffice" ("--calc" file))
+              ("\\.\\(?:odp\\|pps\\|ppt\\|pptx\\)\\'" "libreoffice" ("--impress" file)))))
+
 ; Hidden Files
 (require 'dired-x)
 (setq dired-omit-files "^\\...+$")
