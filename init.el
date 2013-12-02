@@ -483,7 +483,16 @@ is replaced and the point is put before CHAR."
 ;;; Version Control ;;;
 ;;;;;;;;;;;;;;;;;;;;;;;
 
-; Packages
+; Hooks
+(add-hook 'emacs-lisp-mode-hook 'git-gutter-mode)
+(add-hook 'haml-mode-hook 'git-gutter-mode)
+(add-hook 'html-mode-hook 'git-gutter-mode)
+(add-hook 'org-mode-hook 'git-gutter-mode)
+(add-hook 'php-mode-hook 'git-gutter-mode)
+(add-hook 'python-mode-hook 'git-gutter-mode)
+(add-hook 'sh-mode-hook 'git-gutter-mode)
+
+; Key Bindings
 (global-set-key (kbd "M-s g s") 'magit-status)
 
 
