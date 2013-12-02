@@ -162,6 +162,9 @@ is replaced and the point is put before CHAR."
 (require 'smartparens-config)
 (smartparens-global-mode t)
 
+; Smartscan
+(global-smartscan-mode t)
+
 ; Variables
 (setq sentence-end-double-space nil)
 (setq set-mark-command-repeat-pop t)
