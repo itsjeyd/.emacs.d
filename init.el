@@ -264,6 +264,17 @@ is replaced and the point is put before CHAR."
 (add-hook 'eclim-mode-hook (lambda () (company-mode t)))
 
 
+;;;;;;;;;;;;;
+;;; LaTeX ;;;
+;;;;;;;;;;;;;
+
+; AUCTeX
+(setq-default TeX-master nil)
+
+; BibTeX
+(setq bibtex-maintain-sorted-entries t)
+
+
 ;;;;;;;;;;;;;;;;;;
 ;;; Minibuffer ;;;
 ;;;;;;;;;;;;;;;;;;
