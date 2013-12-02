@@ -119,6 +119,10 @@
 ; Ace Jump
 (global-set-key (kbd "s-SPC") 'ace-jump-mode)
 
+; Browse Kill Ring
+(require 'browse-kill-ring)
+(global-set-key (kbd "M-s b k") 'browse-kill-ring)
+
 ; Functions
 (put 'narrow-to-region 'disabled nil)
 
