@@ -311,11 +311,6 @@ is replaced and the point is put before CHAR."
 (define-key org-mode-map (kbd "M-s t l") 'org-toggle-link-display)
 
 ; Variables
-(setq org-agenda-files (quote
-                        ("/storage/ORG/school.org"
-                         "/storage/ORG/job.org"
-                         "/storage/ORG/life.org"
-                         "/storage/ORG/read.org")))
 (setq org-agenda-include-diary t)
 (setq org-enforce-todo-dependencies t)
 (setq org-track-ordered-property-with-tag t)
