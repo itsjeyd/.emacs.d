@@ -158,6 +158,10 @@ is replaced and the point is put before CHAR."
 (define-key occur-mode-map "n" 'occur-next)
 (define-key occur-mode-map "p" 'occur-prev)
 
+; Move Text
+(global-set-key (kbd "M-s u") 'move-text-up)
+(global-set-key (kbd "M-s d") 'move-text-down)
+
 ; Parens
 (require 'smartparens-config)
 (smartparens-global-mode t)
