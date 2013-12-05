@@ -20,6 +20,7 @@
 ;;;;;;;;;;;;;
 
 (add-to-list 'load-path "~/.emacs.d/")
+(add-to-list 'load-path "~/.emacs.d/mark-lines/")
 
 
 ;;;;;;;;;;;;;;;
@@ -157,6 +158,10 @@ is replaced and the point is put before CHAR."
 
 (define-key occur-mode-map "n" 'occur-next)
 (define-key occur-mode-map "p" 'occur-prev)
+
+; Mark Lines
+(require 'mark-lines)
+(global-set-key (kbd "M-s m") 'mark-lines-next-line)
 
 ; Move Text
 (global-set-key (kbd "M-s u") 'move-text-up)
