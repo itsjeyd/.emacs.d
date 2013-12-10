@@ -253,6 +253,7 @@ is replaced and the point is put before CHAR."
 (add-hook 'eclim-mode-hook (lambda () (company-mode t)))
 
 ; Hooks
+(add-hook 'java-mode-hook 'ensime-scala-mode-hook)
 (add-hook 'java-mode-hook (lambda () (subword-mode 1)))
 
 
@@ -444,6 +445,14 @@ is replaced and the point is put before CHAR."
 
 ; Variables
 (setq recentf-max-saved-items 100)
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; Scala Development ;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;
+
+; Ensime
+(add-hook 'scala-mode-hook 'ensime-scala-mode-hook)
 
 
 ;;;;;;;;;;;;;;;;;
