@@ -503,6 +503,8 @@ is replaced and the point is put before CHAR."
 
 ; Key Bindings
 (global-set-key (kbd "M-s g s") 'magit-status)
+(global-set-key (kbd "M-s s h") 'git-gutter:stage-hunk)
+(global-set-key (kbd "M-s r h") 'git-gutter:revert-hunk)
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;
