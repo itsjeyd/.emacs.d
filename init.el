@@ -225,6 +225,7 @@ is replaced and the point is put before CHAR."
 (set-scroll-bar-mode nil)
 (tool-bar-mode 0)
 (tooltip-mode 0)
+(set-cursor-color "#FF5A0E")
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;
