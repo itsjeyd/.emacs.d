@@ -251,6 +251,9 @@ is replaced and the point is put before CHAR."
 (company-emacs-eclim-setup)
 (add-hook 'eclim-mode-hook (lambda () (company-mode t)))
 
+; Hooks
+(add-hook 'java-mode-hook (lambda () (subword-mode 1)))
+
 
 ;;;;;;;;;;;;;
 ;;; LaTeX ;;;
