@@ -498,6 +498,8 @@ is replaced and the point is put before CHAR."
 
 ; Hooks
 (add-hook 'emacs-lisp-mode-hook 'git-gutter-mode)
+(add-hook 'java-mode-hook 'git-gutter-mode)
+(add-hook 'js-mode-hook 'git-gutter-mode)
 (add-hook 'haml-mode-hook 'git-gutter-mode)
 (add-hook 'html-mode-hook 'git-gutter-mode)
 (add-hook 'org-mode-hook 'git-gutter-mode)
