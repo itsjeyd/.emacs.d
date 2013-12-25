@@ -256,6 +256,11 @@ is replaced and the point is put before CHAR."
 (add-hook 'java-mode-hook 'ensime-scala-mode-hook)
 (add-hook 'java-mode-hook (lambda () (subword-mode 1)))
 
+; Variables
+(defun set-indentation-behavior ()
+  (c-set-offset 'arglist-intro '+))
+(add-hook 'java-mode-hook 'set-indentation-behavior)
+
 
 ;;;;;;;;;;;;;
 ;;; LaTeX ;;;
