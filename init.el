@@ -111,6 +111,7 @@
   (vector 'remap 'end-of-buffer) 'dired-jump-to-bottom)
 
 ; Variables
+(setq dired-isearch-filenames "dwim")
 (setq dired-recursive-copies (quote always))
 
 
