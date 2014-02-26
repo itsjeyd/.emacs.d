@@ -520,6 +520,7 @@ is replaced and the point is put before CHAR."
 (add-hook 'php-mode-hook 'git-gutter-mode)
 (add-hook 'python-mode-hook 'git-gutter-mode)
 (add-hook 'sh-mode-hook 'git-gutter-mode)
+(add-hook 'css-mode-hook 'git-gutter-mode)
 
 ; Key Bindings
 (global-set-key (kbd "M-s g s") 'magit-status)
