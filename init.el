@@ -280,6 +280,7 @@ is replaced and the point is put before CHAR."
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (setq js-indent-level 2)
+(add-hook 'js-mode-hook (lambda () (subword-mode 1)))
 
 
 ;;;;;;;;;;;;;
