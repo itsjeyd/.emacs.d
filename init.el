@@ -172,6 +172,8 @@ is replaced and the point is put before CHAR."
 (require 'smartparens-config)
 (smartparens-global-mode t)
 
+(global-rainbow-delimiters-mode t)
+
 ; Smartscan
 (global-smartscan-mode t)
 
