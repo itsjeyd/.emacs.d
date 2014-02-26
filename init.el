@@ -80,7 +80,8 @@
               ("\\.chm\\'" "kchmviewer" (file))
               ("\\.\\(?:odt\\|doc\\|docx\\)\\'" "libreoffice" ("--writer" file))
               ("\\.\\(?:ods\\|xls\\|xlsx\\)\\'" "libreoffice" ("--calc" file))
-              ("\\.\\(?:odp\\|pps\\|ppt\\|pptx\\)\\'" "libreoffice" ("--impress" file)))))
+              ("\\.\\(?:odp\\|pps\\|ppt\\|pptx\\)\\'" "libreoffice" ("--impress" file))
+              ("\\.dia\\'" "dia" (file)))))
 
 ; Hidden Files
 (require 'dired-x)
