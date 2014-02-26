@@ -267,7 +267,6 @@ is replaced and the point is put before CHAR."
 
 ; Hooks
 (add-hook 'java-mode-hook 'ensime-scala-mode-hook)
-(add-hook 'java-mode-hook (lambda () (subword-mode 1)))
 
 ; Variables
 (defun set-indentation-behavior ()
@@ -280,7 +279,6 @@ is replaced and the point is put before CHAR."
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (setq js-indent-level 2)
-(add-hook 'js-mode-hook (lambda () (subword-mode 1)))
 
 
 ;;;;;;;;;;;;;
@@ -416,6 +414,13 @@ HOOKS can be a list of hooks or just a single hook."
 ; Parens
 (show-paren-mode t)
 
+; Subword Mode
+(add-to-hooks `(java-mode-hook
+                js-mode-hook
+                php-mode-hook
+                python-mode-hook)
+              (lambda () (subword-mode 1)))
+
 ; yasnippet
 (require 'yasnippet)
 (yas-global-mode 1)
@@ -457,9 +462,6 @@ HOOKS can be a list of hooks or just a single hook."
 (define-key python-mode-map (kbd "M-s f n") 'flymake-goto-next-error)
 (define-key python-mode-map (kbd "M-s f p") 'flymake-goto-prev-error)
 (define-key python-mode-map (kbd "M-s f d") 'flymake-display-err-menu-for-current-line)
-
-; Subword Mode
-(add-hook 'python-mode-hook (lambda () (subword-mode 1)))
 
 
 ;;;;;;;;;;;;;;;
