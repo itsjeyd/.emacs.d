@@ -199,6 +199,14 @@ is replaced and the point is put before CHAR."
 (set-face-attribute 'default nil :font "Monaco-10")
 
 
+;;;;;;;;;;;;
+;;; Help ;;;
+;;;;;;;;;;;;
+
+(setq guide-key/guide-key-sequence '("C-c" "C-x r" "C-x 4"))
+(guide-key-mode t)
+
+
 ;;;;;;;;;;;
 ;;; Ido ;;;
 ;;;;;;;;;;;
