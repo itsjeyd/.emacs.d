@@ -156,6 +156,7 @@ is replaced and the point is put before CHAR."
 (global-unset-key (kbd "M-g M-g"))
 (global-set-key (kbd "M-g l") 'goto-line)
 (global-set-key (kbd "M-s t t") 'toggle-truncate-lines)
+(global-set-key (kbd "RET") 'newline-and-indent)
 
 (define-key occur-mode-map "n" 'occur-next)
 (define-key occur-mode-map "p" 'occur-prev)
