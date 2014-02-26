@@ -262,6 +262,13 @@ is replaced and the point is put before CHAR."
 (add-hook 'java-mode-hook 'set-indentation-behavior)
 
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; JavaScript Development ;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(setq js-indent-level 2)
+
+
 ;;;;;;;;;;;;;
 ;;; LaTeX ;;;
 ;;;;;;;;;;;;;
