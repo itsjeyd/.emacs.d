@@ -178,6 +178,10 @@ is replaced and the point is put before CHAR."
 
 ; Smartscan
 (global-smartscan-mode t)
+(define-key smartscan-map (kbd "M-n") nil)
+(define-key smartscan-map (kbd "M-p") nil)
+(define-key smartscan-map (kbd "s-n") 'smartscan-symbol-go-forward)
+(define-key smartscan-map (kbd "s-p") 'smartscan-symbol-go-backward)
 
 ; Variables
 (setq sentence-end-double-space nil)
