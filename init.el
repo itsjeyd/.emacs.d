@@ -568,6 +568,9 @@ HOOKS can be a list of hooks or just a single hook."
 (global-set-key (kbd "M-s s h") 'git-gutter:stage-hunk)
 (global-set-key (kbd "M-s r h") 'git-gutter:revert-hunk)
 
+; Variables
+(setq magit-diff-refine-hunk t)
+
 
 ;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Windows + Frames ;;;
