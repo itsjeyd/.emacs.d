@@ -398,6 +398,7 @@ HOOKS can be a list of hooks or just a single hook."
 ;;;;;;;;;;;;;;;;;;;
 ;;; Permissions ;;;
 ;;;;;;;;;;;;;;;;;;;
+
 (require 'tramp)
 ; Usage: C-x C-f /sudo::/path/to/file
 
