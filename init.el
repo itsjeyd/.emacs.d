@@ -355,6 +355,9 @@ HOOKS can be a list of hooks or just a single hook."
 
 (require 'org)
 
+; Exports
+(require 'ox-md)
+
 ; Hooks
 (add-hook 'org-mode-hook 'turn-on-auto-fill)
 
