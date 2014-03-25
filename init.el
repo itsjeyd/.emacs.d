@@ -340,6 +340,15 @@ HOOKS can be a list of hooks or just a single hook."
 (column-number-mode t)
 
 
+;;;;;;;;;;;;;
+;;; Modes ;;;
+;;;;;;;;;;;;;
+
+(add-to-list 'auto-mode-alist '("routes$" . conf-space-mode))
+
+(add-hook 'conf-space-mode-hook (lambda () (toggle-truncate-lines 1)))
+
+
 ;;;;;;;;;;;;;;;;
 ;;; Org Mode ;;;
 ;;;;;;;;;;;;;;;;
