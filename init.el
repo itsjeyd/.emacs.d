@@ -358,6 +358,11 @@ HOOKS can be a list of hooks or just a single hook."
 ; Exports
 (require 'ox-md)
 
+; Babel
+(require 'ob-plantuml)
+(setq org-plantuml-jar-path "/opt/plantuml/plantuml.jar")
+(setq plantuml-jar-path "/opt/plantuml/plantuml.jar")
+
 ; Hooks
 (add-hook 'org-mode-hook 'turn-on-auto-fill)
 
@@ -609,6 +614,26 @@ HOOKS can be a list of hooks or just a single hook."
 ;;; Windows + Frames ;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;
 
+(defun change-split (&optional arg)
+  "Change arrangement of two windows from 'stacked' to 'side-by-side'.
+
+With a prefix arg, change arrangement from 'side-by-side' to 'stacked'."
+  (interactive "P")
+  (let ((split-function (progn
+                          (if arg
+                              (lambda () (split-window-below))
+                            (lambda () (split-window-right)))))
+        (current-buf (current-buffer))
+        (other-buf (progn
+                     (other-window 1)
+                     (current-buffer))))
+    (delete-other-windows)
+    (funcall split-function)
+    (switch-to-buffer current-buf)))
+
+; Key Bindings
+(global-set-key (kbd "M-s c s") 'change-split)
+
 ; Macros
 (fset 'kill-other-buffer-close-window
    (lambda (&optional arg) "Keyboard macro. Kills the next buffer
@@ -620,11 +645,3 @@ HOOKS can be a list of hooks or just a single hook."
    than one window." (interactive "p") (kmacro-exec-ring-item (quote ([24
    111 24 107 return 24 48] 0 "%d")) arg)))
 (global-set-key (kbd "C-S-o k") 'kill-other-buffer-close-window)
-
-(fset 'ver-to-hor-split
-   (lambda (&optional arg) "Keyboard macro. Go from a horizontal
-   bar splitting two windows to a vertical one, preserving the
-   buffers shown in the two windows" (interactive "p") (kmacro-exec-ring-item (quote ([24
-   98 18 19 return 24 98 return 24 49 24 51 24 111 24 98 return
-   24 111] 0 "%d")) arg)))
-(global-set-key (kbd "C-x C-3") 'ver-to-hor-split)
