@@ -216,7 +216,6 @@ is replaced and the point is put before CHAR."
 ;;;;;;;;;;;
 
 (ido-mode (quote both))
-(setq ido-use-virtual-buffers t)
 
 ; Key Bindings
 (global-set-key (kbd "M-x") 'smex)
@@ -232,6 +231,7 @@ is replaced and the point is put before CHAR."
 ; Variables
 (setq ido-create-new-buffer (quote always))
 (setq ido-enable-flex-matching t)
+(setq ido-use-virtual-buffers t)
 
 
 ;;;;;;;;;;;;;;;;;
