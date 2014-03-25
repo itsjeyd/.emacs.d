@@ -207,7 +207,7 @@ is replaced and the point is put before CHAR."
 ;;; Help ;;;
 ;;;;;;;;;;;;
 
-(setq guide-key/guide-key-sequence '("C-c" "C-x r" "C-x 4"))
+(setq guide-key/guide-key-sequence '("C-c" "C-x r" "C-x v" "C-x 4"))
 (guide-key-mode t)
 
 
