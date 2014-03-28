@@ -295,6 +295,9 @@ is replaced and the point is put before CHAR."
 ; BibTeX
 (setq bibtex-maintain-sorted-entries t)
 
+; Hooks
+(add-hook 'LaTeX-mode-hook (lambda () (TeX-PDF-mode t)))
+
 
 ;;;;;;;;;;;;;;;;;;
 ;;; Minibuffer ;;;
