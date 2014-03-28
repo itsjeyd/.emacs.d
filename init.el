@@ -631,17 +631,17 @@ With a prefix arg, change arrangement from 'side-by-side' to 'stacked'."
     (funcall split-function)
     (switch-to-buffer current-buf)))
 
+(defun kill-other-buffer-and-window ()
+  "Kill the next buffer in line and closes the associated window.
+I.e., if there are two windows, the active one stays intact, the
+inactive one is closed. If there are several windows, the one
+that would be reached by issuing C-x o once is closed, all others
+stay intact. Should only be used if the frame is displaying more
+than one window."
+  (interactive)
+  (other-window 1)
+  (kill-buffer-and-window))
+
 ; Key Bindings
 (global-set-key (kbd "M-s c s") 'change-split)
-
-; Macros
-(fset 'kill-other-buffer-close-window
-   (lambda (&optional arg) "Keyboard macro. Kills the next buffer
-   in line and closes the associated window. I.e., if there are
-   two windows, the active one stays intact, the inactive one is
-   closed. If there are several windows, the one that would be
-   reached by issuing C-x o once is closed, all others stay
-   intact. Should only be used if the frame is displaying more
-   than one window." (interactive "p") (kmacro-exec-ring-item (quote ([24
-   111 24 107 return 24 48] 0 "%d")) arg)))
-(global-set-key (kbd "C-S-o k") 'kill-other-buffer-close-window)
+(global-set-key (kbd "M-s k o") 'kill-other-buffer-and-window)
