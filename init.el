@@ -652,7 +652,8 @@ than one window."
                      (other-window 1)
                      (current-buffer))))
     (switch-to-buffer current-buf)
-    (switch-to-buffer-other-window other-buf)))
+    (other-window -1)
+    (switch-to-buffer other-buf)))
 
 ; Key Bindings
 (global-set-key (kbd "M-s c s") 'change-split)
