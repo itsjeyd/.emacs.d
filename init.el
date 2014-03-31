@@ -645,6 +645,16 @@ than one window."
   (other-window 1)
   (kill-buffer-and-window))
 
+(defun swap-windows ()
+  (interactive)
+  (let ((current-buf (current-buffer))
+        (other-buf (progn
+                     (other-window 1)
+                     (current-buffer))))
+    (switch-to-buffer current-buf)
+    (switch-to-buffer-other-window other-buf)))
+
 ; Key Bindings
 (global-set-key (kbd "M-s c s") 'change-split)
 (global-set-key (kbd "M-s k o") 'kill-other-buffer-and-window)
+(global-set-key (kbd "M-s s w") 'swap-windows)
