@@ -157,6 +157,14 @@ is replaced and the point is put before CHAR."
   (insert char)
   (forward-char -1))
 
+(defun occur-rename-buffer-use-search-string ()
+  (interactive)
+  (let* ((beg-end (match-data (string-match "\".+\"" (buffer-string))))
+         (beg (+ (car beg-end) 2))
+         (end (cadr beg-end))
+         (search-string (buffer-substring-no-properties beg end)))
+    (rename-buffer (format "*Occur-%s*" search-string))))
+
 ; Hooks
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 
@@ -170,6 +178,8 @@ is replaced and the point is put before CHAR."
 
 (define-key occur-mode-map "n" 'occur-next)
 (define-key occur-mode-map "p" 'occur-prev)
+(define-key occur-mode-map
+  (kbd "C-c r") 'occur-rename-buffer-use-search-string)
 
 ; Mark Lines
 (require 'mark-lines)
