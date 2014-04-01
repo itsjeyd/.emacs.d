@@ -617,6 +617,8 @@ HOOKS can be a list of hooks or just a single hook."
 ;;; Version Control ;;;
 ;;;;;;;;;;;;;;;;;;;;;;;
 
+(require 'magit)
+
 ; Hooks
 (add-hook 'emacs-lisp-mode-hook 'git-gutter-mode)
 (add-hook 'java-mode-hook 'git-gutter-mode)
@@ -635,6 +637,8 @@ HOOKS can be a list of hooks or just a single hook."
 (global-set-key (kbd "M-s p h") 'git-gutter:previous-hunk)
 (global-set-key (kbd "M-s s h") 'git-gutter:stage-hunk)
 (global-set-key (kbd "M-s r h") 'git-gutter:revert-hunk)
+(define-key magit-mode-map (kbd "M-s") nil)
+(define-key magit-mode-map (kbd "M-S") nil)
 
 ; Variables
 (setq magit-diff-refine-hunk t)
@@ -643,6 +647,10 @@ HOOKS can be a list of hooks or just a single hook."
 ;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Windows + Frames ;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;
+
+; Ace Window
+(global-set-key (kbd "M-s a w") 'ace-window)
+(setq aw-keys '(?a ?b ?c ?d ?e ?f ?g ?h ?i))
 
 (defun change-split (&optional arg)
   "Change arrangement of two windows from 'stacked' to 'side-by-side'.
