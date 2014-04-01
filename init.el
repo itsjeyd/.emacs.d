@@ -167,6 +167,7 @@ is replaced and the point is put before CHAR."
 
 ; Hooks
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
+(add-hook 'occur-mode-hook (lambda () (toggle-truncate-lines 1)))
 
 ; Key Bindings
 (global-set-key (kbd "M-g c") 'goto-char)
