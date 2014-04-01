@@ -28,8 +28,8 @@
 ;;;;;;;;;;;;;;;
 
 ; Key Bindings
-(global-set-key (kbd "M-s r b") 'revert-buffer)
 (global-set-key (kbd "C-x C-b") 'ibuffer)
+(global-set-key (kbd "M-s r b") 'revert-buffer)
 
 ; Variables
 (setq confirm-nonexistent-file-or-buffer nil)
