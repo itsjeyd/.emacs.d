@@ -290,6 +290,7 @@ is replaced and the point is put before CHAR."
 ;;;;;;;;;;;;;
 
 ; AUCTeX
+(require 'tex)
 (setq-default TeX-master nil)
 
 ; BibTeX
