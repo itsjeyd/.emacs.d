@@ -27,9 +27,18 @@
 ;;; Buffers ;;;
 ;;;;;;;;;;;;;;;
 
+; Functions
+(defun make-temp-buffer (id)
+  (interactive "nID: ")
+  (switch-to-buffer (format "*tempbuf-%d*" id))
+  (message (concat "Created a new buffer for you. "
+                   "It's called *tempbuf-%d*, and you're looking at it.")
+           id))
+
 ; Key Bindings
 (global-set-key (kbd "C-x C-b") 'ibuffer)
 (global-set-key (kbd "M-s r b") 'revert-buffer)
+(global-set-key (kbd "M-s t b") 'make-temp-buffer)
 
 ; Variables
 (setq confirm-nonexistent-file-or-buffer nil)
