@@ -193,8 +193,13 @@ is replaced and the point is put before CHAR."
 ;;; Elisp Development ;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;
 
+; Hooks
 (add-hook 'emacs-lisp-mode-hook 'turn-on-eldoc-mode)
 (add-hook 'lisp-interaction-mode-hook 'turn-on-eldoc-mode)
+
+; Key Bindings
+(define-key emacs-lisp-mode-map (kbd "M-s e b") 'eval-buffer)
+(define-key emacs-lisp-mode-map (kbd "M-s e r") 'eval-region)
 
 
 ;;;;;;;;;;;;;
