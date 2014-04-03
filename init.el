@@ -652,6 +652,20 @@ HOOKS can be a list of hooks or just a single hook."
 (global-set-key (kbd "M-s a w") 'ace-window)
 (setq aw-keys '(?a ?b ?c ?d ?e ?f ?g ?h ?i))
 
+; Functions
+(defun toggle-window-dedicated ()
+  "Control whether or not Emacs is allowed to display another
+buffer in current window."
+  (interactive)
+  (message
+   (if (let (window (get-buffer-window (current-buffer)))
+         ; set-window-dedicated-p returns FLAG that was passed as
+         ; second argument, thus can be used as COND for if:
+         (set-window-dedicated-p window (not (window-dedicated-p window))))
+       "%s: Can't touch this!"
+     "%s is up for grabs.")
+   (current-buffer)))
+
 (defun change-split (&optional arg)
   "Change arrangement of two windows from 'stacked' to 'side-by-side'.
 
