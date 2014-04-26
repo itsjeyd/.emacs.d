@@ -1,7 +1,51 @@
 * Packages
-I use the following add-on packages (coming soon):
+  I use the following add-on packages:
 
-| Package | Source | Submodule |
-|---------+--------+-----------|
-| ...     | ...    | ...       |
-|---------+--------+-----------|
+  | Package               | Source    |
+  |-----------------------+-----------|
+  | ace-jump-mode         | MELPA     |
+  | ace-window            | MELPA     |
+  | auctex                | ELPA      |
+  | autocomplete          | MELPA     |
+  | browse-kill-ring      | MELPA     |
+  | cdlatex               | Marmalade |
+  | cl-lib                | ELPA      |
+  | command-log-mode      | MELPA     |
+  | company               | MELPA     |
+  | cypher-mode           | MELPA     |
+  | dash                  | MELPA     |
+  | dired-details         | MELPA     |
+  | emacs-eclim           | MELPA     |
+  | ensime                | MELPA     |
+  | fill-column-indicator | MELPA     |
+  | flymake-cursor        | MELPA     |
+  | fringe-helper         | MELPA     |
+  | git-commit-mode       | MELPA     |
+  | git-gutter            | MELPA     |
+  | git-gutter-fringe     | MELPA     |
+  | git-rebase-mode       | MELPA     |
+  | guide-key             | MELPA     |
+  | haml-mode             | MELPA     |
+  | ido-ubiquitous        | MELPA     |
+  | ido-vertical-mode     | MELPA     |
+  | json-reformat         | MELPA     |
+  | magit                 | MELPA     |
+  | markdown-mode         | MELPA     |
+  | move-text             | MELPA     |
+  | openwith              | MELPA     |
+  | org                   | ELPA      |
+  | php-mode              | MELPA     |
+  | plantuml-mode         | MELPA     |
+  | pony-mode             | MELPA     |
+  | popup                 | MELPA     |
+  | popwin                | MELPA     |
+  | rainbow-delimiters    | MELPA     |
+  | s                     | MELPA     |
+  | scala-mode2           | MELPA     |
+  | smartparens           | MELPA     |
+  | smartscan             | MELPA     |
+  | smex                  | MELPA     |
+  | sos                   | MELPA     |
+  | writeroom-mode        | MELPA     |
+  | yasnippet             | MELPA     |
+  |-----------------------+-----------|
