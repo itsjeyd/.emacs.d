@@ -443,6 +443,7 @@ HOOKS can be a list of hooks or just a single hook."
 ; Variables
 (setq org-agenda-include-diary t)
 (setq org-enforce-todo-dependencies t)
+(setq org-list-use-circular-motion t)
 (setq org-track-ordered-property-with-tag t)
 (setq org-use-speed-commands t)
 (setq org-structure-template-alist
