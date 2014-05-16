@@ -751,6 +751,7 @@ than one window."
     (switch-to-buffer other-buf)))
 
 ; Key Bindings
+(global-set-key (kbd "M-s t d") 'toggle-window-dedicated)
 (global-set-key (kbd "M-s c s") 'change-split)
 (global-set-key (kbd "M-s k o") 'kill-other-buffer-and-window)
 (global-set-key (kbd "M-s s w") 'swap-windows)
