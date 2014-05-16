@@ -165,6 +165,29 @@ is replaced and the point is put before CHAR."
          (search-string (buffer-substring-no-properties beg end)))
     (rename-buffer (format "*Occur-%s*" search-string))))
 
+(defun narrow-to-region-indirect-buffer (start end)
+  "Create indirect buffer based on current buffer and narrow it
+to currently active region. Instead of using arbitrary numbering,
+incorporate line numbers of point and mark into buffer name for
+indirect buffer. This command makes it easy to quickly generate
+multiple views of the contents of any given buffer.
+
+Adapted from: http://paste.lisp.org/display/135818."
+  (interactive "r")
+  (with-current-buffer (clone-indirect-buffer
+                        (generate-new-buffer-name
+                         (concat (buffer-name)
+                                 "-indirect-L"
+                                 (number-to-string
+                                  (line-number-at-pos start))
+                                 "-L"
+                                 (number-to-string
+                                  (line-number-at-pos end))))
+                        'display)
+    (narrow-to-region start end)
+    (deactivate-mark)
+    (goto-char (point-min))))
+
 ; Hooks
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 (add-hook 'occur-mode-hook (lambda () (toggle-truncate-lines 1)))
@@ -176,6 +199,7 @@ is replaced and the point is put before CHAR."
 (global-set-key (kbd "M-g l") 'goto-line)
 (global-set-key (kbd "M-s t t") 'toggle-truncate-lines)
 (global-set-key (kbd "RET") 'newline-and-indent)
+(global-set-key (kbd "C-x n i") 'narrow-to-region-indirect-buffer)
 
 (define-key occur-mode-map "n" 'occur-next)
 (define-key occur-mode-map "p" 'occur-prev)
