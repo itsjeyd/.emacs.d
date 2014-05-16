@@ -575,7 +575,6 @@ HOOKS can be a list of hooks or just a single hook."
 (require 'python)
 (define-key python-mode-map (kbd "M-s f n") 'flymake-goto-next-error)
 (define-key python-mode-map (kbd "M-s f p") 'flymake-goto-prev-error)
-(define-key python-mode-map (kbd "M-s f d") 'flymake-display-err-menu-for-current-line)
 
 
 ;;;;;;;;;;;;;;;
