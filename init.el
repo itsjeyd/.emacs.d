@@ -607,6 +607,7 @@ HOOKS can be a list of hooks or just a single hook."
 
 ; Ensime
 (add-hook 'scala-mode-hook 'ensime-scala-mode-hook)
+(setq ensime-ac-override-settings nil)
 
 
 ;;;;;;;;;;;;;;;;;
