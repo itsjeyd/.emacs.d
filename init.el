@@ -448,7 +448,8 @@ HOOKS can be a list of hooks or just a single hook."
 (setq org-enforce-todo-dependencies t)
 (setq org-list-use-circular-motion t)
 (setq org-track-ordered-property-with-tag t)
-(setq org-use-speed-commands t)
+(setq org-use-speed-commands
+      (lambda () (or (looking-at org-outline-regexp) (looking-at "^#\+"))))
 (setq org-structure-template-alist
       (quote (("s" "#+BEGIN_SRC ?\n\n#+END_SRC" "<src lang=\"?\">\n\n</src>")
               ("e" "#+BEGIN_EXAMPLE\n?\n#+END_EXAMPLE" "<example>\n?\n</example>")
