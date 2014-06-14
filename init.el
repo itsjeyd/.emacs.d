@@ -421,10 +421,10 @@ HOOKS can be a list of hooks or just a single hook."
 (setq org-agenda-include-diary t)
 (setq org-enforce-todo-dependencies t)
 (setq org-list-use-circular-motion t)
+(setq org-special-ctrl-a/e t)
 (setq org-track-ordered-property-with-tag t)
 (setq org-use-speed-commands
       (lambda () (or (looking-at org-outline-regexp) (looking-at "^#\+"))))
-(setq org-special-ctrl-a/e t)
 (add-to-list 'org-structure-template-alist
              '("o" "#+BEGIN_COMMENT\n?\n#+END_COMMENT") t)
 
