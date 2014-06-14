@@ -163,9 +163,9 @@ line instead."
        (list (region-beginning) (region-end))
      (list (line-beginning-position) (line-beginning-position 2)))))
 
-(defadvice zap-to-char (after my-zap-to-char-advice (arg char) activate)
-  "Kill up to the ARG'th occurence of CHAR, and leave CHAR. CHAR
-is replaced and the point is put before CHAR."
+(defadvice zap-to-char (after zap-to-char-keep-char (arg char) activate)
+  "Kill up to but not including the ARG'th occurence of CHAR.
+Put point before CHAR."
   (insert char)
   (forward-char -1))
 
