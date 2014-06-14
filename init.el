@@ -240,6 +240,7 @@ Adapted from: http://paste.lisp.org/display/135818."
 (define-key smartscan-map (kbd "s-p") 'smartscan-symbol-go-backward)
 
 ; Variables
+(setq save-interprogram-paste-before-kill t)
 (setq sentence-end-double-space nil)
 (setq set-mark-command-repeat-pop t)
 (setq tab-width 4)
