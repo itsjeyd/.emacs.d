@@ -168,8 +168,6 @@ Put point before CHAR."
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 
 ; Key Bindings
-(global-set-key (kbd "M-g c") 'goto-char)
-(global-set-key (kbd "M-g l") 'goto-line)
 (global-set-key (kbd "RET") 'newline-and-indent)
 
 ; Mark Lines
@@ -384,6 +382,18 @@ HOOKS can be a list of hooks or just a single hook."
 
 
 ;;;;;;;;;;;;;;;;
+;;; Movement ;;;
+;;;;;;;;;;;;;;;;
+
+; Ace Jump
+(global-set-key (kbd "s-SPC") 'ace-jump-mode)
+
+; Key Bindings
+(global-set-key (kbd "M-g c") 'goto-char)
+(global-set-key (kbd "M-g l") 'goto-line)
+
+
+;;;;;;;;;;;;;;;;
 ;;; Org Mode ;;;
 ;;;;;;;;;;;;;;;;
 
@@ -576,9 +586,6 @@ HOOKS can be a list of hooks or just a single hook."
 ;;;;;;;;;;;;;;
 ;;; Search ;;;
 ;;;;;;;;;;;;;;
-
-; Ace Jump
-(global-set-key (kbd "s-SPC") 'ace-jump-mode)
 
 ; Functions
 (defun occur-rename-buffer-after-search-string ()
