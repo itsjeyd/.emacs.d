@@ -136,9 +136,6 @@
 ;;; Editing ;;;
 ;;;;;;;;;;;;;;;
 
-; Ace Jump
-(global-set-key (kbd "s-SPC") 'ace-jump-mode)
-
 ; Browse Kill Ring
 (require 'browse-kill-ring)
 (global-set-key (kbd "M-s b k") 'browse-kill-ring)
@@ -169,16 +166,6 @@ Put point before CHAR."
   (insert char)
   (forward-char -1))
 
-(defun occur-rename-buffer-after-search-string ()
-  "Uniquify name of *Occur* buffer by appending search string to it."
-  (let* ((beg-end (match-data (string-match "\".+\"" (buffer-string))))
-         (beg (+ (car beg-end) 2))
-         (end (cadr beg-end))
-         (search-string (buffer-substring-no-properties beg end)))
-    (rename-buffer (format "*Occur-%s*" search-string))))
-
-(add-hook 'occur-hook 'occur-rename-buffer-after-search-string)
-
 (defun narrow-to-region-indirect-buffer (start end)
   "Create indirect buffer based on current buffer and narrow it
 to currently active region. Instead of using arbitrary numbering,
@@ -203,7 +190,6 @@ Adapted from: http://paste.lisp.org/display/135818."
 
 ; Hooks
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
-(add-hook 'occur-mode-hook (lambda () (toggle-truncate-lines 1)))
 
 ; Key Bindings
 (global-set-key (kbd "M-g c") 'goto-char)
@@ -213,9 +199,6 @@ Adapted from: http://paste.lisp.org/display/135818."
 (global-set-key (kbd "M-s t t") 'toggle-truncate-lines)
 (global-set-key (kbd "RET") 'newline-and-indent)
 (global-set-key (kbd "C-x n i") 'narrow-to-region-indirect-buffer)
-
-(define-key occur-mode-map "n" 'occur-next)
-(define-key occur-mode-map "p" 'occur-prev)
 
 ; Mark Lines
 (require 'mark-lines)
@@ -230,13 +213,6 @@ Adapted from: http://paste.lisp.org/display/135818."
 (smartparens-global-mode t)
 
 (global-rainbow-delimiters-mode t)
-
-; Smartscan
-(global-smartscan-mode t)
-(define-key smartscan-map (kbd "M-n") nil)
-(define-key smartscan-map (kbd "M-p") nil)
-(define-key smartscan-map (kbd "s-n") 'smartscan-symbol-go-forward)
-(define-key smartscan-map (kbd "s-p") 'smartscan-symbol-go-backward)
 
 ; Variables
 (setq save-interprogram-paste-before-kill t)
@@ -625,6 +601,43 @@ HOOKS can be a list of hooks or just a single hook."
 
 ; Variables
 (setq scroll-preserve-screen-position 1)
+
+
+;;;;;;;;;;;;;;
+;;; Search ;;;
+;;;;;;;;;;;;;;
+
+; Ace Jump
+(global-set-key (kbd "s-SPC") 'ace-jump-mode)
+
+; Functions
+(defun occur-rename-buffer-after-search-string ()
+  "Uniquify name of *Occur* buffer by appending search string to it."
+  (let* ((beg-end (match-data (string-match "\".+\"" (buffer-string))))
+         (beg (+ (car beg-end) 2))
+         (end (cadr beg-end))
+         (search-string (buffer-substring-no-properties beg end)))
+    (rename-buffer (format "*Occur-%s*" search-string))))
+
+(defun toggle-truncate-lines-on ()
+  (toggle-truncate-lines 1))
+
+; Hooks
+(add-hook 'occur-hook 'occur-rename-buffer-after-search-string)
+(add-hook 'occur-mode-hook 'toggle-truncate-lines-on)
+
+; Key Bindings
+(define-key occur-mode-map "n" 'occur-next)
+(define-key occur-mode-map "p" 'occur-prev)
+
+
+; Smartscan
+(global-smartscan-mode t)
+(define-key smartscan-map (kbd "M-n") nil)
+(define-key smartscan-map (kbd "M-p") nil)
+(define-key smartscan-map (kbd "s-n") 'smartscan-symbol-go-forward)
+(define-key smartscan-map (kbd "s-p") 'smartscan-symbol-go-backward)
+
 
 
 ;;;;;;;;;;;;;;
