@@ -141,8 +141,6 @@
 (global-set-key (kbd "M-s b k") 'browse-kill-ring)
 
 ; Functions
-(put 'narrow-to-region 'disabled nil)
-
 (defadvice kill-ring-save (before slick-copy activate compile)
   "When called interactively with no active region, copy a single
 line instead."
@@ -166,28 +164,6 @@ Put point before CHAR."
   (insert char)
   (forward-char -1))
 
-(defun narrow-to-region-indirect-buffer (start end)
-  "Create indirect buffer based on current buffer and narrow it
-to currently active region. Instead of using arbitrary numbering,
-incorporate line numbers of point and mark into buffer name for
-indirect buffer. This command makes it easy to quickly generate
-multiple views of the contents of any given buffer.
-
-Adapted from: http://paste.lisp.org/display/135818."
-  (interactive "r")
-  (with-current-buffer
-      (clone-indirect-buffer
-       (generate-new-buffer-name
-        (concat (buffer-name)
-                "-indirect-L"
-                (number-to-string (line-number-at-pos start))
-                "-L"
-                (number-to-string (line-number-at-pos end))))
-       'display)
-    (narrow-to-region start end)
-    (deactivate-mark)
-    (goto-char (point-min))))
-
 ; Hooks
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 
@@ -196,9 +172,7 @@ Adapted from: http://paste.lisp.org/display/135818."
 (global-unset-key (kbd "M-g g"))
 (global-unset-key (kbd "M-g M-g"))
 (global-set-key (kbd "M-g l") 'goto-line)
-(global-set-key (kbd "M-s t t") 'toggle-truncate-lines)
 (global-set-key (kbd "RET") 'newline-and-indent)
-(global-set-key (kbd "C-x n i") 'narrow-to-region-indirect-buffer)
 
 ; Mark Lines
 (require 'mark-lines)
@@ -410,8 +384,6 @@ HOOKS can be a list of hooks or just a single hook."
 
 (add-to-list 'auto-mode-alist '("routes$" . conf-space-mode))
 
-(add-hook 'conf-space-mode-hook (lambda () (toggle-truncate-lines 1)))
-
 
 ;;;;;;;;;;;;;;;;
 ;;; Org Mode ;;;
@@ -619,12 +591,8 @@ HOOKS can be a list of hooks or just a single hook."
          (search-string (buffer-substring-no-properties beg end)))
     (rename-buffer (format "*Occur-%s*" search-string))))
 
-(defun toggle-truncate-lines-on ()
-  (toggle-truncate-lines 1))
-
 ; Hooks
 (add-hook 'occur-hook 'occur-rename-buffer-after-search-string)
-(add-hook 'occur-mode-hook 'toggle-truncate-lines-on)
 
 ; Key Bindings
 (define-key occur-mode-map "n" 'occur-next)
@@ -710,6 +678,47 @@ HOOKS can be a list of hooks or just a single hook."
 
 ; Variables
 (setq magit-diff-refine-hunk t)
+
+
+;;;;;;;;;;;;;;;;;;
+;;; Visibility ;;;
+;;;;;;;;;;;;;;;;;;
+
+; Functions
+(put 'narrow-to-region 'disabled nil)
+
+(defun narrow-to-region-indirect-buffer (start end)
+  "Create indirect buffer based on current buffer and narrow it
+to currently active region. Instead of using arbitrary numbering,
+incorporate line numbers of point and mark into buffer name for
+indirect buffer. This command makes it easy to quickly generate
+multiple views of the contents of any given buffer.
+
+Adapted from: http://paste.lisp.org/display/135818."
+  (interactive "r")
+  (with-current-buffer
+      (clone-indirect-buffer
+       (generate-new-buffer-name
+        (concat (buffer-name)
+                "-indirect-L"
+                (number-to-string (line-number-at-pos start))
+                "-L"
+                (number-to-string (line-number-at-pos end))))
+       'display)
+    (narrow-to-region start end)
+    (deactivate-mark)
+    (goto-char (point-min))))
+
+(defun toggle-truncate-lines-on ()
+  (toggle-truncate-lines 1))
+
+; Hooks
+(add-hook 'conf-space-mode-hook 'toggle-truncate-lines-on)
+(add-hook 'occur-mode-hook 'toggle-truncate-lines-on)
+
+; Key Bindings
+(global-set-key (kbd "C-x n i") 'narrow-to-region-indirect-buffer)
+(global-set-key (kbd "M-s t t") 'toggle-truncate-lines)
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;
