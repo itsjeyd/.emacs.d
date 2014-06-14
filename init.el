@@ -635,26 +635,28 @@ HOOKS can be a list of hooks or just a single hook."
 ;;;;;;;;;;;;;;;;;
 
 ; Functions
+(defun search-service (name url)
+  (browse-url
+   (concat url (if mark-active
+                   (buffer-substring (region-beginning) (region-end))
+                 (read-string (format "%s: " name))))))
+
 (defun google ()
   "Googles a query or region if any."
   (interactive)
-  (browse-url
-   (concat
-    "http://www.google.com/search?ie=utf-8&oe=utf-8&q="
-    (if mark-active
-        (buffer-substring (region-beginning) (region-end))
-      (read-string "Google: ")))))
+  (search-service "Google"
+                  "http://www.google.com/search?ie=utf-8&oe=utf-8&q="))
 
 (defun startpage ()
   "Startpages a query or region if any."
   (interactive)
-  (browse-url
-   (concat
-    "https://startingpage.com/do/metasearch.pl?query="
-    (if mark-active
-        (buffer-substring (region-beginning) (region-end))
-      (read-string "StartPage: ")))))
+  (search-service "StartPage"
+                  "https://startpage.com/do/metasearch.pl?query="))
 
+(defun urbandictionary ()
+  (interactive)
+  (search-service "Urbandictionary"
+                  "http://www.urbandictionary.com/define.php?term="))
 
 ;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Version Control ;;;
