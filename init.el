@@ -450,22 +450,9 @@ HOOKS can be a list of hooks or just a single hook."
 (setq org-track-ordered-property-with-tag t)
 (setq org-use-speed-commands
       (lambda () (or (looking-at org-outline-regexp) (looking-at "^#\+"))))
-(setq org-structure-template-alist
-      (quote (("s" "#+BEGIN_SRC ?\n\n#+END_SRC" "<src lang=\"?\">\n\n</src>")
-              ("e" "#+BEGIN_EXAMPLE\n?\n#+END_EXAMPLE" "<example>\n?\n</example>")
-              ("q" "#+BEGIN_QUOTE\n?\n#+END_QUOTE" "<quote>\n?\n</quote>")
-              ("v" "#+BEGIN_VERSE\n?\n#+END_VERSE" "<verse>\n?\n</verse>")
-              ("V" "#+BEGIN_VERBATIM\n?\n#+END_VERBATIM" "<verbatim>\n?\n</verbatim>")
-              ("c" "#+BEGIN_CENTER\n?\n#+END_CENTER" "<center>\n?\n</center>")
-              ("l" "#+BEGIN_LaTeX\n?\n#+END_LaTeX" "<literal style=\"latex\">\n?\n</literal>")
-              ("L" "#+LaTeX: " "<literal style=\"latex\">?</literal>")
-              ("h" "#+BEGIN_HTML\n?\n#+END_HTML" "<literal style=\"html\">\n?\n</literal>")
-              ("H" "#+HTML: " "<literal style=\"html\">?</literal>")
-              ("a" "#+BEGIN_ASCII\n?\n#+END_ASCII")
-              ("A" "#+ASCII: ")
-              ("i" "#+INDEX: ?" "#+INDEX: ?")
-              ("I" "#+INCLUDE: %file ?" "<include file=%file markup=\"?\">")
-              ("o" "#+BEGIN_COMMENT\n?\n#+END_COMMENT"))))
+(setq org-special-ctrl-a/e t)
+(add-to-list 'org-structure-template-alist
+             '("o" "#+BEGIN_COMMENT\n?\n#+END_COMMENT") t)
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;
