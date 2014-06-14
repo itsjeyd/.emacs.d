@@ -169,13 +169,15 @@ Put point before CHAR."
   (insert char)
   (forward-char -1))
 
-(defun occur-rename-buffer-use-search-string ()
-  (interactive)
+(defun occur-rename-buffer-after-search-string ()
+  "Uniquify name of *Occur* buffer by appending search string to it."
   (let* ((beg-end (match-data (string-match "\".+\"" (buffer-string))))
          (beg (+ (car beg-end) 2))
          (end (cadr beg-end))
          (search-string (buffer-substring-no-properties beg end)))
     (rename-buffer (format "*Occur-%s*" search-string))))
+
+(add-hook 'occur-hook 'occur-rename-buffer-after-search-string)
 
 (defun narrow-to-region-indirect-buffer (start end)
   "Create indirect buffer based on current buffer and narrow it
@@ -215,8 +217,6 @@ Adapted from: http://paste.lisp.org/display/135818."
 
 (define-key occur-mode-map "n" 'occur-next)
 (define-key occur-mode-map "p" 'occur-prev)
-(define-key occur-mode-map
-  (kbd "C-c r") 'occur-rename-buffer-use-search-string)
 
 ; Mark Lines
 (require 'mark-lines)
