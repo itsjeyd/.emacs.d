@@ -34,6 +34,8 @@
 ;;;;;;;;;;;;;;;
 
 ; Functions
+(setq temp-buffer-count 0)
+
 (defun make-temp-buffer ()
   (interactive)
   (let ((temp-buffer-name (format "*tempbuf-%d*" temp-buffer-count)))
@@ -49,7 +51,6 @@
 ; Variables
 (setq confirm-nonexistent-file-or-buffer nil)
 (setq revert-without-query (quote (".*")))
-(setq temp-buffer-count 0)
 
 
 ;;;;;;;;;;;;;;;;;;;;
