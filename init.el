@@ -704,7 +704,7 @@ HOOKS can be a list of hooks or just a single hook."
 ;;;;;;;;;;;;;;;;;;;;;;;;
 
 ; Ace Window
-(global-set-key (kbd "M-s a w") 'ace-window)
+(global-set-key (kbd "C-x o") 'ace-window)
 (setq aw-keys '(?a ?b ?c ?d ?e ?f ?g ?h ?i))
 
 ; Functions
