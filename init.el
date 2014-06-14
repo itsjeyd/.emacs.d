@@ -348,7 +348,7 @@ Adapted from: http://paste.lisp.org/display/135818."
 
 (defun java-class-to-top ()
   (if (and (eq major-mode 'java-mode)
-           (looking-at "public\\|private\\|protected\\|class"))
+           (looking-at "^public\\|private\\|protected\\|class"))
       (recenter-top-bottom 0)))
 
 ; Hooks
