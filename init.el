@@ -1,5 +1,4 @@
 (package-initialize)
-(load-theme 'wombat t)
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
@@ -300,10 +299,17 @@ Adapted from: http://paste.lisp.org/display/135818."
 ;;;;;;;;;;;;;;;;;
 
 (setq inhibit-startup-screen t)
+
+; Controls
 (set-scroll-bar-mode nil)
 (tool-bar-mode 0)
-(tooltip-mode 0)
+
+; Theme
+(load-theme 'wombat t)
 (set-cursor-color "#FF5A0E")
+
+; Tooltips
+(tooltip-mode 0)
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;
