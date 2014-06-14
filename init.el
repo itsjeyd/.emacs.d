@@ -188,16 +188,15 @@ multiple views of the contents of any given buffer.
 
 Adapted from: http://paste.lisp.org/display/135818."
   (interactive "r")
-  (with-current-buffer (clone-indirect-buffer
-                        (generate-new-buffer-name
-                         (concat (buffer-name)
-                                 "-indirect-L"
-                                 (number-to-string
-                                  (line-number-at-pos start))
-                                 "-L"
-                                 (number-to-string
-                                  (line-number-at-pos end))))
-                        'display)
+  (with-current-buffer
+      (clone-indirect-buffer
+       (generate-new-buffer-name
+        (concat (buffer-name)
+                "-indirect-L"
+                (number-to-string (line-number-at-pos start))
+                "-L"
+                (number-to-string (line-number-at-pos end))))
+       'display)
     (narrow-to-region start end)
     (deactivate-mark)
     (goto-char (point-min))))
