@@ -428,6 +428,7 @@ HOOKS can be a list of hooks or just a single hook."
 
 ; Variables
 (setq org-agenda-include-diary t)
+(setq org-blank-before-new-entry '((heading . t) (plain-list-item . auto)))
 (setq org-enforce-todo-dependencies t)
 (setq org-list-allow-alphabetical t)
 (setq org-list-use-circular-motion t)
