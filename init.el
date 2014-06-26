@@ -680,6 +680,7 @@ HOOKS can be a list of hooks or just a single hook."
 (add-hook 'python-mode-hook 'git-gutter-mode)
 (add-hook 'sh-mode-hook 'git-gutter-mode)
 (add-hook 'css-mode-hook 'git-gutter-mode)
+(add-hook 'git-commit-mode-hook 'turn-on-orgstruct)
 
 ; Key Bindings
 (global-set-key (kbd "M-s g s") 'magit-status)
