@@ -86,29 +86,15 @@
 ;;; Dired ;;;
 ;;;;;;;;;;;;;
 
-; File Associations
-(require 'openwith)
-(openwith-mode t)
-(setq openwith-associations
-      (quote (("\\.\\(?:pdf\\|ps\\)\\'" "okular" (file))
-              ("\\.\\(?:mp3\\|wav\\|flac\\)\\'" "gmusicbrowser" (file))
-              ("\\.\\(?:mpe?g\\|avi\\|wmv\\|flv\\|mov\\|mp4\\)\\'" "vlc" (file))
-              ("\\.\\(?:jpe?g\\|png\\|bmp\\)\\'" "gwenview" (file))
-              ("\\.chm\\'" "kchmviewer" (file))
-              ("\\.\\(?:odt\\|doc\\|docx\\)\\'" "libreoffice" ("--writer" file))
-              ("\\.\\(?:ods\\|xls\\|xlsx\\)\\'" "libreoffice" ("--calc" file))
-              ("\\.\\(?:odp\\|pps\\|ppt\\|pptx\\)\\'" "libreoffice" ("--impress" file))
-              ("\\.dia\\'" "dia" (file)))))
+; Dired Details (source: whattheemacsd.com)
+(require 'dired-details)
+(setq-default dired-details-hidden-string "> ")
+(dired-details-install)
 
 ; Hidden Files
 (require 'dired-x)
 (setq dired-omit-files "^\\...+$")
 (add-hook 'dired-mode-hook (lambda () (dired-omit-mode 1)))
-
-; Layout (source: whattheemacsd.com)
-(require 'dired-details)
-(setq-default dired-details-hidden-string "> ")
-(dired-details-install)
 
 ; Movement (source: whattheemacsd.com)
 (defun dired-jump-to-top ()
@@ -127,6 +113,19 @@
 (define-key dired-mode-map
   (vector 'remap 'end-of-buffer) 'dired-jump-to-bottom)
 
+; Openwith
+(openwith-mode t)
+(setq openwith-associations
+      (quote (("\\.\\(?:pdf\\|ps\\)\\'" "okular" (file))
+              ("\\.\\(?:mp3\\|wav\\|flac\\)\\'" "gmusicbrowser" (file))
+              ("\\.\\(?:mpe?g\\|avi\\|wmv\\|flv\\|mov\\|mp4\\)\\'" "vlc" (file))
+              ("\\.\\(?:jpe?g\\|png\\|bmp\\)\\'" "gwenview" (file))
+              ("\\.chm\\'" "kchmviewer" (file))
+              ("\\.\\(?:odt\\|doc\\|docx\\)\\'" "libreoffice" ("--writer" file))
+              ("\\.\\(?:ods\\|xls\\|xlsx\\)\\'" "libreoffice" ("--calc" file))
+              ("\\.\\(?:odp\\|pps\\|ppt\\|pptx\\)\\'" "libreoffice" ("--impress" file))
+              ("\\.dia\\'" "dia" (file)))))
+
 ; Variables
 (setq dired-isearch-filenames "dwim")
 (setq dired-recursive-copies (quote always))
@@ -137,7 +136,6 @@
 ;;;;;;;;;;;;;;;
 
 ; Browse Kill Ring
-(require 'browse-kill-ring)
 (global-set-key (kbd "M-s b k") 'browse-kill-ring)
 
 ; Functions
@@ -205,7 +203,6 @@ Put point before CHAR."
 (define-key emacs-lisp-mode-map (kbd "M-s e r") 'eval-region)
 
 ; Slime Nav
-(require 'elisp-slime-nav)
 (dolist (hook '(emacs-lisp-mode-hook ielm-mode-hook))
   (add-hook hook 'turn-on-elisp-slime-nav-mode))
 
@@ -241,7 +238,6 @@ Put point before CHAR."
 (global-set-key (kbd "M-X") 'smex-major-mode-commands)
 
 ; Ubiquitous
-(require 'ido-ubiquitous)
 (ido-ubiquitous-mode)
 (setq ido-ubiquitous-command-exceptions
       (quote (sclang-dump-interface sclang-dump-full-interface)))
@@ -415,8 +411,6 @@ HOOKS can be a list of hooks or just a single hook."
 ;;; Org Mode ;;;
 ;;;;;;;;;;;;;;;;
 
-(require 'org)
-
 ; Exports
 (require 'ox-md)
 
@@ -538,7 +532,6 @@ HOOKS can be a list of hooks or just a single hook."
               (lambda () (subword-mode 1)))
 
 ; yasnippet
-(require 'yasnippet)
 (yas-global-mode 1)
 
 
@@ -555,7 +548,6 @@ HOOKS can be a list of hooks or just a single hook."
 
 ; Django
 (add-to-list 'load-path "~/.emacs.d/pony-mode/src")
-(require 'pony-mode)
 
 ; Flymake
 (when (load "flymake" t)
