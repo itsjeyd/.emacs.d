@@ -259,6 +259,14 @@ Put point before CHAR."
 ; Tooltips
 (tooltip-mode 0)
 
+; Writeroom
+(defun turn-off-git-gutter ()
+  (if (not git-gutter-mode)
+      (git-gutter-mode t)
+    (git-gutter-mode -1)))
+
+(add-hook 'writeroom-mode-hook 'turn-off-git-gutter)
+
 
 ;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Java Development ;;;
