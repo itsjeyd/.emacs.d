@@ -431,6 +431,7 @@ HOOKS can be a list of hooks or just a single hook."
 (setq org-enforce-todo-dependencies t)
 (setq org-list-allow-alphabetical t)
 (setq org-list-use-circular-motion t)
+(setq org-return-follows-link t)
 (setq org-special-ctrl-a/e t)
 (setq org-track-ordered-property-with-tag t)
 (setq org-use-speed-commands
