@@ -204,6 +204,11 @@ Put point before CHAR."
 (define-key emacs-lisp-mode-map (kbd "M-s e b") 'eval-buffer)
 (define-key emacs-lisp-mode-map (kbd "M-s e r") 'eval-region)
 
+; Slime Nav
+(require 'elisp-slime-nav)
+(dolist (hook '(emacs-lisp-mode-hook ielm-mode-hook))
+  (add-hook hook 'turn-on-elisp-slime-nav-mode))
+
 
 ;;;;;;;;;;;;;
 ;;; Fonts ;;;
