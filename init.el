@@ -434,6 +434,8 @@ HOOKS can be a list of hooks or just a single hook."
 (define-key org-mode-map (kbd "M-s t d") 'org-shiftmetadown)
 (define-key org-mode-map (kbd "M-s t l") 'org-shiftmetaleft)
 (define-key org-mode-map (kbd "M-s t r") 'org-shiftmetaright)
+(define-key org-mode-map (kbd "M-s t h") 'org-insert-todo-heading)
+(define-key org-mode-map (kbd "M-s t s") 'org-insert-todo-subheading)
 
 ; Variables
 (setq org-agenda-include-diary t)
