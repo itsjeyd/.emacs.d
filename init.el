@@ -433,6 +433,7 @@ HOOKS can be a list of hooks or just a single hook."
 (setq org-list-use-circular-motion t)
 (setq org-return-follows-link t)
 (setq org-special-ctrl-a/e t)
+(setq org-special-ctrl-k t)
 (setq org-track-ordered-property-with-tag t)
 (setq org-use-speed-commands
       (lambda () (or (looking-at org-outline-regexp) (looking-at "^#\+"))))
