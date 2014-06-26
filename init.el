@@ -216,6 +216,9 @@ Put point before CHAR."
 ;;; Help ;;;
 ;;;;;;;;;;;;
 
+(find-function-setup-keys)
+
+; Guide Key
 (setq guide-key/guide-key-sequence '("C-c" "C-x r" "C-x v" "C-x 4"))
 (guide-key-mode t)
 
