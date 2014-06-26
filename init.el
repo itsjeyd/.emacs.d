@@ -185,6 +185,7 @@ Put point before CHAR."
 (global-rainbow-delimiters-mode t)
 
 ; Variables
+(setq cua-enable-cua-keys nil)
 (setq save-interprogram-paste-before-kill t)
 (setq sentence-end-double-space nil)
 (setq set-mark-command-repeat-pop t)
