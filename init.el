@@ -689,6 +689,9 @@ HOOKS can be a list of hooks or just a single hook."
 (require 'git-gutter)
 (add-to-list 'git-gutter:update-hooks 'magit-revert-buffer-hook)
 
+; git-wip
+(load "~/git-wip/emacs/git-wip.el")
+
 ; Hooks
 (add-hook 'emacs-lisp-mode-hook 'git-gutter-mode)
 (add-hook 'java-mode-hook 'git-gutter-mode)
