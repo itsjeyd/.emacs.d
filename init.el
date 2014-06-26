@@ -546,9 +546,6 @@ HOOKS can be a list of hooks or just a single hook."
 ;;; Python Development ;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-; Django
-(add-to-list 'load-path "~/.emacs.d/pony-mode/src")
-
 ; Flymake
 (when (load "flymake" t)
   (defun flymake-pyflakes-init ()
