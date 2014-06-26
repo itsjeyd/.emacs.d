@@ -422,9 +422,18 @@ HOOKS can be a list of hooks or just a single hook."
 ; Key Bindings
 (define-key org-mode-map (kbd "C-c a") 'org-agenda)
 (define-key org-mode-map (kbd "C-c l") 'org-store-link)
+(define-key org-mode-map (kbd "C-c t") 'org-toggle-link-display)
 (define-key org-mode-map (kbd "M-n") 'org-next-item)
 (define-key org-mode-map (kbd "M-p") 'org-previous-item)
-(define-key org-mode-map (kbd "M-s t l") 'org-toggle-link-display)
+;; Mnemonics: (i)tem, (t)ree
+(define-key org-mode-map (kbd "M-s i u") 'org-metaup)
+(define-key org-mode-map (kbd "M-s i d") 'org-metadown)
+(define-key org-mode-map (kbd "M-s i l") 'org-metaleft)
+(define-key org-mode-map (kbd "M-s i r") 'org-metaright)
+(define-key org-mode-map (kbd "M-s t u") 'org-shiftmetaup)
+(define-key org-mode-map (kbd "M-s t d") 'org-shiftmetadown)
+(define-key org-mode-map (kbd "M-s t l") 'org-shiftmetaleft)
+(define-key org-mode-map (kbd "M-s t r") 'org-shiftmetaright)
 
 ; Variables
 (setq org-agenda-include-diary t)
