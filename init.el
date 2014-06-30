@@ -135,6 +135,9 @@
 ;;; Editing ;;;
 ;;;;;;;;;;;;;;;
 
+; Anchored Transpose
+(global-set-key (kbd "M-s a t") 'anchored-transpose)
+
 ; Browse Kill Ring
 (global-set-key (kbd "M-s b k") 'browse-kill-ring)
 
