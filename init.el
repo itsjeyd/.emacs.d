@@ -502,10 +502,10 @@ HOOKS can be a list of hooks or just a single hook."
 (defun configure-hs ()
   "Configure Hide/Show"
   (setq hs-isearch-open t)
-  (define-key hs-minor-mode-map (kbd "M-s a h") 'hs-hide-all)
-  (define-key hs-minor-mode-map (kbd "M-s a s") 'hs-show-all)
-  (define-key hs-minor-mode-map (kbd "M-s b h") 'hs-hide-block)
-  (define-key hs-minor-mode-map (kbd "M-s b s") 'hs-show-block)
+  (define-key hs-minor-mode-map (kbd "M-s h a") 'hs-hide-all)
+  (define-key hs-minor-mode-map (kbd "M-s s a") 'hs-show-all)
+  (define-key hs-minor-mode-map (kbd "M-s h b") 'hs-hide-block)
+  (define-key hs-minor-mode-map (kbd "M-s s b") 'hs-show-block)
   (define-key hs-minor-mode-map (kbd "M-s l h") 'hs-hide-level)
   (define-key hs-minor-mode-map (kbd "M-s t h") 'hs-toggle-hiding))
 
