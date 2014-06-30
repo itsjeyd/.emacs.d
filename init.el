@@ -750,6 +750,14 @@ Adapted from: http://paste.lisp.org/display/135818."
     (deactivate-mark)
     (goto-char (point-min))))
 
+(defun tim/set-selective-display (&optional arg)
+  "Use selective display to hide lines below current column.
+With a prefix arg, clear selective display."
+  (interactive "P")
+  (if arg
+      (set-selective-display -1)
+    (set-selective-display (+ (current-column) 1))))
+
 (defun toggle-truncate-lines-on ()
   (toggle-truncate-lines 1))
 
@@ -759,6 +767,7 @@ Adapted from: http://paste.lisp.org/display/135818."
 
 ; Key Bindings
 (global-set-key (kbd "C-x n i") 'narrow-to-region-indirect-buffer)
+(global-set-key (kbd "C-x $") 'tim/set-selective-display)
 (global-set-key (kbd "M-s t t") 'toggle-truncate-lines)
 
 
