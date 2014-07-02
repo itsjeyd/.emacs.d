@@ -233,7 +233,7 @@ Put point before CHAR."
 ;;;;;;;;;;;
 
 (ido-mode (quote both))
-;(ido-everywhere)
+(ido-everywhere)
 
 ; Key Bindings
 (global-set-key (kbd "M-x") 'smex)
