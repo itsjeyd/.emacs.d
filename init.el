@@ -118,7 +118,7 @@
 (setq openwith-associations
       (quote (("\\.\\(?:pdf\\|ps\\)\\'" "okular" (file))
               ("\\.\\(?:mp3\\|wav\\|flac\\)\\'" "gmusicbrowser" (file))
-              ("\\.\\(?:mpe?g\\|avi\\|wmv\\|flv\\|mov\\|mp4\\)\\'" "vlc" (file))
+              ("\\.\\(?:mpe?g\\|avi\\|wmv\\|flv\\|mov\\|mp4\\|ogg\\)\\'" "vlc" (file))
               ("\\.\\(?:jpe?g\\|png\\|bmp\\)\\'" "gwenview" (file))
               ("\\.chm\\'" "kchmviewer" (file))
               ("\\.\\(?:odt\\|doc\\|docx\\)\\'" "libreoffice" ("--writer" file))
