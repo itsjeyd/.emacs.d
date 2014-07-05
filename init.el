@@ -528,6 +528,21 @@ HOOKS can be a list of hooks or just a single hook."
 ; Parens
 (show-paren-mode t)
 
+; Smart Semicolon
+(defun tim/electric-semicolon ()
+  (interactive)
+  (end-of-line)
+  (when (not (looking-back ";"))
+    (insert ";")))
+
+(defun tim/enable-electric-semicolon ()
+  (interactive)
+  (local-set-key (kbd ";") 'tim/electric-semicolon))
+
+(add-hook 'java-mode-hook 'tim/enable-electric-semicolon)
+(add-hook 'js-mode-hook 'tim/enable-electric-semicolon)
+(add-hook 'php-mode-hook 'tim/enable-electric-semicolon)
+
 ; Subword Mode
 (add-to-hooks `(java-mode-hook
                 js-mode-hook
