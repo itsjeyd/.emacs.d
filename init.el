@@ -261,6 +261,9 @@ Put point before CHAR."
 (set-scroll-bar-mode nil)
 (tool-bar-mode 0)
 
+; Cursor
+(blink-cursor-mode -1)
+
 ; Theme
 (load-theme 'wombat t)
 (set-cursor-color "#FF5A0E")
