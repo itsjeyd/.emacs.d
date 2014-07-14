@@ -855,3 +855,6 @@ than one window."
 (global-set-key (kbd "M-s c s") 'change-split)
 (global-set-key (kbd "M-s k o") 'kill-other-buffer-and-window)
 (global-set-key (kbd "M-s s w") 'swap-windows)
+
+; Variables
+(setq ediff-split-window-function 'split-window-horizontally)
