@@ -265,9 +265,26 @@ Put point before CHAR."
 (blink-cursor-mode -1)
 
 ; Theme
+(defun customize-enabled-theme ()
+  (let ((enabled-theme (car custom-enabled-themes)))
+    (cond ((eq enabled-theme 'base16-default)
+           (set-cursor-color "#FF5A0E")
+           (fringe-mode 0))
+          ((eq enabled-theme 'tronesque)
+           (set-face-attribute 'dired-directory nil :foreground "#2872b2")
+           (set-face-attribute 'info-header-xref nil :foreground "#2872b2"))
+          ((eq enabled-theme 'wombat)
+           (set-cursor-color "#FF5A0E")))))
+
 (defadvice load-theme
   (before disable-before-load (theme &optional no-confirm no-enable) activate)
   (mapc 'disable-theme custom-enabled-themes))
+
+(defadvice load-theme
+  (after load-custom-theme-settings
+         (theme &optional no-confirm no-enable)
+         activate)
+  (customize-enabled-theme))
 
 (load-theme 'base16-default t)
 
