@@ -437,6 +437,10 @@ HOOKS can be a list of hooks or just a single hook."
 ;;; Org Mode ;;;
 ;;;;;;;;;;;;;;;;
 
+; Emphasis
+(setcar (nthcdr 4 org-emphasis-regexp-components) 2)
+(org-set-emph-re 'org-emphasis-regexp-components org-emphasis-regexp-components)
+
 ; Exports
 (require 'ox-md)
 
