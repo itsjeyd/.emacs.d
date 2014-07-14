@@ -503,18 +503,14 @@ HOOKS can be a list of hooks or just a single hook."
 (ac-emacs-eclim-config)
 
 ; Hide/Show
+(require 'hideshow-org)
+
 (defun configure-hs ()
   "Configure Hide/Show"
-  (setq hs-isearch-open t)
-  (define-key hs-minor-mode-map (kbd "M-s h a") 'hs-hide-all)
-  (define-key hs-minor-mode-map (kbd "M-s s a") 'hs-show-all)
-  (define-key hs-minor-mode-map (kbd "M-s h b") 'hs-hide-block)
-  (define-key hs-minor-mode-map (kbd "M-s s b") 'hs-show-block)
-  (define-key hs-minor-mode-map (kbd "M-s l h") 'hs-hide-level)
-  (define-key hs-minor-mode-map (kbd "M-s t h") 'hs-toggle-hiding))
+  (setq hs-isearch-open t))
 
-(defun turn-on-hs ()
-  (hs-minor-mode 1)
+(defun turn-on-hs-org ()
+  (hs-org/minor-mode 1)
   (configure-hs))
 
 (add-to-hooks '(emacs-lisp-mode-hook
@@ -524,7 +520,7 @@ HOOKS can be a list of hooks or just a single hook."
                 js-mode-hook
                 php-mode-hook
                 python-mode-hook)
-              'turn-on-hs)
+              'turn-on-hs-org)
 
 ; Indentation
 (setq-default indent-tabs-mode nil)
