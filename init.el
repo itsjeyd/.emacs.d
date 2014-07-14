@@ -265,6 +265,10 @@ Put point before CHAR."
 (blink-cursor-mode -1)
 
 ; Theme
+(defadvice load-theme
+  (before disable-before-load (theme &optional no-confirm no-enable) activate)
+  (mapc 'disable-theme custom-enabled-themes))
+
 (load-theme 'base16-default t)
 
 ; Tooltips
