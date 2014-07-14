@@ -265,8 +265,7 @@ Put point before CHAR."
 (blink-cursor-mode -1)
 
 ; Theme
-(load-theme 'wombat t)
-(set-cursor-color "#FF5A0E")
+(load-theme 'base16-default t)
 
 ; Tooltips
 (tooltip-mode 0)
