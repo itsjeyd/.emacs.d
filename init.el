@@ -742,6 +742,7 @@ HOOKS can be a list of hooks or just a single hook."
 
 ; git-wip
 (load "~/git-wip/emacs/git-wip.el")
+(require 'git-wip-timemachine)
 
 ; Hooks
 (add-hook 'emacs-lisp-mode-hook 'git-gutter-mode)
