@@ -379,6 +379,7 @@ Put point before CHAR."
 
 ; Variables
 (savehist-mode t)
+(setq echo-keystrokes 0.5)
 (setq history-delete-duplicates t)
 (setq history-length t)
 
