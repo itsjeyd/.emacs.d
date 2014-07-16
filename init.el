@@ -380,6 +380,8 @@ Put point before CHAR."
 ; Variables
 (savehist-mode t)
 (setq echo-keystrokes 0.5)
+(setq enable-recursive-minibuffers t)
+(minibuffer-depth-indicate-mode)
 (setq history-delete-duplicates t)
 (setq history-length t)
 
