@@ -719,6 +719,11 @@ HOOKS can be a list of hooks or just a single hook."
   (search-service "StartPage"
                   "https://startpage.com/do/metasearch.pl?query="))
 
+(defun thesaurus ()
+  "Look up synonyms for query or region if any."
+  (interactive)
+  (search-service "Thesaurus" "http://thesaurus.com/browse/"))
+
 (defun urbandictionary ()
   "Look up Urbandictionary definition(s) for query or region if any."
   (interactive)
