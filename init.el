@@ -708,18 +708,19 @@ HOOKS can be a list of hooks or just a single hook."
                  (read-string (format "%s: " name))))))
 
 (defun google ()
-  "Googles a query or region if any."
+  "Google a query or region if any."
   (interactive)
   (search-service "Google"
                   "http://www.google.com/search?ie=utf-8&oe=utf-8&q="))
 
 (defun startpage ()
-  "Startpages a query or region if any."
+  "Startpage a query or region if any."
   (interactive)
   (search-service "StartPage"
                   "https://startpage.com/do/metasearch.pl?query="))
 
 (defun urbandictionary ()
+  "Look up Urbandictionary definition(s) for query or region if any."
   (interactive)
   (search-service "Urbandictionary"
                   "http://www.urbandictionary.com/define.php?term="))
