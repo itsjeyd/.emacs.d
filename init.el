@@ -490,6 +490,7 @@ HOOKS can be a list of hooks or just a single hook."
 (setq org-footnote-define-inline t)
 (setq org-footnote-auto-label 'random)
 (setq org-list-allow-alphabetical t)
+(setq org-list-demote-modify-bullet '(("-" . "+") ("+" . "-")))
 (setq org-list-use-circular-motion t)
 (setq org-return-follows-link t)
 (setq org-special-ctrl-a/e t)
