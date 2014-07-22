@@ -415,12 +415,13 @@ HOOKS can be a list of hooks or just a single hook."
 ;;; Modeline ;;;
 ;;;;;;;;;;;;;;;;
 
+; Modes
+(column-number-mode t)
+
 ; Unique Buffer Names
 (require 'uniquify)
 (setq uniquify-buffer-name-style (quote forward))
 
-; Variables
-(column-number-mode t)
 
 
 ;;;;;;;;;;;;;
