@@ -706,6 +706,14 @@ HOOKS can be a list of hooks or just a single hook."
     (server-start))
 
 
+;;;;;;;;;;;;;;;;
+;;; Speedbar ;;;
+;;;;;;;;;;;;;;;;
+
+; Variables
+(setq speedbar-use-images nil)
+
+
 ;;;;;;;;;;;;;;;;;
 ;;; Utilities ;;;
 ;;;;;;;;;;;;;;;;;
