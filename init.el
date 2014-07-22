@@ -447,6 +447,7 @@ HOOKS can be a list of hooks or just a single hook."
 ;;;;;;;;;;;;;;;;
 
 ; Emphasis
+(setcar (nthcdr 1 org-emphasis-regexp-components) "[:alpha:]- \t.,:!?;'\")}\\")
 (setcar (nthcdr 4 org-emphasis-regexp-components) 2)
 (org-set-emph-re 'org-emphasis-regexp-components org-emphasis-regexp-components)
 
