@@ -187,6 +187,7 @@ Put point before CHAR."
 
 ; Variables
 (setq cua-enable-cua-keys nil)
+(setq require-final-newline t)
 (setq save-interprogram-paste-before-kill t)
 (setq sentence-end-double-space nil)
 (setq set-mark-command-repeat-pop t)
