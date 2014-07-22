@@ -485,6 +485,7 @@ HOOKS can be a list of hooks or just a single hook."
 (setq org-blank-before-new-entry '((heading . t) (plain-list-item . auto)))
 (setq org-completion-use-ido t)
 (setq org-enforce-todo-dependencies t)
+(setq org-export-copy-to-kill-ring nil)
 (setq org-footnote-define-inline t)
 (setq org-footnote-auto-label 'random)
 (setq org-list-allow-alphabetical t)
