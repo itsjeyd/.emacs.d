@@ -352,6 +352,12 @@ Put point before CHAR."
 ;;; JavaScript Development ;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+; Functions
+(defun json-reformat-buffer ()
+  (interactive)
+  (json-reformat-region (point-min) (point-max)))
+
+; Variables
 (setq js-indent-level 2)
 
 
