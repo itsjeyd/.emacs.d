@@ -128,6 +128,7 @@
 
 ; Variables
 (setq dired-isearch-filenames "dwim")
+(setq dired-listing-switches "-alh")
 (setq dired-recursive-copies (quote always))
 
 
