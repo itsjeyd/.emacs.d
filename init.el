@@ -161,16 +161,30 @@ line instead."
      (list (line-beginning-position) (line-beginning-position 2)))))
 
 (defadvice zap-to-char (after zap-to-char-keep-char (arg char) activate)
-  "Kill up to but not including the ARG'th occurence of CHAR.
+  "Kill up to but not including ARG'th occurence of CHAR.
 Put point before CHAR."
   (insert char)
   (forward-char -1))
+
+(defun zap-to-string (arg str)
+  "Kill up to but not including ARG'th occurrence of STR.
+Case is ignored if `case-fold-search' is non-nil in the current buffer.
+Goes backward if ARG is negative; error if STR not found."
+  (interactive "p\nsZap to string: ")
+  (save-excursion
+    (let* ((start (point))
+           (len (length str))
+           (end (if (< arg 0)
+                    (+ (search-forward str nil nil arg) len)
+                  (- (search-forward str nil nil arg) len))))
+      (kill-region start end))))
 
 ; Hooks
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 
 ; Key Bindings
 (global-set-key (kbd "RET") 'newline-and-indent)
+(global-set-key (kbd "M-s z") 'zap-to-string)
 
 ; Mark Lines
 (require 'mark-lines)
