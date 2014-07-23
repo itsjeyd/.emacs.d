@@ -237,6 +237,9 @@ Put point before CHAR."
 (ido-mode (quote both))
 (ido-everywhere)
 
+; Flx
+(flx-ido-mode 1)
+
 ; Key Bindings
 (global-set-key (kbd "M-x") 'smex)
 (global-set-key (kbd "<menu>") 'smex)
