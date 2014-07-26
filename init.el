@@ -1,4 +1,5 @@
 (package-initialize)
+(setq idle-require-idle-delay 10)
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
@@ -472,12 +473,14 @@ HOOKS can be a list of hooks or just a single hook."
 (org-set-emph-re 'org-emphasis-regexp-components org-emphasis-regexp-components)
 
 ; Exports
-(require 'ox-md)
+(idle-require 'ox-md)
 
 ; Babel
-(require 'ob-plantuml)
-(setq org-plantuml-jar-path "/opt/plantuml/plantuml.jar")
-(setq plantuml-jar-path "/opt/plantuml/plantuml.jar")
+(idle-require 'ob-plantuml)
+(eval-after-load 'ob-plantuml
+  '(progn
+     (setq org-plantuml-jar-path "/opt/plantuml/plantuml.jar")
+     (setq plantuml-jar-path "/opt/plantuml/plantuml.jar")))
 
 ; Hooks
 (add-hook 'org-mode-hook 'turn-on-auto-fill)
@@ -638,9 +641,11 @@ HOOKS can be a list of hooks or just a single hook."
             (unless (eq buffer-file-name nil) (flymake-mode t))))
 
 ; Key Bindings
-(require 'python)
-(define-key python-mode-map (kbd "M-s f n") 'flymake-goto-next-error)
-(define-key python-mode-map (kbd "M-s f p") 'flymake-goto-prev-error)
+(idle-require 'python)
+(eval-after-load 'python
+  '(progn
+     (define-key python-mode-map (kbd "M-s f n") 'flymake-goto-next-error)
+     (define-key python-mode-map (kbd "M-s f p") 'flymake-goto-prev-error)))
 
 
 ;;;;;;;;;;;;;;;
@@ -925,3 +930,7 @@ than one window."
 
 ; Variables
 (setq ediff-split-window-function 'split-window-horizontally)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(idle-require-mode)
