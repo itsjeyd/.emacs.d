@@ -633,7 +633,8 @@ HOOKS can be a list of hooks or just a single hook."
 ;;; Project Management ;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(filesets-init)
+(projectile-global-mode)
+(add-to-list 'projectile-globally-ignored-directories "doxygen")
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;
