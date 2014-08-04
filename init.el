@@ -728,6 +728,9 @@ HOOKS can be a list of hooks or just a single hook."
 (define-key occur-mode-map "n" 'occur-next)
 (define-key occur-mode-map "p" 'occur-prev)
 
+; Loccur
+(require 'loccur)
+(global-set-key (kbd "M-s l o") 'loccur-current)
 
 ; Smartscan
 (global-smartscan-mode t)
