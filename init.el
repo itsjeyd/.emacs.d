@@ -498,6 +498,14 @@ HOOKS can be a list of hooks or just a single hook."
 ; Exports
 (idle-require 'ox-md)
 
+; Functions
+(defadvice org-display-inline-images
+  (around handle-openwith
+          (&optional include-linked refresh beg end) activate compile)
+  (openwith-mode -1)
+  ad-do-it
+  (openwith-mode 1))
+
 ; Babel
 (idle-require 'ob-plantuml)
 (eval-after-load 'ob-plantuml
