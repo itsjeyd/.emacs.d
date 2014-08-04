@@ -168,6 +168,12 @@ line instead."
     (goto-char (point-min))
     (flush-lines "^$")))
 
+(defun sort-lines-and-uniquify ()
+  "Sort lines alphabetically (in ascending order) and remove duplicates."
+  (interactive)
+  (sort-lines nil (point-min) (point-max))
+  (shell-command-on-region (point-min) (point-max) "uniq" nil t))
+
 (defadvice zap-to-char (after zap-to-char-keep-char (arg char) activate)
   "Kill up to but not including ARG'th occurence of CHAR.
 Put point before CHAR."
@@ -193,6 +199,7 @@ Goes backward if ARG is negative; error if STR not found."
 ; Key Bindings
 (global-set-key (kbd "RET") 'newline-and-indent)
 (global-set-key (kbd "M-s f e") 'flush-empty-lines)
+(global-set-key (kbd "M-s s u") 'sort-lines-and-uniquify)
 (global-set-key (kbd "M-s z") 'zap-to-string)
 
 ; Mark Lines
