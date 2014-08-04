@@ -161,6 +161,13 @@ line instead."
        (list (region-beginning) (region-end))
      (list (line-beginning-position) (line-beginning-position 2)))))
 
+(defun flush-empty-lines ()
+  "Remove empty lines from buffer."
+  (interactive)
+  (save-excursion
+    (goto-char (point-min))
+    (flush-lines "^$")))
+
 (defadvice zap-to-char (after zap-to-char-keep-char (arg char) activate)
   "Kill up to but not including ARG'th occurence of CHAR.
 Put point before CHAR."
@@ -185,6 +192,7 @@ Goes backward if ARG is negative; error if STR not found."
 
 ; Key Bindings
 (global-set-key (kbd "RET") 'newline-and-indent)
+(global-set-key (kbd "M-s f e") 'flush-empty-lines)
 (global-set-key (kbd "M-s z") 'zap-to-string)
 
 ; Mark Lines
