@@ -287,7 +287,9 @@ Goes backward if ARG is negative; error if STR not found."
 ; Theme
 (defun customize-enabled-theme ()
   (let ((enabled-theme (car custom-enabled-themes)))
-    (cond ((eq enabled-theme 'base16-default)
+    (cond ((eq enabled-theme 'ample)
+           (fringe-mode 0))
+          ((eq enabled-theme 'base16-default)
            (set-cursor-color "#FF5A0E")
            (fringe-mode 0))
           ((eq enabled-theme 'tronesque)
