@@ -224,6 +224,13 @@ Goes backward if ARG is negative; error if STR not found."
 (setq set-mark-command-repeat-pop t)
 (setq tab-width 4)
 
+; Whitespace
+(require 'whitespace)
+(setq whitespace-style '(face lines-tail))
+(setq whitespace-line-column nil)
+(add-hook 'org-mode-hook 'whitespace-mode)
+(add-hook 'prog-mode-hook 'whitespace-mode)
+
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Elisp Development ;;;
