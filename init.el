@@ -214,10 +214,14 @@ Goes backward if ARG is negative; error if STR not found."
 (global-set-key (kbd "M-s u") 'move-text-up)
 (global-set-key (kbd "M-s d") 'move-text-down)
 
+; Multiple Cursors
+(global-set-key (kbd "M-s n l") 'mc/mark-next-like-this)
+(global-set-key (kbd "M-s a l") 'mc/mark-all-like-this)
+(global-set-key (kbd "M-s a d") 'mc/mark-all-dwim)
+
 ; Parens
 (require 'smartparens-config)
 (smartparens-global-mode t)
-
 (global-rainbow-delimiters-mode t)
 
 ; Variables
