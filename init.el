@@ -144,6 +144,8 @@
 (global-set-key (kbd "M-s b k") 'browse-kill-ring)
 
 ; Functions
+(autoload 'zap-up-to-char "misc")
+
 (defadvice kill-ring-save (before slick-copy activate compile)
   "When called interactively with no active region, copy a single
 line instead."
@@ -174,12 +176,6 @@ line instead."
   (sort-lines nil (point-min) (point-max))
   (shell-command-on-region (point-min) (point-max) "uniq" nil t))
 
-(defadvice zap-to-char (after zap-to-char-keep-char (arg char) activate)
-  "Kill up to but not including ARG'th occurence of CHAR.
-Put point before CHAR."
-  (insert char)
-  (forward-char -1))
-
 (defun zap-to-string (arg str)
   "Kill up to but not including ARG'th occurrence of STR.
 Case is ignored if `case-fold-search' is non-nil in the current buffer.
@@ -201,6 +197,7 @@ Goes backward if ARG is negative; error if STR not found."
 (global-set-key (kbd "M-s f e") 'flush-empty-lines)
 (global-set-key (kbd "M-s s u") 'sort-lines-and-uniquify)
 (global-set-key (kbd "M-s z") 'zap-to-string)
+(global-set-key (kbd "M-z") 'zap-up-to-char)
 
 ; Mark Lines
 (require 'mark-lines)
