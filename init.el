@@ -143,6 +143,13 @@
 ; Browse Kill Ring
 (global-set-key (kbd "M-s b k") 'browse-kill-ring)
 
+; Change Inner
+(global-set-key (kbd "M-s c i") 'change-inner)
+(global-set-key (kbd "M-s c o") 'change-outer)
+
+; Expand Region
+(global-set-key (kbd "M-s x r") 'er/expand-region)
+
 ; Functions
 (autoload 'zap-up-to-char "misc")
 
