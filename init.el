@@ -177,6 +177,20 @@ line instead."
     (goto-char (point-min))
     (flush-lines "^$")))
 
+(defun ispell-word-then-abbrev (p)
+  "Call `ispell-word'. Then create an abbrev for the correction made.
+With prefix P, create local abbrev. Otherwise it will be global."
+  (interactive "P")
+  (let ((before (downcase (or (thing-at-point 'word) "")))
+        after)
+    (call-interactively 'ispell-word)
+    (setq after (downcase (or (thing-at-point 'word) "")))
+    (unless (string= after before)
+      (define-abbrev
+        (if p local-abbrev-table global-abbrev-table) before after))
+      (message "\"%s\" now expands to \"%s\" %sally."
+               before after (if p "loc" "glob"))))
+
 (defun sort-lines-and-uniquify ()
   "Sort lines alphabetically (in ascending order) and remove duplicates."
   (interactive)
@@ -202,6 +216,7 @@ Goes backward if ARG is negative; error if STR not found."
 ; Key Bindings
 (global-set-key (kbd "RET") 'newline-and-indent)
 (global-set-key (kbd "M-s f e") 'flush-empty-lines)
+(global-set-key (kbd "M-s i a") 'ispell-word-then-abbrev)
 (global-set-key (kbd "M-s s u") 'sort-lines-and-uniquify)
 (global-set-key (kbd "M-s z") 'zap-to-string)
 (global-set-key (kbd "M-z") 'zap-up-to-char)
@@ -227,10 +242,12 @@ Goes backward if ARG is negative; error if STR not found."
 ; Variables
 (setq cua-enable-cua-keys nil)
 (setq require-final-newline t)
+(setq save-abbrevs t)
 (setq save-interprogram-paste-before-kill t)
 (setq sentence-end-double-space nil)
 (setq set-mark-command-repeat-pop t)
 (setq tab-width 4)
+(setq-default abbrev-mode t)
 
 ; Whitespace
 (require 'whitespace)
