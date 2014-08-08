@@ -2,11 +2,14 @@
 *~
 *dat
 *elc
+.mc-lists.el
 bookmarks
 filesets-cache.el
 history
+projectile-bookmarks.eld
 tramp
 
 # Folders
 elpa/
+ensime-servers/
 url/
