@@ -334,7 +334,9 @@ Goes backward if ARG is negative; error if STR not found."
 ; Theme
 (defun customize-enabled-theme ()
   (let ((enabled-theme (car custom-enabled-themes)))
-    (cond ((eq enabled-theme 'ample)
+    (cond ((eq enabled-theme 'sanityinc-tomorrow-night)
+           (fringe-mode 0))
+          ((eq enabled-theme 'ample)
            (fringe-mode 0))
           ((eq enabled-theme 'base16-default)
            (set-cursor-color "#FF5A0E")
@@ -355,7 +357,7 @@ Goes backward if ARG is negative; error if STR not found."
          activate)
   (customize-enabled-theme))
 
-(load-theme 'base16-default t)
+(load-theme 'sanityinc-tomorrow-night t)
 
 ; Tooltips
 (tooltip-mode 0)
