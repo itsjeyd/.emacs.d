@@ -598,6 +598,9 @@ HOOKS can be a list of hooks or just a single hook."
 ; Auto-complete
 (require 'auto-complete-config)
 (ac-config-default)
+(setq ac-use-menu-map t)
+(setq ac-auto-show-menu 0.3)
+(setq ac-ignore-case nil)
 
 ; Hide/Show
 (require 'hideshow-org)
