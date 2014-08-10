@@ -375,26 +375,6 @@ Goes backward if ARG is negative; error if STR not found."
 ;;; Java Development ;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;
 
-; Eclim
-(require 'eclim)
-(global-eclim-mode)
-(setq help-at-pt-display-when-idle t)
-(setq help-at-pt-timer-delay 0.1)
-(help-at-pt-set-timer)
-(add-hook
- 'eclim-mode-hook
- (lambda ()
-   (remove-hook 'before-save-hook 'delete-trailing-whitespace)))
-
-; Eclimd
-(require 'eclimd)
-
-; Company
-(require 'company)
-(require 'company-emacs-eclim)
-(company-emacs-eclim-setup)
-(add-hook 'eclim-mode-hook (lambda () (company-mode t)))
-
 ; Functions
 (defun java-goto-class ()
   (interactive)
@@ -618,8 +598,6 @@ HOOKS can be a list of hooks or just a single hook."
 ; Auto-complete
 (require 'auto-complete-config)
 (ac-config-default)
-(require 'ac-emacs-eclim-source)
-(ac-emacs-eclim-config)
 
 ; Hide/Show
 (require 'hideshow-org)
