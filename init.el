@@ -827,6 +827,14 @@ HOOKS can be a list of hooks or just a single hook."
 
 (require 'magit)
 
+; Functions
+(defun magit-ls-files ()
+  "List tracked files of current repository."
+  (interactive)
+  (if (derived-mode-p 'magit-mode)
+      (magit-git-command "ls-files" default-directory)
+    (message "Not in a Magit buffer.")))
+
 ; Git Gutter
 (require 'git-gutter)
 (add-to-list 'git-gutter:update-hooks 'magit-revert-buffer-hook)
@@ -856,6 +864,7 @@ HOOKS can be a list of hooks or just a single hook."
 (global-set-key (kbd "M-s r h") 'git-gutter:revert-hunk)
 (define-key magit-mode-map (kbd "M-s") nil)
 (define-key magit-mode-map (kbd "M-S") nil)
+(define-key magit-mode-map (kbd "K") 'magit-ls-files)
 
 ; Variables
 (setq magit-diff-refine-hunk t)
