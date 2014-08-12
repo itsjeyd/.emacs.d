@@ -469,6 +469,10 @@ HOOKS can be a list of hooks or just a single hook."
 ; Modes
 (column-number-mode t)
 
+; Nyan
+(nyan-mode t)
+(setq nyan-bar-length 16)
+
 ; Unique Buffer Names
 (require 'uniquify)
 (setq uniquify-buffer-name-style (quote forward))
