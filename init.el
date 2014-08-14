@@ -270,8 +270,15 @@ Goes backward if ARG is negative; error if STR not found."
 (define-key emacs-lisp-mode-map (kbd "M-s e r") 'eval-region)
 
 ; Slime Nav
+(defadvice turn-on-elisp-slime-nav-mode
+  (after configure-slime-nav activate compile)
+  (modeline-remove-lighter 'elisp-slime-nav-mode))
+
 (dolist (hook '(emacs-lisp-mode-hook ielm-mode-hook))
   (add-hook hook 'turn-on-elisp-slime-nav-mode))
+
+; Variables
+(setq eldoc-minor-mode-string "")
 
 
 ;;;;;;;;;;;;;
@@ -465,6 +472,16 @@ HOOKS can be a list of hooks or just a single hook."
 ;;;;;;;;;;;;;;;;
 ;;; Modeline ;;;
 ;;;;;;;;;;;;;;;;
+
+; Lighters
+(defun modeline-set-lighter (minor-mode lighter)
+  (when (assq minor-mode minor-mode-alist)
+    (setcar (cdr (assq minor-mode minor-mode-alist)) lighter)))
+
+(defun modeline-remove-lighter (minor-mode)
+  (modeline-set-lighter minor-mode ""))
+
+(modeline-set-lighter 'auto-fill-function (string 32 #x23ce))
 
 ; Modes
 (column-number-mode t)
@@ -662,8 +679,11 @@ HOOKS can be a list of hooks or just a single hook."
 ;;; Project Management ;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+; Projectile
 (projectile-global-mode)
 (add-to-list 'projectile-globally-ignored-directories "doxygen")
+(setq projectile-mode-line
+      '(:eval (format " Proj[%s]" (projectile-project-name))))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -868,6 +888,7 @@ HOOKS can be a list of hooks or just a single hook."
 
 ; Variables
 (setq magit-diff-refine-hunk t)
+(setq magit-auto-revert-mode-lighter "")
 
 
 ;;;;;;;;;;;;;;;;;;
@@ -992,3 +1013,14 @@ than one window."
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (idle-require-mode)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(modeline-remove-lighter 'auto-complete-mode)
+(modeline-remove-lighter 'git-gutter-mode)
+(modeline-remove-lighter 'guide-key-mode)
+(modeline-remove-lighter 'hs-minor-mode)
+(modeline-remove-lighter 'smartparens-mode)
+(modeline-remove-lighter 'whitespace-mode)
+(modeline-remove-lighter 'yas-minor-mode)
+(modeline-set-lighter 'abbrev-mode " Abbr")
