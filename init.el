@@ -287,6 +287,9 @@ Goes backward if ARG is negative; error if STR not found."
 
 (set-face-attribute 'default nil :font "Monaco-10")
 
+(require 'unicode-fonts)
+(unicode-fonts-setup)
+
 
 ;;;;;;;;;;;;
 ;;; Help ;;;
