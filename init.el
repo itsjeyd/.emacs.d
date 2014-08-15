@@ -550,7 +550,6 @@ HOOKS can be a list of hooks or just a single hook."
 ; Key Bindings
 (define-key org-mode-map (kbd "<C-tab>") 'pcomplete)
 (define-key org-mode-map (kbd "C-c a") 'org-agenda)
-(define-key org-mode-map (kbd "C-c l") 'org-store-link)
 (define-key org-mode-map (kbd "C-c t") 'org-toggle-link-display)
 (define-key org-mode-map (kbd "M-n") 'org-next-item)
 (define-key org-mode-map (kbd "M-p") 'org-previous-item)
@@ -565,6 +564,7 @@ HOOKS can be a list of hooks or just a single hook."
 (define-key org-mode-map (kbd "M-s t r") 'org-shiftmetaright)
 (define-key org-mode-map (kbd "M-s t h") 'org-insert-todo-heading)
 (define-key org-mode-map (kbd "M-s t s") 'org-insert-todo-subheading)
+(global-set-key (kbd "C-c l") 'org-store-link)
 
 ; Variables
 (setq org-agenda-include-diary t)
