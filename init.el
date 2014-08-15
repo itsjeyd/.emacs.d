@@ -494,6 +494,9 @@ HOOKS can be a list of hooks or just a single hook."
 (require 'uniquify)
 (setq uniquify-buffer-name-style (quote forward))
 
+; Variables
+(setf (nth 5 mode-line-modes)
+      '(:eval (if (buffer-narrowed-p) (string 32 #x27fa) "")))
 
 ;;;;;;;;;;;;;
 ;;; Modes ;;;
