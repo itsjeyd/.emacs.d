@@ -333,8 +333,6 @@ Goes backward if ARG is negative; error if STR not found."
 ;;; Interface ;;;
 ;;;;;;;;;;;;;;;;;
 
-(setq inhibit-startup-screen t)
-
 ; Controls
 (set-scroll-bar-mode nil)
 (tool-bar-mode 0)
@@ -372,6 +370,9 @@ Goes backward if ARG is negative; error if STR not found."
 
 ; Tooltips
 (tooltip-mode 0)
+
+; Variables
+(setq inhibit-startup-screen t)
 
 ; Writeroom
 (defun turn-off-git-gutter ()
