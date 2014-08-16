@@ -340,6 +340,13 @@ Goes backward if ARG is negative; error if STR not found."
 ; Cursor
 (blink-cursor-mode -1)
 
+; Functions
+(defun customize-scratch-buffer ()
+  "Display custom message in *scratch* buffer."
+  (erase-buffer)
+  (insert ";; Parentheses are just *hugs* for your function calls!")
+  (newline 2))
+
 ; Theme
 (defun customize-enabled-theme ()
   (let ((enabled-theme (car custom-enabled-themes)))
@@ -1042,6 +1049,10 @@ than one window."
 (modeline-remove-lighter 'whitespace-mode)
 (modeline-remove-lighter 'yas-minor-mode)
 (modeline-set-lighter 'abbrev-mode " Abbr")
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(customize-scratch-buffer)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
