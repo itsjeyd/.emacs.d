@@ -673,11 +673,11 @@ HOOKS can be a list of hooks or just a single hook."
 (add-hook 'php-mode-hook 'tim/enable-electric-semicolon)
 
 ; Subword Mode
-(add-to-hooks `(java-mode-hook
-                js-mode-hook
-                php-mode-hook
-                python-mode-hook)
-              (lambda () (subword-mode 1)))
+(defun turn-on-subword-mode ()
+  (subword-mode 1))
+
+(add-to-hooks `(java-mode-hook js-mode-hook php-mode-hook python-mode-hook)
+              'turn-on-subword-mode)
 
 ; yasnippet
 (yas-global-mode 1)
