@@ -682,6 +682,9 @@ HOOKS can be a list of hooks or just a single hook."
 (add-to-hooks `(java-mode-hook js-mode-hook php-mode-hook python-mode-hook)
               'turn-on-subword-mode)
 
+; Which Function
+(which-function-mode)
+
 ; yasnippet
 (yas-global-mode 1)
 
