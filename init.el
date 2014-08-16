@@ -1032,8 +1032,14 @@ than one window."
 (global-set-key (kbd "M-s k o") 'kill-other-buffer-and-window)
 (global-set-key (kbd "M-s s w") 'swap-windows)
 
+; Modes
+(winner-mode)
+(global-set-key (kbd "C-c u") 'winner-undo)
+(global-set-key (kbd "C-c r") 'winner-redo)
+
 ; Variables
 (setq ediff-split-window-function 'split-window-horizontally)
+
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
