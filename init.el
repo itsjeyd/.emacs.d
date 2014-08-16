@@ -323,6 +323,7 @@ Goes backward if ARG is negative; error if STR not found."
       (quote (sclang-dump-interface sclang-dump-full-interface)))
 
 ; Variables
+(add-to-list 'ido-ignore-buffers "\*Compile-Log\*")
 (setq ido-create-new-buffer (quote always))
 (setq ido-enable-flex-matching t)
 (setq ido-use-virtual-buffers t)
