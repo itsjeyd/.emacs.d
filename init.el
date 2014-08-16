@@ -561,6 +561,8 @@ HOOKS can be a list of hooks or just a single hook."
 (define-key org-mode-map (kbd "M-s i d") 'org-metadown)
 (define-key org-mode-map (kbd "M-s i l") 'org-metaleft)
 (define-key org-mode-map (kbd "M-s i r") 'org-metaright)
+(define-key org-mode-map (kbd "s-l") 'org-shiftleft)
+(define-key org-mode-map (kbd "s-r") 'org-shiftright)
 (define-key org-mode-map (kbd "M-s t u") 'org-shiftmetaup)
 (define-key org-mode-map (kbd "M-s t d") 'org-shiftmetadown)
 (define-key org-mode-map (kbd "M-s t l") 'org-shiftmetaleft)
