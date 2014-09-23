@@ -125,6 +125,7 @@
               ("\\.\\(?:odt\\|doc\\|docx\\)\\'" "libreoffice" ("--writer" file))
               ("\\.\\(?:ods\\|xls\\|xlsx\\)\\'" "libreoffice" ("--calc" file))
               ("\\.\\(?:odp\\|pps\\|ppt\\|pptx\\)\\'" "libreoffice" ("--impress" file))
+              ("\\.odg\\'" "libreoffice" ("--draw" file))
               ("\\.dia\\'" "dia" (file)))))
 
 ; Variables
