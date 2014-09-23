@@ -170,6 +170,10 @@ line instead."
        (list (region-beginning) (region-end))
      (list (line-beginning-position) (line-beginning-position 2)))))
 
+(defadvice set-mark-command
+  (before record-current-position (arg) activate compile)
+  (when arg (push-mark)))
+
 (defun flush-empty-lines ()
   "Remove empty lines from buffer."
   (interactive)
