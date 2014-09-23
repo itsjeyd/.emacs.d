@@ -234,10 +234,12 @@ Goes backward if ARG is negative; error if STR not found."
 (global-set-key (kbd "M-s a l") 'mc/mark-all-like-this)
 (global-set-key (kbd "M-s a d") 'mc/mark-all-dwim)
 
-; Parens
+; Rainbow Delimiters
+(global-rainbow-delimiters-mode t)
+
+; Smartparens
 (require 'smartparens-config)
 (smartparens-global-mode t)
-(global-rainbow-delimiters-mode t)
 
 ; Variables
 (setq cua-enable-cua-keys nil)
