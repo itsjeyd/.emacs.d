@@ -579,6 +579,13 @@ HOOKS can be a list of hooks or just a single hook."
       (looking-at "^#\+")))
 
 ; Babel
+(require 'ob-dot)
+
+(idle-require 'ob-ditaa)
+(eval-after-load 'ob-ditaa
+  '(progn
+     (setq org-ditaa-jar-path "/usr/share/java/ditaa/ditaa-0_9.jar")))
+
 (idle-require 'ob-plantuml)
 (eval-after-load 'ob-plantuml
   '(progn
