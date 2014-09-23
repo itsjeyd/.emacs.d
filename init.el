@@ -235,7 +235,8 @@ Goes backward if ARG is negative; error if STR not found."
 (global-set-key (kbd "M-s a d") 'mc/mark-all-dwim)
 
 ; Rainbow Delimiters
-(global-rainbow-delimiters-mode t)
+(add-hook 'org-mode-hook 'rainbow-delimiters-mode)
+(add-hook 'prog-mode-hook 'rainbow-delimiters-mode)
 
 ; Smartparens
 (require 'smartparens-config)
