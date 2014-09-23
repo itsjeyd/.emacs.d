@@ -246,6 +246,22 @@ Goes backward if ARG is negative; error if STR not found."
 (require 'smartparens-config)
 (smartparens-global-mode t)
 
+(defun sp-wrap-with-parens (&optional arg)
+  (interactive "P")
+  (sp-wrap-with-pair "("))
+
+(defun sp-wrap-with-double-quotes (&optional arg)
+  (interactive "P")
+  (sp-wrap-with-pair "\""))
+
+(defun sp-wrap-with-single-quotes (&optional arg)
+  (interactive "P")
+  (sp-wrap-with-pair "'"))
+
+(define-key sp-keymap (kbd "M-s (") 'sp-wrap-with-parens)
+(define-key sp-keymap (kbd "M-s \"") 'sp-wrap-with-double-quotes)
+(define-key sp-keymap (kbd "M-s '") 'sp-wrap-with-single-quotes)
+
 ; Variables
 (setq cua-enable-cua-keys nil)
 (setq require-final-newline t)
