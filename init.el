@@ -592,6 +592,10 @@ HOOKS can be a list of hooks or just a single hook."
      (setq org-plantuml-jar-path "/opt/plantuml/plantuml.jar")
      (setq plantuml-jar-path "/opt/plantuml/plantuml.jar")))
 
+(add-to-list 'org-babel-load-languages '(dot . t) t)
+(add-to-list 'org-babel-load-languages '(ditaa . t) t)
+(add-to-list 'org-babel-load-languages '(plantuml . t) t)
+
 ; Hooks
 (add-hook 'org-mode-hook 'turn-on-auto-fill)
 
