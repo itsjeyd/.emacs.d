@@ -553,6 +553,10 @@ HOOKS can be a list of hooks or just a single hook."
   ad-do-it
   (openwith-mode 1))
 
+(defun org-at-outline-or-file-header ()
+  (or (looking-at org-outline-regexp)
+      (looking-at "^#\+")))
+
 ; Babel
 (idle-require 'ob-plantuml)
 (eval-after-load 'ob-plantuml
@@ -601,8 +605,7 @@ HOOKS can be a list of hooks or just a single hook."
 (setq org-special-ctrl-a/e t)
 (setq org-special-ctrl-k t)
 (setq org-track-ordered-property-with-tag t)
-(setq org-use-speed-commands
-      (lambda () (or (looking-at org-outline-regexp) (looking-at "^#\+"))))
+(setq org-use-speed-commands 'org-at-outline-or-file-header)
 (add-to-list 'org-structure-template-alist
              '("o" "#+BEGIN_COMMENT\n?\n#+END_COMMENT") t)
 
