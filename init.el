@@ -628,6 +628,7 @@ HOOKS can be a list of hooks or just a single hook."
 (setq org-export-copy-to-kill-ring nil)
 (setq org-footnote-define-inline t)
 (setq org-footnote-auto-label 'random)
+(setq org-latex-table-caption-above nil)
 (setq org-list-allow-alphabetical t)
 (setq org-list-demote-modify-bullet '(("-" . "+") ("+" . "-")))
 (setq org-list-use-circular-motion t)
