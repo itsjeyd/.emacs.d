@@ -471,8 +471,13 @@ Goes backward if ARG is negative; error if STR not found."
 ; BibTeX
 (setq bibtex-maintain-sorted-entries t)
 
+; Functions
+(defun configure-tex ()
+  (TeX-PDF-mode t)
+  (outline-minor-mode))
+
 ; Hooks
-(add-hook 'LaTeX-mode-hook (lambda () (TeX-PDF-mode t)))
+(add-hook 'LaTeX-mode-hook 'configure-tex)
 
 
 ;;;;;;;;;;;;;;;;;;
