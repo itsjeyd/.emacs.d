@@ -268,6 +268,8 @@ Goes backward if ARG is negative; error if STR not found."
 (sp-local-pair 'org-mode "/" "/" :wrap "M-s /")
 (sp-local-pair 'org-mode "=" "=" :wrap "M-s =")
 
+(setq sp-autoinsert-if-followed-by-word nil)
+
 ; Variables
 (setq cua-enable-cua-keys nil)
 (setq require-final-newline t)
