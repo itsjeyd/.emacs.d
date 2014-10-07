@@ -264,6 +264,10 @@ Goes backward if ARG is negative; error if STR not found."
 (define-key sp-keymap (kbd "M-s \"") 'sp-wrap-with-double-quotes)
 (define-key sp-keymap (kbd "M-s '") 'sp-wrap-with-single-quotes)
 
+(sp-local-pair 'org-mode "*" "*" :wrap "M-s *")
+(sp-local-pair 'org-mode "/" "/" :wrap "M-s /")
+(sp-local-pair 'org-mode "=" "=" :wrap "M-s =")
+
 ; Variables
 (setq cua-enable-cua-keys nil)
 (setq require-final-newline t)
