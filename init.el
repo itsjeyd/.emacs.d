@@ -238,6 +238,7 @@ Goes backward if ARG is negative; error if STR not found."
 (global-set-key (kbd "M-s n l") 'mc/mark-next-like-this)
 (global-set-key (kbd "M-s a l") 'mc/mark-all-like-this)
 (global-set-key (kbd "M-s a d") 'mc/mark-all-dwim)
+(global-set-key (kbd "M-s r a") 'set-rectangular-region-anchor)
 
 ; Rainbow Delimiters
 (add-hook 'org-mode-hook 'rainbow-delimiters-mode)
