@@ -819,7 +819,6 @@ HOOKS can be a list of hooks or just a single hook."
 ;;;;;;;;;;;;;;;
 
 (require 'recentf)
-(recentf-mode t)
 
 ; Functions
 (defun ido-recentf-open ()
@@ -835,6 +834,10 @@ HOOKS can be a list of hooks or just a single hook."
 
 ; Variables
 (setq recentf-max-saved-items 100)
+(setq recentf-save-file "~/.emacs.d/.recentf")
+
+; Launch
+(recentf-mode t)
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;
