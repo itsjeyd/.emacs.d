@@ -374,6 +374,7 @@ Goes backward if ARG is negative; error if STR not found."
 (add-to-list 'ido-ignore-buffers "\*Messages\*")
 (setq ido-create-new-buffer (quote always))
 (setq ido-enable-flex-matching t)
+(setq ido-save-directory-list-file "~/.emacs.d/.ido.last")
 (setq ido-use-virtual-buffers t)
 
 
