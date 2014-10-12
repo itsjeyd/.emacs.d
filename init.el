@@ -335,7 +335,7 @@ Goes backward if ARG is negative; error if STR not found."
 (find-function-setup-keys)
 
 ; Guide Key
-(setq guide-key/guide-key-sequence '("C-c" "C-x r" "C-x v" "C-x 4"))
+(setq guide-key/guide-key-sequence '("C-c" "C-x r" "C-x v" "C-x 4" "C-c p"))
 (guide-key-mode t)
 
 
