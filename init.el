@@ -636,6 +636,7 @@ HOOKS can be a list of hooks or just a single hook."
 ; Variables
 (setq org-agenda-include-diary t)
 (setq org-blank-before-new-entry '((heading . t) (plain-list-item . auto)))
+(setq org-catch-invisible-edits 'error)
 (setq org-completion-use-ido t)
 (setq org-enforce-todo-dependencies t)
 (setq org-export-copy-to-kill-ring nil)
