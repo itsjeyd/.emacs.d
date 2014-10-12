@@ -961,10 +961,6 @@ HOOKS can be a list of hooks or just a single hook."
       (magit-git-command "ls-files" default-directory)
     (message "Not in a Magit buffer.")))
 
-; Git Gutter
-(require 'git-gutter)
-(add-to-list 'git-gutter:update-hooks 'magit-revert-buffer-hook)
-
 ; git-wip
 (load "~/git-wip/emacs/git-wip.el")
 (require 'git-wip-timemachine)
