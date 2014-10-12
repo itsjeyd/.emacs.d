@@ -155,6 +155,11 @@
 ; Functions
 (autoload 'zap-up-to-char "misc")
 
+(defadvice ispell-pdict-save
+  (after flyspell-buffer-again (&optional no-query force-save)
+         activate compile)
+  (flyspell-buffer))
+
 (defadvice kill-ring-save (before slick-copy activate compile)
   "When called interactively with no active region, copy a single
 line instead."
