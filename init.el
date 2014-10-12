@@ -27,8 +27,9 @@
 ;;; Backups ;;;
 ;;;;;;;;;;;;;;;
 
-(setq backup-directory-alist '(("." . "~/.emacs.d/backups")))
-
+(setq backup-directory-alist '(("-autoloads.el\\'")
+                               ("-loaddefs.el\\'")
+                               ("." . "~/.emacs.d/backups")))
 
 ;;;;;;;;;;;;;;;
 ;;; Buffers ;;;
