@@ -356,6 +356,7 @@ Goes backward if ARG is negative; error if STR not found."
 
 ; Variables
 (add-to-list 'ido-ignore-buffers "\*Compile-Log\*")
+(add-to-list 'ido-ignore-buffers "\*Messages\*")
 (setq ido-create-new-buffer (quote always))
 (setq ido-enable-flex-matching t)
 (setq ido-use-virtual-buffers t)
