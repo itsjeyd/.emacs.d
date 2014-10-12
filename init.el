@@ -375,9 +375,11 @@ Goes backward if ARG is negative; error if STR not found."
 ; Functions
 (defun customize-scratch-buffer ()
   "Display custom message in *scratch* buffer."
-  (erase-buffer)
-  (insert ";; Parentheses are just *hugs* for your function calls!")
-  (newline 2))
+  (interactive)
+  (with-current-buffer "*scratch*"
+    (erase-buffer)
+    (insert ";; Parentheses are just *hugs* for your function calls!")
+    (newline 2)))
 
 ; Theme
 (defun customize-enabled-theme ()
