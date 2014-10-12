@@ -369,6 +369,9 @@ Goes backward if ARG is negative; error if STR not found."
 (setq ido-ubiquitous-command-exceptions
       (quote (sclang-dump-interface sclang-dump-full-interface)))
 
+; Smex
+(setq smex-save-file "~/.emacs.d/.smex-items")
+
 ; Variables
 (add-to-list 'ido-ignore-buffers "\*Compile-Log\*")
 (add-to-list 'ido-ignore-buffers "\*Messages\*")
