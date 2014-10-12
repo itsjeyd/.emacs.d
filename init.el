@@ -38,12 +38,18 @@
 ; Functions
 (setq temp-buffer-count 0)
 
+(defun ibuffer-group-buffers ()
+  (ibuffer-switch-to-saved-filter-groups "Default"))
+
 (defun make-temp-buffer ()
   (interactive)
   (let ((temp-buffer-name (format "*tempbuf-%d*" temp-buffer-count)))
     (switch-to-buffer temp-buffer-name)
     (message "New temp buffer (%s) created." temp-buffer-name))
   (setq temp-buffer-count (1+ temp-buffer-count)))
+
+; Hooks
+(add-hook 'ibuffer-mode-hook 'ibuffer-group-buffers)
 
 ; Key Bindings
 (global-set-key (kbd "C-x C-b") 'ibuffer)
@@ -53,6 +59,9 @@
 ; Variables
 (setq confirm-nonexistent-file-or-buffer nil)
 (setq revert-without-query (quote (".*")))
+(setq-default ibuffer-saved-filter-groups
+              '(("Default" ("Dired" (mode . dired-mode))
+                           ("Temporary" (name . "\*.*\*")))))
 
 
 ;;;;;;;;;;;;;;;;;;;;
