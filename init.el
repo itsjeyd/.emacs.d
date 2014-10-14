@@ -613,6 +613,9 @@ HOOKS can be a list of hooks or just a single hook."
   (or (looking-at org-outline-regexp)
       (looking-at "^#\+")))
 
+(fset 'org-wrap-in-comment-block
+   [?\C-o tab ?< ?o tab ?\C-w ?\C-w ?\C-u ?\C-x ?q ?\C-y ?\C-p ?\C-p ?\C-w ?\C-e ?\C-f])
+
 ; Babel
 (require 'ob-dot)
 
@@ -641,6 +644,7 @@ HOOKS can be a list of hooks or just a single hook."
 (define-key org-mode-map (kbd "M-n") 'org-next-item)
 (define-key org-mode-map (kbd "M-p") 'org-previous-item)
 ;; Mnemonics: (i)tem, (t)ree
+(define-key org-mode-map (kbd "M-s c b") 'org-wrap-in-comment-block)
 (define-key org-mode-map (kbd "M-s i u") 'org-metaup)
 (define-key org-mode-map (kbd "M-s i d") 'org-metadown)
 (define-key org-mode-map (kbd "M-s i l") 'org-metaleft)
