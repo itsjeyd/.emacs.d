@@ -971,6 +971,16 @@ HOOKS can be a list of hooks or just a single hook."
 (load "~/git-wip/emacs/git-wip.el")
 (require 'git-wip-timemachine)
 
+; Git Gutter
+(defun set-up-git-gutter ()
+  (modeline-remove-lighter 'git-gutter-mode)
+  (local-set-key (kbd "M-s n h") 'git-gutter:next-hunk)
+  (local-set-key (kbd "M-s p h") 'git-gutter:previous-hunk)
+  (local-set-key (kbd "M-s s h") 'git-gutter:stage-hunk)
+  (local-set-key (kbd "M-s r h") 'git-gutter:revert-hunk))
+
+(add-hook 'git-gutter-mode-on-hook 'set-up-git-gutter)
+
 ; Hooks
 (add-hook 'emacs-lisp-mode-hook 'git-gutter-mode)
 (add-hook 'java-mode-hook 'git-gutter-mode)
@@ -986,10 +996,6 @@ HOOKS can be a list of hooks or just a single hook."
 
 ; Key Bindings
 (global-set-key (kbd "M-s g s") 'magit-status)
-(global-set-key (kbd "M-s n h") 'git-gutter:next-hunk)
-(global-set-key (kbd "M-s p h") 'git-gutter:previous-hunk)
-(global-set-key (kbd "M-s s h") 'git-gutter:stage-hunk)
-(global-set-key (kbd "M-s r h") 'git-gutter:revert-hunk)
 (define-key magit-mode-map (kbd "M-s") nil)
 (define-key magit-mode-map (kbd "M-S") nil)
 (define-key magit-mode-map (kbd "K") 'magit-ls-files)
