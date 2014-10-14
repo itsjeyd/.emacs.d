@@ -660,6 +660,7 @@ HOOKS can be a list of hooks or just a single hook."
 (setq org-blank-before-new-entry '((heading . t) (plain-list-item . auto)))
 (setq org-catch-invisible-edits 'error)
 (setq org-completion-use-ido t)
+(setq org-export-dispatch-use-expert-ui t)
 (setq org-enforce-todo-dependencies t)
 (setq org-export-copy-to-kill-ring nil)
 (setq org-footnote-define-inline t)
