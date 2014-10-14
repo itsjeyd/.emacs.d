@@ -718,6 +718,7 @@ HOOKS can be a list of hooks or just a single hook."
 (setq ac-use-menu-map t)
 (setq ac-auto-show-menu 0.3)
 (setq ac-ignore-case nil)
+(add-to-list 'ac-sources 'ac-source-yasnippet)
 
 ; Hide/Show
 (require 'hideshow-org)
