@@ -370,6 +370,7 @@ Goes backward if ARG is negative; error if STR not found."
 
 ; Ubiquitous
 (ido-ubiquitous-mode)
+(push '(disable exact "unhighlight-regexp") ido-ubiquitous-command-overrides)
 (push '(disable prefix "sclang-dump-") ido-ubiquitous-command-overrides)
 
 ; Smex
