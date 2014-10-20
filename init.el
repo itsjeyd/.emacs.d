@@ -370,8 +370,7 @@ Goes backward if ARG is negative; error if STR not found."
 
 ; Ubiquitous
 (ido-ubiquitous-mode)
-(setq ido-ubiquitous-command-exceptions
-      (quote (sclang-dump-interface sclang-dump-full-interface)))
+(push '(disable prefix "sclang-dump-") ido-ubiquitous-command-overrides)
 
 ; Smex
 (setq smex-save-file "~/.emacs.d/.smex-items")
