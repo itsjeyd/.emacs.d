@@ -41,6 +41,9 @@
 (defun ibuffer-group-buffers ()
   (ibuffer-switch-to-saved-filter-groups "Default"))
 
+(defun ibuffer-turn-on-auto-refresh ()
+  (ibuffer-auto-mode 1))
+
 (defun make-temp-buffer ()
   (interactive)
   (let ((temp-buffer-name (format "*tempbuf-%d*" temp-buffer-count)))
@@ -50,6 +53,7 @@
 
 ; Hooks
 (add-hook 'ibuffer-mode-hook 'ibuffer-group-buffers)
+(add-hook 'ibuffer-mode-hook 'ibuffer-turn-on-auto-refresh)
 
 ; Key Bindings
 (global-set-key (kbd "C-x C-b") 'ibuffer)
