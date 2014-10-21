@@ -174,11 +174,6 @@
 ; Functions
 (autoload 'zap-up-to-char "misc")
 
-(defadvice ispell-pdict-save
-  (after flyspell-buffer-again (&optional no-query force-save)
-         activate compile)
-  (flyspell-buffer))
-
 (defadvice kill-ring-save (before slick-copy activate compile)
   "When called interactively with no active region, copy a single
 line instead."
@@ -206,20 +201,6 @@ line instead."
   (save-excursion
     (goto-char (point-min))
     (flush-lines "^$")))
-
-(defun ispell-word-then-abbrev (p)
-  "Call `ispell-word'. Then create an abbrev for the correction made.
-With prefix P, create local abbrev. Otherwise it will be global."
-  (interactive "P")
-  (let ((before (downcase (or (thing-at-point 'word) "")))
-        after)
-    (call-interactively 'ispell-word)
-    (setq after (downcase (or (thing-at-point 'word) "")))
-    (unless (string= after before)
-      (define-abbrev
-        (if p local-abbrev-table global-abbrev-table) before after))
-      (message "\"%s\" now expands to \"%s\" %sally."
-               before after (if p "loc" "glob"))))
 
 (defun sort-lines-and-uniquify ()
   "Sort lines alphabetically (in ascending order) and remove duplicates."
@@ -296,16 +277,13 @@ Goes backward if ARG is negative; error if STR not found."
 (setq sp-autoinsert-if-followed-by-word nil)
 
 ; Variables
-(setq abbrev-file-name "~/.emacs.d/.abbrev_defs")
 (setq cua-enable-cua-keys nil)
 (setq recenter-positions '(top middle bottom))
 (setq require-final-newline t)
-(setq save-abbrevs t)
 (setq save-interprogram-paste-before-kill t)
 (setq sentence-end-double-space nil)
 (setq set-mark-command-repeat-pop t)
 (setq tab-width 4)
-(setq-default abbrev-mode t)
 
 ; Whitespace
 (require 'whitespace)
@@ -448,14 +426,6 @@ Goes backward if ARG is negative; error if STR not found."
 
 ; Variables
 (setq inhibit-startup-screen t)
-
-; Writeroom
-(defun turn-off-git-gutter ()
-  (if (not git-gutter-mode)
-      (git-gutter-mode t)
-    (git-gutter-mode -1)))
-
-(add-hook 'writeroom-mode-hook 'turn-off-git-gutter)
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;
@@ -1144,6 +1114,47 @@ than one window."
 
 ; Variables
 (setq ediff-split-window-function 'split-window-horizontally)
+
+
+;;;;;;;;;;;;;;;
+;;; Writing ;;;
+;;;;;;;;;;;;;;;
+
+; Functions
+(defadvice ispell-pdict-save
+  (after flyspell-buffer-again (&optional no-query force-save)
+         activate compile)
+  (flyspell-buffer))
+
+(defun ispell-word-then-abbrev (p)
+  "Call `ispell-word'. Then create an abbrev for the correction made.
+With prefix P, create local abbrev. Otherwise it will be global."
+  (interactive "P")
+  (let ((before (downcase (or (thing-at-point 'word) "")))
+        after)
+    (call-interactively 'ispell-word)
+    (setq after (downcase (or (thing-at-point 'word) "")))
+    (unless (string= after before)
+      (define-abbrev
+        (if p local-abbrev-table global-abbrev-table) before after))
+      (message "\"%s\" now expands to \"%s\" %sally."
+               before after (if p "loc" "glob"))))
+
+; Key Bindings
+(global-set-key (kbd "M-s i a") 'ispell-word-then-abbrev)
+
+; Variables
+(setq abbrev-file-name "~/.emacs.d/.abbrev_defs")
+(setq save-abbrevs t)
+(setq-default abbrev-mode t)
+
+; Writeroom
+(defun turn-off-git-gutter ()
+  (if (not git-gutter-mode)
+      (git-gutter-mode t)
+    (git-gutter-mode -1)))
+
+(add-hook 'writeroom-mode-hook 'turn-off-git-gutter)
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
