@@ -19,8 +19,8 @@
 ;;; Paths ;;;
 ;;;;;;;;;;;;;
 
-(add-to-list 'load-path "~/.emacs.d/")
-(add-to-list 'load-path "~/.emacs.d/mark-lines/")
+(add-to-list 'load-path "~/.emacs.d/lisp/")
+(add-to-list 'load-path "~/.emacs.d/lisp/mark-lines/")
 
 
 ;;;;;;;;;;;;;;;
