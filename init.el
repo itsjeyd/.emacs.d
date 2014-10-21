@@ -102,6 +102,18 @@
 ;;;;;;;;;;;;;
 
 ; Functions
+(defun dired-jump-to-top ()
+  (interactive)
+  (goto-char (point-min))
+  (if dired-hide-details-mode
+      (dired-next-line 3)
+    (dired-next-line 4)))
+
+(defun dired-jump-to-bottom ()
+  (interactive)
+  (goto-char (point-max))
+  (dired-next-line -1))
+
 (defun dired-setup ()
   (dired-omit-mode 1)
   (dired-hide-details-mode 1))
@@ -116,23 +128,8 @@
 ; Key Bindings
 (define-key dired-mode-map (kbd ")") 'dired-hide-details-mode)
 (define-key dired-mode-map (kbd "M-o") 'dired-omit-mode)
-
-; Movement (source: whattheemacsd.com)
-(defun dired-jump-to-top ()
-  (interactive)
-  (goto-char (point-min))
-  (if dired-hide-details-mode
-      (dired-next-line 3)
-    (dired-next-line 4)))
-
 (define-key dired-mode-map
   (vector 'remap 'beginning-of-buffer) 'dired-jump-to-top)
-
-(defun dired-jump-to-bottom ()
-  (interactive)
-  (goto-char (point-max))
-  (dired-next-line -1))
-
 (define-key dired-mode-map
   (vector 'remap 'end-of-buffer) 'dired-jump-to-bottom)
 
