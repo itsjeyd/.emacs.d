@@ -298,6 +298,7 @@ Goes backward if ARG is negative; error if STR not found."
 ; Variables
 (setq abbrev-file-name "~/.emacs.d/.abbrev_defs")
 (setq cua-enable-cua-keys nil)
+(setq recenter-positions '(top middle bottom))
 (setq require-final-newline t)
 (setq save-abbrevs t)
 (setq save-interprogram-paste-before-kill t)
