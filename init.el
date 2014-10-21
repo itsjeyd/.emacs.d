@@ -295,6 +295,7 @@ Goes backward if ARG is negative; error if STR not found."
 (setq sp-autoinsert-if-followed-by-word nil)
 
 ; Variables
+(setq abbrev-file-name "~/.emacs.d/.abbrev_defs")
 (setq cua-enable-cua-keys nil)
 (setq require-final-newline t)
 (setq save-abbrevs t)
@@ -729,6 +730,7 @@ HOOKS can be a list of hooks or just a single hook."
 (require 'auto-complete-config)
 (ac-config-default)
 (ac-flyspell-workaround)
+(setq ac-comphist-file "~/.emacs.d/.ac-comphist.dat")
 (setq ac-use-menu-map t)
 (setq ac-auto-show-menu 0.3)
 (setq ac-ignore-case nil)
@@ -796,6 +798,7 @@ HOOKS can be a list of hooks or just a single hook."
 ; Projectile
 (projectile-global-mode)
 (add-to-list 'projectile-globally-ignored-directories "doxygen")
+(setq projectile-known-projects-file ".projectile-bookmarks.eld")
 (setq projectile-mode-line
       '(:eval (format " %s[%s]"
                       (string #x1f5c0) (projectile-project-name))))

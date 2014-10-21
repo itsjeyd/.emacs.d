@@ -3,14 +3,13 @@
 *cache
 *dat
 *elc
+*eld
 .ido.last
 .mc-lists.el
 .recentf
 .smex-items
 bookmarks
-filesets-cache.el
 history
-projectile-bookmarks.eld
 tramp
 
 # Folders
