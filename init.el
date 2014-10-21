@@ -169,7 +169,7 @@
 (global-set-key (kbd "M-s c o") 'change-outer)
 
 ; Expand Region
-(global-set-key (kbd "C-c e") 'er/expand-region)
+(global-set-key (kbd "M-@") 'er/expand-region)
 
 ; Functions
 (autoload 'zap-up-to-char "misc")
