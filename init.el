@@ -124,6 +124,7 @@
 
 ; Hooks
 (add-hook 'dired-mode-hook 'dired-setup)
+(add-hook 'dired-mode-hook 'toggle-truncate-lines-on)
 
 ; Key Bindings
 (define-key dired-mode-map (kbd ")") 'dired-hide-details-mode)
