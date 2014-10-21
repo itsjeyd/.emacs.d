@@ -121,7 +121,9 @@
 (defun dired-jump-to-top ()
   (interactive)
   (goto-char (point-min))
-  (dired-next-line 4))
+  (if dired-hide-details-mode
+      (dired-next-line 3)
+    (dired-next-line 4)))
 
 (define-key dired-mode-map
   (vector 'remap 'beginning-of-buffer) 'dired-jump-to-top)
