@@ -688,7 +688,7 @@ HOOKS can be a list of hooks or just a single hook."
 (setq org-M-RET-may-split-line
       '((headline . nil) (item . t) (table . t)))
 (setq org-return-follows-link t)
-(setq org-special-ctrl-a/e t)
+(setq org-special-ctrl-a/e 'reversed)
 (setq org-special-ctrl-k t)
 (setq org-track-ordered-property-with-tag t)
 (setq org-use-speed-commands 'org-at-outline-or-file-header)
