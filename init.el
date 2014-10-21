@@ -101,17 +101,20 @@
 ;;; Dired ;;;
 ;;;;;;;;;;;;;
 
-; Dired Details (source: whattheemacsd.com)
-(require 'dired-details)
-(setq-default dired-details-hidden-string "> ")
-(dired-details-install)
+; Functions
+(defun dired-setup ()
+  (dired-omit-mode 1)
+  (dired-hide-details-mode 1))
 
 ; Hidden Files
 (require 'dired-x)
 (setq dired-omit-files "^\\...+$")
-(add-hook 'dired-mode-hook (lambda () (dired-omit-mode 1)))
+
+; Hooks
+(add-hook 'dired-mode-hook 'dired-setup)
 
 ; Key Bindings
+(define-key dired-mode-map (kbd ")") 'dired-hide-details-mode)
 (define-key dired-mode-map (kbd "M-o") 'dired-omit-mode)
 
 ; Movement (source: whattheemacsd.com)
