@@ -227,7 +227,6 @@ Goes backward if ARG is negative; error if STR not found."
 ; Key Bindings
 (global-set-key (kbd "RET") 'newline-and-indent)
 (global-set-key (kbd "M-s f e") 'flush-empty-lines)
-(global-set-key (kbd "M-s i a") 'ispell-word-then-abbrev)
 (global-set-key (kbd "M-s s u") 'sort-lines-and-uniquify)
 (global-set-key (kbd "M-s z") 'zap-to-string)
 (global-set-key (kbd "M-z") 'zap-up-to-char)
