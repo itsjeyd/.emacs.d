@@ -812,9 +812,13 @@ HOOKS can be a list of hooks or just a single hook."
   (add-to-list 'flymake-allowed-file-name-masks
                '("\\.py\\'" flymake-pyflakes-init)))
 
-(add-hook 'python-mode-hook
-          (lambda ()
-            (unless (eq buffer-file-name nil) (flymake-mode t))))
+; Functions
+(defun python-setup ()
+  (unless (eq buffer-file-name nil)
+    (flymake-mode t)))
+
+; Hooks
+(add-hook 'python-mode-hook 'python-setup)
 
 ; Key Bindings
 (idle-require 'python)
