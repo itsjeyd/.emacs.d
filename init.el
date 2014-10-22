@@ -165,8 +165,8 @@
 (global-set-key (kbd "M-s b k") 'browse-kill-ring)
 
 ; Change Inner
-(global-set-key (kbd "M-s c i") 'change-inner)
-(global-set-key (kbd "M-s c o") 'change-outer)
+(global-set-key (kbd "C-c i") 'change-inner)
+(global-set-key (kbd "C-c o") 'change-outer)
 
 ; Expand Region
 (global-set-key (kbd "M-@") 'er/expand-region)
