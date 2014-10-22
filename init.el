@@ -317,9 +317,9 @@ Goes backward if ARG is negative; error if STR not found."
 
 ; Hooks
 (add-hook 'emacs-lisp-mode-hook 'prettify-symbols-mode)
-(add-hook 'emacs-lisp-mode-hook 'turn-on-eldoc-mode)
+(add-hook 'emacs-lisp-mode-hook 'eldoc-mode)
 (add-hook 'lisp-interaction-mode-hook 'prettify-symbols-mode)
-(add-hook 'lisp-interaction-mode-hook 'turn-on-eldoc-mode)
+(add-hook 'lisp-interaction-mode-hook 'eldoc-mode)
 
 ; Key Bindings
 (define-key emacs-lisp-mode-map (kbd "M-s e b") 'eval-buffer)
