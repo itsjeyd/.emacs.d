@@ -614,7 +614,9 @@ HOOKS can be a list of hooks or just a single hook."
 
 (defun org-at-outline-or-file-header ()
   (or (looking-at org-outline-regexp)
-      (looking-at "^#\+")))
+      (looking-at "^#\+")
+      (looking-at "^[[:blank:]]\\{2,\\}")
+      (looking-at "^$")))
 
 (fset 'org-wrap-in-comment-block
    [?\C-o tab ?< ?o tab ?\C-w ?\C-w ?\C-u ?\C-x ?q ?\C-y ?\C-p ?\C-p ?\C-w ?\C-e ?\C-f])
