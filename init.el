@@ -278,7 +278,6 @@ Goes backward if ARG is negative; error if STR not found."
 
 ; Variables
 (setq cua-enable-cua-keys nil)
-(setq recenter-positions '(top middle bottom))
 (setq require-final-newline t)
 (setq save-interprogram-paste-before-kill t)
 (setq sentence-end-double-space nil)
@@ -852,6 +851,7 @@ HOOKS can be a list of hooks or just a single hook."
 (put 'scroll-left 'disabled nil)
 
 ; Variables
+(setq recenter-positions '(top middle bottom))
 (setq scroll-preserve-screen-position 1)
 
 
