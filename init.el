@@ -274,6 +274,7 @@ Goes backward if ARG is negative; error if STR not found."
 (sp-local-pair 'org-mode "=" "=" :wrap "M-s =")
 
 (setq sp-autoinsert-if-followed-by-word nil)
+(setq sp-navigate-consider-stringlike-sexp '(org-mode latex-mode))
 
 ; Variables
 (setq cua-enable-cua-keys nil)
