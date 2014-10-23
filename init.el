@@ -165,6 +165,9 @@
 ; Browse Kill Ring
 (global-set-key (kbd "M-s b k") 'browse-kill-ring)
 
+; Caps Lock
+(global-set-key (kbd "M-s c l") 'caps-lock-mode)
+
 ; Change Inner
 (global-set-key (kbd "C-c i") 'change-inner)
 (global-set-key (kbd "C-c o") 'change-outer)
