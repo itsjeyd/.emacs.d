@@ -857,6 +857,23 @@ HOOKS can be a list of hooks or just a single hook."
 (require 'recentf)
 
 ; Functions
+(defun recentf-keep-directory-predicate (file)
+  (file-directory-p file))
+
+(defadvice recentf-track-opened-file (around set-buffer-file-name activate compile)
+  (if (eq major-mode 'dired-mode)
+      (progn (setq buffer-file-name default-directory)
+             ad-do-it
+             (setq buffer-file-name nil))
+    ad-do-it))
+
+(defadvice recentf-track-closed-file (around set-buffer-file-name activate compile)
+  (if (eq major-mode 'dired-mode)
+      (progn (setq buffer-file-name default-directory)
+             ad-do-it
+             (setq buffer-file-name nil))
+    ad-do-it))
+
 (defun ido-recentf-open ()
   "Use `ido-completing-read' to \\[find-file] a recent file"
   (interactive)
@@ -869,6 +886,8 @@ HOOKS can be a list of hooks or just a single hook."
 ; NOTE: C-x C-r is bound to `find-file-read-only' by default
 
 ; Variables
+(add-to-list 'recentf-keep 'recentf-keep-directory-predicate)
+(add-to-list 'recentf-used-hooks '(dired-after-readin-hook recentf-track-opened-file))
 (setq recentf-max-saved-items 100)
 (setq recentf-save-file "~/.emacs.d/.recentf")
 
