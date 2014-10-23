@@ -414,21 +414,32 @@ Goes backward if ARG is negative; error if STR not found."
     (insert ";; Parentheses are just *hugs* for your function calls!")
     (newline 2)))
 
+; Linum Relative
+(require 'linum-relative)
+
 ; Theme
 (defun customize-enabled-theme ()
-  (let ((enabled-theme (car custom-enabled-themes)))
-    (cond ((eq enabled-theme 'sanityinc-tomorrow-night)
-           (fringe-mode 0))
-          ((eq enabled-theme 'ample)
-           (fringe-mode 0))
-          ((eq enabled-theme 'base16-default)
-           (set-cursor-color "#FF5A0E")
-           (fringe-mode 0))
+  (let ((enabled-theme (car custom-enabled-themes))
+        (cursor-preferred-color "#FF5A0E"))
+    (cond ((eq enabled-theme 'base16-default)
+           (set-cursor-color cursor-preferred-color))
           ((eq enabled-theme 'tronesque)
-           (set-face-attribute 'dired-directory nil :foreground "#2872b2")
-           (set-face-attribute 'info-header-xref nil :foreground "#2872b2"))
+           (let ((fallback-color
+                  (face-attribute 'show-paren-match :background)))
+             (set-face-attribute
+              'dired-directory nil :foreground fallback-color)
+             (set-face-attribute
+              'info-header-xref nil :foreground fallback-color)))
           ((eq enabled-theme 'wombat)
-           (set-cursor-color "#FF5A0E")))))
+           (set-cursor-color cursor-preferred-color)))))
+
+(defun customize-theme ()
+  (let ((default-background-color (face-attribute 'default :background))
+        (linum-background-color (face-attribute 'linum :background)))
+    (set-face-attribute 'fringe nil :background default-background-color)
+    (set-face-attribute 'linum nil :background default-background-color)
+    (set-face-attribute
+     'linum-relative-current-face nil :background linum-background-color)))
 
 (defadvice load-theme
   (before disable-before-load (theme &optional no-confirm no-enable) activate)
@@ -438,6 +449,7 @@ Goes backward if ARG is negative; error if STR not found."
   (after load-custom-theme-settings
          (theme &optional no-confirm no-enable)
          activate)
+  (customize-theme)
   (customize-enabled-theme))
 
 (load-theme 'sanityinc-tomorrow-night t)
@@ -986,6 +998,8 @@ HOOKS can be a list of hooks or just a single hook."
 (require 'git-wip-timemachine)
 
 ; Git Gutter
+(require 'git-gutter-fringe)
+
 (defun set-up-git-gutter ()
   (modeline-remove-lighter 'git-gutter-mode)
   (local-set-key (kbd "M-s n h") 'git-gutter:next-hunk)
@@ -1015,6 +1029,7 @@ HOOKS can be a list of hooks or just a single hook."
 (define-key magit-mode-map (kbd "K") 'magit-ls-files)
 
 ; Variables
+(setq git-gutter-fr:side 'right-fringe)
 (setq magit-diff-refine-hunk t)
 (setq magit-auto-revert-mode-lighter "")
 
