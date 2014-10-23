@@ -126,7 +126,6 @@
 
 ; Hooks
 (add-hook 'dired-mode-hook 'dired-setup)
-(add-hook 'dired-mode-hook 'toggle-truncate-lines-on)
 
 ; Key Bindings
 (define-key dired-mode-map (kbd ")") 'dired-hide-details-mode)
@@ -1071,17 +1070,13 @@ With a prefix arg, clear selective display."
       (set-selective-display -1)
     (set-selective-display (+ (current-column) 1))))
 
-(defun toggle-truncate-lines-on ()
-  (toggle-truncate-lines 1))
-
-; Hooks
-(add-hook 'conf-space-mode-hook 'toggle-truncate-lines-on)
-(add-hook 'occur-mode-hook 'toggle-truncate-lines-on)
-
 ; Key Bindings
 (global-set-key (kbd "C-x n i") 'narrow-to-region-indirect-buffer)
 (global-set-key (kbd "C-x $") 'tim/set-selective-display)
 (global-set-key (kbd "M-s t t") 'toggle-truncate-lines)
+
+; Variables
+(setq-default truncate-lines t)
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;
