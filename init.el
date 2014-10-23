@@ -102,6 +102,8 @@
 ;;;;;;;;;;;;;
 
 ; Functions
+(put 'dired-find-alternate-file 'disabled nil)
+
 (defun dired-jump-to-top ()
   (interactive)
   (goto-char (point-min))
