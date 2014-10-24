@@ -246,7 +246,6 @@ Goes backward if ARG is negative; error if STR not found."
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 
 ; Key Bindings
-(global-set-key (kbd "RET") 'newline-and-indent)
 (global-set-key (kbd "M-s f e") 'flush-empty-lines)
 (global-set-key (kbd "M-s s u") 'sort-lines-and-uniquify)
 (global-set-key (kbd "M-s z") 'zap-to-string)
