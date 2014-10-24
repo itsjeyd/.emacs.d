@@ -1053,16 +1053,10 @@ HOOKS can be a list of hooks or just a single hook."
 (add-hook 'git-gutter:update-hooks 'window-configuration-change-hook)
 
 ; Hooks
-(add-hook 'emacs-lisp-mode-hook 'git-gutter-mode)
-(add-hook 'java-mode-hook 'git-gutter-mode)
-(add-hook 'js-mode-hook 'git-gutter-mode)
-(add-hook 'haml-mode-hook 'git-gutter-mode)
+(add-hook 'css-mode-hook 'git-gutter-mode)
 (add-hook 'html-mode-hook 'git-gutter-mode)
 (add-hook 'org-mode-hook 'git-gutter-mode)
-(add-hook 'php-mode-hook 'git-gutter-mode)
-(add-hook 'python-mode-hook 'git-gutter-mode)
-(add-hook 'sh-mode-hook 'git-gutter-mode)
-(add-hook 'css-mode-hook 'git-gutter-mode)
+(add-hook 'prog-mode-hook 'git-gutter-mode)
 (add-hook 'git-commit-mode-hook 'turn-on-orgstruct)
 
 ; Key Bindings
