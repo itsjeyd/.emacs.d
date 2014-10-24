@@ -416,6 +416,9 @@ Goes backward if ARG is negative; error if STR not found."
     (insert ";; Parentheses are just *hugs* for your function calls!")
     (newline 2)))
 
+; Hooks
+(add-hook 'linum-mode-hook 'git-gutter-fringe-change-fringe)
+
 ; Linum Relative
 (require 'linum-relative)
 
@@ -1021,13 +1024,20 @@ HOOKS can be a list of hooks or just a single hook."
 (require 'git-gutter-fringe)
 
 (defun set-up-git-gutter ()
+  (setq-local git-gutter-fr:side 'left-fringe)
   (modeline-remove-lighter 'git-gutter-mode)
   (local-set-key (kbd "M-s n h") 'git-gutter:next-hunk)
   (local-set-key (kbd "M-s p h") 'git-gutter:previous-hunk)
   (local-set-key (kbd "M-s s h") 'git-gutter:stage-hunk)
   (local-set-key (kbd "M-s r h") 'git-gutter:revert-hunk))
 
+(defun git-gutter-fringe-change-fringe ()
+  (if linum-mode
+      (setq-local git-gutter-fr:side 'right-fringe)
+    (setq-local git-gutter-fr:side 'left-fringe)))
+
 (add-hook 'git-gutter-mode-on-hook 'set-up-git-gutter)
+(add-hook 'git-gutter:update-hooks 'window-configuration-change-hook)
 
 ; Hooks
 (add-hook 'emacs-lisp-mode-hook 'git-gutter-mode)
@@ -1049,7 +1059,6 @@ HOOKS can be a list of hooks or just a single hook."
 (define-key magit-mode-map (kbd "K") 'magit-ls-files)
 
 ; Variables
-(setq git-gutter-fr:side 'right-fringe)
 (setq magit-diff-refine-hunk t)
 (setq magit-auto-revert-mode-lighter "")
 
