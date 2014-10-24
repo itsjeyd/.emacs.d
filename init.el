@@ -1205,7 +1205,7 @@ than one window."
          activate compile)
   (flyspell-buffer))
 
-(defun ispell-word-then-abbrev (p)
+(defun ispell-word-then-abbrev (local)
   "Call `ispell-word'. Then create an abbrev for the correction made.
 With prefix P, create local abbrev. Otherwise it will be global."
   (interactive "P")
@@ -1215,9 +1215,9 @@ With prefix P, create local abbrev. Otherwise it will be global."
     (setq after (downcase (or (thing-at-point 'word) "")))
     (unless (string= after before)
       (define-abbrev
-        (if p local-abbrev-table global-abbrev-table) before after))
+        (if local local-abbrev-table global-abbrev-table) before after))
       (message "\"%s\" now expands to \"%s\" %sally."
-               before after (if p "loc" "glob"))))
+               before after (if local "loc" "glob"))))
 
 ; Key Bindings
 (global-set-key (kbd "M-s i a") 'ispell-word-then-abbrev)
