@@ -902,6 +902,13 @@ HOOKS can be a list of hooks or just a single hook."
          (search-string (buffer-substring-no-properties beg end)))
     (rename-buffer (format "*Occur-%s*" search-string))))
 
+(defadvice rgrep (around rgrep-rename-buffer-after-search-string
+                         (regexp &optional files dir confirm)
+                         activate compile)
+  ad-do-it
+  (with-current-buffer grep-last-buffer
+    (rename-buffer (format "*grep-%s*" regexp))))
+
 ; Hooks
 (add-hook 'occur-hook 'occur-rename-buffer-after-search-string)
 
