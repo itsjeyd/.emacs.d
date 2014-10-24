@@ -175,6 +175,7 @@
 ; Electric Pair Mode
 (electric-pair-mode)
 
+(defvar single-backticks '(?\` . ?\`))
 (defvar single-quotes '(?\' . ?\'))
 (defvar org-bold-markup '(?\* . ?\*))
 (defvar org-italics-markup '(?/ . ?/))
@@ -182,11 +183,16 @@
 (defvar org-electric-pairs
   `(,single-quotes ,org-verbatim-markup ,org-italics-markup ,org-bold-markup))
 
+(defun git-commit-add-electric-pairs ()
+  (setq-local electric-pair-pairs
+              (cons single-backticks electric-pair-pairs)))
+
 (defun org-add-electric-pairs ()
   (setq-local electric-pair-pairs
               (append electric-pair-pairs org-electric-pairs))
   (setq-local electric-pair-text-pairs electric-pair-pairs))
 
+(add-hook 'git-commit-mode-hook 'git-commit-add-electric-pairs)
 (add-hook 'org-mode-hook 'org-add-electric-pairs)
 
 ; Expand Region
