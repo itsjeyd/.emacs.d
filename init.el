@@ -172,6 +172,23 @@
 (global-set-key (kbd "C-c i") 'change-inner)
 (global-set-key (kbd "C-c o") 'change-outer)
 
+; Electric Pair Mode
+(electric-pair-mode)
+
+(defvar single-quotes '(?\' . ?\'))
+(defvar org-bold-markup '(?\* . ?\*))
+(defvar org-italics-markup '(?/ . ?/))
+(defvar org-verbatim-markup '(?= . ?=))
+(defvar org-electric-pairs
+  `(,single-quotes ,org-verbatim-markup ,org-italics-markup ,org-bold-markup))
+
+(defun org-add-electric-pairs ()
+  (setq-local electric-pair-pairs
+              (append electric-pair-pairs org-electric-pairs))
+  (setq-local electric-pair-text-pairs electric-pair-pairs))
+
+(add-hook 'org-mode-hook 'org-add-electric-pairs)
+
 ; Expand Region
 (global-set-key (kbd "M-@") 'er/expand-region)
 
@@ -252,52 +269,6 @@ Goes backward if ARG is negative; error if STR not found."
 ; Rainbow Delimiters
 (add-hook 'org-mode-hook 'rainbow-delimiters-mode)
 (add-hook 'prog-mode-hook 'rainbow-delimiters-mode)
-
-; Smartparens
-(require 'smartparens-config)
-(smartparens-global-mode t)
-
-(defun sp-wrap-with-parens (&optional arg)
-  (interactive "P")
-  (sp-wrap-with-pair "("))
-
-(defun sp-wrap-with-double-quotes (&optional arg)
-  (interactive "P")
-  (sp-wrap-with-pair "\""))
-
-(defun sp-wrap-with-single-quotes (&optional arg)
-  (interactive "P")
-  (sp-wrap-with-pair "'"))
-
-(define-key sp-keymap (kbd "M-s (") 'sp-wrap-with-parens)
-(define-key sp-keymap (kbd "M-s \"") 'sp-wrap-with-double-quotes)
-(define-key sp-keymap (kbd "M-s '") 'sp-wrap-with-single-quotes)
-
-(sp-local-pair 'org-mode "*" "*" :wrap "M-s *")
-(sp-local-pair 'org-mode "/" "/" :wrap "M-s /")
-(sp-local-pair 'org-mode "=" "=" :wrap "M-s =")
-
-(setq sp-autoinsert-if-followed-by-word nil)
-(setq sp-navigate-consider-stringlike-sexp '(org-mode latex-mode))
-
-(defadvice define-key (around check-n (keymap key def) activate compile)
-  (if (and (equal this-command 'org-export-dispatch)
-           (or (equal key "b")
-               (equal key "c")
-               (equal key "f")
-               (equal key "g")
-               (equal key "j")
-               (equal key "n")
-               (equal key "o")
-               (equal key "p")
-               (equal key "s")
-               (equal key "u")
-               (equal key "v")
-               (equal key "F")
-               (equal key "B")
-               (equal key "C")))
-      (message "Rebinding a speed key in org-mode? Not under my watch!")
-    ad-do-it))
 
 ; Variables
 (setq cua-enable-cua-keys nil)
