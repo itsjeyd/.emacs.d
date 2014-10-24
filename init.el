@@ -15,6 +15,7 @@
 )
 
 
+
 ;;;;;;;;;;;;;
 ;;; Paths ;;;
 ;;;;;;;;;;;;;
@@ -23,6 +24,7 @@
 (add-to-list 'load-path "~/.emacs.d/lisp/mark-lines/")
 
 
+
 ;;;;;;;;;;;;;;;
 ;;; Backups ;;;
 ;;;;;;;;;;;;;;;
@@ -31,6 +33,7 @@
                                ("-loaddefs.el\\'")
                                ("." . "~/.emacs.d/backups")))
 
+
 ;;;;;;;;;;;;;;;
 ;;; Buffers ;;;
 ;;;;;;;;;;;;;;;
@@ -68,6 +71,7 @@
                            ("Temporary" (name . "\*.*\*")))))
 
 
+
 ;;;;;;;;;;;;;;;;;;;;
 ;;; Byte-Compile ;;;
 ;;;;;;;;;;;;;;;;;;;;
@@ -83,6 +87,7 @@
 (add-hook 'after-save-hook 'auto-recompile-elisp-file)
 
 
+
 ;;;;;;;;;;;;;;;;;;;
 ;;; Common Lisp ;;;
 ;;;;;;;;;;;;;;;;;;;
@@ -90,6 +95,7 @@
 (require 'cl-lib)
 
 
+
 ;;;;;;;;;;;;;;;;;;;;
 ;;; Custom Stuff ;;;
 ;;;;;;;;;;;;;;;;;;;;
@@ -97,6 +103,7 @@
 (load "wenote")
 
 
+
 ;;;;;;;;;;;;;
 ;;; Dired ;;;
 ;;;;;;;;;;;;;
@@ -155,6 +162,7 @@
 (setq dired-recursive-copies (quote always))
 
 
+
 ;;;;;;;;;;;;;;;
 ;;; Editing ;;;
 ;;;;;;;;;;;;;;;
@@ -291,6 +299,7 @@ Goes backward if ARG is negative; error if STR not found."
 (add-hook 'prog-mode-hook 'whitespace-mode)
 
 
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Elisp Development ;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -318,6 +327,7 @@ Goes backward if ARG is negative; error if STR not found."
 (setq eldoc-minor-mode-string "")
 
 
+
 ;;;;;;;;;;;;;
 ;;; Fonts ;;;
 ;;;;;;;;;;;;;
@@ -328,6 +338,7 @@ Goes backward if ARG is negative; error if STR not found."
 (unicode-fonts-setup)
 
 
+
 ;;;;;;;;;;;;
 ;;; Help ;;;
 ;;;;;;;;;;;;
@@ -340,6 +351,7 @@ Goes backward if ARG is negative; error if STR not found."
 (guide-key-mode t)
 
 
+
 ;;;;;;;;;;;
 ;;; Ido ;;;
 ;;;;;;;;;;;
@@ -372,6 +384,7 @@ Goes backward if ARG is negative; error if STR not found."
 (setq ido-use-virtual-buffers t)
 
 
+
 ;;;;;;;;;;;;;;;;;
 ;;; Interface ;;;
 ;;;;;;;;;;;;;;;;;
@@ -442,6 +455,7 @@ Goes backward if ARG is negative; error if STR not found."
 (setq inhibit-startup-screen t)
 
 
+
 ;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Java Development ;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;
@@ -470,6 +484,7 @@ Goes backward if ARG is negative; error if STR not found."
 (add-hook 'java-mode-hook 'set-indentation-behavior)
 
 
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; JavaScript Development ;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -483,6 +498,7 @@ Goes backward if ARG is negative; error if STR not found."
 (setq js-indent-level 2)
 
 
+
 ;;;;;;;;;;;;;
 ;;; LaTeX ;;;
 ;;;;;;;;;;;;;
@@ -503,6 +519,7 @@ Goes backward if ARG is negative; error if STR not found."
 (add-hook 'LaTeX-mode-hook 'configure-tex)
 
 
+
 ;;;;;;;;;;;;;;;;;;
 ;;; Minibuffer ;;;
 ;;;;;;;;;;;;;;;;;;
@@ -519,6 +536,7 @@ Goes backward if ARG is negative; error if STR not found."
 (setq history-length t)
 
 
+
 ;;;;;;;;;;;;
 ;;; MISC ;;;
 ;;;;;;;;;;;;
@@ -538,6 +556,7 @@ HOOKS can be a list of hooks or just a single hook."
     (add-hook hooks function append local)))
 
 
+
 ;;;;;;;;;;;;;;;;
 ;;; Modeline ;;;
 ;;;;;;;;;;;;;;;;
@@ -567,6 +586,7 @@ HOOKS can be a list of hooks or just a single hook."
 (setf (nth 5 mode-line-modes)
       '(:eval (if (buffer-narrowed-p) (string 32 #x27fa) "")))
 
+
 ;;;;;;;;;;;;;
 ;;; Modes ;;;
 ;;;;;;;;;;;;;
@@ -574,6 +594,7 @@ HOOKS can be a list of hooks or just a single hook."
 (add-to-list 'auto-mode-alist '("routes$" . conf-space-mode))
 
 
+
 ;;;;;;;;;;;;;;;;
 ;;; Movement ;;;
 ;;;;;;;;;;;;;;;;
@@ -586,6 +607,7 @@ HOOKS can be a list of hooks or just a single hook."
 (global-set-key (kbd "M-g l") 'goto-line)
 
 
+
 ;;;;;;;;;;;;;;;;
 ;;; Org Mode ;;;
 ;;;;;;;;;;;;;;;;
@@ -684,6 +706,7 @@ HOOKS can be a list of hooks or just a single hook."
              '("o" "#+BEGIN_COMMENT\n?\n#+END_COMMENT") t)
 
 
+
 ;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Package Manager ;;;
 ;;;;;;;;;;;;;;;;;;;;;;;
@@ -704,6 +727,7 @@ HOOKS can be a list of hooks or just a single hook."
   (print requirements))
 
 
+
 ;;;;;;;;;;;;;;;;;;;
 ;;; Permissions ;;;
 ;;;;;;;;;;;;;;;;;;;
@@ -712,6 +736,7 @@ HOOKS can be a list of hooks or just a single hook."
 ; Usage: C-x C-f /sudo::/path/to/file
 
 
+
 ;;;;;;;;;;;;;;;;;;;
 ;;; Programming ;;;
 ;;;;;;;;;;;;;;;;;;;
@@ -781,6 +806,7 @@ HOOKS can be a list of hooks or just a single hook."
 (yas-global-mode 1)
 
 
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Project Management ;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -794,6 +820,7 @@ HOOKS can be a list of hooks or just a single hook."
                       (string #x1f5c0) (projectile-project-name))))
 
 
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Python Development ;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -829,6 +856,7 @@ HOOKS can be a list of hooks or just a single hook."
 (setq python-shell-interpreter "ipython")
 
 
+
 ;;;;;;;;;;;;;;;
 ;;; Recentf ;;;
 ;;;;;;;;;;;;;;;
@@ -873,6 +901,7 @@ HOOKS can be a list of hooks or just a single hook."
 (recentf-mode t)
 
 
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Scala Development ;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -882,6 +911,7 @@ HOOKS can be a list of hooks or just a single hook."
 (setq ensime-ac-override-settings nil)
 
 
+
 ;;;;;;;;;;;;;;;;;
 ;;; Scrolling ;;;
 ;;;;;;;;;;;;;;;;;
@@ -894,6 +924,7 @@ HOOKS can be a list of hooks or just a single hook."
 (setq scroll-preserve-screen-position 1)
 
 
+
 ;;;;;;;;;;;;;;
 ;;; Search ;;;
 ;;;;;;;;;;;;;;
@@ -929,6 +960,7 @@ HOOKS can be a list of hooks or just a single hook."
 (define-key smartscan-map (kbd "s-p") 'smartscan-symbol-go-backward)
 
 
+
 ;;;;;;;;;;;;;;
 ;;; Server ;;;
 ;;;;;;;;;;;;;;
@@ -938,6 +970,7 @@ HOOKS can be a list of hooks or just a single hook."
     (server-start))
 
 
+
 ;;;;;;;;;;;;;;;;
 ;;; Speedbar ;;;
 ;;;;;;;;;;;;;;;;
@@ -946,6 +979,7 @@ HOOKS can be a list of hooks or just a single hook."
 (setq speedbar-use-images nil)
 
 
+
 ;;;;;;;;;;;;;;;;;
 ;;; Utilities ;;;
 ;;;;;;;;;;;;;;;;;
@@ -981,6 +1015,7 @@ HOOKS can be a list of hooks or just a single hook."
                   "http://www.urbandictionary.com/define.php?term="))
 
 
+
 ;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Version Control ;;;
 ;;;;;;;;;;;;;;;;;;;;;;;
@@ -1042,11 +1077,13 @@ HOOKS can be a list of hooks or just a single hook."
 (setq magit-auto-revert-mode-lighter "")
 
 
+
 ;;;;;;;;;;;;;;;;;;
 ;;; Visibility ;;;
 ;;;;;;;;;;;;;;;;;;
 
 ; Functions
+(put 'narrow-to-page 'disabled nil)
 (put 'narrow-to-region 'disabled nil)
 
 (defun narrow-to-region-indirect-buffer (start end)
@@ -1088,6 +1125,7 @@ With a prefix arg, clear selective display."
 (setq-default truncate-lines t)
 
 
+
 ;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Windows + Frames ;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;
@@ -1163,6 +1201,7 @@ than one window."
 (setq ediff-split-window-function 'split-window-horizontally)
 
 
+
 ;;;;;;;;;;;;;;;
 ;;; Writing ;;;
 ;;;;;;;;;;;;;;;
@@ -1204,6 +1243,7 @@ With prefix P, create local abbrev. Otherwise it will be global."
 (add-hook 'writeroom-mode-hook 'turn-off-git-gutter)
 
 
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (idle-require-mode)
