@@ -894,13 +894,12 @@ HOOKS can be a list of hooks or just a single hook."
 ;;;;;;;;;;;;;;
 
 ; Functions
-(defun occur-rename-buffer-after-search-string ()
-  "Uniquify name of *Occur* buffer by appending search string to it."
-  (let* ((beg-end (match-data (string-match "\".+\"" (buffer-string))))
-         (beg (+ (car beg-end) 2))
-         (end (cadr beg-end))
-         (search-string (buffer-substring-no-properties beg end)))
-    (rename-buffer (format "*Occur-%s*" search-string))))
+(defadvice occur (around occur-rename-buffer-after-search-string
+                         (regexp &optional nlines)
+                         activate compile)
+  ad-do-it
+  (with-current-buffer "*Occur*"
+    (rename-buffer (format "*Occur-%s*" regexp))))
 
 (defadvice rgrep (around rgrep-rename-buffer-after-search-string
                          (regexp &optional files dir confirm)
@@ -908,9 +907,6 @@ HOOKS can be a list of hooks or just a single hook."
   ad-do-it
   (with-current-buffer grep-last-buffer
     (rename-buffer (format "*grep-%s*" regexp))))
-
-; Hooks
-(add-hook 'occur-hook 'occur-rename-buffer-after-search-string)
 
 ; Key Bindings
 (define-key occur-mode-map "n" 'occur-next)
