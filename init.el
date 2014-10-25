@@ -1265,3 +1265,4 @@ With prefix P, create local abbrev. Otherwise it will be global."
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (split-window-horizontally)
+(toggle-frame-maximized)
