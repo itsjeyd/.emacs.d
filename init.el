@@ -605,6 +605,11 @@ HOOKS can be a list of hooks or just a single hook."
 (global-set-key (kbd "M-g c") 'goto-char)
 (global-set-key (kbd "M-g l") 'goto-line)
 
+; Variables
+(setq ace-jump-mode-submode-list
+      '(ace-jump-char-mode ace-jump-word-mode ace-jump-line-mode))
+(setq ace-jump-word-mode-use-query-char nil)
+
 
 
 ;;;;;;;;;;;;;;;;
