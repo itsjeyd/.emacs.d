@@ -1058,6 +1058,7 @@ HOOKS can be a list of hooks or just a single hook."
 (add-hook 'org-mode-hook 'git-gutter-mode)
 (add-hook 'prog-mode-hook 'git-gutter-mode)
 (add-hook 'git-commit-mode-hook 'turn-on-orgstruct)
+(add-hook 'git-commit-mode-hook 'turn-on-auto-fill)
 
 ; Key Bindings
 (global-set-key (kbd "M-s g s") 'magit-status)
