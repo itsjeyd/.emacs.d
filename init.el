@@ -241,7 +241,7 @@ line instead."
   "Sort lines alphabetically (in ascending order) and remove duplicates."
   (interactive)
   (sort-lines nil (point-min) (point-max))
-  (shell-command-on-region (point-min) (point-max) "uniq" nil t))
+  (delete-duplicate-lines (point-min) (point-max) nil nil nil t))
 
 (defun zap-to-string (arg str)
   "Kill up to but not including ARG'th occurrence of STR.
