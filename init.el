@@ -724,13 +724,6 @@ HOOKS can be a list of hooks or just a single hook."
 (add-to-list 'package-archives
              '("org" . "http://orgmode.org/elpa/") t)
 
-(defadvice package-compute-transaction
-  (before package-compute-transaction-reverse
-          (package-list requirements) activate compile)
-  "reverse the requirements"
-  (setq requirements (reverse requirements))
-  (print requirements))
-
 
 
 ;;;;;;;;;;;;;;;;;;;
