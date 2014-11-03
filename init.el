@@ -157,6 +157,7 @@
               ("\\.dia\\'" "dia" (file)))))
 
 ; Variables
+(setq dired-dwim-target t)
 (setq dired-isearch-filenames "dwim")
 (setq dired-listing-switches "-alh")
 (setq dired-recursive-copies (quote always))
