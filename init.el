@@ -193,7 +193,7 @@
 (global-set-key (kbd "C-c o") 'change-outer)
 
 ; Electric Pair Mode
-(electric-pair-mode)
+(electric-pair-mode 1)
 
 (defvar single-backticks '(?\` . ?\`))
 (defvar single-quotes '(?\' . ?\'))
@@ -369,7 +369,7 @@ Goes backward if ARG is negative; error if STR not found."
 ;;;;;;;;;;;
 
 (ido-mode (quote both))
-(ido-everywhere)
+(ido-everywhere 1)
 
 ; Flx
 (flx-ido-mode 1)
@@ -380,7 +380,7 @@ Goes backward if ARG is negative; error if STR not found."
 (global-set-key (kbd "M-X") 'smex-major-mode-commands)
 
 ; Ubiquitous
-(ido-ubiquitous-mode)
+(ido-ubiquitous-mode 1)
 (push '(disable exact "unhighlight-regexp") ido-ubiquitous-command-overrides)
 (push '(disable prefix "sclang-dump-") ido-ubiquitous-command-overrides)
 
@@ -542,7 +542,7 @@ Goes backward if ARG is negative; error if STR not found."
 (savehist-mode t)
 (setq echo-keystrokes 0.3)
 (setq enable-recursive-minibuffers t)
-(minibuffer-depth-indicate-mode)
+(minibuffer-depth-indicate-mode 1)
 (setq history-delete-duplicates t)
 (setq history-length t)
 
@@ -809,7 +809,7 @@ HOOKS can be a list of hooks or just a single hook."
               'turn-on-subword-mode)
 
 ; Which Function
-(which-function-mode)
+(which-function-mode 1)
 
 ; yasnippet
 (yas-global-mode 1)
@@ -821,7 +821,7 @@ HOOKS can be a list of hooks or just a single hook."
 ;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ; Projectile
-(projectile-global-mode)
+(projectile-global-mode 1)
 (add-to-list 'projectile-globally-ignored-directories "doxygen")
 (setq projectile-known-projects-file "~/.emacs.d/.projectile-bookmarks.eld")
 (setq projectile-mode-line
@@ -1197,7 +1197,7 @@ than one window."
 (global-set-key (kbd "M-s s w") 'swap-windows)
 
 ; Modes
-(winner-mode)
+(winner-mode 1)
 (global-set-key (kbd "C-c u") 'winner-undo)
 (global-set-key (kbd "C-c r") 'winner-redo)
 
@@ -1250,7 +1250,7 @@ With prefix P, create local abbrev. Otherwise it will be global."
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(idle-require-mode)
+(idle-require-mode 1)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
