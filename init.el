@@ -903,7 +903,7 @@ HOOKS can be a list of hooks or just a single hook."
 ; Variables
 (add-to-list 'recentf-keep 'recentf-keep-directory-predicate)
 (add-to-list 'recentf-used-hooks '(dired-after-readin-hook recentf-track-opened-file))
-(setq recentf-max-saved-items 100)
+(setq recentf-max-saved-items 150)
 (setq recentf-save-file "~/.emacs.d/.recentf")
 
 ; Launch
