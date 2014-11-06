@@ -124,8 +124,8 @@
   (dired-next-line -1))
 
 (defun dired-setup ()
-  (dired-omit-mode 1)
-  (dired-hide-details-mode 1))
+  (dired-hide-details-mode 1)
+  (dired-omit-mode 1))
 
 ; Hidden Files
 (require 'dired-x)
