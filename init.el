@@ -535,14 +535,16 @@ Goes backward if ARG is negative; error if STR not found."
 ;;; Minibuffer ;;;
 ;;;;;;;;;;;;;;;;;;
 
+; Modes
+(minibuffer-depth-indicate-mode 1)
+(savehist-mode t)
+
 ; Prompts
 (fset 'yes-or-no-p 'y-or-n-p)
 
 ; Variables
-(savehist-mode t)
 (setq echo-keystrokes 0.3)
 (setq enable-recursive-minibuffers t)
-(minibuffer-depth-indicate-mode 1)
 (setq history-delete-duplicates t)
 (setq history-length t)
 
