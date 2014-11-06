@@ -39,7 +39,7 @@
 ;;;;;;;;;;;;;;;
 
 ; Functions
-(setq temp-buffer-count 0)
+(defvar temp-buffer-count 0)
 
 (defun ibuffer-group-buffers ()
   (ibuffer-switch-to-saved-filter-groups "Default"))
