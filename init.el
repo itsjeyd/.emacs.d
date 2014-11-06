@@ -876,9 +876,6 @@ HOOKS can be a list of hooks or just a single hook."
 (require 'recentf)
 
 ; Functions
-(defun recentf-keep-directory-predicate (file)
-  (file-directory-p file))
-
 (defadvice recentf-track-opened-file (around set-buffer-file-name activate compile)
   (if (eq major-mode 'dired-mode)
       (progn (setq buffer-file-name default-directory)
@@ -904,7 +901,6 @@ HOOKS can be a list of hooks or just a single hook."
 (global-set-key (kbd "C-x C-r") 'ido-recentf-open)
 
 ; Variables
-(add-to-list 'recentf-keep 'recentf-keep-directory-predicate)
 (add-to-list 'recentf-used-hooks '(dired-after-readin-hook recentf-track-opened-file))
 (setq recentf-max-saved-items 150)
 (setq recentf-save-file "~/.emacs.d/.recentf")
