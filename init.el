@@ -684,6 +684,7 @@ HOOKS can be a list of hooks or just a single hook."
 (define-key org-mode-map (kbd "M-n") 'org-next-item)
 (define-key org-mode-map (kbd "M-p") 'org-previous-item)
 ;; Mnemonics: (i)tem, (t)ree
+(define-key org-mode-map (kbd "M-s c a") 'org-force-cycle-archived)
 (define-key org-mode-map (kbd "M-s c b") 'org-wrap-in-comment-block)
 (define-key org-mode-map (kbd "M-s i u") 'org-metaup)
 (define-key org-mode-map (kbd "M-s i d") 'org-metadown)
