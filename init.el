@@ -227,7 +227,6 @@ line instead."
   (interactive
    (if mark-active
        (list (region-beginning) (region-end))
-     (message "Copied line")
      (list (line-beginning-position) (line-beginning-position 2)))))
 
 (defadvice kill-region (before slick-cut activate compile)
@@ -248,6 +247,24 @@ line instead."
   (save-excursion
     (goto-char (point-min))
     (flush-lines "^$")))
+
+(defun kill-ring-save-with-arg (arg)
+  (interactive "P")
+  (if arg
+      (let ((beg (line-beginning-position))
+            (end (line-beginning-position (+ arg 1))))
+        (kill-ring-save beg end)
+        (message "Copied %d lines." arg))
+    (call-interactively 'kill-ring-save)))
+
+(defun kill-region-with-arg (arg)
+  (interactive "P")
+  (if arg
+      (let ((beg (line-beginning-position))
+            (end (line-beginning-position (+ arg 1))))
+        (kill-region beg end)
+        (message "Killed %d lines." arg))
+    (call-interactively 'kill-region)))
 
 (defun sort-lines-and-uniquify ()
   "Sort lines alphabetically (in ascending order) and remove duplicates."
@@ -272,6 +289,8 @@ Goes backward if ARG is negative; error if STR not found."
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 
 ; Key Bindings
+(global-set-key (kbd "M-w") 'kill-ring-save-with-arg)
+(global-set-key (kbd "C-w") 'kill-region-with-arg)
 (global-set-key (kbd "M-s f e") 'flush-empty-lines)
 (global-set-key (kbd "M-s s u") 'sort-lines-and-uniquify)
 (global-set-key (kbd "M-s z") 'zap-to-string)
