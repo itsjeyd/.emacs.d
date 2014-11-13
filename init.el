@@ -876,6 +876,12 @@ HOOKS can be a list of hooks or just a single hook."
 (require 'recentf)
 
 ; Functions
+(defadvice recentf-keep-default-predicate
+    (around recentf-discard-autoloads (file) activate compile)
+  (if (not (string-match-p "-autoloads" (file-name-nondirectory file)))
+      ad-do-it
+    nil))
+
 (defadvice recentf-track-opened-file (around set-buffer-file-name activate compile)
   (if (eq major-mode 'dired-mode)
       (progn (setq buffer-file-name default-directory)
