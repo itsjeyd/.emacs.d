@@ -437,7 +437,7 @@ Goes backward if ARG is negative; error if STR not found."
     (newline 2)))
 
 ; Hooks
-(add-hook 'linum-mode-hook 'git-gutter-fringe-change-fringe)
+(add-hook 'linum-mode-hook 'git-gutter-fringe+-change-fringe)
 
 ; Linum Relative
 (require 'linum-relative)
@@ -1068,29 +1068,30 @@ HOOKS can be a list of hooks or just a single hook."
 (require 'git-wip-timemachine)
 
 ; Git Gutter
-(require 'git-gutter-fringe)
+(require 'git-gutter-fringe+)
 
-(defun set-up-git-gutter ()
-  (setq-local git-gutter-fr:side 'left-fringe)
-  (modeline-remove-lighter 'git-gutter-mode)
-  (local-set-key (kbd "M-s n h") 'git-gutter:next-hunk)
-  (local-set-key (kbd "M-s p h") 'git-gutter:previous-hunk)
-  (local-set-key (kbd "M-s s h") 'git-gutter:stage-hunk)
-  (local-set-key (kbd "M-s r h") 'git-gutter:revert-hunk))
+(defun set-up-git-gutter+ ()
+  (setq-local git-gutter-fr+-side 'left-fringe)
+  (modeline-remove-lighter 'git-gutter+-mode)
+  (local-set-key (kbd "M-s n h") 'git-gutter+-next-hunk)
+  (local-set-key (kbd "M-s p h") 'git-gutter+-previous-hunk)
+  (local-set-key (kbd "M-s s h") 'git-gutter+-stage-hunks)
+  (local-set-key (kbd "M-s r h") 'git-gutter+-revert-hunks))
 
-(defun git-gutter-fringe-change-fringe ()
+(defun git-gutter-fringe+-change-fringe ()
   (if linum-mode
-      (setq-local git-gutter-fr:side 'right-fringe)
-    (setq-local git-gutter-fr:side 'left-fringe)))
+      (setq-local git-gutter-fr+-side 'right-fringe)
+    (setq-local git-gutter-fr+-side 'left-fringe))
+  (git-gutter+-refresh))
 
-(add-hook 'git-gutter-mode-on-hook 'set-up-git-gutter)
-(add-hook 'git-gutter:update-hooks 'window-configuration-change-hook)
+(add-hook 'git-gutter+-mode-hook 'set-up-git-gutter+)
+(add-hook 'magit-revert-buffer-hook 'git-gutter+-refresh)
 
 ; Hooks
-(add-hook 'css-mode-hook 'git-gutter-mode)
-(add-hook 'html-mode-hook 'git-gutter-mode)
-(add-hook 'org-mode-hook 'git-gutter-mode)
-(add-hook 'prog-mode-hook 'git-gutter-mode)
+(add-hook 'css-mode-hook 'git-gutter+-mode)
+(add-hook 'html-mode-hook 'git-gutter+-mode)
+(add-hook 'org-mode-hook 'git-gutter+-mode)
+(add-hook 'prog-mode-hook 'git-gutter+-mode)
 (add-hook 'git-commit-mode-hook 'turn-on-orgstruct)
 (add-hook 'git-commit-mode-hook 'turn-on-auto-fill)
 
@@ -1263,12 +1264,12 @@ With prefix P, create local abbrev. Otherwise it will be global."
 (setq-default abbrev-mode t)
 
 ; Writeroom
-(defun turn-off-git-gutter ()
-  (if (not git-gutter-mode)
-      (git-gutter-mode t)
-    (git-gutter-mode -1)))
+(defun turn-off-git-gutter+ ()
+  (if (not git-gutter+-mode)
+      (git-gutter+-mode t)
+    (git-gutter+-mode -1)))
 
-(add-hook 'writeroom-mode-hook 'turn-off-git-gutter)
+(add-hook 'writeroom-mode-hook 'turn-off-git-gutter+)
 
 
 
@@ -1279,7 +1280,7 @@ With prefix P, create local abbrev. Otherwise it will be global."
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (modeline-remove-lighter 'auto-complete-mode)
-(modeline-remove-lighter 'git-gutter-mode)
+(modeline-remove-lighter 'git-gutter+-mode)
 (modeline-remove-lighter 'guide-key-mode)
 (modeline-remove-lighter 'hs-minor-mode)
 (modeline-remove-lighter 'smartparens-mode)
