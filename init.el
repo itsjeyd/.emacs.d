@@ -781,6 +781,7 @@ HOOKS can be a list of hooks or just a single hook."
 (ac-config-default)
 (ac-flyspell-workaround)
 (define-key ac-completing-map (kbd "C-f") 'ac-stop)
+(define-key ac-completing-map (kbd "C-h") 'ac-help)
 (setq ac-comphist-file "~/.emacs.d/.ac-comphist.dat")
 (setq ac-use-menu-map t)
 (setq ac-auto-show-menu 0.3)
