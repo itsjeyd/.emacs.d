@@ -381,6 +381,9 @@ Goes backward if ARG is negative; error if STR not found."
 (setq guide-key/popup-window-position 'bottom)
 (guide-key-mode t)
 
+; Variables
+(setq help-window-select t)
+
 
 
 ;;;;;;;;;;;
