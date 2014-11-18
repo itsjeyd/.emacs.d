@@ -16,7 +16,6 @@
   | clojure-mode                   |
   | command-log-mode               |
   | cypher-mode                    |
-  | dired-subtree                  |
   | discover-my-major              |
   | elisp-slime-nav                |
   | ensime                         |
@@ -25,8 +24,8 @@
   | flx-ido                        |
   | flymake-cursor                 |
   | fringe-helper                  |
-  | git-gutter                     |
-  | git-gutter-fringe              |
+  | git-gutter+                    |
+  | git-gutter-fringe+             |
   | git-timemachine                |
   | graphviz-dot-mode              |
   | guide-key                      |
