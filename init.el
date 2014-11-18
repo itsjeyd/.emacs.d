@@ -170,7 +170,7 @@
 ; Variables
 (setq dired-dwim-target t)
 (setq dired-isearch-filenames "dwim")
-(setq dired-listing-switches "-alh")
+(setq dired-listing-switches "-alh --time-style=long-iso")
 (setq dired-recursive-copies (quote always))
 
 
