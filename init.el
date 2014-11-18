@@ -1278,6 +1278,21 @@ With prefix P, create local abbrev. Otherwise it will be global."
 
 
 
+;;;;;;;;;;;;;
+;;; Ztree ;;;
+;;;;;;;;;;;;;
+
+(idle-require 'ztree-dir)
+(eval-after-load 'ztree-dir
+  '(progn
+     (define-key ztree-mode-map (kbd "n") 'next-line)
+     (define-key ztree-mode-map (kbd "p") 'previous-line)))
+
+; Key Bindings
+(global-set-key (kbd "C-x C-d") 'ztree-dir)
+
+
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (idle-require-mode 1)
