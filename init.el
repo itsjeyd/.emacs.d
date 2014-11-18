@@ -780,10 +780,18 @@ HOOKS can be a list of hooks or just a single hook."
 (require 'auto-complete-config)
 (ac-config-default)
 (ac-flyspell-workaround)
+
+(defadvice ac-quick-help
+    (around turn-off-line-truncation (&optional force) activate compile)
+  (toggle-truncate-lines -1)
+  ad-do-it
+  (toggle-truncate-lines 1))
+
 (define-key ac-completing-map (kbd "C-f") 'ac-stop)
 (define-key ac-completing-map (kbd "C-h") 'ac-help)
 (define-key ac-completing-map (kbd "C-v") 'ac-quick-help-scroll-down)
 (define-key ac-completing-map (kbd "M-v") 'ac-quick-help-scroll-up)
+
 (setq ac-comphist-file "~/.emacs.d/.ac-comphist.dat")
 (setq ac-use-menu-map t)
 (setq ac-auto-show-menu 0.3)
