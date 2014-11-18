@@ -1075,6 +1075,7 @@ HOOKS can be a list of hooks or just a single hook."
   (modeline-remove-lighter 'git-gutter+-mode)
   (local-set-key (kbd "M-s n h") 'git-gutter+-next-hunk)
   (local-set-key (kbd "M-s p h") 'git-gutter+-previous-hunk)
+  (local-set-key (kbd "M-s s d") 'git-gutter+-show-hunk)
   (local-set-key (kbd "M-s s h") 'git-gutter+-stage-hunks)
   (local-set-key (kbd "M-s r h") 'git-gutter+-revert-hunks))
 
