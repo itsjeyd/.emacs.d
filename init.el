@@ -794,10 +794,10 @@ HOOKS can be a list of hooks or just a single hook."
 (define-key ac-completing-map (kbd "C-v") 'ac-quick-help-scroll-down)
 (define-key ac-completing-map (kbd "M-v") 'ac-quick-help-scroll-up)
 
-(setq ac-comphist-file "~/.emacs.d/.ac-comphist.dat")
-(setq ac-use-menu-map t)
 (setq ac-auto-show-menu 0.3)
+(setq ac-comphist-file "~/.emacs.d/.ac-comphist.dat")
 (setq ac-ignore-case nil)
+(setq ac-use-menu-map t)
 (add-to-list 'ac-sources 'ac-source-yasnippet)
 
 ; Hide/Show
