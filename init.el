@@ -780,6 +780,8 @@ HOOKS can be a list of hooks or just a single hook."
 (require 'auto-complete-config)
 (ac-config-default)
 (ac-flyspell-workaround)
+(require 'org-ac)
+(org-ac/config-default)
 
 (defadvice ac-quick-help
     (around turn-off-line-truncation (&optional force) activate compile)
@@ -796,7 +798,6 @@ HOOKS can be a list of hooks or just a single hook."
 (setq ac-use-menu-map t)
 (setq ac-auto-show-menu 0.3)
 (setq ac-ignore-case nil)
-(add-to-list 'ac-modes 'org-mode)
 (add-to-list 'ac-sources 'ac-source-yasnippet)
 
 ; Hide/Show
