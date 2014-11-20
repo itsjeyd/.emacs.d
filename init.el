@@ -797,6 +797,7 @@ HOOKS can be a list of hooks or just a single hook."
 (setq ac-auto-show-menu 0.3)
 (setq ac-comphist-file "~/.emacs.d/.ac-comphist.dat")
 (setq ac-ignore-case nil)
+(setq ac-quick-help-delay 1.0)
 (setq ac-use-menu-map t)
 (add-to-list 'ac-sources 'ac-source-yasnippet)
 
