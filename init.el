@@ -447,6 +447,10 @@ Goes backward if ARG is negative; error if STR not found."
 ; Linum Relative
 (require 'linum-relative)
 
+; Rainbow
+(require 'rainbow-mode)
+(add-hook 'css-mode-hook 'rainbow-turn-on)
+
 ; Theme
 (defun customize-enabled-theme ()
   (let ((enabled-theme (car custom-enabled-themes))
