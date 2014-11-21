@@ -432,15 +432,6 @@ Goes backward if ARG is negative; error if STR not found."
 ; Cursor
 (blink-cursor-mode -1)
 
-; Functions
-(defun customize-scratch-buffer ()
-  "Display custom message in *scratch* buffer."
-  (interactive)
-  (with-current-buffer "*scratch*"
-    (erase-buffer)
-    (insert ";; Parentheses are just *hugs* for your function calls!")
-    (newline 2)))
-
 ; Hooks
 (add-hook 'linum-mode-hook 'git-gutter-fringe+-change-fringe)
 
@@ -493,6 +484,8 @@ Goes backward if ARG is negative; error if STR not found."
 
 ; Variables
 (setq inhibit-startup-screen t)
+(setq initial-scratch-message
+      ";; Parentheses are just *hugs* for your function calls!\n\n")
 
 
 
@@ -1328,10 +1321,6 @@ With prefix P, create local abbrev. Otherwise it will be global."
 (modeline-remove-lighter 'whitespace-mode)
 (modeline-remove-lighter 'yas-minor-mode)
 (modeline-set-lighter 'abbrev-mode " Abbr")
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-(customize-scratch-buffer)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
