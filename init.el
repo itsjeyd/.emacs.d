@@ -699,6 +699,7 @@ HOOKS can be a list of hooks or just a single hook."
 (add-hook 'org-mode-hook 'turn-on-auto-fill)
 
 ; Key Bindings
+(define-key org-mode-map (kbd "RET") 'org-return-indent)
 (define-key org-mode-map (kbd "<C-tab>") 'pcomplete)
 (define-key org-mode-map (kbd "C-c a") 'org-agenda)
 (define-key org-mode-map (kbd "C-c t") 'org-toggle-link-display)
