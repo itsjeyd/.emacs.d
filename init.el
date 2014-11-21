@@ -1187,6 +1187,7 @@ With a prefix arg, clear selective display."
 ; Ace Window
 (global-set-key (kbd "C-x o") 'ace-window)
 (setq aw-keys '(?a ?b ?c ?d ?e ?f ?g ?h ?i))
+(setq aw-scope 'frame)
 
 ; Functions
 (defun toggle-window-dedicated ()
