@@ -68,6 +68,7 @@
 (setq revert-without-query (quote (".*")))
 (setq-default ibuffer-saved-filter-groups
               '(("Default" ("Dired" (mode . dired-mode))
+                           ("Org" (mode . org-mode))
                            ("Temporary" (name . "\*.*\*")))))
 
 
