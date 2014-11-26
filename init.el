@@ -997,6 +997,9 @@ HOOKS can be a list of hooks or just a single hook."
   (with-current-buffer grep-last-buffer
     (rename-buffer (format "*grep-%s*" regexp))))
 
+; Hooks
+(add-hook 'occur-mode-hook 'next-error-follow-minor-mode)
+
 ; Key Bindings
 (define-key occur-mode-map "n" 'occur-next)
 (define-key occur-mode-map "p" 'occur-prev)
