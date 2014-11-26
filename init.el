@@ -789,10 +789,10 @@ HOOKS can be a list of hooks or just a single hook."
   ad-do-it
   (toggle-truncate-lines 1))
 
-(define-key ac-completing-map (kbd "C-f") 'ac-stop)
 (define-key ac-completing-map (kbd "C-h") 'ac-help)
 (define-key ac-completing-map (kbd "C-v") 'ac-quick-help-scroll-down)
 (define-key ac-completing-map (kbd "M-v") 'ac-quick-help-scroll-up)
+(define-key ac-menu-map (kbd "C-f") 'ac-stop)
 
 (setq ac-auto-show-menu 0.3)
 (setq ac-comphist-file "~/.emacs.d/.ac-comphist.dat")
