@@ -1124,6 +1124,7 @@ HOOKS can be a list of hooks or just a single hook."
 ; Variables
 (setq magit-diff-refine-hunk t)
 (setq magit-auto-revert-mode-lighter "")
+(setq magit-use-overlays nil)
 
 
 
