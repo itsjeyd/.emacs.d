@@ -49,7 +49,7 @@
 
 (defun make-temp-buffer ()
   (interactive)
-  (let ((temp-buffer-name (format "*tempbuf-%d*" temp-buffer-count)))
+  (let ((temp-buffer-name (format "*temp-%d*" temp-buffer-count)))
     (switch-to-buffer temp-buffer-name)
     (message "New temp buffer (%s) created." temp-buffer-name))
   (setq temp-buffer-count (1+ temp-buffer-count)))
