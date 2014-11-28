@@ -605,8 +605,6 @@ HOOKS can be a list of hooks or just a single hook."
 (defun modeline-remove-lighter (minor-mode)
   (modeline-set-lighter minor-mode ""))
 
-(modeline-set-lighter 'auto-fill-function (string 32 #x23ce))
-
 ; Modes
 (column-number-mode t)
 
@@ -1327,6 +1325,7 @@ With prefix P, create local abbrev. Otherwise it will be global."
 (modeline-remove-lighter 'whitespace-mode)
 (modeline-remove-lighter 'yas-minor-mode)
 (modeline-set-lighter 'abbrev-mode " Abbr")
+(modeline-set-lighter 'auto-fill-function (string 32 #x23ce))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
