@@ -1095,7 +1095,6 @@ HOOKS can be a list of hooks or just a single hook."
 
 (defun set-up-git-gutter+ ()
   (setq-local git-gutter-fr+-side 'left-fringe)
-  (modeline-remove-lighter 'git-gutter+-mode)
   (local-set-key (kbd "M-s n h") 'git-gutter+-next-hunk)
   (local-set-key (kbd "M-s p h") 'git-gutter+-previous-hunk)
   (local-set-key (kbd "M-s s d") 'git-gutter+-show-hunk)
