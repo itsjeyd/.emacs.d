@@ -1321,7 +1321,6 @@ With prefix P, create local abbrev. Otherwise it will be global."
 (modeline-remove-lighter 'git-gutter+-mode)
 (modeline-remove-lighter 'guide-key-mode)
 (modeline-remove-lighter 'hs-minor-mode)
-(modeline-remove-lighter 'smartparens-mode)
 (modeline-remove-lighter 'whitespace-mode)
 (modeline-remove-lighter 'yas-minor-mode)
 (modeline-set-lighter 'abbrev-mode " Abbr")
