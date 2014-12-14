@@ -479,7 +479,7 @@ Goes backward if ARG is negative; error if STR not found."
   (customize-theme)
   (customize-enabled-theme))
 
-(load-theme 'sanityinc-tomorrow-night t)
+(load-theme 'sanityinc-tomorrow-eighties t)
 
 ; Tooltips
 (tooltip-mode 0)
