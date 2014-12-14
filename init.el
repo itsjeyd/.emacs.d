@@ -405,7 +405,18 @@ Goes backward if ARG is negative; error if STR not found."
 ; Flx
 (flx-ido-mode 1)
 
+; Functions
+(defun ido-find-file-as-root ()
+  "Like `ido-find-file, but automatically edit file with
+root-privileges if it is not writable by user."
+  (interactive)
+  (let ((file (ido-read-file-name "Edit as root: ")))
+    (unless (file-writable-p file)
+      (setq file (concat "/su:root@localhost:" file)))
+    (find-file file)))
+
 ; Key Bindings
+(global-set-key (kbd "C-c f") 'ido-find-file-as-root)
 (global-set-key (kbd "M-x") 'smex)
 (global-set-key (kbd "<menu>") 'smex)
 (global-set-key (kbd "M-X") 'smex-major-mode-commands)
