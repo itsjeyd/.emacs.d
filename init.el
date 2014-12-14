@@ -273,6 +273,12 @@ line instead."
   (sort-lines nil (point-min) (point-max))
   (delete-duplicate-lines (point-min) (point-max) nil nil nil t))
 
+(defun unfill-paragraph (&optional region)
+  "Takes a multi-line paragraph and turns it into a single line of text."
+  (interactive)
+  (let ((fill-column (point-max)))
+    (fill-paragraph nil region)))
+
 (defun zap-to-string (arg str)
   "Kill up to but not including ARG'th occurrence of STR.
 Case is ignored if `case-fold-search' is non-nil in the current buffer.
