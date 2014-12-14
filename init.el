@@ -217,7 +217,7 @@
 (add-hook 'org-mode-hook 'org-add-electric-pairs)
 
 ; Expand Region
-(global-set-key (kbd "M-@") 'er/expand-region)
+(global-set-key (kbd "M-s @") 'er/expand-region)
 
 ; Functions
 (autoload 'zap-up-to-char "misc")
