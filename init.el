@@ -733,7 +733,7 @@ HOOKS can be a list of hooks or just a single hook."
 (idle-require 'ox-md)
 
 ; Functions
-(defun org-at-outline-or-file-header ()
+(defun org-point-in-speed-command-position-p ()
   (or (looking-at org-outline-regexp)
       (looking-at "^#\+")
       (looking-at "^[[:blank:]]\\{2,\\}")
@@ -826,7 +826,7 @@ to a unique value for this to work properly."
 (setq org-src-fontify-natively t)
 (setq org-track-ordered-property-with-tag t)
 (setq org-use-extra-keys t)
-(setq org-use-speed-commands 'org-at-outline-or-file-header)
+(setq org-use-speed-commands 'org-point-in-speed-command-position-p)
 (add-to-list 'org-speed-commands-user '("d" . org-next-drawer) t)
 (add-to-list 'org-speed-commands-user '("P" . org-previous-drawer) t)
 (add-to-list 'org-structure-template-alist
