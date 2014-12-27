@@ -698,6 +698,16 @@ HOOKS can be a list of hooks or just a single hook."
   (interactive)
   (re-search-backward "^ *[-+*]\\|^ *[1-9]+[)\.] " nil nil 1))
 
+(defun org-export-all ()
+  "Export all subtrees that are *not* tagged with :noexport:
+or :subtree: to separate files.
+
+Note that subtrees must have the :EXPORT_FILE_NAME: property set
+to a unique value for this to work properly."
+  (interactive)
+  (org-map-entries (lambda () (org-html-export-to-html nil t))
+                   "-noexport-subtree"))
+
 (defun org-fill-paragraph-handle-lists (&optional num-paragraphs)
   (interactive "p")
   (save-excursion
