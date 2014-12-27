@@ -671,6 +671,24 @@ HOOKS can be a list of hooks or just a single hook."
 
 (require 'org)
 
+; Babel
+(require 'ob-dot)
+
+(idle-require 'ob-ditaa)
+(eval-after-load 'ob-ditaa
+  '(progn
+     (setq org-ditaa-jar-path "/usr/share/java/ditaa/ditaa-0_9.jar")))
+
+(idle-require 'ob-plantuml)
+(eval-after-load 'ob-plantuml
+  '(progn
+     (setq org-plantuml-jar-path "/opt/plantuml/plantuml.jar")
+     (setq plantuml-jar-path "/opt/plantuml/plantuml.jar")))
+
+(add-to-list 'org-babel-load-languages '(dot . t) t)
+(add-to-list 'org-babel-load-languages '(ditaa . t) t)
+(add-to-list 'org-babel-load-languages '(plantuml . t) t)
+
 ; Emphasis
 (setcar org-emphasis-regexp-components " \t('\"`{-")
 (setcar (nthcdr 1 org-emphasis-regexp-components) "\[[:alpha:]- \t.,:!?;'\")}\\")
@@ -761,24 +779,6 @@ to a unique value for this to work properly."
 
 (fset 'org-wrap-in-comment-block
    [?\C-o tab ?< ?o tab ?\C-w ?\C-w ?\C-u ?\C-x ?q ?\C-y ?\C-p ?\C-p ?\C-w ?\C-e ?\C-f])
-
-; Babel
-(require 'ob-dot)
-
-(idle-require 'ob-ditaa)
-(eval-after-load 'ob-ditaa
-  '(progn
-     (setq org-ditaa-jar-path "/usr/share/java/ditaa/ditaa-0_9.jar")))
-
-(idle-require 'ob-plantuml)
-(eval-after-load 'ob-plantuml
-  '(progn
-     (setq org-plantuml-jar-path "/opt/plantuml/plantuml.jar")
-     (setq plantuml-jar-path "/opt/plantuml/plantuml.jar")))
-
-(add-to-list 'org-babel-load-languages '(dot . t) t)
-(add-to-list 'org-babel-load-languages '(ditaa . t) t)
-(add-to-list 'org-babel-load-languages '(plantuml . t) t)
 
 ; Hooks
 (add-hook 'org-mode-hook 'org-hide-block-all)
