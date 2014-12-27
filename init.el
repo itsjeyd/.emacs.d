@@ -797,8 +797,10 @@ to a unique value for this to work properly."
 (define-key org-mode-map (kbd "M-s c b") 'org-wrap-in-comment-block)
 (define-key org-mode-map (kbd "M-s t h") 'org-insert-todo-heading)
 (define-key org-mode-map (kbd "M-s t s") 'org-insert-todo-subheading)
+(define-key org-mode-map (kbd "s-d") 'org-shiftdown)
 (define-key org-mode-map (kbd "s-l") 'org-shiftleft)
 (define-key org-mode-map (kbd "s-r") 'org-shiftright)
+(define-key org-mode-map (kbd "s-u") 'org-shiftup)
 (global-set-key (kbd "C-c l") 'org-store-link)
 
 ; Variables
