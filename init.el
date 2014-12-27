@@ -790,15 +790,15 @@ to a unique value for this to work properly."
 (define-key org-mode-map (kbd "<C-tab>") 'pcomplete)
 (define-key org-mode-map (kbd "C-c a") 'org-agenda)
 (define-key org-mode-map (kbd "C-c t") 'org-toggle-link-display)
+(define-key org-mode-map (kbd "C-M-q") 'org-fill-paragraph-handle-lists)
 (define-key org-mode-map (kbd "M-n") 'org-next-item)
 (define-key org-mode-map (kbd "M-p") 'org-previous-item)
-(define-key org-mode-map (kbd "C-M-q") 'org-fill-paragraph-handle-lists)
 (define-key org-mode-map (kbd "M-s c a") 'org-force-cycle-archived)
 (define-key org-mode-map (kbd "M-s c b") 'org-wrap-in-comment-block)
-(define-key org-mode-map (kbd "s-l") 'org-shiftleft)
-(define-key org-mode-map (kbd "s-r") 'org-shiftright)
 (define-key org-mode-map (kbd "M-s t h") 'org-insert-todo-heading)
 (define-key org-mode-map (kbd "M-s t s") 'org-insert-todo-subheading)
+(define-key org-mode-map (kbd "s-l") 'org-shiftleft)
+(define-key org-mode-map (kbd "s-r") 'org-shiftright)
 (global-set-key (kbd "C-c l") 'org-store-link)
 
 ; Variables
