@@ -404,6 +404,7 @@ Goes backward if ARG is negative; error if STR not found."
 
 ; Flx
 (flx-ido-mode 1)
+(setq gc-cons-threshold 7000000)
 
 ; Functions
 (defun ido-find-file-as-root ()
