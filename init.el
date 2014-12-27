@@ -700,6 +700,26 @@ HOOKS can be a list of hooks or just a single hook."
 
 (advice-add 'org-export-numbered-headline-p :around #'org-export-unnumbered)
 
+(defun org-add-tags (property value)
+  (let* ((props (org-entry-properties))
+         (unnumbered (assoc "UNNUMBERED" props))
+         (tags-entry (assoc "TAGS" props))
+         (tags (if tags-entry (cdr tags-entry) "")))
+    (when (and unnumbered (not (string-match-p ":notoc:" tags)))
+      (org-set-tags-to (concat tags "notoc")))))
+
+(advice-add 'org-set-property :after #'org-add-tags)
+
+(defun org-remove-tags (property)
+  (let* ((props (org-entry-properties))
+         (unnumbered (assoc "UNNUMBERED" props))
+         (tags-entry (assoc "TAGS" props))
+         (tags (if tags-entry (cdr tags-entry) "")))
+    (when (and (not unnumbered) (string-match-p ":notoc:" tags))
+      (org-set-tags-to (replace-regexp-in-string ":notoc:" "" tags)))))
+
+(advice-add 'org-delete-property :after #'org-remove-tags)
+
 (defun org-back-to-item ()
   (interactive)
   (re-search-backward "^ *[-+*]\\|^ *[1-9]+[)\.] " nil nil 1))
