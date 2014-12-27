@@ -779,6 +779,7 @@ HOOKS can be a list of hooks or just a single hook."
 (setq org-return-follows-link t)
 (setq org-special-ctrl-a/e 'reversed)
 (setq org-special-ctrl-k t)
+(setq org-src-fontify-natively t)
 (setq org-track-ordered-property-with-tag t)
 (setq org-use-speed-commands 'org-at-outline-or-file-header)
 (add-to-list 'org-structure-template-alist
