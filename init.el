@@ -671,6 +671,40 @@ HOOKS can be a list of hooks or just a single hook."
 
 (require 'org)
 
+; Advice
+(defadvice org-display-inline-images
+  (around handle-openwith
+          (&optional include-linked refresh beg end) activate compile)
+  (openwith-mode -1)
+  ad-do-it
+  (openwith-mode 1))
+
+(defun org-add-tags (property value)
+  (let* ((props (org-entry-properties))
+         (unnumbered (assoc "UNNUMBERED" props))
+         (tags-entry (assoc "TAGS" props))
+         (tags (if tags-entry (cdr tags-entry) "")))
+    (when (and unnumbered (not (string-match-p ":notoc:" tags)))
+      (org-set-tags-to (concat tags "notoc")))))
+
+(advice-add 'org-set-property :after #'org-add-tags)
+
+(defun org-export-unnumbered (orig headline info)
+  (and (funcall orig headline info)
+       (not (org-element-property :UNNUMBERED headline))))
+
+(advice-add 'org-export-numbered-headline-p :around #'org-export-unnumbered)
+
+(defun org-remove-tags (property)
+  (let* ((props (org-entry-properties))
+         (unnumbered (assoc "UNNUMBERED" props))
+         (tags-entry (assoc "TAGS" props))
+         (tags (if tags-entry (cdr tags-entry) "")))
+    (when (and (not unnumbered) (string-match-p ":notoc:" tags))
+      (org-set-tags-to (replace-regexp-in-string ":notoc:" "" tags)))))
+
+(advice-add 'org-delete-property :after #'org-remove-tags)
+
 ; Babel
 (require 'ob-dot)
 
@@ -699,44 +733,11 @@ HOOKS can be a list of hooks or just a single hook."
 (idle-require 'ox-md)
 
 ; Functions
-(defadvice org-display-inline-images
-  (around handle-openwith
-          (&optional include-linked refresh beg end) activate compile)
-  (openwith-mode -1)
-  ad-do-it
-  (openwith-mode 1))
-
 (defun org-at-outline-or-file-header ()
   (or (looking-at org-outline-regexp)
       (looking-at "^#\+")
       (looking-at "^[[:blank:]]\\{2,\\}")
       (looking-at "^$")))
-
-(defun org-export-unnumbered (orig headline info)
-  (and (funcall orig headline info)
-       (not (org-element-property :UNNUMBERED headline))))
-
-(advice-add 'org-export-numbered-headline-p :around #'org-export-unnumbered)
-
-(defun org-add-tags (property value)
-  (let* ((props (org-entry-properties))
-         (unnumbered (assoc "UNNUMBERED" props))
-         (tags-entry (assoc "TAGS" props))
-         (tags (if tags-entry (cdr tags-entry) "")))
-    (when (and unnumbered (not (string-match-p ":notoc:" tags)))
-      (org-set-tags-to (concat tags "notoc")))))
-
-(advice-add 'org-set-property :after #'org-add-tags)
-
-(defun org-remove-tags (property)
-  (let* ((props (org-entry-properties))
-         (unnumbered (assoc "UNNUMBERED" props))
-         (tags-entry (assoc "TAGS" props))
-         (tags (if tags-entry (cdr tags-entry) "")))
-    (when (and (not unnumbered) (string-match-p ":notoc:" tags))
-      (org-set-tags-to (replace-regexp-in-string ":notoc:" "" tags)))))
-
-(advice-add 'org-delete-property :after #'org-remove-tags)
 
 (defun org-back-to-item ()
   (interactive)
