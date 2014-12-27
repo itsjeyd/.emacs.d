@@ -735,6 +735,7 @@ HOOKS can be a list of hooks or just a single hook."
 (add-to-list 'org-babel-load-languages '(plantuml . t) t)
 
 ; Hooks
+(add-hook 'org-mode-hook 'org-hide-block-all)
 (add-hook 'org-mode-hook 'turn-on-auto-fill)
 
 ; Key Bindings
