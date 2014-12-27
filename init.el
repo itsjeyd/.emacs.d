@@ -669,6 +669,8 @@ HOOKS can be a list of hooks or just a single hook."
 ;;; Org Mode ;;;
 ;;;;;;;;;;;;;;;;
 
+(require 'org)
+
 ; Emphasis
 (setcar org-emphasis-regexp-components " \t('\"`{-")
 (setcar (nthcdr 1 org-emphasis-regexp-components) "\[[:alpha:]- \t.,:!?;'\")}\\")
