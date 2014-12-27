@@ -692,6 +692,25 @@ HOOKS can be a list of hooks or just a single hook."
       (looking-at "^[[:blank:]]\\{2,\\}")
       (looking-at "^$")))
 
+(defun org-back-to-item ()
+  (interactive)
+  (re-search-backward "^ *[-+*]\\|^ *[1-9]+[)\.] " nil nil 1))
+
+(defun org-fill-paragraph-handle-lists (&optional num-paragraphs)
+  (interactive "p")
+  (save-excursion
+    (let ((bound (if mark-active
+                     (- (region-end) 2)
+                   (progn
+                     (org-back-to-item)
+                     (while (>= num-paragraphs 0)
+                       (call-interactively 'org-mark-element)
+                       (setq num-paragraphs (1- num-paragraphs)))
+                     (- (region-end) 2)))))
+      (while (search-forward "\n" bound t)
+        (replace-match " ")))
+    (org-fill-paragraph)))
+
 (fset 'org-wrap-in-comment-block
    [?\C-o tab ?< ?o tab ?\C-w ?\C-w ?\C-u ?\C-x ?q ?\C-y ?\C-p ?\C-p ?\C-w ?\C-e ?\C-f])
 
@@ -723,6 +742,7 @@ HOOKS can be a list of hooks or just a single hook."
 (define-key org-mode-map (kbd "C-c t") 'org-toggle-link-display)
 (define-key org-mode-map (kbd "M-n") 'org-next-item)
 (define-key org-mode-map (kbd "M-p") 'org-previous-item)
+(define-key org-mode-map (kbd "C-M-q") 'org-fill-paragraph-handle-lists)
 ;; Mnemonics: (i)tem, (t)ree
 (define-key org-mode-map (kbd "M-s c a") 'org-force-cycle-archived)
 (define-key org-mode-map (kbd "M-s c b") 'org-wrap-in-comment-block)
