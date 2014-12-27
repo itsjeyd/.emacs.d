@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: apply
+# key: apply
+# --
+public Promise<${1:A}> apply($2 $3) {
+    $0
+}

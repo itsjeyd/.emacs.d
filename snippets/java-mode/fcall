@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: fcall
+# key: fcall
+# --
+import play.libs.F.Callback;
+$0

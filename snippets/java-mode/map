@@ -1,0 +1,10 @@
+# -*- mode: snippet -*-
+# name: map
+# key: map
+# --
+${1:Promise}.map(
+    new Function<${2:A}, ${3:B}>() {
+        public $3 apply($2 $1) {
+            $0
+        }
+    });

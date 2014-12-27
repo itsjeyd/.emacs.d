@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: func
+# key: func
+# --
+class ${1:name}Function implements Function<${2:A}, ${3:B}> {
+    $0
+}

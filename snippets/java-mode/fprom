@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: fprom
+# key: fprom
+# --
+import play.libs.F.Promise;
+$0

@@ -1,0 +1,10 @@
+# -*- mode: snippet -*-
+# name: flatMap
+# key: flat
+# --
+${1:Promise}.flatMap(
+    new Function<${2:A}, Promise<${3:B}>>() {
+        public Promise<$3> apply($2 $1) {
+            $0
+        }
+    });

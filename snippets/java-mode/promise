@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: promise
+# key: prom
+# --
+Promise<${1:A}> $2 = $0

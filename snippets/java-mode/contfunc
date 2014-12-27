@@ -1,0 +1,15 @@
+# -*- mode: snippet -*-
+# name: contfunc
+# key: contfunc
+# --
+new Function<Boolean, Result>() {
+    ObjectNode result = Json.newObject();
+    public Result apply(Boolean ${1:arg}) {
+        if ($1) {
+            result.put("message", "${2:Entity} successfully $1.");
+            return ok(result);
+        }
+        result.put("message", "$2 not $1.");
+        return badRequest(result);
+    }
+}$0

@@ -1,0 +1,9 @@
+# -*- mode: snippet -*-
+# name: controller
+# key: cont
+# --
+@Security.Authenticated(Secured.class)
+@BodyParser.Of(BodyParser.Json.class)
+public static Promise<Result> ${1:name}(${2:args}) {
+    $0
+}

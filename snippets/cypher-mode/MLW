@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# contributor: tikr
+# name: MATCH LABEL WHERE
+# key: mlw
+# --
+MATCH ($1:$2) WHERE $3=$4 RETURN $5;$0

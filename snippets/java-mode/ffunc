@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: ffunc
+# key: ffunc
+# --
+import play.libs.F.Function;
+$0

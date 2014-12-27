@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: init
+# key: init
+# --
+${1:public} ${2:name}(${3:args}) {
+    $0
+}

@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# contributor: tikr
+# name: MATCH WHERE
+# key: mw
+# --
+MATCH (${1:n}) WHERE $1.$2=$3 RETURN $1;$0
