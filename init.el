@@ -694,6 +694,12 @@ HOOKS can be a list of hooks or just a single hook."
       (looking-at "^[[:blank:]]\\{2,\\}")
       (looking-at "^$")))
 
+(defun org-export-unnumbered (orig headline info)
+  (and (funcall orig headline info)
+       (not (org-element-property :UNNUMBERED headline))))
+
+(advice-add 'org-export-numbered-headline-p :around #'org-export-unnumbered)
+
 (defun org-back-to-item ()
   (interactive)
   (re-search-backward "^ *[-+*]\\|^ *[1-9]+[)\.] " nil nil 1))
