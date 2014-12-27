@@ -902,6 +902,7 @@ HOOKS can be a list of hooks or just a single hook."
 ; Projectile
 (projectile-global-mode 1)
 (add-to-list 'projectile-globally-ignored-directories "doxygen")
+(setq projectile-enable-caching t)
 (setq projectile-known-projects-file "~/.emacs.d/.projectile-bookmarks.eld")
 (setq projectile-mode-line
       '(:eval (format " %s[%s]"
