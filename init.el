@@ -713,6 +713,16 @@ HOOKS can be a list of hooks or just a single hook."
         (replace-match " ")))
     (org-fill-paragraph)))
 
+(defvar org-generic-drawer-regexp "^ +:[[:alpha:]]+:")
+
+(defun org-next-drawer (arg)
+  (interactive "p")
+  (org-next-block arg nil org-generic-drawer-regexp))
+
+(defun org-previous-drawer (arg)
+  (interactive "p")
+  (org-previous-block arg org-generic-drawer-regexp))
+
 (fset 'org-wrap-in-comment-block
    [?\C-o tab ?< ?o tab ?\C-w ?\C-w ?\C-u ?\C-x ?q ?\C-y ?\C-p ?\C-p ?\C-w ?\C-e ?\C-f])
 
@@ -786,6 +796,8 @@ HOOKS can be a list of hooks or just a single hook."
 (setq org-src-fontify-natively t)
 (setq org-track-ordered-property-with-tag t)
 (setq org-use-speed-commands 'org-at-outline-or-file-header)
+(add-to-list 'org-speed-commands-user '("d" . org-next-drawer) t)
+(add-to-list 'org-speed-commands-user '("P" . org-previous-drawer) t)
 (add-to-list 'org-structure-template-alist
              '("o" "#+BEGIN_COMMENT\n?\n#+END_COMMENT") t)
 
