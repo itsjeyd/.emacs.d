@@ -1115,6 +1115,11 @@ HOOKS can be a list of hooks or just a single hook."
 (require 'magit)
 
 ; Functions
+(defun magit-log-all ()
+  (interactive)
+  (magit-key-mode-popup-logging)
+  (magit-key-mode-toggle-option (quote logging) "--all"))
+
 (defun magit-ls-files ()
   "List tracked files of current repository."
   (interactive)
@@ -1159,6 +1164,7 @@ HOOKS can be a list of hooks or just a single hook."
 (define-key magit-mode-map (kbd "M-s") nil)
 (define-key magit-mode-map (kbd "M-S") nil)
 (define-key magit-mode-map (kbd "K") 'magit-ls-files)
+(define-key magit-mode-map (kbd "l") 'magit-log-all)
 
 ; Variables
 (setq magit-diff-refine-hunk t)
