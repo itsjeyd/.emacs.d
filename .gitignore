@@ -15,5 +15,6 @@ tramp
 # Folders
 elpa/
 ensime-servers/
+image-dired/
 url/
 var/
