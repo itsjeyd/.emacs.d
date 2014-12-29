@@ -180,6 +180,27 @@
 ;;; Editing ;;;
 ;;;;;;;;;;;;;;;
 
+; Advice
+(defadvice kill-ring-save (before slick-copy activate compile)
+  "When called interactively with no active region, copy a single
+line instead."
+  (interactive
+   (if mark-active
+       (list (region-beginning) (region-end))
+     (list (line-beginning-position) (line-beginning-position 2)))))
+
+(defadvice kill-region (before slick-cut activate compile)
+  "When called interactively with no active region, kill a single
+line instead."
+  (interactive
+   (if mark-active
+       (list (region-beginning) (region-end))
+     (list (line-beginning-position) (line-beginning-position 2)))))
+
+(defadvice set-mark-command
+  (before record-current-position (arg) activate compile)
+  (when arg (push-mark)))
+
 ; Anchored Transpose
 (global-set-key (kbd "M-s a t") 'anchored-transpose)
 
@@ -221,26 +242,6 @@
 
 ; Functions
 (autoload 'zap-up-to-char "misc")
-
-(defadvice kill-ring-save (before slick-copy activate compile)
-  "When called interactively with no active region, copy a single
-line instead."
-  (interactive
-   (if mark-active
-       (list (region-beginning) (region-end))
-     (list (line-beginning-position) (line-beginning-position 2)))))
-
-(defadvice kill-region (before slick-cut activate compile)
-  "When called interactively with no active region, kill a single
-line instead."
-  (interactive
-   (if mark-active
-       (list (region-beginning) (region-end))
-     (list (line-beginning-position) (line-beginning-position 2)))))
-
-(defadvice set-mark-command
-  (before record-current-position (arg) activate compile)
-  (when arg (push-mark)))
 
 (defun flush-empty-lines ()
   "Remove empty lines from buffer."
