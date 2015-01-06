@@ -388,6 +388,15 @@ Goes backward if ARG is negative; error if STR not found."
 
 
 ;;;;;;;;;;;;
+;;; Helm ;;;
+;;;;;;;;;;;;
+
+(require 'helm-config)
+(setq helm-buffers-fuzzy-matching t)
+
+
+
+;;;;;;;;;;;;
 ;;; Help ;;;
 ;;;;;;;;;;;;
 
