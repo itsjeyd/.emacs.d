@@ -869,6 +869,10 @@ to a unique value for this to work properly."
 (add-to-list 'package-archives
              '("org" . "http://orgmode.org/elpa/") t)
 
+; Paradox
+(setq paradox-automatically-star nil)
+(setq paradox-execute-asynchronously nil)
+
 
 
 ;;;;;;;;;;;;;;;;;;;
