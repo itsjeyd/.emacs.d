@@ -461,6 +461,14 @@ root-privileges if it is not writable by user."
 ; Cursor
 (blink-cursor-mode -1)
 
+; Functions
+(defun toggle-transparency ()
+  (interactive)
+  (let ((opacity (frame-parameter nil 'alpha)))
+    (if (or (not opacity) (= opacity 100))
+        (set-frame-parameter nil 'alpha 80)
+      (set-frame-parameter nil 'alpha 100))))
+
 ; Hooks
 (add-hook 'linum-mode-hook 'git-gutter-fringe+-change-fringe)
 
