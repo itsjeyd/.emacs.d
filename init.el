@@ -831,6 +831,7 @@ to a unique value for this to work properly."
 (setq org-catch-invisible-edits 'error)
 (setq org-completion-use-ido t)
 (setq org-confirm-babel-evaluate nil)
+(setq org-cycle-include-plain-lists 'integrate)
 (setq org-export-dispatch-use-expert-ui t)
 (setq org-enforce-todo-dependencies t)
 (setq org-export-copy-to-kill-ring nil)
