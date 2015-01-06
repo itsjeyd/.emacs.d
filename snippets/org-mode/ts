@@ -1,0 +1,17 @@
+# -*- mode: snippet -*-
+# name: two-sided drill card
+# key: ts
+# --
+* Word                                                                :drill:
+  :PROPERTIES:
+  :DRILL_CARD_TYPE: twosided
+  :END:
+  Translate:
+
+** Norsk
+   $1
+
+** German
+   $2
+
+$0
