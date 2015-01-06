@@ -740,6 +740,11 @@ HOOKS can be a list of hooks or just a single hook."
 (add-to-list 'org-babel-load-languages '(ditaa . t) t)
 (add-to-list 'org-babel-load-languages '(plantuml . t) t)
 
+; Drill
+(require 'org-drill)
+(setq org-drill-scope 'directory)
+(setq org-drill-hide-item-headings-p t)
+
 ; Emphasis
 (setcar org-emphasis-regexp-components " \t('\"`{-")
 (setcar (nthcdr 1 org-emphasis-regexp-components) "\[[:alpha:]- \t.,:!?;'\")}\\")
