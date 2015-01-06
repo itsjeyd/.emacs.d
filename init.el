@@ -201,6 +201,14 @@ line instead."
   (before record-current-position (arg) activate compile)
   (when arg (push-mark)))
 
+(defun goto-beginning-of-word (arg)
+  (unless (looking-back "\\b")
+    (backward-word)))
+
+(advice-add 'capitalize-word :before #'goto-beginning-of-word)
+(advice-add 'downcase-word :before #'goto-beginning-of-word)
+(advice-add 'upcase-word :before #'goto-beginning-of-word)
+
 ; Anchored Transpose
 (global-set-key (kbd "M-s a t") 'anchored-transpose)
 
