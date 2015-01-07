@@ -866,6 +866,24 @@ to a unique value for this to work properly."
 
 
 
+;;;;;;;;;;;;;;;;
+;;; Overtone ;;;
+;;;;;;;;;;;;;;;;
+
+(require 'cider)
+
+; Hooks
+(add-hook 'cider-mode-hook 'cider-turn-on-eldoc-mode)
+(add-hook 'cider-mode-hook 'ac-cider-setup)
+(add-hook 'cider-repl-mode-hook 'ac-cider-setup)
+
+; Variables
+(setq cider-repl-history-file "~/.emacs.d/cider-history")
+(setq cider-repl-use-pretty-printing t)
+(setq nrepl-buffer-name-show-port t)
+
+
+
 ;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Package Manager ;;;
 ;;;;;;;;;;;;;;;;;;;;;;;
@@ -903,6 +921,8 @@ to a unique value for this to work properly."
 (ac-flyspell-workaround)
 (require 'org-ac)
 (org-ac/config-default)
+(require 'ac-cider)
+(add-to-list 'ac-modes 'cider-mode)
 
 (defadvice ac-quick-help
     (around turn-off-line-truncation (&optional force) activate compile)
