@@ -463,8 +463,7 @@ root-privileges if it is not writable by user."
 ; Key Bindings
 (global-set-key (kbd "C-c f") 'ido-find-file-as-root)
 (global-set-key (kbd "M-x") 'smex)
-(global-set-key (kbd "<menu>") 'smex)
-(global-set-key (kbd "M-X") 'smex-major-mode-commands)
+(global-set-key (kbd "<menu>") 'smex-major-mode-commands)
 
 ; Ubiquitous
 (ido-ubiquitous-mode 1)
