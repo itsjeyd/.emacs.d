@@ -25,6 +25,36 @@
 
 
 
+;;;;;;;;;;;;
+;;; Keys ;;;
+;;;;;;;;;;;;
+
+(defvar custom-keys-mode-map (make-sparse-keymap)
+  "Keymap for custom-keys-mode.")
+
+(defvar custom-keys-mode-prefix-map (lookup-key global-map (kbd "M-s"))
+  "Keymap for custom key bindings starting with M-s prefix.")
+
+(define-key custom-keys-mode-map (kbd "M-s") custom-keys-mode-prefix-map)
+
+(define-minor-mode custom-keys-mode
+  "A minor mode for custom key bindings."
+  :lighter ""
+  :keymap 'custom-keys-mode-map
+  :global t)
+
+(defun prioritize-custom-keys
+    (file &optional noerror nomessage nosuffix must-suffix)
+  "Try to ensure that custom key bindings always have priority."
+  (unless (eq (caar minor-mode-map-alist) 'custom-keys-mode)
+    (let ((custom-keys-mode-map (assq 'custom-keys-mode minor-mode-map-alist)))
+      (assq-delete-all 'custom-keys-mode minor-mode-map-alist)
+      (add-to-list 'minor-mode-map-alist custom-keys-mode-map))))
+
+(advice-add 'load :after #'prioritize-custom-keys)
+
+
+
 ;;;;;;;;;;;;;;;
 ;;; Backups ;;;
 ;;;;;;;;;;;;;;;
@@ -60,8 +90,8 @@
 
 ; Key Bindings
 (global-set-key (kbd "C-x C-b") 'ibuffer)
-(global-set-key (kbd "M-s r b") 'revert-buffer)
-(global-set-key (kbd "M-s t b") 'make-temp-buffer)
+(define-key custom-keys-mode-prefix-map (kbd "r b") 'revert-buffer)
+(define-key custom-keys-mode-prefix-map (kbd "t b") 'make-temp-buffer)
 
 ; Variables
 (setq confirm-nonexistent-file-or-buffer nil)
@@ -210,13 +240,13 @@ line instead."
 (advice-add 'upcase-word :before #'goto-beginning-of-word)
 
 ; Anchored Transpose
-(global-set-key (kbd "M-s a t") 'anchored-transpose)
+(define-key custom-keys-mode-prefix-map (kbd "a t") 'anchored-transpose)
 
 ; Browse Kill Ring
-(global-set-key (kbd "M-s b k") 'browse-kill-ring)
+(define-key custom-keys-mode-prefix-map (kbd "b k") 'browse-kill-ring)
 
 ; Caps Lock
-(global-set-key (kbd "M-s c l") 'caps-lock-mode)
+(define-key custom-keys-mode-prefix-map (kbd "c l") 'caps-lock-mode)
 
 ; Change Inner
 (global-set-key (kbd "C-c i") 'change-inner)
@@ -246,7 +276,7 @@ line instead."
 (add-hook 'org-mode-hook 'org-add-electric-pairs)
 
 ; Expand Region
-(global-set-key (kbd "M-s @") 'er/expand-region)
+(define-key custom-keys-mode-prefix-map (kbd "@") 'er/expand-region)
 
 ; Functions
 (autoload 'zap-up-to-char "misc")
@@ -307,25 +337,25 @@ Goes backward if ARG is negative; error if STR not found."
 ; Key Bindings
 (global-set-key (kbd "M-w") 'kill-ring-save-with-arg)
 (global-set-key (kbd "C-w") 'kill-region-with-arg)
-(global-set-key (kbd "M-s f e") 'flush-empty-lines)
-(global-set-key (kbd "M-s s u") 'sort-lines-and-uniquify)
-(global-set-key (kbd "M-s z") 'zap-to-string)
+(define-key custom-keys-mode-prefix-map (kbd "f e") 'flush-empty-lines)
+(define-key custom-keys-mode-prefix-map (kbd "s u") 'sort-lines-and-uniquify)
+(define-key custom-keys-mode-prefix-map (kbd "z") 'zap-to-string)
 (global-set-key (kbd "M-z") 'zap-up-to-char)
 
 ; Mark Lines
 (require 'mark-lines)
-(global-set-key (kbd "M-s m") 'mark-lines-next-line)
+(define-key custom-keys-mode-prefix-map (kbd "m") 'mark-lines-next-line)
 
 ; Move Text
-(global-set-key (kbd "M-s u") 'move-text-up)
-(global-set-key (kbd "M-s d") 'move-text-down)
+(define-key custom-keys-mode-prefix-map (kbd "u") 'move-text-up)
+(define-key custom-keys-mode-prefix-map (kbd "d") 'move-text-down)
 
 ; Multiple Cursors
-(global-set-key (kbd "M-s e l") 'mc/edit-lines)
-(global-set-key (kbd "M-s n l") 'mc/mark-next-like-this)
-(global-set-key (kbd "M-s a l") 'mc/mark-all-like-this)
-(global-set-key (kbd "M-s a d") 'mc/mark-all-dwim)
-(global-set-key (kbd "M-s r a") 'set-rectangular-region-anchor)
+(define-key custom-keys-mode-prefix-map (kbd "e l") 'mc/edit-lines)
+(define-key custom-keys-mode-prefix-map (kbd "n l") 'mc/mark-next-like-this)
+(define-key custom-keys-mode-prefix-map (kbd "a l") 'mc/mark-all-like-this)
+(define-key custom-keys-mode-prefix-map (kbd "a d") 'mc/mark-all-dwim)
+(define-key custom-keys-mode-prefix-map (kbd "r a") 'set-rectangular-region-anchor)
 
 ; Rainbow Delimiters
 (add-hook 'org-mode-hook 'rainbow-delimiters-mode)
@@ -1147,7 +1177,7 @@ to a unique value for this to work properly."
 
 ; Loccur
 (require 'loccur)
-(global-set-key (kbd "M-s l o") 'loccur-current)
+(define-key custom-keys-mode-prefix-map (kbd "l o") 'loccur-current)
 
 ; Smartscan
 (global-smartscan-mode t)
@@ -1265,7 +1295,7 @@ to a unique value for this to work properly."
 (add-hook 'git-commit-mode-hook 'turn-on-auto-fill)
 
 ; Key Bindings
-(global-set-key (kbd "M-s g s") 'magit-status)
+(define-key custom-keys-mode-prefix-map (kbd "g s") 'magit-status)
 (define-key magit-mode-map (kbd "M-s") nil)
 (define-key magit-mode-map (kbd "M-S") nil)
 (define-key magit-mode-map (kbd "K") 'magit-ls-files)
@@ -1319,7 +1349,7 @@ With a prefix arg, clear selective display."
 ; Key Bindings
 (global-set-key (kbd "C-x n i") 'narrow-to-region-indirect-buffer)
 (global-set-key (kbd "C-x $") 'tim/set-selective-display)
-(global-set-key (kbd "M-s t t") 'toggle-truncate-lines)
+(define-key custom-keys-mode-prefix-map (kbd "t t") 'toggle-truncate-lines)
 
 ; Variables
 (setq-default truncate-lines t)
@@ -1388,10 +1418,10 @@ than one window."
     (switch-to-buffer other-buf)))
 
 ; Key Bindings
-(global-set-key (kbd "M-s t d") 'toggle-window-dedicated)
-(global-set-key (kbd "M-s c s") 'change-split)
-(global-set-key (kbd "M-s k o") 'kill-other-buffer-and-window)
-(global-set-key (kbd "M-s s w") 'swap-windows)
+(define-key custom-keys-mode-prefix-map (kbd "t d") 'toggle-window-dedicated)
+(define-key custom-keys-mode-prefix-map (kbd "c s") 'change-split)
+(define-key custom-keys-mode-prefix-map (kbd "k o") 'kill-other-buffer-and-window)
+(define-key custom-keys-mode-prefix-map (kbd "s w") 'swap-windows)
 
 ; Modes
 (winner-mode 1)
@@ -1428,7 +1458,7 @@ With prefix P, create local abbrev. Otherwise it will be global."
                before after (if local "loc" "glob"))))
 
 ; Key Bindings
-(global-set-key (kbd "M-s i a") 'ispell-word-then-abbrev)
+(define-key custom-keys-mode-prefix-map (kbd "i a") 'ispell-word-then-abbrev)
 
 ; Variables
 (setq abbrev-file-name "~/.emacs.d/.abbrev_defs")
@@ -1479,3 +1509,4 @@ With prefix P, create local abbrev. Otherwise it will be global."
 
 (split-window-horizontally)
 (toggle-frame-maximized)
+(custom-keys-mode 1)
