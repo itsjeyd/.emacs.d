@@ -389,10 +389,6 @@ Goes backward if ARG is negative; error if STR not found."
 (add-hook 'lisp-interaction-mode-hook 'prettify-symbols-mode)
 (add-hook 'lisp-interaction-mode-hook 'eldoc-mode)
 
-; Key Bindings
-(define-key emacs-lisp-mode-map (kbd "M-s e b") 'eval-buffer)
-(define-key emacs-lisp-mode-map (kbd "M-s e r") 'eval-region)
-
 ; Slime Nav
 (defadvice turn-on-elisp-slime-nav-mode
   (after configure-slime-nav activate compile)
