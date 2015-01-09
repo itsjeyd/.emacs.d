@@ -1488,6 +1488,7 @@ With prefix P, create local abbrev. Otherwise it will be global."
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (idle-require-mode 1)
+(custom-keys-mode 1)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -1504,4 +1505,3 @@ With prefix P, create local abbrev. Otherwise it will be global."
 
 (split-window-horizontally)
 (toggle-frame-maximized)
-(custom-keys-mode 1)
