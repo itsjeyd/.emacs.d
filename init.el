@@ -312,6 +312,11 @@ line instead."
   (sort-lines nil (point-min) (point-max))
   (delete-duplicate-lines (point-min) (point-max) nil nil nil t))
 
+(defun ucs-rightwards-arrow ()
+  "Insert unicode symbol: →"
+  (interactive)
+  (insert-char #x2192))
+
 (defun unfill-paragraph (&optional region)
   "Takes a multi-line paragraph and turns it into a single line of text."
   (interactive)
@@ -340,6 +345,7 @@ Goes backward if ARG is negative; error if STR not found."
 (define-key custom-keys-mode-prefix-map (kbd "f e") 'flush-empty-lines)
 (define-key custom-keys-mode-prefix-map (kbd "s u") 'sort-lines-and-uniquify)
 (define-key custom-keys-mode-prefix-map (kbd "z") 'zap-to-string)
+(define-key iso-transl-ctl-x-8-map (kbd "a") 'ucs-rightwards-arrow)
 (global-set-key (kbd "M-z") 'zap-up-to-char)
 
 ; Mark Lines
