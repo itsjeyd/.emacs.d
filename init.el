@@ -340,14 +340,14 @@ Goes backward if ARG is negative; error if STR not found."
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 
 ; Key Bindings
-(global-set-key (kbd "M-w") 'kill-ring-save-with-arg)
 (require 'iso-transl)
 (global-set-key (kbd "C-w") 'kill-region-with-arg)
+(global-set-key (kbd "M-w") 'kill-ring-save-with-arg)
+(global-set-key (kbd "M-z") 'zap-up-to-char)
 (define-key custom-keys-mode-prefix-map (kbd "f e") 'flush-empty-lines)
 (define-key custom-keys-mode-prefix-map (kbd "s u") 'sort-lines-and-uniquify)
 (define-key custom-keys-mode-prefix-map (kbd "z") 'zap-to-string)
 (define-key iso-transl-ctl-x-8-map (kbd "a") 'ucs-rightwards-arrow)
-(global-set-key (kbd "M-z") 'zap-up-to-char)
 
 ; Mark Lines
 (require 'mark-lines)
@@ -849,6 +849,7 @@ to a unique value for this to work properly."
 (add-hook 'org-mode-hook 'turn-on-auto-fill)
 
 ; Key Bindings
+(global-set-key (kbd "C-c l") 'org-store-link)
 (define-key org-mode-map (kbd "RET") 'org-return-indent)
 (define-key org-mode-map (kbd "<C-tab>") 'pcomplete)
 (define-key org-mode-map (kbd "C-c a") 'org-agenda)
@@ -864,7 +865,6 @@ to a unique value for this to work properly."
 (define-key org-mode-map (kbd "s-l") 'org-shiftleft)
 (define-key org-mode-map (kbd "s-r") 'org-shiftright)
 (define-key org-mode-map (kbd "s-u") 'org-shiftup)
-(global-set-key (kbd "C-c l") 'org-store-link)
 
 ; Variables
 (setq org-agenda-include-diary t)
@@ -1420,15 +1420,15 @@ than one window."
     (switch-to-buffer other-buf)))
 
 ; Key Bindings
-(define-key custom-keys-mode-prefix-map (kbd "t d") 'toggle-window-dedicated)
 (define-key custom-keys-mode-prefix-map (kbd "c s") 'change-split)
 (define-key custom-keys-mode-prefix-map (kbd "k o") 'kill-other-buffer-and-window)
 (define-key custom-keys-mode-prefix-map (kbd "s w") 'swap-windows)
+(define-key custom-keys-mode-prefix-map (kbd "t d") 'toggle-window-dedicated)
 
 ; Modes
 (winner-mode 1)
-(global-set-key (kbd "C-c u") 'winner-undo)
 (global-set-key (kbd "C-c r") 'winner-redo)
+(global-set-key (kbd "C-c u") 'winner-undo)
 
 ; Variables
 (setq ediff-split-window-function 'split-window-horizontally)
