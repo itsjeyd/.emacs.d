@@ -242,6 +242,33 @@ line instead."
 ; Anchored Transpose
 (define-key custom-keys-mode-prefix-map (kbd "a t") 'anchored-transpose)
 
+; Auto-complete
+(require 'auto-complete-config)
+(ac-config-default)
+(ac-flyspell-workaround)
+(require 'org-ac)
+(org-ac/config-default)
+(require 'ac-cider)
+(add-to-list 'ac-modes 'cider-mode)
+
+(defadvice ac-quick-help
+    (around turn-off-line-truncation (&optional force) activate compile)
+  (toggle-truncate-lines -1)
+  ad-do-it
+  (toggle-truncate-lines 1))
+
+(define-key ac-completing-map (kbd "C-h") 'ac-help)
+(define-key ac-completing-map (kbd "C-v") 'ac-quick-help-scroll-down)
+(define-key ac-completing-map (kbd "M-v") 'ac-quick-help-scroll-up)
+(define-key ac-menu-map (kbd "C-f") 'ac-stop)
+
+(setq ac-auto-show-menu 0.3)
+(setq ac-comphist-file "~/.emacs.d/.ac-comphist.dat")
+(setq ac-ignore-case nil)
+(setq ac-quick-help-delay 1.0)
+(setq ac-use-menu-map t)
+(add-to-list 'ac-sources 'ac-source-yasnippet)
+
 ; Browse Kill Ring
 (define-key custom-keys-mode-prefix-map (kbd "b k") 'browse-kill-ring)
 
@@ -364,10 +391,6 @@ Goes backward if ARG is negative; error if STR not found."
 (define-key custom-keys-mode-prefix-map (kbd "a d") 'mc/mark-all-dwim)
 (define-key custom-keys-mode-prefix-map (kbd "r a") 'set-rectangular-region-anchor)
 
-; Rainbow Delimiters
-(add-hook 'org-mode-hook 'rainbow-delimiters-mode)
-(add-hook 'prog-mode-hook 'rainbow-delimiters-mode)
-
 ; Variables
 (setq cua-enable-cua-keys nil)
 (setq require-final-newline t)
@@ -375,13 +398,6 @@ Goes backward if ARG is negative; error if STR not found."
 (setq sentence-end-double-space nil)
 (setq set-mark-command-repeat-pop t)
 (setq tab-width 4)
-
-; Whitespace
-(require 'whitespace)
-(setq whitespace-style '(face lines-tail))
-(setq whitespace-line-column nil)
-(add-hook 'org-mode-hook 'whitespace-mode)
-(add-hook 'prog-mode-hook 'whitespace-mode)
 
 
 
@@ -520,6 +536,10 @@ root-privileges if it is not writable by user."
 (require 'rainbow-mode)
 (add-hook 'css-mode-hook 'rainbow-turn-on)
 
+; Rainbow Delimiters
+(add-hook 'org-mode-hook 'rainbow-delimiters-mode)
+(add-hook 'prog-mode-hook 'rainbow-delimiters-mode)
+
 ; Theme
 (defun customize-enabled-theme ()
   (let ((enabled-theme (car custom-enabled-themes))
@@ -564,6 +584,13 @@ root-privileges if it is not writable by user."
 (setq inhibit-startup-screen t)
 (setq initial-scratch-message
       ";; Parentheses are just *hugs* for your function calls!\n\n")
+
+; Whitespace
+(require 'whitespace)
+(setq whitespace-style '(face lines-tail))
+(setq whitespace-line-column nil)
+(add-hook 'org-mode-hook 'whitespace-mode)
+(add-hook 'prog-mode-hook 'whitespace-mode)
 
 
 
@@ -946,33 +973,6 @@ to a unique value for this to work properly."
 ;;;;;;;;;;;;;;;;;;;
 ;;; Programming ;;;
 ;;;;;;;;;;;;;;;;;;;
-
-; Auto-complete
-(require 'auto-complete-config)
-(ac-config-default)
-(ac-flyspell-workaround)
-(require 'org-ac)
-(org-ac/config-default)
-(require 'ac-cider)
-(add-to-list 'ac-modes 'cider-mode)
-
-(defadvice ac-quick-help
-    (around turn-off-line-truncation (&optional force) activate compile)
-  (toggle-truncate-lines -1)
-  ad-do-it
-  (toggle-truncate-lines 1))
-
-(define-key ac-completing-map (kbd "C-h") 'ac-help)
-(define-key ac-completing-map (kbd "C-v") 'ac-quick-help-scroll-down)
-(define-key ac-completing-map (kbd "M-v") 'ac-quick-help-scroll-up)
-(define-key ac-menu-map (kbd "C-f") 'ac-stop)
-
-(setq ac-auto-show-menu 0.3)
-(setq ac-comphist-file "~/.emacs.d/.ac-comphist.dat")
-(setq ac-ignore-case nil)
-(setq ac-quick-help-delay 1.0)
-(setq ac-use-menu-map t)
-(add-to-list 'ac-sources 'ac-source-yasnippet)
 
 ; Hide/Show
 (require 'hideshow-org)
