@@ -985,13 +985,7 @@ to a unique value for this to work properly."
   (hs-org/minor-mode 1)
   (configure-hs))
 
-(add-to-hooks '(emacs-lisp-mode-hook
-                haml-mode-hook
-                html-mode-hook
-                java-mode-hook
-                js-mode-hook
-                php-mode-hook
-                python-mode-hook)
+(add-to-hooks '(css-mode-hook haml-mode-hook html-mode-hook prog-mode-hook)
               'turn-on-hs-org)
 
 ; Indentation
