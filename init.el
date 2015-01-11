@@ -367,14 +367,13 @@ Goes backward if ARG is negative; error if STR not found."
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 
 ; Key Bindings
-(require 'iso-transl)
 (global-set-key (kbd "C-w") 'kill-region-with-arg)
 (global-set-key (kbd "M-w") 'kill-ring-save-with-arg)
 (global-set-key (kbd "M-z") 'zap-up-to-char)
+(define-key ctl-x-map (kbd "8 a") 'ucs-rightwards-arrow)
 (define-key custom-keys-mode-prefix-map (kbd "f e") 'flush-empty-lines)
 (define-key custom-keys-mode-prefix-map (kbd "s u") 'sort-lines-and-uniquify)
 (define-key custom-keys-mode-prefix-map (kbd "z") 'zap-to-string)
-(define-key iso-transl-ctl-x-8-map (kbd "a") 'ucs-rightwards-arrow)
 
 ; Mark Lines
 (require 'mark-lines)
