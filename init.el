@@ -355,7 +355,7 @@ line instead."
              (interactive "*p")
              (insert (make-string arg ,code-point))))))
 
-(ucs-make-command "RIGHT ARROW")
+(ucs-make-command "LONG RIGHTWARDS ARROW")
 
 (defun unfill-paragraph (&optional region)
   "Takes a multi-line paragraph and turns it into a single line of text."
@@ -383,7 +383,7 @@ Goes backward if ARG is negative; error if STR not found."
 (global-set-key (kbd "C-w") 'kill-region-with-arg)
 (global-set-key (kbd "M-w") 'kill-ring-save-with-arg)
 (global-set-key (kbd "M-z") 'zap-up-to-char)
-(define-key ctl-x-map (kbd "8 a") 'right-arrow)
+(define-key ctl-x-map (kbd "8 a") 'long-rightwards-arrow)
 (define-key custom-keys-mode-prefix-map (kbd "f e") 'flush-empty-lines)
 (define-key custom-keys-mode-prefix-map (kbd "s u") 'sort-lines-and-uniquify)
 (define-key custom-keys-mode-prefix-map (kbd "z") 'zap-to-string)
