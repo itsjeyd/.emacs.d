@@ -339,10 +339,23 @@ line instead."
   (sort-lines nil (point-min) (point-max))
   (delete-duplicate-lines (point-min) (point-max) nil nil nil t))
 
-(defun ucs-rightwards-arrow ()
-  "Insert unicode symbol: →"
-  (interactive)
-  (insert-char #x2192))
+(defun ucs-make-command (character)
+  "Create new command for inserting Unicode character CHARACTER."
+  (let* ((code-point (if (string-match-p "^#" character)
+                         (read character)
+                       (cdr (assoc-string character (ucs-names)))))
+         (char-name (if (string-match-p "^#" character)
+                        (car (rassq code-point (ucs-names)))
+                      character))
+         (cmd-name (downcase (replace-regexp-in-string " " "-" char-name nil t))))
+    (eval `(defun ,(intern cmd-name) (arg)
+             ,(concat "Insert Unicode character `" char-name
+                      (format "'.\nThis character has code point %d"
+                              code-point) ".")
+             (interactive "*p")
+             (insert (make-string arg ,code-point))))))
+
+(ucs-make-command "RIGHT ARROW")
 
 (defun unfill-paragraph (&optional region)
   "Takes a multi-line paragraph and turns it into a single line of text."
@@ -370,7 +383,7 @@ Goes backward if ARG is negative; error if STR not found."
 (global-set-key (kbd "C-w") 'kill-region-with-arg)
 (global-set-key (kbd "M-w") 'kill-ring-save-with-arg)
 (global-set-key (kbd "M-z") 'zap-up-to-char)
-(define-key ctl-x-map (kbd "8 a") 'ucs-rightwards-arrow)
+(define-key ctl-x-map (kbd "8 a") 'right-arrow)
 (define-key custom-keys-mode-prefix-map (kbd "f e") 'flush-empty-lines)
 (define-key custom-keys-mode-prefix-map (kbd "s u") 'sort-lines-and-uniquify)
 (define-key custom-keys-mode-prefix-map (kbd "z") 'zap-to-string)
