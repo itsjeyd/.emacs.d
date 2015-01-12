@@ -442,11 +442,33 @@ Goes backward if ARG is negative; error if STR not found."
 
 (find-function-setup-keys)
 
+; Functions
+(defun info-display-topic (topic)
+  "Create command that opens up a separate *info* buffer for TOPIC."
+  (let ((bufname (format "*%s Info*" (capitalize topic)))
+        (cmd-name (format "info-display-%s" topic)))
+    (eval `(defun ,(intern cmd-name) ()
+             ,(format "Jump to %s info buffer, creating it if necessary. This is *not* the buffer \\[info] would jump to, it is a separate entity." topic)
+             (interactive)
+             (if (get-buffer ,bufname)
+                 (switch-to-buffer ,bufname)
+               (info ,topic ,bufname))))))
+
 ; Guide Key
 (setq guide-key/guide-key-sequence
       '("C-c" "C-x r" "C-x v" "C-x 4" "C-c p" "C-x c"))
 (setq guide-key/popup-window-position 'bottom)
 (guide-key-mode t)
+
+; Key Bindings
+(define-key custom-keys-mode-prefix-map (kbd "i e")
+  (info-display-topic "emacs"))
+(define-key custom-keys-mode-prefix-map (kbd "i l")
+  (info-display-topic "elisp"))
+(define-key custom-keys-mode-prefix-map (kbd "i m")
+  (info-display-topic "magit"))
+(define-key custom-keys-mode-prefix-map (kbd "i o")
+  (info-display-topic "org"))
 
 ; Variables
 (setq help-window-select t)
