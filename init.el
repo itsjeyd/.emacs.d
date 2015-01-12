@@ -211,22 +211,6 @@
 ;;;;;;;;;;;;;;;
 
 ; Advice
-(defadvice kill-ring-save (before slick-copy activate compile)
-  "When called interactively with no active region, copy a single
-line instead."
-  (interactive
-   (if mark-active
-       (list (region-beginning) (region-end))
-     (list (line-beginning-position) (line-beginning-position 2)))))
-
-(defadvice kill-region (before slick-cut activate compile)
-  "When called interactively with no active region, kill a single
-line instead."
-  (interactive
-   (if mark-active
-       (list (region-beginning) (region-end))
-     (list (line-beginning-position) (line-beginning-position 2)))))
-
 (defadvice set-mark-command
   (before record-current-position (arg) activate compile)
   (when arg (push-mark)))
@@ -238,6 +222,18 @@ line instead."
 (advice-add 'capitalize-word :before #'goto-beginning-of-word)
 (advice-add 'downcase-word :before #'goto-beginning-of-word)
 (advice-add 'upcase-word :before #'goto-beginning-of-word)
+
+(defun determine-scope (beg end &optional region)
+  "Determine scope for next invocation of `kill-region' or
+`kill-ring-save': When called interactively with no active
+region, operate on a single line. Otherwise, operate on region."
+  (interactive
+   (if mark-active
+       (list (region-beginning) (region-end))
+     (list (line-beginning-position) (line-beginning-position 2)))))
+
+(advice-add 'kill-region :before #'determine-scope)
+(advice-add 'kill-ring-save :before #'determine-scope)
 
 ; Anchored Transpose
 (define-key custom-keys-mode-prefix-map (kbd "a t") 'anchored-transpose)
