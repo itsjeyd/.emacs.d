@@ -1347,8 +1347,8 @@ to a unique value for this to work properly."
 (define-key magit-mode-map (kbd "l") 'magit-log-all)
 
 ; Variables
-(setq magit-diff-refine-hunk t)
 (setq magit-auto-revert-mode-lighter "")
+(setq magit-diff-refine-hunk t)
 (setq magit-use-overlays nil)
 
 
