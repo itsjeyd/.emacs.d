@@ -509,6 +509,33 @@ root-privileges if it is not writable by user."
 ; Cursor
 (blink-cursor-mode -1)
 
+(defvar default-cursor-color "#F2777A")
+(defvar expandable-thing-before-point-color "#00FF7F")
+
+(defun change-cursor-color-when-can-expand ()
+  (interactive)
+  (set-cursor-color (if (last-thing-expandable-p)
+                        expandable-thing-before-point-color
+                      default-cursor-color)))
+
+(defun last-thing-expandable-p ()
+  (or (abbrev--before-point) (yasnippet-can-fire-p)))
+
+(defun yasnippet-can-fire-p (&optional field)
+  (setq yas--condition-cache-timestamp (current-time))
+  (let (relevant-snippets)
+    (unless (and yas-expand-only-for-last-commands
+                 (not (member last-command yas-expand-only-for-last-commands)))
+      (setq relevant-snippets (if field
+                                  (save-restriction
+                                    (narrow-to-region (yas--field-start field)
+                                                      (yas--field-end field))
+                                    (yas--templates-for-key-at-point))
+                                (yas--templates-for-key-at-point)))
+      (and relevant-snippets (first relevant-snippets)))))
+
+(add-hook 'post-command-hook 'change-cursor-color-when-can-expand)
+
 ; Functions
 (defun toggle-transparency ()
   (interactive)
