@@ -90,8 +90,8 @@
 
 ; Key Bindings
 (global-set-key (kbd "C-x C-b") 'ibuffer)
+(global-set-key (kbd "C-c t") 'make-temp-buffer)
 (define-key custom-keys-mode-prefix-map (kbd "r b") 'revert-buffer)
-(define-key custom-keys-mode-prefix-map (kbd "t b") 'make-temp-buffer)
 
 ; Variables
 (setq confirm-nonexistent-file-or-buffer nil)
@@ -859,11 +859,20 @@ to a unique value for this to work properly."
   (interactive "p")
   (org-previous-block arg org-generic-drawer-regexp))
 
+(defvar org-blocks-hidden nil)
+
+(defun org-toggle-blocks ()
+  (interactive)
+  (if org-blocks-hidden
+      (org-show-block-all)
+    (org-hide-block-all))
+  (setq-local org-blocks-hidden (not org-blocks-hidden)))
+
 (fset 'org-wrap-in-comment-block
    [?\C-o tab ?< ?o tab ?\C-w ?\C-w ?\C-u ?\C-x ?q ?\C-y ?\C-p ?\C-p ?\C-w ?\C-e ?\C-f])
 
 ; Hooks
-(add-hook 'org-mode-hook 'org-hide-block-all)
+(add-hook 'org-mode-hook 'org-toggle-blocks)
 (add-hook 'org-mode-hook 'turn-on-auto-fill)
 
 ; Key Bindings
@@ -877,6 +886,7 @@ to a unique value for this to work properly."
 (define-key org-mode-map (kbd "M-n") 'org-next-item)
 (define-key org-mode-map (kbd "M-p") 'org-previous-item)
 (define-key org-mode-map (kbd "M-s TAB") 'org-force-cycle-archived)
+(define-key org-mode-map (kbd "M-s t b") 'org-toggle-blocks)
 (define-key org-mode-map (kbd "M-s t h") 'org-insert-todo-heading)
 (define-key org-mode-map (kbd "M-s t s") 'org-insert-todo-subheading)
 (define-key org-mode-map (kbd "s-d") 'org-shiftdown)
