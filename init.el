@@ -1033,6 +1033,7 @@ to a unique value for this to work properly."
       (shrink-window-horizontally (- current-width 50)))))
 
 ; Variables
+(setq doc-view-continuous t)
 (setq pdf-info-restart-process-p t)
 (setq pdf-util-fast-image-format "png")
 
