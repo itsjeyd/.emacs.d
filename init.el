@@ -1011,6 +1011,33 @@ to a unique value for this to work properly."
 
 
 
+;;;;;;;;;;;;
+;;; PDFs ;;;
+;;;;;;;;;;;;
+
+(pdf-tools-install)
+
+; Functions
+(defadvice pdf-outline
+    (before prepare-windows
+            (&optional buffer no-select-window-p) activate compile)
+  (delete-other-windows)
+  (split-window-right)
+  (other-window 1))
+
+(defadvice pdf-outline
+    (after shrink-outline-buffer-horizontally
+           (&optional buffer no-select-window-p) activate compile)
+  (let ((current-width (window-total-width)))
+    (when (> current-width 50)
+      (shrink-window-horizontally (- current-width 50)))))
+
+; Variables
+(setq pdf-info-restart-process-p t)
+(setq pdf-util-fast-image-format "png")
+
+
+
 ;;;;;;;;;;;;;;;;;;;
 ;;; Permissions ;;;
 ;;;;;;;;;;;;;;;;;;;
