@@ -505,6 +505,7 @@ root-privileges if it is not writable by user."
 (ido-ubiquitous-mode 1)
 (push '(disable exact "unhighlight-regexp") ido-ubiquitous-command-overrides)
 (push '(disable prefix "sclang-dump-") ido-ubiquitous-command-overrides)
+(setq ido-ubiquitous-max-items 50000)
 
 ; Smex
 (setq smex-save-file "~/.emacs.d/.smex-items")
