@@ -95,7 +95,7 @@
 
 ; Variables
 (setq confirm-nonexistent-file-or-buffer nil)
-(setq revert-without-query (quote (".*")))
+(setq revert-without-query '(".*"))
 (setq-default ibuffer-saved-filter-groups
               '(("Default" ("Dired" (mode . dired-mode))
                            ("Org" (mode . org-mode))
@@ -202,7 +202,7 @@
 (setq dired-dwim-target t)
 (setq dired-isearch-filenames "dwim")
 (setq dired-listing-switches "-alh --time-style=long-iso")
-(setq dired-recursive-copies (quote always))
+(setq dired-recursive-copies 'always)
 
 
 
@@ -479,7 +479,7 @@ Goes backward if ARG is negative; error if STR not found."
 ;;; Ido ;;;
 ;;;;;;;;;;;
 
-(ido-mode (quote both))
+(ido-mode 'both)
 (ido-everywhere 1)
 
 ; Flx
@@ -513,7 +513,7 @@ root-privileges if it is not writable by user."
 ; Variables
 (add-to-list 'ido-ignore-buffers "\*Compile-Log\*")
 (add-to-list 'ido-ignore-buffers "\*Messages\*")
-(setq ido-create-new-buffer (quote always))
+(setq ido-create-new-buffer 'always)
 (setq ido-enable-flex-matching t)
 (setq ido-save-directory-list-file "~/.emacs.d/.ido.last")
 (setq ido-use-filename-at-point 'guess)
@@ -758,7 +758,7 @@ HOOKS can be a list of hooks or just a single hook."
 
 ; Unique Buffer Names
 (require 'uniquify)
-(setq uniquify-buffer-name-style (quote forward))
+(setq uniquify-buffer-name-style 'forward)
 
 ; Variables
 (setf (nth 5 mode-line-modes)
@@ -1299,7 +1299,7 @@ to a unique value for this to work properly."
 (defun magit-log-all ()
   (interactive)
   (magit-key-mode-popup-logging)
-  (magit-key-mode-toggle-option (quote logging) "--all"))
+  (magit-key-mode-toggle-option 'logging "--all"))
 
 (defun magit-ls-files ()
   "List tracked files of current repository."
