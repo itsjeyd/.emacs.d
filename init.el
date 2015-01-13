@@ -1214,16 +1214,17 @@ to a unique value for this to work properly."
   (with-current-buffer grep-last-buffer
     (rename-buffer (format "*grep-%s*" regexp))))
 
+; Helm Swoop
+(require 'helm-swoop)
+(global-set-key (kbd "C-c h") 'helm-swoop)
+(define-key isearch-mode-map (kbd "M-h") 'helm-swoop-from-isearch)
+
 ; Hooks
 (add-hook 'occur-mode-hook 'next-error-follow-minor-mode)
 
 ; Key Bindings
 (define-key occur-mode-map "n" 'occur-next)
 (define-key occur-mode-map "p" 'occur-prev)
-
-; Loccur
-(require 'loccur)
-(define-key custom-keys-mode-prefix-map (kbd "l o") 'loccur-current)
 
 ; Smartscan
 (global-smartscan-mode t)
