@@ -22,6 +22,7 @@
 
 (add-to-list 'load-path "~/.emacs.d/lisp/")
 (add-to-list 'load-path "~/.emacs.d/lisp/mark-lines/")
+(add-to-list 'load-path "~/.emacs.d/lisp/synosaurus/")
 
 
 
@@ -1565,11 +1566,10 @@ With prefix P, create local abbrev. Otherwise it will be global."
 (setq save-abbrevs t)
 (setq-default abbrev-mode t)
 
-; Synonyms
-(setq synonyms-file "~/mthes10/mthesaur.txt")
-(setq synonyms-cache-file "~/.emacs.d/.mthesaur.cache")
-(setq synonyms-fill-column 75)
-(require 'synonyms)
+; Synosaurus
+(require 'synosaurus)
+(require 'synosaurus-wordnet)
+(setq synosaurus-lookup-function 'wordnet-lookup)
 
 ; Writeroom
 (defun turn-off-git-gutter+ ()
