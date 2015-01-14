@@ -1289,34 +1289,26 @@ to a unique value for this to work properly."
 ;;;;;;;;;;;;;;;;;
 
 ; Functions
-(defun search-service (name url)
-  (browse-url
-   (concat url (if mark-active
-                   (buffer-substring (region-beginning) (region-end))
-                 (read-string (format "%s: " name))))))
-
-(defun google ()
-  "Google a query or region if any."
+(defun define-search-service (name url)
+  "Create command for looking up query using a specific service."
   (interactive)
-  (search-service "Google"
-                  "http://www.google.com/search?ie=utf-8&oe=utf-8&q="))
+  (eval `(defun ,(intern name) ()
+           ,(format "Look up query or contents of region (if any) on %s."
+                    (capitalize name))
+           (interactive)
+           (let ((query (if mark-active
+                            (buffer-substring (region-beginning) (region-end))
+                          (read-string (format "%s: " ,name)))))
+             (browse-url (concat ,url query))))))
 
-(defun startpage ()
-  "Startpage a query or region if any."
-  (interactive)
-  (search-service "StartPage"
-                  "https://startpage.com/do/metasearch.pl?query="))
-
-(defun thesaurus ()
-  "Look up synonyms for query or region if any."
-  (interactive)
-  (search-service "Thesaurus" "http://thesaurus.com/browse/"))
-
-(defun urbandictionary ()
-  "Look up Urbandictionary definition(s) for query or region if any."
-  (interactive)
-  (search-service "Urbandictionary"
-                  "http://www.urbandictionary.com/define.php?term="))
+(define-search-service
+  "google" "http://www.google.com/search?ie=utf-8&oe=utf-8&q=")
+(define-search-service
+  "startpage" "https://startpage.com/do/metasearch.pl?query=")
+(define-search-service
+  "thesaurus" "http://thesaurus.com/browse/")
+(define-search-service
+  "urbandictionary" "http://www.urbandictionary.com/define.php?term=")
 
 
 
