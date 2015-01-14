@@ -1552,7 +1552,6 @@ With prefix P, create local abbrev. Otherwise it will be global."
 
 ; Variables
 (setq abbrev-file-name "~/.emacs.d/.abbrev_defs")
-(setq save-abbrevs t)
 (setq-default abbrev-mode t)
 
 ; Synosaurus
