@@ -1565,6 +1565,12 @@ With prefix P, create local abbrev. Otherwise it will be global."
 (setq save-abbrevs t)
 (setq-default abbrev-mode t)
 
+; Synonyms
+(setq synonyms-file "~/mthes10/mthesaur.txt")
+(setq synonyms-cache-file "~/.emacs.d/.mthesaur.cache")
+(setq synonyms-fill-column 75)
+(require 'synonyms)
+
 ; Writeroom
 (defun turn-off-git-gutter+ ()
   (if (not git-gutter+-mode)
