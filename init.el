@@ -657,7 +657,6 @@ root-privileges if it is not writable by user."
   (c-set-offset 'arglist-intro '+))
 
 ; Hooks
-(add-hook 'java-mode-hook 'ensime-scala-mode-hook)
 (add-hook 'java-mode-hook 'java-goto-class)
 (add-hook 'java-mode-hook 'set-indentation-behavior)
 (add-hook 'window-configuration-change-hook 'java-class-to-top)
@@ -1220,16 +1219,6 @@ to a unique value for this to work properly."
 
 ; Launch
 (recentf-mode t)
-
-
-
-;;;;;;;;;;;;;;;;;;;;;;;;;
-;;; Scala Development ;;;
-;;;;;;;;;;;;;;;;;;;;;;;;;
-
-; Ensime
-(add-hook 'scala-mode-hook 'ensime-scala-mode-hook)
-(setq ensime-ac-override-settings nil)
 
 
 
