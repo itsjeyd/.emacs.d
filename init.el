@@ -1304,6 +1304,17 @@ to a unique value for this to work properly."
 
 
 
+;;;;;;;;;;;;;;;;;;;;;
+;;; SuperCollider ;;;
+;;;;;;;;;;;;;;;;;;;;;
+
+(idle-require 'sclang)
+(eval-after-load 'sclang
+  '(progn
+     (add-hook 'sclang-mode-hook 'sclang-extensions-mode)))
+
+
+
 ;;;;;;;;;;;;;;;;;
 ;;; Utilities ;;;
 ;;;;;;;;;;;;;;;;;
