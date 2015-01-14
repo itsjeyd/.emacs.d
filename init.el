@@ -856,6 +856,23 @@ HOOKS can be a list of hooks or just a single hook."
 (setq org-drill-scope 'directory)
 (setq org-drill-hide-item-headings-p t)
 
+; Capture
+(require 'org-capture)
+
+(defun format-quote (selection)
+  (if (= (length selection) 0)
+      ""
+    (format "#+BEGIN_QUOTE\n  %s\n  #+END_QUOTE\n\n  " selection)))
+
+(setq org-capture-templates
+      '(("q" "Quote" plain (file "~/org/quotes.org")
+         "%?\n\n-" :empty-lines-before 2 :kill-buffer t)
+        ("j" "Journal" entry (file+datetree "~/org/journal.org")
+         "* %<%H:%M>\n%?")
+        ("l" "Link" entry (file+datetree "~/org/links.org")
+         "* %^{Title}\n  Source: %u, %c\n\n  %(format-quote \"%:initial\")%?"
+         :kill-buffer t)))
+
 ; Emphasis
 (setcar org-emphasis-regexp-components " \t('\"`{-")
 (setcar (nthcdr 1 org-emphasis-regexp-components) "\[[:alpha:]- \t.,:!?;'\")}\\")
@@ -945,6 +962,9 @@ to a unique value for this to work properly."
 (define-key org-mode-map (kbd "s-l") 'org-shiftleft)
 (define-key org-mode-map (kbd "s-r") 'org-shiftright)
 (define-key org-mode-map (kbd "s-u") 'org-shiftup)
+
+; Protocol
+(require 'org-protocol)
 
 ; Variables
 (setq org-agenda-include-diary t)
