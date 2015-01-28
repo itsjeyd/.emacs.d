@@ -397,11 +397,19 @@ Goes backward if ARG is negative; error if STR not found."
 ;;; Elisp Development ;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;
 
+; Functions
+(defun lispy-setup ()
+  (lispy-mode 1)
+  (modeline-remove-lighter 'lispy-mode))
+
 ; Hooks
+(add-hook 'clojure-mode-hook 'lispy-setup)
 (add-hook 'emacs-lisp-mode-hook 'prettify-symbols-mode)
+(add-hook 'emacs-lisp-mode-hook 'lispy-setup)
 (add-hook 'emacs-lisp-mode-hook 'eldoc-mode)
 (add-hook 'eval-expression-minibuffer-setup-hook 'eldoc-mode)
 (add-hook 'lisp-interaction-mode-hook 'prettify-symbols-mode)
+(add-hook 'lisp-interaction-mode-hook 'lispy-setup)
 (add-hook 'lisp-interaction-mode-hook 'eldoc-mode)
 
 ; Slime Nav
