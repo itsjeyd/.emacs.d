@@ -1019,7 +1019,7 @@ to a unique value for this to work properly."
 (add-hook 'cider-repl-mode-hook 'ac-cider-setup)
 
 ; Variables
-(setq cider-repl-history-file "~/.emacs.d/cider-history")
+(setq cider-repl-history-file "~/.emacs.d/.cider-history")
 (setq cider-repl-use-pretty-printing t)
 (setq nrepl-buffer-name-show-port t)
 
@@ -1141,6 +1141,7 @@ to a unique value for this to work properly."
 ; Projectile
 (projectile-global-mode 1)
 (add-to-list 'projectile-globally-ignored-directories "doxygen")
+(setq projectile-cache-file "~/.emacs.d/.projectile.cache")
 (setq projectile-enable-caching t)
 (setq projectile-known-projects-file "~/.emacs.d/.projectile-bookmarks.eld")
 (setq projectile-mode-line
