@@ -63,6 +63,8 @@
 
 (define-abbrev-table 'doctex-mode-abbrev-table '())
 
+(define-abbrev-table 'edebug-eval-mode-abbrev-table '())
+
 (define-abbrev-table 'edit-abbrevs-mode-abbrev-table '())
 
 (define-abbrev-table 'emacs-lisp-byte-code-mode-abbrev-table '())
@@ -100,6 +102,7 @@
     ("assigment" "assignment" nil 0)
     ("bc" "because" nil 2)
     ("becuase" "because" nil 0)
+    ("btw" "by the way" nil 1)
     ("cos" "because" nil 3)
     ("edting" "editing" nil 2)
     ("effiently" "efficiently" nil 0)
@@ -111,12 +114,14 @@
     ("menas" "means" nil 0)
     ("modles" "models" nil 1)
     ("optmized" "optimized" nil 0)
+    ("prob" "probably" nil 0)
     ("respecit" "respect" nil 1)
     ("sectino" "section" nil 0)
     ("serach" "search" nil 0)
     ("similiar" "similar" nil 0)
     ("specfic" "specific" nil 0)
     ("specificiations" "specifications" nil 0)
+    ("sth" "something" nil 0)
     ("suboptimal" "sub-optimal" nil 0)
     ("systme" "system" nil 2)
     ("teh" "the" nil 0)
@@ -195,6 +200,10 @@
 
 (define-abbrev-table 'package-menu-mode-abbrev-table '())
 
+(define-abbrev-table 'paradox-commit-list-mode-abbrev-table '())
+
+(define-abbrev-table 'paradox-menu-mode-abbrev-table '())
+
 (define-abbrev-table 'pdf-annot-list-mode-abbrev-table '())
 
 (define-abbrev-table 'pdf-outline-buffer-mode-abbrev-table '())
@@ -242,6 +251,8 @@
 (define-abbrev-table 'sx-question-mode-abbrev-table '())
 
 (define-abbrev-table 'synonyms-mode-abbrev-table '())
+
+(define-abbrev-table 'synosaurus-list-mode-abbrev-table '())
 
 (define-abbrev-table 'tablist-mode-abbrev-table '())
 
