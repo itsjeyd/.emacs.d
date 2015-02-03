@@ -22,7 +22,6 @@
 
 (add-to-list 'load-path "~/.emacs.d/lisp/")
 (add-to-list 'load-path "~/.emacs.d/lisp/mark-lines/")
-(add-to-list 'load-path "~/.emacs.d/lisp/synosaurus/")
 
 
 
