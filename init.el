@@ -1281,6 +1281,7 @@ to a unique value for this to work properly."
 (add-hook 'occur-mode-hook 'next-error-follow-minor-mode)
 
 ; Key Bindings
+(global-set-key (kbd "C-c g") 'rgrep)
 (define-key occur-mode-map "n" 'occur-next)
 (define-key occur-mode-map "p" 'occur-prev)
 
