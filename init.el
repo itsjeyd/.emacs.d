@@ -1479,17 +1479,18 @@ Adapted from: http://paste.lisp.org/display/135818."
     (deactivate-mark)
     (goto-char (point-min))))
 
-(defun tim/set-selective-display (&optional arg)
+(defun hide-lines-below-current-column (orig &optional arg)
   "Use selective display to hide lines below current column.
 With a prefix arg, clear selective display."
   (interactive "P")
   (if arg
-      (set-selective-display -1)
-    (set-selective-display (+ (current-column) 1))))
+      (funcall orig -1)
+    (funcall orig (+ (current-column) 1))))
+
+(advice-add 'set-selective-display :around #'hide-lines-below-current-column)
 
 ; Key Bindings
 (global-set-key (kbd "C-x n i") 'narrow-to-region-indirect-buffer)
-(global-set-key (kbd "C-x $") 'tim/set-selective-display)
 (define-key custom-keys-mode-prefix-map (kbd "t t") 'toggle-truncate-lines)
 
 ; Variables
