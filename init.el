@@ -1554,7 +1554,20 @@ window with current window."
   (interactive)
   (ace-window 4))
 
+; Hydra
+(defhydra hydra-resize-window ()
+  "Make window(s)"
+  ("}" enlarge-window-horizontally "wider")
+  ("{" shrink-window-horizontally "narrower")
+  ("^" enlarge-window "taller")
+  ("v" shrink-window "shorter")
+  ("+" balance-windows "balanced")
+  ("-" shrink-window-if-larger-than-buffer "fit"))
+
 ; Key Bindings
+(global-set-key (kbd "C-x {") 'hydra-resize-window/body)
+(global-set-key (kbd "C-x }") 'hydra-resize-window/body)
+(global-set-key (kbd "C-x ^") 'hydra-resize-window/body)
 (define-key custom-keys-mode-prefix-map (kbd "c s") 'change-split)
 (define-key custom-keys-mode-prefix-map (kbd "k o") 'kill-other-buffer-and-window)
 (define-key custom-keys-mode-prefix-map (kbd "s w") 'swap-windows)
