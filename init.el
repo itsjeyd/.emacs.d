@@ -372,8 +372,22 @@ Goes backward if ARG is negative; error if STR not found."
 (define-key custom-keys-mode-prefix-map (kbd "m") 'mark-lines-next-line)
 
 ; Move Text
-(define-key custom-keys-mode-prefix-map (kbd "u") 'move-text-up)
-(define-key custom-keys-mode-prefix-map (kbd "d") 'move-text-down)
+(defun position-point (orig arg)
+  (if (not mark-active)
+      (progn
+        (funcall orig arg)
+        (forward-line (- arg)))
+    (funcall orig arg)))
+
+(advice-add 'move-text-up :around #'position-point)
+
+(defhydra hydra-move-text ()
+  "Move text"
+  ("u" move-text-up "up")
+  ("d" move-text-down "down"))
+
+(define-key custom-keys-mode-prefix-map (kbd "u") 'hydra-move-text/body)
+(define-key custom-keys-mode-prefix-map (kbd "d") 'hydra-move-text/body)
 
 ; Multiple Cursors
 (define-key custom-keys-mode-prefix-map (kbd "e l") 'mc/edit-lines)
