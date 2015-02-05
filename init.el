@@ -1517,14 +1517,10 @@ than one window."
   (kill-buffer-and-window))
 
 (defun swap-windows ()
+  "Call `ace-window' with a single prefix arg to swap arbitrary
+window with current window."
   (interactive)
-  (let ((current-buf (current-buffer))
-        (other-buf (progn
-                     (other-window 1)
-                     (current-buffer))))
-    (switch-to-buffer current-buf)
-    (other-window -1)
-    (switch-to-buffer other-buf)))
+  (ace-window 4))
 
 ; Key Bindings
 (define-key custom-keys-mode-prefix-map (kbd "c s") 'change-split)
