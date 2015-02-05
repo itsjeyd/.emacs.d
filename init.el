@@ -1269,6 +1269,16 @@ to a unique value for this to work properly."
 ; Functions
 (put 'scroll-left 'disabled nil)
 
+; Hydra
+(defhydra hydra-scroll ()
+  "Scroll"
+  ("<" scroll-left "left")
+  (">" scroll-right "right"))
+
+; Key Bindings
+(global-set-key (kbd "C-x <") 'hydra-scroll/body)
+(global-set-key (kbd "C-x >") 'hydra-scroll/body)
+
 ; Variables
 (setq recenter-positions '(top middle bottom))
 (setq scroll-preserve-screen-position 1)
