@@ -802,7 +802,15 @@ HOOKS can be a list of hooks or just a single hook."
 ; Ace Jump
 (global-set-key (kbd "s-SPC") 'ace-jump-mode)
 
+; Hydra
+(defhydra hydra-move-by-page ()
+  "Move by page"
+  ("]" forward-page "next page")
+  ("[" backward-page "prev page"))
+
 ; Key Bindings
+(global-set-key (kbd "C-x [") 'hydra-move-by-page/body)
+(global-set-key (kbd "C-x ]") 'hydra-move-by-page/body)
 (global-set-key (kbd "M-g c") 'goto-char)
 (global-set-key (kbd "M-g l") 'goto-line)
 (define-key custom-keys-mode-prefix-map (kbd "n p") 'forward-page)
