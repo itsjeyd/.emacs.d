@@ -1113,6 +1113,34 @@ to a unique value for this to work properly."
 ;;; Programming ;;;
 ;;;;;;;;;;;;;;;;;;;
 
+; Helm Dash
+(require 'helm-dash)
+(setq helm-dash-common-docsets '("Emacs Lisp" "MySQL" "PostgreSQL" "SQLite"))
+(setq helm-dash-docsets-path "/storage/docsets/")
+
+(defvar-local helm-dash-docsets nil)
+
+(defmacro helm-dash-setup (language docsets)
+  "Create function that sets up `helm-dash' for specific LANGUAGE."
+  (let ((fn-name (intern (format "helm-dash-%s" language)))
+        (current-docsets (mapconcat 'identity docsets ", ")))
+    `(progn
+       (defun ,fn-name ()
+         ,(format "Set up `helm-dash' for %s.\n\nDocsets: %s"
+                  language current-docsets)
+         (setq helm-dash-docsets ,docsets)
+         (setq helm-current-buffer (current-buffer))))))
+
+(add-hook 'sh-mode-hook (helm-dash-setup "bash" ["Bash"]))
+(add-hook 'clojure-mode-hook (helm-dash-setup "clojure" ["Clojure"]))
+(add-hook 'java-mode-hook (helm-dash-setup "java" ["Android" "Java" "Play_Java"]))
+(add-hook 'LaTeX-mode-hook (helm-dash-setup "latex" ["LaTeX"]))
+(add-hook 'php-mode-hook (helm-dash-setup "php" ["PHP"]))
+(add-hook 'python-mode-hook (helm-dash-setup "python" ["Django" "Python 2" "Python 3"]))
+(add-hook 'css-mode-hook (helm-dash-setup "css" ["Bootstrap 3" "CSS"]))
+(add-hook 'html-mode-hook (helm-dash-setup "html" ["Bootstrap 3" "HTML"]))
+(add-hook 'js-mode-hook (helm-dash-setup "js" ["BackboneJS" "Bootstrap 3" "JavaScript" "jQuery" "UnderscoreJS"]))
+
 ; Hide/Show
 (require 'hideshow-org)
 
