@@ -1317,6 +1317,10 @@ to a unique value for this to work properly."
 ;;; Search ;;;
 ;;;;;;;;;;;;;;
 
+; Anzu
+(setq anzu-mode-lighter "")
+(global-anzu-mode 1)
+
 ; Functions
 (defadvice occur (around occur-rename-buffer-after-search-string
                          (regexp &optional nlines)
