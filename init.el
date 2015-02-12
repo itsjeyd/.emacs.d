@@ -1410,6 +1410,17 @@ to a unique value for this to work properly."
 (define-search-service
   "urbandictionary" "http://www.urbandictionary.com/define.php?term=")
 
+; Hydra
+(defhydra hydra-search (:color blue)
+  "Search"
+  ("g" google "Google")
+  ("s" startpage "StartPage")
+  ("t" thesaurus "Thesaurus")
+  ("u" urbandictionary "Urbandictionary"))
+
+; Key Bindings
+(global-set-key (kbd "C-c s") 'hydra-search/body)
+
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;
