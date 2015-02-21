@@ -265,9 +265,6 @@ region, operate on a single line. Otherwise, operate on region."
 (setq ac-use-menu-map t)
 (add-to-list 'ac-sources 'ac-source-yasnippet)
 
-; Browse Kill Ring
-(define-key custom-keys-mode-prefix-map (kbd "b k") 'browse-kill-ring)
-
 ; Caps Lock
 (define-key custom-keys-mode-prefix-map (kbd "c l") 'caps-lock-mode)
 
@@ -454,6 +451,11 @@ Goes backward if ARG is negative; error if STR not found."
 ;;;;;;;;;;;;
 
 (require 'helm-config)
+
+; Key Bindings
+(global-set-key (kbd "C-c k") 'helm-show-kill-ring)
+
+; Variables
 (setq helm-buffers-fuzzy-matching t)
 
 
