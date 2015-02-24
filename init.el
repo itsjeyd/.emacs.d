@@ -1375,7 +1375,11 @@ to a unique value for this to work properly."
 ;;;;;;;;;;;;;;;;
 
 ; Variables
-(setq speedbar-use-images nil)
+(eval-after-load 'speedbar
+  (progn
+    (setq speedbar-tag-hierarchy-method
+          '(speedbar-simple-group-tag-hierarchy speedbar-sort-tag-hierarchy))
+    (setq speedbar-use-images nil)))
 
 
 
