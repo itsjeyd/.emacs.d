@@ -408,6 +408,9 @@ Goes backward if ARG is negative; error if STR not found."
 ;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ; Functions
+(defun electric-indent-mode-setup ()
+  (setq electric-indent-chars (delq 10 electric-indent-chars)))
+
 (defun lispy-setup ()
   (lispy-mode 1)
   (modeline-remove-lighter 'lispy-mode))
@@ -415,6 +418,7 @@ Goes backward if ARG is negative; error if STR not found."
 ; Hooks
 (add-hook 'clojure-mode-hook 'lispy-setup)
 (add-hook 'emacs-lisp-mode-hook 'eldoc-mode)
+(add-hook 'emacs-lisp-mode-hook 'electric-indent-mode-setup)
 (add-hook 'emacs-lisp-mode-hook 'lispy-setup)
 (add-hook 'emacs-lisp-mode-hook 'prettify-symbols-mode)
 (add-hook 'eval-expression-minibuffer-setup-hook 'eldoc-mode)
