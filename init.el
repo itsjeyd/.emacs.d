@@ -378,10 +378,11 @@ Goes backward if ARG is negative; error if STR not found."
 
 (advice-add 'move-text-up :around #'position-point)
 
-(defhydra hydra-move-text ()
+(defhydra hydra-move-text (:color pink)
   "Move text"
   ("u" move-text-up "up")
-  ("d" move-text-down "down"))
+  ("d" move-text-down "down")
+  ("C-g" nil "quit"))
 
 (define-key custom-keys-mode-prefix-map (kbd "u") 'hydra-move-text/body)
 (define-key custom-keys-mode-prefix-map (kbd "d") 'hydra-move-text/body)
