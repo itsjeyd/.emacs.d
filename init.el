@@ -414,9 +414,9 @@ Goes backward if ARG is negative; error if STR not found."
 
 ; Hooks
 (add-hook 'clojure-mode-hook 'lispy-setup)
-(add-hook 'emacs-lisp-mode-hook 'prettify-symbols-mode)
-(add-hook 'emacs-lisp-mode-hook 'lispy-setup)
 (add-hook 'emacs-lisp-mode-hook 'eldoc-mode)
+(add-hook 'emacs-lisp-mode-hook 'lispy-setup)
+(add-hook 'emacs-lisp-mode-hook 'prettify-symbols-mode)
 (add-hook 'eval-expression-minibuffer-setup-hook 'eldoc-mode)
 
 ; Slime Nav
