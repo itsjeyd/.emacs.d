@@ -910,7 +910,6 @@ HOOKS can be a list of hooks or just a single hook."
 ; Emphasis
 (setcar org-emphasis-regexp-components " \t('\"`{-")
 (setcar (nthcdr 1 org-emphasis-regexp-components) "\[[:alpha:]- \t.,:!?;'\")}\\")
-(setcar (nthcdr 2 org-emphasis-regexp-components) " \t\r\n\"'")
 (org-set-emph-re 'org-emphasis-regexp-components org-emphasis-regexp-components)
 
 ; Exports
