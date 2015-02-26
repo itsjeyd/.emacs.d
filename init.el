@@ -418,9 +418,6 @@ Goes backward if ARG is negative; error if STR not found."
 (add-hook 'emacs-lisp-mode-hook 'lispy-setup)
 (add-hook 'emacs-lisp-mode-hook 'eldoc-mode)
 (add-hook 'eval-expression-minibuffer-setup-hook 'eldoc-mode)
-(add-hook 'lisp-interaction-mode-hook 'prettify-symbols-mode)
-(add-hook 'lisp-interaction-mode-hook 'lispy-setup)
-(add-hook 'lisp-interaction-mode-hook 'eldoc-mode)
 
 ; Slime Nav
 (defadvice turn-on-elisp-slime-nav-mode
