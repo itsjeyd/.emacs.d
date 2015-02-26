@@ -1192,6 +1192,7 @@ to a unique value for this to work properly."
 
 ; yasnippet
 (yas-global-mode 1)
+(setq yas-prompt-functions '(yas-ido-prompt yas-x-prompt yas-no-prompt))
 
 
 
