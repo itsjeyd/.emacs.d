@@ -18,6 +18,7 @@ tramp
 elpa/
 ensime-servers/
 image-dired/
+lisp/mark-lines/
 speed-type/
 url/
 var/
