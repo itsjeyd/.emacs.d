@@ -18,6 +18,7 @@ tramp
 elpa/
 ensime-servers/
 image-dired/
+lisp/git-wip-timemachine
 lisp/mark-lines/
 speed-type/
 url/
