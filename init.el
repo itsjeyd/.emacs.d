@@ -1456,6 +1456,7 @@ to a unique value for this to work properly."
 
 ; git-wip
 (load "~/git-wip/emacs/git-wip.el")
+(add-to-list 'load-path "~/.emacs.d/lisp/git-wip-timemachine/")
 (require 'git-wip-timemachine)
 
 ; Git Gutter
