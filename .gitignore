@@ -13,6 +13,7 @@
 bookmarks
 history
 tramp
+custom.el
 
 # Folders
 elpa/
