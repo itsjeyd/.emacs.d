@@ -39,6 +39,7 @@
   | flymake-cursor        |
   | font-utils            |
   | fringe-helper         |
+  | gh-md                 |
   | git-commit-mode       |
   | git-gutter+           |
   | git-gutter-fringe+    |
@@ -58,6 +59,7 @@
   | ido-ubiquitous        |
   | ido-vertical-mode     |
   | iedit                 |
+  | imenu-list            |
   | json-reformat         |
   | let-alist             |
   | linum-relative        |
@@ -75,6 +77,7 @@
   | openwith              |
   | org-ac                |
   | org-plus-contrib      |
+  | package-build         |
   | paradox               |
   | pcache                |
   | pdf-tools             |
@@ -86,7 +89,6 @@
   | popup                 |
   | popwin                |
   | projectile            |
-  | python-environment    |
   | queue                 |
   | rainbow-delimiters    |
   | rainbow-mode          |
@@ -99,6 +101,7 @@
   | smartscan             |
   | smex                  |
   | speed-type            |
+  | spinner               |
   | sr-speedbar           |
   | synosaurus            |
   | tablist               |
