@@ -904,6 +904,26 @@ HOOKS can be a list of hooks or just a single hook."
 (idle-require 'ox-md)
 
 ; Functions
+(defun org-copy-link ()
+  "Copy `org-mode' link at point."
+  (interactive)
+  (let ((links-invisible-initially-p org-descriptive-links))
+    (save-excursion
+      (when links-invisible-initially-p
+        (org-toggle-link-display))
+      (unless (or (looking-at "\\[\\[")
+                  (and (looking-back "\\[") (looking-at "\\[")))
+        (search-backward "[["))
+      (forward-char 2)
+      (let ((beg (point)))
+        (search-forward "][")
+        (backward-char 2)
+        (let ((link (buffer-substring-no-properties beg (point))))
+          (kill-new link)
+          (message "Copied link: %s" link)))
+      (when links-invisible-initially-p
+        (org-toggle-link-display)))))
+
 (defun org-point-in-speed-command-position-p ()
   (or (looking-at org-outline-regexp)
       (looking-at "^#\+")
