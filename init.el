@@ -474,7 +474,25 @@ Goes backward if ARG is negative; error if STR not found."
 (setq guide-key/popup-window-position 'bottom)
 (guide-key-mode t)
 
+; Hydra
+(defhydra hydra-apropos (:color blue)
+  "Apropos"
+  ("a" apropos "apropos")
+  ("c" apropos-command "command")
+  ("d" apropos-documentation "documentation")
+  ("e" apropos-value "value")
+  ("l" apropos-library "library")
+  ("u" apropos-user-option "user option")
+  ("v" apropos-variable "variable")
+  ("i" info-apropos "info")
+  ("t" tags-apropos "tags")
+  ("z a" customize-apropos "customize")
+  ("z f" customize-apropos-faces "customize faces")
+  ("z g" customize-apropos-groups "customize groups")
+  ("z o" customize-apropos-options "customize options"))
+
 ; Key Bindings
+(global-set-key (kbd "C-h a") 'hydra-apropos/body)
 (define-key custom-keys-mode-prefix-map (kbd "i e")
   (info-display-topic "emacs"))
 (define-key custom-keys-mode-prefix-map (kbd "i l")
