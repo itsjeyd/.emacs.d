@@ -1597,22 +1597,8 @@ With a prefix arg, clear selective display."
 (setq aw-scope 'frame)
 
 ; Functions
-(defun toggle-window-dedicated ()
-  "Control whether or not Emacs is allowed to display another
-buffer in current window."
-  (interactive)
-  (message
-   (if (let (window (get-buffer-window (current-buffer)))
-         ; set-window-dedicated-p returns FLAG that was passed as
-         ; second argument, thus can be used as COND for if:
-         (set-window-dedicated-p window (not (window-dedicated-p window))))
-       "%s: Can't touch this!"
-     "%s is up for grabs.")
-   (current-buffer)))
-
 (defun change-split (&optional arg)
   "Change arrangement of two windows from 'stacked' to 'side-by-side'.
-
 With a prefix arg, change arrangement from 'side-by-side' to 'stacked'."
   (interactive "P")
   (let ((split-function (progn
@@ -1643,6 +1629,19 @@ than one window."
 window with current window."
   (interactive)
   (ace-window 4))
+
+(defun toggle-window-dedicated ()
+  "Control whether or not Emacs is allowed to display another
+buffer in current window."
+  (interactive)
+  (message
+   (if (let (window (get-buffer-window (current-buffer)))
+         ; set-window-dedicated-p returns FLAG that was passed as
+         ; second argument, thus can be used as COND for if:
+         (set-window-dedicated-p window (not (window-dedicated-p window))))
+       "%s: Can't touch this!"
+     "%s is up for grabs.")
+   (current-buffer)))
 
 ; Hydra
 (defhydra hydra-resize-window ()
