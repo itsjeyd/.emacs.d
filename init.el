@@ -609,6 +609,8 @@ root-privileges if it is not writable by user."
               'dired-directory nil :foreground fallback-color)
              (set-face-attribute
               'info-header-xref nil :foreground fallback-color)))
+          ((eq enabled-theme 'sanityinc-tomorrow-eighties)
+           (set-face-attribute 'hydra-face-blue nil :foreground "#6699cc"))
           ((eq enabled-theme 'wombat)
            (set-cursor-color cursor-preferred-color)))))
 
