@@ -1624,6 +1624,29 @@ than one window."
   (other-window 1)
   (kill-buffer-and-window))
 
+(defun split-root-window (direction size)
+  "Split root window of current frame.
+DIRECTION specifies how root window will be split; possible
+values are 'below and 'right. SIZE specifies height or width of
+window that will be added to the current window layout."
+  (split-window (frame-root-window)
+                (and size (prefix-numeric-value size))
+                direction))
+
+(defun split-root-window-below (&optional size)
+  "Split root window vertically.
+Optional argument SIZE specifies height of window that will be
+added to the current window layout."
+  (interactive "P")
+  (split-root-window 'below size))
+
+(defun split-root-window-right (&optional size)
+  "Split root window horizontally.
+Optional argument SIZE specifies width of window that will be
+added to the current window layout."
+  (interactive "P")
+  (split-root-window 'right size))
+
 (defun swap-windows ()
   "Call `ace-window' with a single prefix arg to swap arbitrary
 window with current window."
@@ -1654,6 +1677,8 @@ buffer in current window."
   ("-" shrink-window-if-larger-than-buffer "fit"))
 
 ; Key Bindings
+(global-set-key (kbd "C-c 2") 'split-root-window-below)
+(global-set-key (kbd "C-c 3") 'split-root-window-right)
 (global-set-key (kbd "C-x {") 'hydra-resize-window/body)
 (global-set-key (kbd "C-x }") 'hydra-resize-window/body)
 (global-set-key (kbd "C-x ^") 'hydra-resize-window/body)
