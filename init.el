@@ -1606,7 +1606,7 @@ With a prefix arg, clear selective display."
 
 ; Functions
 (defun change-split (&optional arg)
-  "Change arrangement of two windows from 'stacked' to 'side-by-side'.
+  "Change arrangement of current window and `other-window' from 'stacked' to 'side-by-side'.
 With a prefix arg, change arrangement from 'side-by-side' to 'stacked'."
   (interactive "P")
   (let ((split-function (progn
