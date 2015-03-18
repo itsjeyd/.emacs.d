@@ -1279,6 +1279,7 @@ to a unique value for this to work properly."
      (define-key python-mode-map (kbd "M-s f p") 'flymake-goto-prev-error)))
 
 ; Variables
+(setq python-fill-docstring-style 'django)
 (setq python-shell-interpreter "ipython")
 
 
