@@ -348,6 +348,7 @@ Goes backward if ARG is negative; error if STR not found."
 (global-set-key (kbd "M-w") 'kill-ring-save-with-arg)
 (global-set-key (kbd "M-z") 'zap-up-to-char)
 (define-key iso-transl-ctl-x-8-map (kbd "a") "⟶")
+(define-key iso-transl-ctl-x-8-map (kbd "l") "⚡")
 (define-key custom-keys-mode-prefix-map (kbd "f e") 'flush-empty-lines)
 (define-key custom-keys-mode-prefix-map (kbd "s u") 'sort-lines-and-uniquify)
 (define-key custom-keys-mode-prefix-map (kbd "z") 'zap-to-string)
