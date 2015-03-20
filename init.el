@@ -461,19 +461,17 @@ Goes backward if ARG is negative; error if STR not found."
 ; Functions
 (defun info-display-topic (topic)
   "Create command that opens up a separate *info* buffer for TOPIC."
-  (let ((bufname (format "*%s Info*" (capitalize topic)))
-        (cmd-name (format "info-display-%s" topic)))
-    (eval `(defun ,(intern cmd-name) ()
-             ,(format "Jump to %s info buffer, creating it if necessary. This is *not* the buffer \\[info] would jump to, it is a separate entity." topic)
-             (interactive)
-             (if (get-buffer ,bufname)
-                 (switch-to-buffer ,bufname)
-               (info ,topic ,bufname))))))
-
-(info-display-topic "emacs")
-(info-display-topic "elisp")
-(info-display-topic "magit")
-(info-display-topic "org")
+  (let* ((bufname (format "*%s Info*" (capitalize topic)))
+         (cmd-name (format "info-display-%s" topic))
+         (cmd (intern cmd-name)))
+    (if (fboundp cmd)
+        cmd
+      (eval `(defun ,cmd ()
+               ,(format "Jump to %s info buffer, creating it if necessary. This is *not* the buffer \\[info] would jump to, it is a separate entity." topic)
+               (interactive)
+               (if (get-buffer ,bufname)
+                   (switch-to-buffer ,bufname)
+                 (info ,topic ,bufname)))))))
 
 ; Guide Key
 (setq guide-key/guide-key-sequence
@@ -500,10 +498,10 @@ Goes backward if ARG is negative; error if STR not found."
 
 (defhydra hydra-info (:color blue)
   "Info"
-  ("e" info-display-emacs "Emacs")
-  ("l" info-display-elisp "Elisp")
-  ("m" info-display-magit "Magit")
-  ("o" info-display-org "Org Mode"))
+  ("e" (funcall (info-display-topic "emacs")) "Emacs")
+  ("l" (funcall (info-display-topic "elisp")) "Elisp")
+  ("m" (funcall (info-display-topic "magit")) "Magit")
+  ("o" (funcall (info-display-topic "org")) "Org Mode"))
 
 ; Key Bindings
 (global-set-key (kbd "C-h a") 'hydra-apropos/body)
