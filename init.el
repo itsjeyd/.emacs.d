@@ -204,7 +204,8 @@
   (when arg (push-mark)))
 
 (defun goto-beginning-of-word (arg)
-  (unless (looking-back "\\b")
+  (unless (or (looking-back "\\b")
+              (looking-back "\\s-") (looking-at "\\s-"))
     (backward-word)))
 
 (advice-add 'capitalize-word :before #'goto-beginning-of-word)
