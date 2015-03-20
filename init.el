@@ -470,6 +470,11 @@ Goes backward if ARG is negative; error if STR not found."
                  (switch-to-buffer ,bufname)
                (info ,topic ,bufname))))))
 
+(info-display-topic "emacs")
+(info-display-topic "elisp")
+(info-display-topic "magit")
+(info-display-topic "org")
+
 ; Guide Key
 (setq guide-key/guide-key-sequence
       '("C-c" "C-x r" "C-x v" "C-x 4" "C-c p" "C-x c" "M-s"))
@@ -493,16 +498,16 @@ Goes backward if ARG is negative; error if STR not found."
   ("z g" customize-apropos-groups "customize groups")
   ("z o" customize-apropos-options "customize options"))
 
+(defhydra hydra-info (:color blue)
+  "Info"
+  ("e" info-display-emacs "Emacs")
+  ("l" info-display-elisp "Elisp")
+  ("m" info-display-magit "Magit")
+  ("o" info-display-org "Org Mode"))
+
 ; Key Bindings
 (global-set-key (kbd "C-h a") 'hydra-apropos/body)
-(define-key custom-keys-mode-prefix-map (kbd "i e")
-  (info-display-topic "emacs"))
-(define-key custom-keys-mode-prefix-map (kbd "i l")
-  (info-display-topic "elisp"))
-(define-key custom-keys-mode-prefix-map (kbd "i m")
-  (info-display-topic "magit"))
-(define-key custom-keys-mode-prefix-map (kbd "i o")
-  (info-display-topic "org"))
+(define-key custom-keys-mode-prefix-map (kbd "i") 'hydra-info/body)
 
 ; Variables
 (setq help-window-select t)
@@ -1732,7 +1737,7 @@ With prefix P, create local abbrev. Otherwise it will be global."
                before after (if local "loc" "glob"))))
 
 ; Key Bindings
-(define-key custom-keys-mode-prefix-map (kbd "i a") 'ispell-word-then-abbrev)
+(define-key custom-keys-mode-prefix-map (kbd "a a") 'ispell-word-then-abbrev)
 
 ; Variables
 (setq abbrev-file-name "~/.emacs.d/.abbrev_defs")
