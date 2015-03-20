@@ -467,7 +467,7 @@ Goes backward if ARG is negative; error if STR not found."
     (if (fboundp cmd)
         cmd
       (eval `(defun ,cmd ()
-               ,(format "Jump to %s info buffer, creating it if necessary. This is *not* the buffer \\[info] would jump to, it is a separate entity." topic)
+               ,(format "Jump to %s info buffer, creating it if necessary.\nThis is *not* the buffer \\[info] would jump to, it is a separate entity." topic)
                (interactive)
                (if (get-buffer ,bufname)
                    (switch-to-buffer ,bufname)
