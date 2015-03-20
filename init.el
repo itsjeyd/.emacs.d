@@ -834,8 +834,6 @@ HOOKS can be a list of hooks or just a single hook."
 (global-set-key (kbd "C-x ]") 'hydra-move-by-page/body)
 (global-set-key (kbd "M-g c") 'goto-char)
 (global-set-key (kbd "M-g l") 'goto-line)
-(define-key custom-keys-mode-prefix-map (kbd "n p") 'forward-page)
-(define-key custom-keys-mode-prefix-map (kbd "p p") 'backward-page)
 
 ; Variables
 (setq ace-jump-mode-submode-list
