@@ -27,6 +27,7 @@
   | dash                  |
   | deferred              |
   | dired-hacks-utils     |
+  | direx                 |
   | discover-my-major     |
   | elisp-slime-nav       |
   | epc                   |
@@ -112,7 +113,6 @@
   | writeroom-mode        |
   | yasnippet             |
   | yaxception            |
-  | ztree                 |
   |-----------------------|
 
 * Themes

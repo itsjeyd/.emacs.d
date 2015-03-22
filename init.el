@@ -127,6 +127,13 @@
 ;;; Dired ;;;
 ;;;;;;;;;;;;;
 
+; Direx
+(require 'direx)
+(setq direx:closed-icon "▶ ")
+(setq direx:leaf-icon "  ")
+(setq direx:open-icon "▼ ")
+(global-set-key (kbd "C-x C-d") 'direx:jump-to-directory)
+
 ; Functions
 (put 'dired-find-alternate-file 'disabled nil)
 
@@ -1753,21 +1760,6 @@ With prefix P, create local abbrev. Otherwise it will be global."
     (git-gutter+-mode -1)))
 
 (add-hook 'writeroom-mode-hook 'turn-off-git-gutter+)
-
-
-
-;;;;;;;;;;;;;
-;;; Ztree ;;;
-;;;;;;;;;;;;;
-
-(idle-require 'ztree-dir)
-(eval-after-load 'ztree-dir
-  '(progn
-     (define-key ztree-mode-map (kbd "n") 'next-line)
-     (define-key ztree-mode-map (kbd "p") 'previous-line)))
-
-; Key Bindings
-(global-set-key (kbd "C-x C-d") 'ztree-dir)
 
 
 
