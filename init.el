@@ -895,6 +895,7 @@ HOOKS can be a list of hooks or just a single hook."
 
 ; Babel
 (require 'ob-dot)
+(require 'ob-sh)
 
 (idle-require 'ob-ditaa)
 (eval-after-load 'ob-ditaa
@@ -907,9 +908,13 @@ HOOKS can be a list of hooks or just a single hook."
      (setq org-plantuml-jar-path "/opt/plantuml/plantuml.jar")
      (setq plantuml-jar-path "/opt/plantuml/plantuml.jar")))
 
+(add-to-list 'org-babel-load-languages '(sh . t) t)
 (add-to-list 'org-babel-load-languages '(dot . t) t)
 (add-to-list 'org-babel-load-languages '(ditaa . t) t)
 (add-to-list 'org-babel-load-languages '(plantuml . t) t)
+
+(org-babel-do-load-languages
+ 'org-babel-load-languages org-babel-load-languages)
 
 ; Drill
 (require 'org-drill)
