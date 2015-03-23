@@ -1553,12 +1553,7 @@ to a unique value for this to work properly."
 (require 'git-gutter-fringe+)
 
 (defun set-up-git-gutter+ ()
-  (setq-local git-gutter-fr+-side 'left-fringe)
-  (local-set-key (kbd "M-s n h") 'git-gutter+-next-hunk)
-  (local-set-key (kbd "M-s p h") 'git-gutter+-previous-hunk)
-  (local-set-key (kbd "M-s s d") 'git-gutter+-show-hunk)
-  (local-set-key (kbd "M-s s h") 'git-gutter+-stage-hunks)
-  (local-set-key (kbd "M-s r h") 'git-gutter+-revert-hunks))
+  (setq-local git-gutter-fr+-side 'left-fringe))
 
 (defun git-gutter-fringe+-change-fringe ()
   (if linum-mode
@@ -1577,7 +1572,18 @@ to a unique value for this to work properly."
 (add-hook 'git-commit-mode-hook 'turn-on-orgstruct)
 (add-hook 'git-commit-mode-hook 'turn-on-auto-fill)
 
+; Hydra
+(defhydra hydra-git-gutter+ ()
+  "Git Gutter"
+  ("d" git-gutter+-show-hunk "diff hunk")
+  ("n" git-gutter+-next-hunk "next hunk")
+  ("p" git-gutter+-previous-hunk "previous hunk")
+  ("r" git-gutter+-revert-hunks "revert hunk(s)")
+  ("s" git-gutter+-stage-hunks "stage hunk(s)")
+  ("u" git-gutter+-unstage-whole-buffer "unstage buffer"))
+
 ; Key Bindings
+(define-key custom-keys-mode-prefix-map (kbd "g g") 'hydra-git-gutter+/body)
 (define-key custom-keys-mode-prefix-map (kbd "g s") 'magit-status)
 (define-key magit-mode-map (kbd "M-s") nil)
 (define-key magit-mode-map (kbd "M-S") nil)
