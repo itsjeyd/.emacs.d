@@ -393,15 +393,6 @@ Goes backward if ARG is negative; error if STR not found."
 (define-key custom-keys-mode-prefix-map (kbd "m") 'mark-lines-next-line)
 
 ; Move Text
-(defun position-point (orig arg)
-  (if (not mark-active)
-      (progn
-        (funcall orig arg)
-        (forward-line (- arg)))
-    (funcall orig arg)))
-
-(advice-add 'move-text-up :around #'position-point)
-
 (defhydra hydra-move-text (:color pink)
   "Move text"
   ("u" move-text-up "up")
