@@ -17,6 +17,7 @@
 ;;;;;;;;;;;;;
 
 (add-to-list 'load-path "~/.emacs.d/lisp/")
+(add-to-list 'load-path "~/.emacs.d/lisp/calfw-git/")
 (add-to-list 'load-path "~/.emacs.d/lisp/mark-lines/")
 
 
@@ -113,6 +114,32 @@
 
 (add-hook 'after-save-hook 'auto-recompile-elisp-file)
 
+
+
+;;;;;;;;;;;;;;;;
+;;; Calendar ;;;
+;;;;;;;;;;;;;;;;
+
+(require 'calfw)
+
+(setq cfw:face-item-separator-color "#6699cc")
+(setq cfw:render-line-breaker 'cfw:render-line-breaker-wordwrap)
+
+(require 'calfw-org)
+
+(defun cfw:open-org-calendar ()
+  "Open an org schedule calendar in the new buffer."
+  (interactive)
+  (save-excursion
+    (let* ((org-source (cfw:org-create-source "#7aa37a"))
+           (cp (cfw:create-calendar-component-buffer
+                :view 'month
+                :contents-sources (list org-source)
+                :custom-map cfw:org-schedule-map
+                :sorter 'cfw:org-schedule-sorter)))
+      (switch-to-buffer (cfw:cp-get-buffer cp)))))
+
+(require 'calfw-git)
 
 
 ;;;;;;;;;;;;;;;;;;;
@@ -648,7 +675,17 @@ root-privileges if it is not writable by user."
              (set-face-attribute
               'info-header-xref nil :foreground fallback-color)))
           ((eq enabled-theme 'sanityinc-tomorrow-eighties)
-           (set-face-attribute 'hydra-face-blue nil :foreground "#6699cc"))
+           (set-face-attribute 'cfw:face-title nil :foreground "#f99157")
+           (set-face-attribute 'cfw:face-sunday nil :foreground "#cc99cc")
+           (set-face-attribute 'cfw:face-header nil :foreground "#66cccc")
+           (set-face-attribute 'cfw:face-holiday nil :foreground "#ffcc66")
+           (set-face-attribute 'cfw:face-default-day nil :foreground "#66cccc")
+           (set-face-attribute 'cfw:face-select nil :background "#99cc99" :foreground "#393939")
+           (set-face-attribute 'cfw:face-today-title nil :background "#f2777a" :foreground "#393939")
+           (set-face-attribute 'cfw:face-today nil :foreground "#99cc99")
+           (set-face-attribute 'cfw:face-toolbar nil :background "#393939")
+           (set-face-attribute 'cfw:face-toolbar-button-off nil :foreground "#7f7f7f" :weight 'normal)
+           (set-face-attribute 'hydra-face-blue nil :foreground "#6699cc")
           ((eq enabled-theme 'wombat)
            (set-cursor-color cursor-preferred-color)))))
 
