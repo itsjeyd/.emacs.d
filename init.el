@@ -1097,6 +1097,7 @@ to a unique value for this to work properly."
 (require 'org-protocol)
 
 ; Variables
+(setq org-agenda-files '("~/org/tasks.org"))
 (setq org-agenda-include-diary t)
 (setq org-blank-before-new-entry '((heading . t) (plain-list-item . auto)))
 (setq org-catch-invisible-edits 'error)
