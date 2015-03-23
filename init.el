@@ -722,7 +722,6 @@ root-privileges if it is not writable by user."
 (require 'whitespace)
 (setq whitespace-style '(face lines-tail))
 (setq whitespace-line-column nil)
-(add-hook 'org-mode-hook 'whitespace-mode)
 (add-hook 'prog-mode-hook 'whitespace-mode)
 
 
