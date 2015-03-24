@@ -393,6 +393,11 @@ Goes backward if ARG is negative; error if STR not found."
 (define-key custom-keys-mode-prefix-map (kbd "m") 'mark-lines-next-line)
 
 ; Move Text
+(defun follow-line (arg)
+  (unless mark-active (forward-line (- arg))))
+
+(advice-add 'move-text-up :after #'follow-line)
+
 (defhydra hydra-move-text (:color pink)
   "Move text"
   ("u" move-text-up "up")
