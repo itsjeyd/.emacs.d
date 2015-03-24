@@ -390,7 +390,21 @@ Goes backward if ARG is negative; error if STR not found."
 
 ; Mark Lines
 (require 'mark-lines)
-(define-key custom-keys-mode-prefix-map (kbd "m") 'mark-lines-next-line)
+
+(defhydra hydra-mark-lines ()
+  "Mark lines"
+  ("m" next-line "next line")
+  ("n" next-line "next line")
+  ("p" previous-line "previous line"))
+
+(defun mark-line ()
+  "Simple wrapper around `mark-lines-next-line' that marks the line
+point is on and summons `hydra-mark-lines'."
+  (interactive)
+  (mark-lines-next-line 1)
+  (hydra-mark-lines/body))
+
+(define-key custom-keys-mode-prefix-map (kbd "m") 'mark-line)
 
 ; Move Text
 (defun follow-line (arg)
