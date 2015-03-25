@@ -884,8 +884,8 @@ HOOKS can be a list of hooks or just a single hook."
 ; Hydra
 (defhydra hydra-move-by-page ()
   "Move by page"
-  ("]" forward-page "next page")
-  ("[" backward-page "prev page"))
+  ("[" backward-page "prev page")
+  ("]" forward-page "next page"))
 
 ; Key Bindings
 (global-set-key (kbd "C-x [") 'hydra-move-by-page/body)
