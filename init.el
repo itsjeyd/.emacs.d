@@ -267,6 +267,7 @@ region, operate on a single line. Otherwise, operate on region."
 (ac-flyspell-workaround)
 (require 'org-ac)
 (org-ac/config-default)
+(setq org-ac/ac-trigger-command-keys '("\\" "SPC" ":" "[" "+"))
 (require 'ac-cider)
 (add-to-list 'ac-modes 'cider-mode)
 
@@ -1076,6 +1077,7 @@ to a unique value for this to work properly."
 
 ; Key Bindings
 (defvar org-mode-extra-keys-map (lookup-key org-mode-map (kbd "C-c C-x")))
+(global-set-key (kbd "C-c a") 'org-agenda)
 (global-set-key (kbd "C-c l") 'org-store-link)
 (define-key org-mode-extra-keys-map (kbd "c") 'org-table-copy-down)
 (define-key org-mode-extra-keys-map (kbd "d") 'org-metadown)
@@ -1088,7 +1090,6 @@ to a unique value for this to work properly."
 (define-key org-mode-extra-keys-map (kbd "U") 'org-shiftmetaup)
 (define-key org-mode-map (kbd "RET") 'org-return-indent)
 (define-key org-mode-map (kbd "<C-tab>") 'pcomplete)
-(define-key org-mode-map (kbd "C-c a") 'org-agenda)
 (define-key org-mode-map (kbd "C-c c") 'org-wrap-in-comment-block)
 (define-key org-mode-map (kbd "C-c d") 'org-toggle-link-display)
 (define-key org-mode-map (kbd "C-M-q") 'org-fill-paragraph-handle-lists)
