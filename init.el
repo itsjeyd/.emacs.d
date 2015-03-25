@@ -1123,6 +1123,7 @@ to a unique value for this to work properly."
 (setq org-list-allow-alphabetical t)
 (setq org-list-demote-modify-bullet '(("-" . "+") ("+" . "-")))
 (setq org-list-use-circular-motion t)
+(setq org-log-into-drawer t)
 (setq org-M-RET-may-split-line '((headline . nil) (item . t) (table . t)))
 (setq org-outline-path-complete-in-steps nil)
 (setq org-return-follows-link t)
