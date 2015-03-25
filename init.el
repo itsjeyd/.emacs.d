@@ -519,7 +519,7 @@ point is on and summons `hydra-mark-lines'."
 
 ; Guide Key
 (setq guide-key/guide-key-sequence
-      '("C-c" "C-x r" "C-x v" "C-x 4" "C-c p" "C-x c" "M-s"))
+      '("C-c" "C-x r" "C-x v" "C-x 4" "C-c p" "C-x c" "M-s" "C-c C-x"))
 (setq guide-key/popup-window-position 'bottom)
 (guide-key-mode t)
 
