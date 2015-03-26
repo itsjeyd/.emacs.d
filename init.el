@@ -1120,6 +1120,7 @@ to a unique value for this to work properly."
 (setq org-special-ctrl-a/e 'reversed)
 (setq org-special-ctrl-k t)
 (setq org-src-fontify-natively t)
+(setq org-todo-repeat-to-state "RECURRING")
 (setq org-track-ordered-property-with-tag t)
 (setq org-use-speed-commands 'org-point-in-speed-command-position-p)
 (add-to-list 'org-speed-commands-user '("d" . org-next-drawer) t)
