@@ -1442,6 +1442,16 @@ to a unique value for this to work properly."
   (with-current-buffer grep-last-buffer
     (rename-buffer (format "*grep-%s*" regexp))))
 
+(defun toggle-lazy-highlight-cleanup ()
+  "Toggle `lazy-highlight-cleanup'.
+- If `t' (ON), Isearch will *not* leave highlights around.
+- If `nil' (OFF), matches will stay highlighted until the next
+invocation of an Isearch command."
+  (interactive)
+  (setq lazy-highlight-cleanup (not lazy-highlight-cleanup))
+  (message "Lazy highlight cleanup is now %s."
+           (if lazy-highlight-cleanup "ON" "OFF")))
+
 ; Helm Swoop
 (require 'helm-swoop)
 (global-set-key (kbd "C-c h") 'helm-swoop)
