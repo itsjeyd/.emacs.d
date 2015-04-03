@@ -18,6 +18,7 @@
 
 (add-to-list 'load-path "~/.emacs.d/lisp/")
 (add-to-list 'load-path "~/.emacs.d/lisp/calfw-git/")
+(add-to-list 'load-path "~/.emacs.d/lisp/git-wip-timemachine/")
 (add-to-list 'load-path "~/.emacs.d/lisp/mark-lines/")
 
 
@@ -1571,7 +1572,6 @@ invocation of an Isearch command."
 
 ; git-wip
 (load "~/git-wip/emacs/git-wip.el")
-(add-to-list 'load-path "~/.emacs.d/lisp/git-wip-timemachine/")
 (require 'git-wip-timemachine)
 
 ; Git Gutter
