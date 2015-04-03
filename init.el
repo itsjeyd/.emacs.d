@@ -470,6 +470,15 @@ point is on and summons `hydra-mark-lines'."
 
 ; Variables
 (setq eldoc-minor-mode-string "")
+(setq avi-background t)
+(setq lispy-avy-keys (number-sequence ?a ?i))
+(setq lispy-avy-style-char 'at)
+(setq lispy-avy-style-paren 'at)
+(setq lispy-avy-style-symbol 'at)
+(setq lispy-completion-method 'helm)
+(setq lispy-no-space t)
+(setq lispy-occur-backend 'helm)
+(setq lispy-window-height-ratio 0.8)
 
 
 
