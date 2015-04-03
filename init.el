@@ -1804,6 +1804,9 @@ With prefix P, create local abbrev. Otherwise it will be global."
       (message "\"%s\" now expands to \"%s\" %sally."
                before after (if local "loc" "glob"))))
 
+; Hooks
+(add-hook 'markdown-mode-hook 'turn-on-auto-fill)
+
 ; Key Bindings
 (define-key custom-keys-mode-prefix-map (kbd "a a") 'ispell-word-then-abbrev)
 
