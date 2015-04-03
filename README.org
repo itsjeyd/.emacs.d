@@ -71,7 +71,6 @@
   | magit                 |
   | makey                 |
   | markdown-mode         |
-  | m-buffer              |
   | move-text             |
   | multiple-cursors      |
   | noflet                |
