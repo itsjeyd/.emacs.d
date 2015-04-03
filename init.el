@@ -698,6 +698,8 @@ root-privileges if it is not writable by user."
            (set-face-attribute 'cfw:face-toolbar nil :background "#393939")
            (set-face-attribute 'cfw:face-toolbar-button-off nil :foreground "#7f7f7f" :weight 'normal)
            (set-face-attribute 'hydra-face-blue nil :foreground "#6699cc")
+           (set-face-attribute 'org-block-begin-line nil :background "#393939")
+           (set-face-attribute 'org-block-end-line nil :background "#393939"))
           ((eq enabled-theme 'wombat)
            (set-cursor-color cursor-preferred-color)))))
 
