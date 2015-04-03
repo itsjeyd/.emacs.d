@@ -106,6 +106,7 @@
     ("cos" "because" nil 3)
     ("edting" "editing" nil 2)
     ("effiently" "efficiently" nil 0)
+    ("fo" "of" nil 1)
     ("funciton" "function" nil 2)
     ("furhter" "further" nil 1)
     ("inclued" "include" nil 0)
