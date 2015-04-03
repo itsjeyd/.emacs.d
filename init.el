@@ -832,6 +832,9 @@ root-privileges if it is not writable by user."
 (setq enable-recursive-minibuffers t)
 (setq history-delete-duplicates t)
 (setq history-length t)
+(setq minibuffer-prompt-properties
+      (append minibuffer-prompt-properties
+              '(point-entered minibuffer-avoid-prompt)))
 
 
 
