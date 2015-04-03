@@ -1585,14 +1585,16 @@ invocation of an Isearch command."
 (add-hook 'git-commit-mode-hook 'turn-on-auto-fill)
 
 ; Hydra
-(defhydra hydra-git-gutter+ ()
+(defhydra hydra-git-gutter+ (:color pink)
   "Git Gutter"
-  ("d" git-gutter+-show-hunk "diff hunk")
-  ("n" git-gutter+-next-hunk "next hunk")
-  ("p" git-gutter+-previous-hunk "previous hunk")
-  ("r" git-gutter+-revert-hunks "revert hunk(s)")
-  ("s" git-gutter+-stage-hunks "stage hunk(s)")
-  ("u" git-gutter+-unstage-whole-buffer "unstage buffer"))
+  ("n" git-gutter+-next-hunk "next")
+  ("p" git-gutter+-previous-hunk "prev")
+  ("d" git-gutter+-show-hunk "diff" :color blue)
+  ("s" git-gutter+-stage-hunks "stage")
+  ("r" git-gutter+-revert-hunks "revert")
+  ("u" git-gutter+-unstage-whole-buffer "unstage buffer")
+  ("m" magit-status "magit" :color blue)
+  ("C-g" nil "quit"))
 
 ; Key Bindings
 (define-key custom-keys-mode-prefix-map (kbd "g g") 'hydra-git-gutter+/body)
