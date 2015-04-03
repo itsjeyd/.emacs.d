@@ -19,6 +19,7 @@
 (add-to-list 'load-path "~/.emacs.d/lisp/")
 (add-to-list 'load-path "~/.emacs.d/lisp/calfw-git/")
 (add-to-list 'load-path "~/.emacs.d/lisp/git-wip-timemachine/")
+(add-to-list 'load-path "~/.emacs.d/lisp/lispy-mnemonic/")
 (add-to-list 'load-path "~/.emacs.d/lisp/mark-lines/")
 
 
@@ -445,6 +446,8 @@ point is on and summons `hydra-mark-lines'."
 ;;; Elisp Development ;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;
 
+(require 'lispy-mnemonic)
+
 ; Functions
 (defun electric-indent-mode-setup ()
   (setq electric-indent-chars (delq 10 electric-indent-chars)))
@@ -460,6 +463,7 @@ point is on and summons `hydra-mark-lines'."
 (add-hook 'emacs-lisp-mode-hook 'lispy-setup)
 (add-hook 'emacs-lisp-mode-hook 'prettify-symbols-mode)
 (add-hook 'eval-expression-minibuffer-setup-hook 'eldoc-mode)
+(add-hook 'lispy-mode-hook 'lispy-mnemonic-restore-bindings)
 
 ; Slime Nav
 (defadvice turn-on-elisp-slime-nav-mode
