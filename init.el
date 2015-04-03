@@ -1697,7 +1697,7 @@ With a prefix arg, clear selective display."
 ; Ace Window
 (global-set-key (kbd "C-x o") 'ace-window)
 (set-face-attribute 'aw-leading-char-face nil :height 2.0)
-(setq aw-keys '(?a ?b ?c ?d ?e ?f ?g ?h ?i))
+(setq aw-keys (number-sequence ?a ?i))
 (setq aw-scope 'frame)
 
 ; Functions
