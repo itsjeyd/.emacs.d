@@ -908,6 +908,7 @@ HOOKS can be a list of hooks or just a single hook."
 ; Variables
 (setq ace-jump-mode-submode-list
       '(ace-jump-char-mode ace-jump-word-mode ace-jump-line-mode))
+(setq ace-jump-mode-move-keys (number-sequence ?a ?i))
 (setq ace-jump-word-mode-use-query-char nil)
 
 
