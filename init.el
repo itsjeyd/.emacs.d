@@ -898,24 +898,26 @@ HOOKS can be a list of hooks or just a single hook."
 ;;; Movement ;;;
 ;;;;;;;;;;;;;;;;
 
-; Ace Jump
-(global-set-key (kbd "s-SPC") 'ace-jump-mode)
-
 ; Hydra
+(defhydra hydra-ace-jump (:color blue)
+  "Ace jump"
+  ("c" ace-jump-char-mode "char")
+  ("w" ace-jump-word-mode "word")
+  ("l" ace-jump-line-mode "line"))
+
 (defhydra hydra-move-by-page ()
   "Move by page"
   ("[" backward-page "prev page")
   ("]" forward-page "next page"))
 
 ; Key Bindings
+(global-set-key (kbd "M-SPC") 'hydra-ace-jump/body)
 (global-set-key (kbd "C-x [") 'hydra-move-by-page/body)
 (global-set-key (kbd "C-x ]") 'hydra-move-by-page/body)
 (global-set-key (kbd "M-g c") 'goto-char)
 (global-set-key (kbd "M-g l") 'goto-line)
 
 ; Variables
-(setq ace-jump-mode-submode-list
-      '(ace-jump-char-mode ace-jump-word-mode ace-jump-line-mode))
 (setq ace-jump-mode-move-keys (number-sequence ?a ?i))
 (setq ace-jump-mode-scope 'frame)
 (setq ace-jump-word-mode-use-query-char nil)
