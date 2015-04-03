@@ -20,6 +20,7 @@ elpa/
 ensime-servers/
 image-dired/
 lisp/git-wip-timemachine
+lisp/lispy-mnemonic/
 lisp/mark-lines/
 speed-type/
 url/
