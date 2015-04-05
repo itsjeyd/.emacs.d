@@ -1629,6 +1629,7 @@ invocation of an Isearch command."
 ; Variables
 (setq magit-auto-revert-mode-lighter "")
 (setq magit-diff-refine-hunk t)
+(setq magit-last-seen-setup-instructions "1.4.0")
 (setq magit-use-overlays nil)
 
 
