@@ -1465,6 +1465,17 @@ invocation of an Isearch command."
   (message "Lazy highlight cleanup is now %s."
            (if lazy-highlight-cleanup "ON" "OFF")))
 
+(defun isearch-hungry-delete ()
+  "Delete the failed portion of the search string, or the last
+char if successful."
+  (interactive)
+  (with-isearch-suspended
+   (setq isearch-new-string
+         (substring isearch-string 0 (or (isearch-fail-pos)
+                                         (1- (length isearch-string))))
+         isearch-new-message
+         (mapconcat 'isearch-text-char-description isearch-new-string ""))))
+
 ; Helm Swoop
 (require 'helm-swoop)
 (global-set-key (kbd "C-c h") 'helm-swoop)
@@ -1475,6 +1486,7 @@ invocation of an Isearch command."
 
 ; Key Bindings
 (global-set-key (kbd "C-c g") 'rgrep)
+(define-key isearch-mode-map (kbd "<backspace>") 'isearch-hungry-delete)
 (define-key occur-mode-map "n" 'occur-next)
 (define-key occur-mode-map "p" 'occur-prev)
 
