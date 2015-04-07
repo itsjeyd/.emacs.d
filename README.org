@@ -47,6 +47,7 @@
   | git-gutter-fringe+    |
   | git-rebase-mode       |
   | git-timemachine       |
+  | google-maps           |
   | graphviz-dot-mode     |
   | guide-key             |
   | haml-mode             |
@@ -54,7 +55,6 @@
   | helm-dash             |
   | helm-swoop            |
   | hideshow-org          |
-  | highlight             |
   | hydra                 |
   | idle-highlight-mode   |
   | idle-require          |
