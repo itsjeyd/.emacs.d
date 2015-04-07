@@ -1258,6 +1258,8 @@ to a unique value for this to work properly."
 (add-hook 'html-mode-hook (helm-dash-setup "html" ["Bootstrap 3" "HTML"]))
 (add-hook 'js-mode-hook (helm-dash-setup "js" ["BackboneJS" "Bootstrap 3" "JavaScript" "jQuery" "UnderscoreJS"]))
 
+(global-set-key (kbd "C-c d") 'helm-dash)
+
 ; Hide/Show
 (require 'hideshow-org)
 
