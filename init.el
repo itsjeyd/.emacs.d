@@ -1331,32 +1331,20 @@ to a unique value for this to work properly."
 ;;; Python Development ;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-; Flymake
-(when (load "flymake" t)
-  (defun flymake-pyflakes-init ()
-    (let* ((temp-file (flymake-init-create-temp-buffer-copy
-                       'flymake-create-temp-inplace))
-           (local-file (file-relative-name
-                        temp-file
-                        (file-name-directory buffer-file-name))))
-      (list "pyflakes" (list local-file))))
-  (add-to-list 'flymake-allowed-file-name-masks
-               '("\\.py\\'" flymake-pyflakes-init)))
-
-; Functions
-(defun python-setup ()
-  (unless (eq buffer-file-name nil)
-    (flymake-mode t)))
+; Flycheck Pyflakes
+(require 'flycheck-pyflakes)
+(add-to-list 'flycheck-disabled-checkers 'python-flake8)
+(add-to-list 'flycheck-disabled-checkers 'python-pylint)
 
 ; Hooks
-(add-hook 'python-mode-hook 'python-setup)
+(add-hook 'python-mode-hook 'flycheck-mode)
 
 ; Key Bindings
 (idle-require 'python)
 (eval-after-load 'python
   '(progn
-     (define-key python-mode-map (kbd "M-s f n") 'flymake-goto-next-error)
-     (define-key python-mode-map (kbd "M-s f p") 'flymake-goto-prev-error)))
+     (define-key python-mode-map (kbd "M-s f n") 'flycheck-next-error)
+     (define-key python-mode-map (kbd "M-s f p") 'flycheck-previous-error)))
 
 ; Variables
 (setq python-fill-docstring-style 'django)

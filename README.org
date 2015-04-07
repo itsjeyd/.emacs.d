@@ -38,7 +38,8 @@
   | fill-column-indicator |
   | flx                   |
   | flx-ido               |
-  | flymake-cursor        |
+  | flycheck              |
+  | flycheck-pyflakes     |
   | font-utils            |
   | fringe-helper         |
   | gh-md                 |
