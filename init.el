@@ -1469,12 +1469,10 @@ invocation of an Isearch command."
   "Delete the failed portion of the search string, or the last
 char if successful."
   (interactive)
-  (with-isearch-suspended
-   (setq isearch-new-string
-         (substring isearch-string 0 (or (isearch-fail-pos)
-                                         (1- (length isearch-string))))
-         isearch-new-message
-         (mapconcat 'isearch-text-char-description isearch-new-string ""))))
+  (if (isearch-fail-pos)
+      (while (isearch-fail-pos)
+        (isearch-delete-char))
+    (isearch-delete-char)))
 
 ; Helm Swoop
 (require 'helm-swoop)
