@@ -790,6 +790,16 @@ root-privileges if it is not writable by user."
   (interactive)
   (json-reformat-region (point-min) (point-max)))
 
+; Hooks
+(add-hook 'js-mode-hook 'flycheck-mode)
+
+; Key Bindings
+(idle-require 'js)
+(eval-after-load 'js
+  '(progn
+     (define-key js-mode-map (kbd "M-s f n") 'flycheck-next-error)
+     (define-key js-mode-map (kbd "M-s f p") 'flycheck-previous-error)))
+
 ; Variables
 (setq js-indent-level 2)
 
