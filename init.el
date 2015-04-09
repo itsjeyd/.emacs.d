@@ -1131,6 +1131,7 @@ to a unique value for this to work properly."
 (setq org-confirm-babel-evaluate nil)
 (setq org-cycle-include-plain-lists 'integrate)
 (setq org-export-dispatch-use-expert-ui t)
+(setq org-enforce-todo-checkbox-dependencies t)
 (setq org-enforce-todo-dependencies t)
 (setq org-export-copy-to-kill-ring nil)
 (setq org-footnote-define-inline t)
