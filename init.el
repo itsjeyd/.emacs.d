@@ -447,23 +447,19 @@ point is on and summons `hydra-mark-lines'."
 ;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (require 'lispy-mnemonic)
+(setq lispy-mnemonic-restore-bindings t)
 
 ; Functions
 (defun electric-indent-mode-setup ()
   (setq electric-indent-chars (delq 10 electric-indent-chars)))
 
-(defun lispy-setup ()
-  (lispy-mode 1)
-  (modeline-remove-lighter 'lispy-mode))
-
 ; Hooks
-(add-hook 'clojure-mode-hook 'lispy-setup)
+(add-hook 'clojure-mode-hook 'lispy-mnemonic-mode)
 (add-hook 'emacs-lisp-mode-hook 'eldoc-mode)
 (add-hook 'emacs-lisp-mode-hook 'electric-indent-mode-setup)
-(add-hook 'emacs-lisp-mode-hook 'lispy-setup)
+(add-hook 'emacs-lisp-mode-hook 'lispy-mnemonic-mode)
 (add-hook 'emacs-lisp-mode-hook 'prettify-symbols-mode)
 (add-hook 'eval-expression-minibuffer-setup-hook 'eldoc-mode)
-(add-hook 'lispy-mode-hook 'lispy-mnemonic-restore-bindings)
 
 ; Slime Nav
 (defadvice turn-on-elisp-slime-nav-mode
