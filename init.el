@@ -793,13 +793,6 @@ root-privileges if it is not writable by user."
 ; Hooks
 (add-hook 'js-mode-hook 'flycheck-mode)
 
-; Key Bindings
-(idle-require 'js)
-(eval-after-load 'js
-  '(progn
-     (define-key js-mode-map (kbd "M-s f n") 'flycheck-next-error)
-     (define-key js-mode-map (kbd "M-s f p") 'flycheck-previous-error)))
-
 ; Variables
 (setq js-indent-level 2)
 
@@ -1240,6 +1233,13 @@ to a unique value for this to work properly."
 ;;; Programming ;;;
 ;;;;;;;;;;;;;;;;;;;
 
+; Flycheck
+(defun flycheck-setup ()
+  (define-key custom-keys-mode-prefix-map (kbd "f n") 'flycheck-next-error)
+  (define-key custom-keys-mode-prefix-map (kbd "f p") 'flycheck-previous-error))
+
+(add-hook 'flycheck-mode-hook 'flycheck-setup)
+
 ; Helm Dash
 (require 'helm-dash)
 (setq helm-dash-common-docsets '("Emacs Lisp" "MySQL" "PostgreSQL" "SQLite"))
@@ -1348,13 +1348,6 @@ to a unique value for this to work properly."
 
 ; Hooks
 (add-hook 'python-mode-hook 'flycheck-mode)
-
-; Key Bindings
-(idle-require 'python)
-(eval-after-load 'python
-  '(progn
-     (define-key python-mode-map (kbd "M-s f n") 'flycheck-next-error)
-     (define-key python-mode-map (kbd "M-s f p") 'flycheck-previous-error)))
 
 ; Variables
 (setq python-fill-docstring-style 'django)
