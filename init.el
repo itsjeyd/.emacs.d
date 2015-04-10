@@ -1,4 +1,5 @@
 (package-initialize)
+(setq package-enable-at-startup nil)
 (setq idle-require-idle-delay 10)
 
 
