@@ -1263,6 +1263,7 @@ to a unique value for this to work properly."
 (add-hook 'php-mode-hook (helm-dash-setup "php" ["PHP"]))
 (add-hook 'python-mode-hook (helm-dash-setup "python" ["Django" "Python 2" "Python 3"]))
 (add-hook 'css-mode-hook (helm-dash-setup "css" ["Bootstrap 3" "CSS"]))
+(add-hook 'haml-mode-hook (helm-dash-setup "html" ["Bootstrap 3" "HTML"]))
 (add-hook 'html-mode-hook (helm-dash-setup "html" ["Bootstrap 3" "HTML"]))
 (add-hook 'js-mode-hook (helm-dash-setup "js" ["BackboneJS" "Bootstrap 3" "JavaScript" "jQuery" "UnderscoreJS"]))
 
