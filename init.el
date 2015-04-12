@@ -630,6 +630,7 @@ root-privileges if it is not writable by user."
 
 ; Controls
 (set-scroll-bar-mode nil)
+(menu-bar-mode 0)
 (tool-bar-mode 0)
 
 ; Cursor
