@@ -1493,6 +1493,9 @@ char if successful."
 (define-key smartscan-map (kbd "s-n") 'smartscan-symbol-go-forward)
 (define-key smartscan-map (kbd "s-p") 'smartscan-symbol-go-backward)
 
+; Variables
+(setq isearch-allow-scroll t)
+
 
 
 ;;;;;;;;;;;;;;
