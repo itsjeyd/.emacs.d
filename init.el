@@ -1018,6 +1018,10 @@ HOOKS can be a list of hooks or just a single hook."
 ; Exports
 (idle-require 'ox-md)
 
+; Faces
+(set-face-attribute 'org-done nil :strike-through t)
+(set-face-attribute 'org-headline-done nil :strike-through t)
+
 ; Functions
 (defun org-copy-link ()
   "Copy `org-mode' link at point."
@@ -1132,6 +1136,7 @@ to a unique value for this to work properly."
 (setq org-enforce-todo-checkbox-dependencies t)
 (setq org-enforce-todo-dependencies t)
 (setq org-export-copy-to-kill-ring nil)
+(setq org-fontify-done-headline t)
 (setq org-footnote-define-inline t)
 (setq org-footnote-auto-label 'random)
 (setq org-latex-table-caption-above nil)
