@@ -55,7 +55,6 @@
   | helm                  |
   | helm-dash             |
   | helm-swoop            |
-  | hideshow-org          |
   | hydra                 |
   | idle-highlight-mode   |
   | idle-require          |

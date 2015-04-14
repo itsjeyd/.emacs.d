@@ -1275,20 +1275,6 @@ to a unique value for this to work properly."
 
 (global-set-key (kbd "C-c d") 'helm-dash)
 
-; Hide/Show
-(require 'hideshow-org)
-
-(defun configure-hs ()
-  "Configure Hide/Show"
-  (setq hs-isearch-open t))
-
-(defun turn-on-hs-org ()
-  (hs-org/minor-mode 1)
-  (configure-hs))
-
-(add-to-hooks '(css-mode-hook haml-mode-hook html-mode-hook prog-mode-hook)
-              'turn-on-hs-org)
-
 ; Indentation
 (setq-default indent-tabs-mode nil)
 
@@ -1873,7 +1859,6 @@ With prefix P, create local abbrev. Otherwise it will be global."
 (modeline-remove-lighter 'auto-complete-mode)
 (modeline-remove-lighter 'git-gutter+-mode)
 (modeline-remove-lighter 'guide-key-mode)
-(modeline-remove-lighter 'hs-minor-mode)
 (modeline-remove-lighter 'whitespace-mode)
 (modeline-remove-lighter 'yas-minor-mode)
 (modeline-set-lighter 'abbrev-mode " Abbr")
