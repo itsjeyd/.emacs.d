@@ -142,6 +142,14 @@
                 :sorter 'cfw:org-schedule-sorter)))
       (switch-to-buffer (cfw:cp-get-buffer cp)))))
 
+(defun open-org-calendar ()
+  "Open calendar in a separate frame."
+  (interactive)
+  (let ((cal-frame (make-frame '((minibuffer . nil)))))
+    (select-frame cal-frame)
+    (cfw:open-org-calendar)
+    (toggle-window-dedicated)))
+
 (require 'calfw-git)
 
 
