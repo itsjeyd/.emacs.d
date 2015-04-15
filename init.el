@@ -473,14 +473,6 @@ point is on and summons `hydra-mark-lines'."
 (add-hook 'emacs-lisp-mode-hook 'prettify-symbols-mode)
 (add-hook 'eval-expression-minibuffer-setup-hook 'eldoc-mode)
 
-; Slime Nav
-(defadvice turn-on-elisp-slime-nav-mode
-  (after configure-slime-nav activate compile)
-  (modeline-remove-lighter 'elisp-slime-nav-mode))
-
-(dolist (hook '(emacs-lisp-mode-hook ielm-mode-hook))
-  (add-hook hook 'turn-on-elisp-slime-nav-mode))
-
 ; Variables
 (setq eldoc-minor-mode-string "")
 (setq avi-background t)

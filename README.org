@@ -22,7 +22,6 @@
   | clojure-mode          |
   | dash                  |
   | direx                 |
-  | elisp-slime-nav       |
   | epl                   |
   | expand-region         |
   | fill-column-indicator |
