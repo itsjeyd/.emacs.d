@@ -1860,6 +1860,13 @@ With prefix P, create local abbrev. Otherwise it will be global."
 (require 'synosaurus-wordnet)
 (setq synosaurus-lookup-function 'wordnet-lookup)
 
+(defhydra hydra-synosaurus (:color blue)
+  "Synosaurus"
+  ("l" synosaurus-lookup "look up")
+  ("r" synosaurus-choose-and-replace "replace"))
+
+(global-set-key (kbd "C-c S") 'hydra-synosaurus/body)
+
 ; Writeroom
 (defun turn-off-git-gutter+ ()
   (if (not git-gutter+-mode)
