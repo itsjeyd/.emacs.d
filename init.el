@@ -566,7 +566,8 @@ point is on and summons `hydra-mark-lines'."
   ("e" (funcall (info-display-topic "emacs")) "Emacs")
   ("l" (funcall (info-display-topic "elisp")) "Elisp")
   ("m" (funcall (info-display-topic "magit")) "Magit")
-  ("o" (funcall (info-display-topic "org")) "Org Mode"))
+  ("o" (funcall (info-display-topic "org")) "Org Mode")
+  ("s" (funcall (info-display-topic "sicp")) "SICP"))
 
 ; Key Bindings
 (global-set-key (kbd "C-h a") 'hydra-apropos/body)
