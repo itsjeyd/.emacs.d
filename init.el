@@ -790,10 +790,6 @@ root-privileges if it is not writable by user."
 (add-to-list 'auto-mode-alist '("\\.js" . js2-mode))
 
 ; Functions
-(defun json-reformat-buffer ()
-  (interactive)
-  (json-reformat-region (point-min) (point-max)))
-
 (defun tern-delete-process ()
   (interactive)
   (delete-process "Tern"))

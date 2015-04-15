@@ -51,7 +51,6 @@
   | iedit                 |
   | js2-mode              |
   | js2-refactor          |
-  | json-reformat         |
   | let-alist             |
   | linum-relative        |
   | lispy                 |
