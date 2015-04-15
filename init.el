@@ -869,19 +869,6 @@ root-privileges if it is not writable by user."
 ;;; MISC ;;;
 ;;;;;;;;;;;;
 
-; Source:
-; https://code.google.com/p/dea/source/browse/trunk/my-lisps/ahei-misc.el
-
-(defun add-to-hooks (hooks function &optional append local)
-  "Call `add-hook' on HOOKS using arguments FUNCTION, APPEND, and LOCAL.
-
-HOOKS can be a list of hooks or just a single hook."
-  (if (listp hooks)
-      (mapc
-       `(lambda (hook)
-          (add-hook hook ',function append local))
-       hooks)
-    (add-hook hooks function append local)))
 
 
 
