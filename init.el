@@ -1546,7 +1546,6 @@ char if successful."
 ; Functions
 (defun define-search-service (name url)
   "Create command for looking up query using a specific service."
-  (interactive)
   (eval `(defun ,(intern (downcase name)) ()
            ,(format "Look up query or contents of region (if any) on %s." name)
            (interactive)
