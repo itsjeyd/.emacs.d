@@ -1332,11 +1332,7 @@ to a unique value for this to work properly."
 (add-hook 'php-mode-hook 'tim/enable-electric-semicolon)
 
 ; Subword Mode
-(defun turn-on-subword-mode ()
-  (subword-mode 1))
-
-(add-to-hooks `(java-mode-hook js-mode-hook php-mode-hook python-mode-hook)
-              'turn-on-subword-mode)
+(add-hook 'prog-mode-hook 'subword-mode)
 
 ; Which Function
 (which-function-mode 1)
