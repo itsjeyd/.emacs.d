@@ -110,8 +110,6 @@
   | sr-speedbar           |
   | synosaurus            |
   | tablist               |
-  | tern                  |
-  | tern-auto-complete    |
   | ucs-utils             |
   | unicode-fonts         |
   | visual-fill-column    |

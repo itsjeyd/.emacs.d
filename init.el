@@ -22,6 +22,7 @@
 (add-to-list 'load-path "~/.emacs.d/lisp/git-wip-timemachine/")
 (add-to-list 'load-path "~/.emacs.d/lisp/lispy-mnemonic/")
 (add-to-list 'load-path "~/.emacs.d/lisp/mark-lines/")
+(add-to-list 'load-path "/usr/lib/node_modules/tern/emacs/")
 
 
 
