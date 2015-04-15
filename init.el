@@ -282,6 +282,8 @@ region, operate on a single line. Otherwise, operate on region."
 (setq org-ac/ac-trigger-command-keys '("\\" "SPC" ":" "[" "+"))
 (require 'ac-cider)
 (add-to-list 'ac-modes 'cider-mode)
+(require 'tern-auto-complete)
+(tern-ac-setup)
 
 (defadvice ac-quick-help
     (around turn-off-line-truncation (&optional force) activate compile)
@@ -792,16 +794,38 @@ root-privileges if it is not writable by user."
 ;;; JavaScript Development ;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+(add-to-list 'auto-mode-alist '("\\.js" . js2-mode))
+
 ; Functions
 (defun json-reformat-buffer ()
   (interactive)
   (json-reformat-region (point-min) (point-max)))
 
+(defun tern-delete-process ()
+  (interactive)
+  (delete-process "Tern"))
+
 ; Hooks
-(add-hook 'js-mode-hook 'flycheck-mode)
+(add-hook 'js2-mode-hook 'ac-js2-mode)
+(add-hook 'js2-mode-hook 'flycheck-mode)
+(add-hook 'js2-mode-hook 'js2-imenu-extras-mode)
+(add-hook 'js2-mode-hook 'tern-mode)
+
+; JS2 Refactor
+(require 'js2-refactor)
+(js2r-add-keybindings-with-prefix "C-c C-r")
+
+; Key Bindings
+(eval-after-load 'js2-mode
+  '(define-key js2-mode-map (kbd "C-c b") 'web-beautify-js))
+(eval-after-load 'css-mode
+  '(define-key css-mode-map (kbd "C-c b") 'web-beautify-css))
+(eval-after-load 'sgml-mode
+  '(define-key sgml-mode-map (kbd "C-c b") 'web-beautify-html))
 
 ; Variables
-(setq js-indent-level 2)
+(setq-default js2-basic-offset 2)
+(setq js2-highlight-level 3)
 
 
 
@@ -1280,7 +1304,7 @@ to a unique value for this to work properly."
 (add-hook 'css-mode-hook (helm-dash-setup "css" ["Bootstrap 3" "CSS"]))
 (add-hook 'haml-mode-hook (helm-dash-setup "html" ["Bootstrap 3" "HTML"]))
 (add-hook 'html-mode-hook (helm-dash-setup "html" ["Bootstrap 3" "HTML"]))
-(add-hook 'js-mode-hook (helm-dash-setup "js" ["BackboneJS" "Bootstrap 3" "JavaScript" "jQuery" "UnderscoreJS"]))
+(add-hook 'js2-mode-hook (helm-dash-setup "js" ["BackboneJS" "Bootstrap 3" "JavaScript" "jQuery" "UnderscoreJS"]))
 
 (global-set-key (kbd "C-c d") 'helm-dash)
 
@@ -1302,7 +1326,7 @@ to a unique value for this to work properly."
   (local-set-key (kbd ";") 'tim/electric-semicolon))
 
 (add-hook 'java-mode-hook 'tim/enable-electric-semicolon)
-(add-hook 'js-mode-hook 'tim/enable-electric-semicolon)
+(add-hook 'js2-mode-hook 'tim/enable-electric-semicolon)
 (add-hook 'php-mode-hook 'tim/enable-electric-semicolon)
 
 ; Subword Mode
