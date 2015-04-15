@@ -546,6 +546,7 @@ point is on and summons `hydra-mark-lines'."
   ("d" apropos-documentation "doc")
   ("e" apropos-value "val")
   ("l" apropos-library "lib")
+  ("o" apropos-user-option "option")
   ("u" apropos-user-option "option")
   ("v" apropos-variable "var")
   ("i" info-apropos "info")
