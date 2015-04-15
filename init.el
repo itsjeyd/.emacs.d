@@ -1617,7 +1617,7 @@ char if successful."
   "Git Gutter"
   ("n" git-gutter+-next-hunk "next")
   ("p" git-gutter+-previous-hunk "prev")
-  ("d" git-gutter+-show-hunk "diff" :color blue)
+  ("d" git-gutter+-show-hunk "diff")
   ("s" git-gutter+-stage-hunks "stage")
   ("r" git-gutter+-revert-hunks "revert")
   ("u" git-gutter+-unstage-whole-buffer "unstage buffer")
