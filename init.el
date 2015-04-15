@@ -1319,7 +1319,11 @@ to a unique value for this to work properly."
 (add-hook 'php-mode-hook 'tim/enable-electric-semicolon)
 
 ; Subword Mode
-(add-hook 'prog-mode-hook 'subword-mode)
+(defun subword-setup ()
+  (subword-mode 1)
+  (modeline-remove-lighter 'subword-mode))
+
+(add-hook 'prog-mode-hook 'subword-setup)
 
 ; Which Function
 (which-function-mode 1)
