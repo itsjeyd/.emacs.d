@@ -8,7 +8,6 @@
   | ac-js2                |
   | ace-jump-mode         |
   | ace-window            |
-  | anaphora              |
   | anchored-transpose    |
   | anzu                  |
   | async                 |
@@ -21,21 +20,11 @@
   | change-inner          |
   | cider                 |
   | clojure-mode          |
-  | command-log-mode      |
-  | company               |
-  | concurrent            |
-  | ctable                |
-  | cypher-mode           |
   | dash                  |
-  | deferred              |
-  | dired-hacks-utils     |
   | direx                 |
-  | discover-my-major     |
   | elisp-slime-nav       |
-  | epc                   |
   | epl                   |
   | expand-region         |
-  | f                     |
   | fill-column-indicator |
   | flx                   |
   | flx-ido               |
@@ -50,7 +39,6 @@
   | git-rebase-mode       |
   | git-timemachine       |
   | google-maps           |
-  | graphviz-dot-mode     |
   | guide-key             |
   | haml-mode             |
   | helm                  |
@@ -62,7 +50,6 @@
   | ido-ubiquitous        |
   | ido-vertical-mode     |
   | iedit                 |
-  | imenu-list            |
   | js2-mode              |
   | js2-refactor          |
   | json-reformat         |
@@ -72,11 +59,9 @@
   | list-utils            |
   | log4e                 |
   | magit                 |
-  | makey                 |
   | markdown-mode         |
   | move-text             |
   | multiple-cursors      |
-  | noflet                |
   | nyan-mode             |
   | openwith              |
   | org-ac                |
@@ -86,7 +71,6 @@
   | pcache                |
   | pdf-tools             |
   | persistent-soft       |
-  | php-mode              |
   | pkg-info              |
   | plantuml-mode         |
   | pony-mode             |
@@ -98,8 +82,6 @@
   | rainbow-mode          |
   | request               |
   | s                     |
-  | sbt-mode              |
-  | scala-mode2           |
   | sclang-extensions     |
   | sclang-snippets       |
   | sicp                  |
