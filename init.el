@@ -481,7 +481,6 @@ point is on and summons `hydra-mark-lines'."
 (setq lispy-avy-style-paren 'at)
 (setq lispy-avy-style-symbol 'at)
 (setq lispy-completion-method 'helm)
-(setq lispy-no-space t)
 (setq lispy-occur-backend 'helm)
 (setq lispy-window-height-ratio 0.8)
 
