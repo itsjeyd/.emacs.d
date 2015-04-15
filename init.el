@@ -550,10 +550,14 @@ point is on and summons `hydra-mark-lines'."
   ("v" apropos-variable "variable")
   ("i" info-apropos "info")
   ("t" tags-apropos "tags")
-  ("z a" customize-apropos "customize")
-  ("z f" customize-apropos-faces "customize faces")
-  ("z g" customize-apropos-groups "customize groups")
-  ("z o" customize-apropos-options "customize options"))
+  ("z" hydra-customize-apropos/body "customize"))
+
+(defhydra hydra-customize-apropos (:color blue)
+  "Apropos (customize)"
+  ("a" customize-apropos "apropos")
+  ("f" customize-apropos-faces "faces")
+  ("g" customize-apropos-groups "groups")
+  ("o" customize-apropos-options "options"))
 
 (defhydra hydra-info (:color blue)
   "Info"
