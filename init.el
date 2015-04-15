@@ -1564,6 +1564,10 @@ char if successful."
   "thesaurus" "http://thesaurus.com/browse/")
 (define-search-service
   "urbandictionary" "http://www.urbandictionary.com/define.php?term=")
+(define-search-service
+  "wiktionary" "https://en.wiktionary.org/wiki/")
+(define-search-service
+  "wikipedia" "https://en.wikipedia.org/wiki/")
 
 ; Hydra
 (defhydra hydra-search (:color blue)
@@ -1571,7 +1575,9 @@ char if successful."
   ("g" google "Google")
   ("s" startpage "StartPage")
   ("t" thesaurus "Thesaurus")
-  ("u" urbandictionary "Urbandictionary"))
+  ("u" urbandictionary "Urbandictionary")
+  ("d" wiktionary "Wiktionary")
+  ("w" wikipedia "Wikipedia"))
 
 ; Key Bindings
 (global-set-key (kbd "C-c s") 'hydra-search/body)
