@@ -1263,6 +1263,15 @@ to a unique value for this to work properly."
 ;;; Programming ;;;
 ;;;;;;;;;;;;;;;;;;;
 
+; Advice
+(defun imenu-toggle-ido-vertical-mode (orig &optional prompt alist)
+  (unwind-protect
+      (progn (ido-vertical-mode 1)
+             (funcall orig prompt alist))
+    (ido-vertical-mode -1)))
+
+(advice-add 'imenu-choose-buffer-index :around #'imenu-toggle-ido-vertical-mode)
+
 ; Flycheck
 (defun flycheck-setup ()
   (define-key custom-keys-mode-prefix-map (kbd "f n") 'flycheck-next-error)
