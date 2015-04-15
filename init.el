@@ -1547,9 +1547,8 @@ char if successful."
 (defun define-search-service (name url)
   "Create command for looking up query using a specific service."
   (interactive)
-  (eval `(defun ,(intern name) ()
-           ,(format "Look up query or contents of region (if any) on %s."
-                    (capitalize name))
+  (eval `(defun ,(intern (downcase name)) ()
+           ,(format "Look up query or contents of region (if any) on %s." name)
            (interactive)
            (let ((query (if mark-active
                             (buffer-substring (region-beginning) (region-end))
@@ -1557,17 +1556,17 @@ char if successful."
              (browse-url (concat ,url query))))))
 
 (define-search-service
-  "google" "http://www.google.com/search?ie=utf-8&oe=utf-8&q=")
+  "Google" "http://www.google.com/search?ie=utf-8&oe=utf-8&q=")
 (define-search-service
-  "startpage" "https://startpage.com/do/metasearch.pl?query=")
+  "StartPage" "https://startpage.com/do/metasearch.pl?query=")
 (define-search-service
-  "thesaurus" "http://thesaurus.com/browse/")
+  "Thesaurus" "http://thesaurus.com/browse/")
 (define-search-service
-  "urbandictionary" "http://www.urbandictionary.com/define.php?term=")
+  "Urbandictionary" "http://www.urbandictionary.com/define.php?term=")
 (define-search-service
-  "wiktionary" "https://en.wiktionary.org/wiki/")
+  "Wiktionary" "https://en.wiktionary.org/wiki/")
 (define-search-service
-  "wikipedia" "https://en.wikipedia.org/wiki/")
+  "Wikipedia" "https://en.wikipedia.org/wiki/")
 
 ; Hydra
 (defhydra hydra-search (:color blue)
