@@ -1233,7 +1233,7 @@ to a unique value for this to work properly."
 ; Variables
 (setq doc-view-continuous t)
 (setq pdf-info-restart-process-p t)
-(setq pdf-util-fast-image-format "png")
+(setq pdf-util-fast-image-format '("png". ".png"))
 
 
 
