@@ -338,7 +338,7 @@ region, operate on a single line. Otherwise, operate on region."
 (define-key custom-keys-mode-prefix-map (kbd "@") 'er/expand-region)
 
 ; Functions
-(autoload 'zap-up-to-char "misc")
+(autoload 'zap-up-to-char "misc" "Zap *up to* char." t)
 
 (defun flush-empty-lines ()
   "Remove empty lines from buffer."
