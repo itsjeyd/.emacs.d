@@ -462,13 +462,13 @@ point is on and summons `hydra-mark-lines'."
 (setq lispy-mnemonic-restore-bindings t)
 
 ; Functions
-(defun electric-indent-mode-setup ()
+(defun electric-indent-setup ()
   (setq electric-indent-chars (delq 10 electric-indent-chars)))
 
 ; Hooks
 (add-hook 'clojure-mode-hook 'lispy-mnemonic-mode)
 (add-hook 'emacs-lisp-mode-hook 'eldoc-mode)
-(add-hook 'emacs-lisp-mode-hook 'electric-indent-mode-setup)
+(add-hook 'emacs-lisp-mode-hook 'electric-indent-setup)
 (add-hook 'emacs-lisp-mode-hook 'lispy-mnemonic-mode)
 (add-hook 'emacs-lisp-mode-hook 'prettify-symbols-mode)
 (add-hook 'eval-expression-minibuffer-setup-hook 'eldoc-mode)
