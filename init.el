@@ -1609,7 +1609,7 @@ char if successful."
 ; Git Gutter
 (require 'git-gutter-fringe+)
 
-(defun set-up-git-gutter+ ()
+(defun git-gutter+-setup ()
   (setq-local git-gutter-fr+-side 'left-fringe))
 
 (defun git-gutter-fringe+-change-fringe ()
@@ -1618,7 +1618,7 @@ char if successful."
     (setq-local git-gutter-fr+-side 'left-fringe))
   (git-gutter+-refresh))
 
-(add-hook 'git-gutter+-mode-hook 'set-up-git-gutter+)
+(add-hook 'git-gutter+-mode-hook 'git-gutter+-setup)
 (add-hook 'magit-revert-buffer-hook 'git-gutter+-refresh)
 
 ; Hooks
