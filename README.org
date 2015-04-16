@@ -21,6 +21,7 @@
   | cider                 |
   | clojure-mode          |
   | dash                  |
+  | diminish              |
   | direx                 |
   | epl                   |
   | expand-region         |
@@ -45,7 +46,6 @@
   | helm-swoop            |
   | hydra                 |
   | idle-highlight-mode   |
-  | idle-require          |
   | ido-ubiquitous        |
   | ido-vertical-mode     |
   | iedit                 |
@@ -92,6 +92,7 @@
   | tablist               |
   | ucs-utils             |
   | unicode-fonts         |
+  | use-package           |
   | visual-fill-column    |
   | web-beautify          |
   | wgrep                 |

@@ -1,6 +1,10 @@
 (package-initialize)
 (setq package-enable-at-startup nil)
-(setq idle-require-idle-delay 10)
+
+(require 'use-package)
+(setq use-package-always-ensure t)
+
+(require 'bind-key)
 
 
 
@@ -18,11 +22,6 @@
 ;;;;;;;;;;;;;
 
 (add-to-list 'load-path "~/.emacs.d/lisp/")
-(add-to-list 'load-path "~/.emacs.d/lisp/calfw-git/")
-(add-to-list 'load-path "~/.emacs.d/lisp/git-wip-timemachine/")
-(add-to-list 'load-path "~/.emacs.d/lisp/lispy-mnemonic/")
-(add-to-list 'load-path "~/.emacs.d/lisp/mark-lines/")
-(add-to-list 'load-path "/usr/lib/node_modules/tern/emacs/")
 
 
 
@@ -69,14 +68,29 @@
 ;;; Buffers ;;;
 ;;;;;;;;;;;;;;;
 
-; Functions
+(use-package ibuffer
+  :bind ("C-x C-b" . ibuffer)
+  :config
+  ;; Functions
+  (defun ibuffer-group-buffers ()
+    (ibuffer-switch-to-saved-filter-groups "Default"))
+
+  (defun ibuffer-turn-on-auto-refresh ()
+    (ibuffer-auto-mode 1))
+
+  ;; Hooks
+  (add-hook 'ibuffer-mode-hook 'ibuffer-group-buffers)
+  (add-hook 'ibuffer-mode-hook 'ibuffer-turn-on-auto-refresh)
+
+  ;; Variables
+  (setq-default ibuffer-saved-filter-groups
+                '(("Default"
+                   ("Dired" (mode . dired-mode))
+                   ("Org" (mode . org-mode))
+                   ("Temporary" (name . "\*.*\*"))))))
+
+; Commands
 (defvar temp-buffer-count 0)
-
-(defun ibuffer-group-buffers ()
-  (ibuffer-switch-to-saved-filter-groups "Default"))
-
-(defun ibuffer-turn-on-auto-refresh ()
-  (ibuffer-auto-mode 1))
 
 (defun make-temp-buffer ()
   (interactive)
@@ -85,22 +99,13 @@
     (message "New temp buffer (%s) created." temp-buffer-name))
   (setq temp-buffer-count (1+ temp-buffer-count)))
 
-; Hooks
-(add-hook 'ibuffer-mode-hook 'ibuffer-group-buffers)
-(add-hook 'ibuffer-mode-hook 'ibuffer-turn-on-auto-refresh)
-
 ; Key Bindings
-(global-set-key (kbd "C-x C-b") 'ibuffer)
 (global-set-key (kbd "C-c t") 'make-temp-buffer)
 (define-key custom-keys-mode-prefix-map (kbd "r b") 'revert-buffer)
 
 ; Variables
 (setq confirm-nonexistent-file-or-buffer nil)
 (setq revert-without-query '(".*"))
-(setq-default ibuffer-saved-filter-groups
-              '(("Default" ("Dired" (mode . dired-mode))
-                           ("Org" (mode . org-mode))
-                           ("Temporary" (name . "\*.*\*")))))
 
 
 
@@ -108,7 +113,8 @@
 ;;; Byte-Compile ;;;
 ;;;;;;;;;;;;;;;;;;;;
 
-(defun auto-recompile-elisp-file ()
+; Commands
+(defun recompile-elisp-file ()
   (interactive)
   (when (and buffer-file-name (string-match "\\.el" buffer-file-name))
     (let ((byte-file (concat buffer-file-name "\\.elc")))
@@ -116,7 +122,7 @@
               (file-newer-than-file-p buffer-file-name byte-file))
           (byte-compile-file buffer-file-name)))))
 
-(add-hook 'after-save-hook 'auto-recompile-elisp-file)
+(add-hook 'after-save-hook 'recompile-elisp-file)
 
 
 
@@ -124,25 +130,40 @@
 ;;; Calendar ;;;
 ;;;;;;;;;;;;;;;;
 
-(require 'calfw)
+(use-package calfw
+  :defer t
+  :config
+  (setq cfw:face-item-separator-color "#6699cc")
+  (setq cfw:render-line-breaker 'cfw:render-line-breaker-wordwrap)
+  (when (eq (car custom-enabled-themes) 'sanityinc-tomorrow-eighties)
+            (set-face-attribute 'cfw:face-title nil :foreground "#f99157")
+            (set-face-attribute 'cfw:face-sunday nil :foreground "#cc99cc")
+            (set-face-attribute 'cfw:face-header nil :foreground "#66cccc")
+            (set-face-attribute 'cfw:face-holiday nil :foreground "#ffcc66")
+            (set-face-attribute 'cfw:face-default-day nil :foreground "#66cccc")
+            (set-face-attribute 'cfw:face-select nil :background "#99cc99" :foreground "#393939")
+            (set-face-attribute 'cfw:face-today-title nil :background "#f2777a" :foreground "#393939")
+            (set-face-attribute 'cfw:face-today nil :foreground "#99cc99")
+            (set-face-attribute 'cfw:face-toolbar nil :background "#393939")
+            (set-face-attribute 'cfw:face-toolbar-button-off nil :foreground "#7f7f7f" :weight 'normal)))
 
-(setq cfw:face-item-separator-color "#6699cc")
-(setq cfw:render-line-breaker 'cfw:render-line-breaker-wordwrap)
+(use-package calfw-org
+  :ensure calfw
+  :commands cfw:open-org-calendar
+  :config
+  (defun cfw:org-create-source (&optional color)
+    "Create org-agenda source."
+    (make-cfw:source
+     :name "org-agenda"
+     :color (or color "#7aa37a")
+     :data 'cfw:org-schedule-period-to-calendar)))
 
-(require 'calfw-org)
+(use-package calfw-git
+  :ensure nil
+  :load-path "lisp/calfw-git"
+  :commands cfw:git-open-calendar)
 
-(defun cfw:open-org-calendar ()
-  "Open an org schedule calendar in the new buffer."
-  (interactive)
-  (save-excursion
-    (let* ((org-source (cfw:org-create-source "#7aa37a"))
-           (cp (cfw:create-calendar-component-buffer
-                :view 'month
-                :contents-sources (list org-source)
-                :custom-map cfw:org-schedule-map
-                :sorter 'cfw:org-schedule-sorter)))
-      (switch-to-buffer (cfw:cp-get-buffer cp)))))
-
+; Commands
 (defun open-org-calendar ()
   "Open calendar in a separate frame."
   (interactive)
@@ -151,15 +172,32 @@
     (cfw:open-org-calendar)
     (toggle-window-dedicated)))
 
-(require 'calfw-git)
-
 
 
 ;;;;;;;;;;;;;;;;;;;
 ;;; Common Lisp ;;;
 ;;;;;;;;;;;;;;;;;;;
 
-(require 'cl-lib)
+(use-package cl-lib)
+
+
+
+;;;;;;;;;;;
+;;; CSS ;;;
+;;;;;;;;;;;
+
+(use-package css-mode
+  :commands css-mode
+  :config
+
+  (use-package rainbow-mode
+    :commands rainbow-turn-on)
+
+  ;; Hooks
+  (add-hook 'css-mode-hook 'rainbow-turn-on)
+
+  ;; Key Bindings
+  (bind-key "C-c b" 'web-beautify-css css-mode-map))
 
 
 
@@ -167,83 +205,147 @@
 ;;; Dired ;;;
 ;;;;;;;;;;;;;
 
-; Direx
-(require 'direx)
-(setq direx:closed-icon "▶ ")
-(setq direx:leaf-icon "  ")
-(setq direx:open-icon "▼ ")
-(global-set-key (kbd "C-x C-d") 'direx:jump-to-directory)
+(use-package dired
+  :ensure nil
+  :config
+  ;; Commands
+  (defun dired-jump-to-top ()
+    (interactive)
+    (goto-char (point-min))
+    (if dired-hide-details-mode
+        (dired-next-line 3)
+      (dired-next-line 4)))
 
-; Functions
-(put 'dired-find-alternate-file 'disabled nil)
+  (defun dired-jump-to-bottom ()
+    (interactive)
+    (goto-char (point-max))
+    (dired-next-line -1))
 
-(defun dired-jump-to-top ()
-  (interactive)
-  (goto-char (point-min))
-  (if dired-hide-details-mode
-      (dired-next-line 3)
-    (dired-next-line 4)))
+  ;; Commands
+  (put 'dired-find-alternate-file 'disabled nil)
 
-(defun dired-jump-to-bottom ()
-  (interactive)
-  (goto-char (point-max))
-  (dired-next-line -1))
+  ;; Hooks
+  (add-hook 'dired-mode-hook 'dired-hide-details-mode)
 
-(defun dired-setup ()
-  (dired-hide-details-mode 1)
-  (dired-omit-mode 1))
+  ;; Key Bindings
+  (bind-keys :map dired-mode-map
+             (")" . dired-hide-details-mode)
+             ((vector 'remap 'beginning-of-buffer) . dired-jump-to-top)
+             ((vector 'remap 'end-of-buffer) . dired-jump-to-bottom))
 
-; Hidden Files
-(require 'dired-x)
-(setq dired-omit-files "^\\...+$")
+  ;; Variables
+  (setq dired-dwim-target t)
+  (setq dired-isearch-filenames "dwim")
+  (setq dired-listing-switches "-alh --time-style=long-iso")
+  (setq dired-recursive-copies 'always))
 
-; Hooks
-(add-hook 'dired-mode-hook 'dired-setup)
+(use-package dired-x
+  :ensure nil
+  :bind ("C-x C-j" . dired-jump)
+  :config
+  (add-hook 'dired-mode-hook 'dired-omit-mode)
+  (bind-key "M-o" 'dired-omit-mode dired-mode-map)
+  (setq dired-omit-files "^\\...+$"))
 
-; Key Bindings
-(define-key dired-mode-map (kbd ")") 'dired-hide-details-mode)
-(define-key dired-mode-map (kbd "M-o") 'dired-omit-mode)
-(define-key dired-mode-map
-  (vector 'remap 'beginning-of-buffer) 'dired-jump-to-top)
-(define-key dired-mode-map
-  (vector 'remap 'end-of-buffer) 'dired-jump-to-bottom)
-
-; Openwith
-(openwith-mode t)
-(setq openwith-associations
-      (list (list (openwith-make-extension-regexp '("pdf" "ps"))
-                  "okular" '(file))
-            (list (openwith-make-extension-regexp '("flac" "mp3" "wav"))
-                  "gmusicbrowser" '(file))
-            (list (openwith-make-extension-regexp '("avi" "flv" "mov" "mp4"
-                                                    "mpeg" "mpg" "ogg" "wmv"))
-                  "vlc" '(file))
-            (list (openwith-make-extension-regexp '("bmp" "jpeg" "jpg" "png"))
-                  "gwenview" '(file))
-            (list (openwith-make-extension-regexp '("chm"))
-                  "kchmviewer" '(file))
-            (list (openwith-make-extension-regexp '("doc" "docx" "odt"))
-                  "libreoffice" '("--writer" file))
-            (list (openwith-make-extension-regexp '("ods" "xls" "xlsx"))
-                  "libreoffice" '("--calc" file))
-            (list (openwith-make-extension-regexp '("odp" "pps" "ppt" "pptx"))
-                  "libreoffice" '("--impress" file))
-            (list (openwith-make-extension-regexp '("odg"))
-                  "libreoffice" '("--draw" file))
-            (list (openwith-make-extension-regexp '("dia"))
-                  "dia" '(file))))
-
-; Variables
-(setq dired-dwim-target t)
-(setq dired-isearch-filenames "dwim")
-(setq dired-listing-switches "-alh --time-style=long-iso")
-(setq dired-recursive-copies 'always)
+(use-package direx
+  :bind ("C-x C-d" . direx:jump-to-directory)
+  :config
+  (setq direx:closed-icon "▶ ")
+  (setq direx:leaf-icon "  ")
+  (setq direx:open-icon "▼ "))
 
 
 
 ;;;;;;;;;;;;;;;
 ;;; Editing ;;;
 ;;;;;;;;;;;;;;;
+
+(use-package anchored-transpose
+  :commands anchored-transpose
+  :init
+  (bind-key "a t" 'anchored-transpose custom-keys-mode-prefix-map))
+
+(use-package auto-complete-config
+  :ensure auto-complete
+  :config
+  (ac-config-default)
+  (ac-flyspell-workaround)
+
+  ;; Advice
+  (defadvice ac-quick-help
+      (around turn-off-line-truncation (&optional force) activate compile)
+    (toggle-truncate-lines -1)
+    ad-do-it
+    (toggle-truncate-lines 1))
+
+  ;; Key Bindings
+  (bind-keys :map ac-completing-map
+             ("C-h" . ac-help)
+             ("C-v" . ac-quick-help-scroll-down)
+             ("M-v" . ac-quick-help-scroll-up))
+  (bind-key "C-f" 'ac-stop ac-menu-map)
+
+  ;; Variables
+  (setq ac-auto-show-menu 0.3)
+  (setq ac-comphist-file "~/.emacs.d/.ac-comphist.dat")
+  (setq ac-ignore-case nil)
+  (setq ac-quick-help-delay 1.0)
+  (setq ac-use-menu-map t))
+
+(use-package caps-lock
+  :commands caps-lock-mode
+  :init
+  (bind-key "c l" 'caps-lock-mode custom-keys-mode-prefix-map))
+
+(use-package change-inner
+  :bind (("C-c i" . change-inner)
+         ("C-c o" . change-outer)))
+
+(use-package expand-region
+  :commands er/expand-region
+  :init
+  (bind-key "@" 'er/expand-region custom-keys-mode-prefix-map))
+
+(use-package mark-lines
+  :ensure nil
+  :load-path "lisp/mark-lines"
+  :commands mark-lines-next-line)
+
+(use-package misc
+  :ensure nil
+  :bind ("M-z" . zap-up-to-char))
+
+(use-package move-text
+  :commands (move-text-up move-text-down)
+  :config
+  ;; Functions
+  (defun follow-line (arg)
+    (unless mark-active (forward-line (- arg))))
+
+  ;; Hooks
+  (advice-add 'move-text-up :after #'follow-line))
+
+(use-package multiple-cursors
+  :commands (mc/edit-lines
+             mc/mark-next-like-this
+             mc/mark-previous-like-this
+             mc/mark-all-like-this
+             mc/mark-all-dwim
+             set-rectangular-region-anchor)
+  :init
+  (bind-key (kbd "e l") 'mc/edit-lines custom-keys-mode-prefix-map)
+  (bind-key (kbd "n l") 'mc/mark-next-like-this custom-keys-mode-prefix-map)
+  (bind-key (kbd "a l") 'mc/mark-all-like-this custom-keys-mode-prefix-map)
+  (bind-key (kbd "a d") 'mc/mark-all-dwim custom-keys-mode-prefix-map)
+  (bind-key (kbd "r a") 'set-rectangular-region-anchor custom-keys-mode-prefix-map))
+
+(use-package iso-transl
+  :ensure nil
+  :defer t
+  :config
+  (bind-keys :map iso-transl-ctl-x-8-map
+             ("a" . "⟶")
+             ("l" . "⚡" )))
 
 ; Advice
 (defadvice set-mark-command
@@ -271,81 +373,28 @@ region, operate on a single line. Otherwise, operate on region."
 (advice-add 'kill-region :before #'determine-scope)
 (advice-add 'kill-ring-save :before #'determine-scope)
 
-; Anchored Transpose
-(define-key custom-keys-mode-prefix-map (kbd "a t") 'anchored-transpose)
-
-; Auto-complete
-(require 'auto-complete-config)
-(ac-config-default)
-(ac-flyspell-workaround)
-(require 'org-ac)
-(org-ac/config-default)
-(setq org-ac/ac-trigger-command-keys '("\\" "SPC" ":" "[" "+"))
-(require 'ac-cider)
-(add-to-list 'ac-modes 'cider-mode)
-(require 'tern-auto-complete)
-(tern-ac-setup)
-
-(defadvice ac-quick-help
-    (around turn-off-line-truncation (&optional force) activate compile)
-  (toggle-truncate-lines -1)
-  ad-do-it
-  (toggle-truncate-lines 1))
-
-(define-key ac-completing-map (kbd "C-h") 'ac-help)
-(define-key ac-completing-map (kbd "C-v") 'ac-quick-help-scroll-down)
-(define-key ac-completing-map (kbd "M-v") 'ac-quick-help-scroll-up)
-(define-key ac-menu-map (kbd "C-f") 'ac-stop)
-
-(setq ac-auto-show-menu 0.3)
-(setq ac-comphist-file "~/.emacs.d/.ac-comphist.dat")
-(setq ac-ignore-case nil)
-(setq ac-quick-help-delay 1.0)
-(setq ac-use-menu-map t)
-(add-to-list 'ac-sources 'ac-source-yasnippet)
-
-; Caps Lock
-(define-key custom-keys-mode-prefix-map (kbd "c l") 'caps-lock-mode)
-
-; Change Inner
-(global-set-key (kbd "C-c i") 'change-inner)
-(global-set-key (kbd "C-c o") 'change-outer)
-
 ; Electric Pair Mode
 (electric-pair-mode 1)
 
 (defvar single-backticks '(?\` . ?\`))
 (defvar single-quotes '(?\' . ?\'))
-(defvar org-bold-markup '(?\* . ?\*))
-(defvar org-italics-markup '(?/ . ?/))
-(defvar org-verbatim-markup '(?= . ?=))
-(defvar org-electric-pairs
-  `(,single-quotes ,org-verbatim-markup ,org-italics-markup ,org-bold-markup))
 
-(defun git-commit-add-electric-pairs ()
-  (setq-local electric-pair-pairs
-              (cons single-backticks electric-pair-pairs)))
-
-(defun org-add-electric-pairs ()
-  (setq-local electric-pair-pairs
-              (append electric-pair-pairs org-electric-pairs))
-  (setq-local electric-pair-text-pairs electric-pair-pairs))
-
-(add-hook 'git-commit-mode-hook 'git-commit-add-electric-pairs)
-(add-hook 'org-mode-hook 'org-add-electric-pairs)
-
-; Expand Region
-(define-key custom-keys-mode-prefix-map (kbd "@") 'er/expand-region)
-
-; Functions
-(autoload 'zap-up-to-char "misc" "Zap *up to* char." t)
-
+; Commands
 (defun flush-empty-lines ()
   "Remove empty lines from buffer."
   (interactive)
   (save-excursion
     (goto-char (point-min))
     (flush-lines "^$")))
+
+(defun kill-region-with-arg (arg)
+  (interactive "P")
+  (if arg
+      (let ((beg (line-beginning-position))
+            (end (line-beginning-position (+ arg 1))))
+        (kill-region beg end)
+        (message "Killed %d lines." arg))
+    (call-interactively 'kill-region)))
 
 (defun kill-ring-save-with-arg (arg)
   (interactive "P")
@@ -356,14 +405,12 @@ region, operate on a single line. Otherwise, operate on region."
         (message "Copied %d lines." arg))
     (call-interactively 'kill-ring-save)))
 
-(defun kill-region-with-arg (arg)
-  (interactive "P")
-  (if arg
-      (let ((beg (line-beginning-position))
-            (end (line-beginning-position (+ arg 1))))
-        (kill-region beg end)
-        (message "Killed %d lines." arg))
-    (call-interactively 'kill-region)))
+(defun mark-line ()
+  "Simple wrapper around `mark-lines-next-line' that marks the line
+point is on and summons `hydra-mark-lines'."
+  (interactive)
+  (mark-lines-next-line 1)
+  (hydra-mark-lines/body))
 
 (defun sort-lines-and-uniquify ()
   "Sort lines alphabetically (in ascending order) and remove duplicates."
@@ -393,40 +440,12 @@ Goes backward if ARG is negative; error if STR not found."
 ; Hooks
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 
-; Key Bindings
-(require 'iso-transl)
-(global-set-key (kbd "C-w") 'kill-region-with-arg)
-(global-set-key (kbd "M-w") 'kill-ring-save-with-arg)
-(global-set-key (kbd "M-z") 'zap-up-to-char)
-(define-key iso-transl-ctl-x-8-map (kbd "a") "⟶")
-(define-key iso-transl-ctl-x-8-map (kbd "l") "⚡")
-(define-key custom-keys-mode-prefix-map (kbd "f e") 'flush-empty-lines)
-(define-key custom-keys-mode-prefix-map (kbd "s u") 'sort-lines-and-uniquify)
-(define-key custom-keys-mode-prefix-map (kbd "z") 'zap-to-string)
-
-; Mark Lines
-(require 'mark-lines)
-
+; Hydra
 (defhydra hydra-mark-lines ()
   "Mark lines"
   ("m" next-line "next line")
   ("n" next-line "next line")
   ("p" previous-line "previous line"))
-
-(defun mark-line ()
-  "Simple wrapper around `mark-lines-next-line' that marks the line
-point is on and summons `hydra-mark-lines'."
-  (interactive)
-  (mark-lines-next-line 1)
-  (hydra-mark-lines/body))
-
-(define-key custom-keys-mode-prefix-map (kbd "m") 'mark-line)
-
-; Move Text
-(defun follow-line (arg)
-  (unless mark-active (forward-line (- arg))))
-
-(advice-add 'move-text-up :after #'follow-line)
 
 (defhydra hydra-move-text (:color pink)
   "Move text"
@@ -434,15 +453,15 @@ point is on and summons `hydra-mark-lines'."
   ("d" move-text-down "down")
   ("C-g" nil "quit"))
 
+; Key Bindings
+(global-set-key (kbd "C-w") 'kill-region-with-arg)
+(global-set-key (kbd "M-w") 'kill-ring-save-with-arg)
+(define-key custom-keys-mode-prefix-map (kbd "m") 'mark-line)
 (define-key custom-keys-mode-prefix-map (kbd "u") 'hydra-move-text/body)
 (define-key custom-keys-mode-prefix-map (kbd "d") 'hydra-move-text/body)
-
-; Multiple Cursors
-(define-key custom-keys-mode-prefix-map (kbd "e l") 'mc/edit-lines)
-(define-key custom-keys-mode-prefix-map (kbd "n l") 'mc/mark-next-like-this)
-(define-key custom-keys-mode-prefix-map (kbd "a l") 'mc/mark-all-like-this)
-(define-key custom-keys-mode-prefix-map (kbd "a d") 'mc/mark-all-dwim)
-(define-key custom-keys-mode-prefix-map (kbd "r a") 'set-rectangular-region-anchor)
+(define-key custom-keys-mode-prefix-map (kbd "z") 'zap-to-string)
+(define-key custom-keys-mode-prefix-map (kbd "f e") 'flush-empty-lines)
+(define-key custom-keys-mode-prefix-map (kbd "s u") 'sort-lines-and-uniquify)
 
 ; Variables
 (setq cua-enable-cua-keys nil)
@@ -458,31 +477,77 @@ point is on and summons `hydra-mark-lines'."
 ;;; Elisp Development ;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(require 'lispy-mnemonic)
-(setq lispy-mnemonic-restore-bindings t)
+(use-package lispy-mnemonic
+  :ensure nil
+  :load-path "lisp/lispy-mnemonic"
+  :commands lispy-mnemonic-mode
+  :config
+  (setq lispy-mnemonic-restore-bindings t))
+
+(use-package lispy
+  :defer t
+  :config
+  (setq avi-background t)
+  (setq lispy-avy-keys (number-sequence ?a ?i))
+  (setq lispy-avy-style-char 'at)
+  (setq lispy-avy-style-paren 'at)
+  (setq lispy-avy-style-symbol 'at)
+  (setq lispy-completion-method 'helm)
+  (setq lispy-occur-backend 'helm)
+  (setq lispy-window-height-ratio 0.8))
+
+(use-package clojure-mode
+  :commands clojure-mode
+  :config
+  (add-hook 'clojure-mode-hook 'lispy-mnemonic-mode))
+
+(use-package eldoc
+  :commands eldoc-mode
+  :config
+  (setq eldoc-minor-mode-string ""))
 
 ; Functions
 (defun electric-indent-setup ()
   (setq electric-indent-chars (delq 10 electric-indent-chars)))
 
 ; Hooks
-(add-hook 'clojure-mode-hook 'lispy-mnemonic-mode)
 (add-hook 'emacs-lisp-mode-hook 'eldoc-mode)
 (add-hook 'emacs-lisp-mode-hook 'electric-indent-setup)
 (add-hook 'emacs-lisp-mode-hook 'lispy-mnemonic-mode)
 (add-hook 'emacs-lisp-mode-hook 'prettify-symbols-mode)
 (add-hook 'eval-expression-minibuffer-setup-hook 'eldoc-mode)
 
-; Variables
-(setq eldoc-minor-mode-string "")
-(setq avi-background t)
-(setq lispy-avy-keys (number-sequence ?a ?i))
-(setq lispy-avy-style-char 'at)
-(setq lispy-avy-style-paren 'at)
-(setq lispy-avy-style-symbol 'at)
-(setq lispy-completion-method 'helm)
-(setq lispy-occur-backend 'helm)
-(setq lispy-window-height-ratio 0.8)
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; File Associations ;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(use-package openwith
+  :config
+  (openwith-mode t)
+  (setq openwith-associations
+        (list (list (openwith-make-extension-regexp '("pdf" "ps"))
+                    "okular" '(file))
+              (list (openwith-make-extension-regexp '("flac" "mp3" "wav"))
+                    "gmusicbrowser" '(file))
+              (list (openwith-make-extension-regexp '("avi" "flv" "mov" "mp4"
+                                                      "mpeg" "mpg" "ogg" "wmv"))
+                    "vlc" '(file))
+              (list (openwith-make-extension-regexp '("bmp" "jpeg" "jpg" "png"))
+                    "gwenview" '(file))
+              (list (openwith-make-extension-regexp '("chm"))
+                    "kchmviewer" '(file))
+              (list (openwith-make-extension-regexp '("doc" "docx" "odt"))
+                    "libreoffice" '("--writer" file))
+              (list (openwith-make-extension-regexp '("ods" "xls" "xlsx"))
+                    "libreoffice" '("--calc" file))
+              (list (openwith-make-extension-regexp '("odp" "pps" "ppt" "pptx"))
+                    "libreoffice" '("--impress" file))
+              (list (openwith-make-extension-regexp '("odg"))
+                    "libreoffice" '("--draw" file))
+              (list (openwith-make-extension-regexp '("dia"))
+                    "dia" '(file)))))
 
 
 
@@ -492,8 +557,10 @@ point is on and summons `hydra-mark-lines'."
 
 (set-face-attribute 'default nil :font "Monaco-10")
 
-(require 'unicode-fonts)
-(unicode-fonts-setup)
+; Unicode Fonts
+(use-package unicode-fonts
+  :config
+  (unicode-fonts-setup))
 
 
 
@@ -501,13 +568,11 @@ point is on and summons `hydra-mark-lines'."
 ;;; Helm ;;;
 ;;;;;;;;;;;;
 
-(require 'helm-config)
-
-; Key Bindings
-(global-set-key (kbd "C-c k") 'helm-show-kill-ring)
-
-; Variables
-(setq helm-buffers-fuzzy-matching t)
+(use-package helm-config
+  :ensure helm
+  :bind ("C-c k" . helm-show-kill-ring)
+  :config
+  (setq helm-buffers-fuzzy-matching t))
 
 
 
@@ -516,6 +581,15 @@ point is on and summons `hydra-mark-lines'."
 ;;;;;;;;;;;;
 
 (find-function-setup-keys)
+
+(use-package guide-key
+  :defer 5
+  :config
+  (guide-key-mode t)
+  (modeline-remove-lighter 'guide-key-mode)
+  (setq guide-key/guide-key-sequence
+        '("C-c" "C-x r" "C-x v" "C-x 4" "C-c p" "C-x c" "M-s" "C-c C-x"))
+  (setq guide-key/popup-window-position 'bottom))
 
 ; Functions
 (defun info-display-topic (topic)
@@ -531,12 +605,6 @@ point is on and summons `hydra-mark-lines'."
                (if (get-buffer ,bufname)
                    (switch-to-buffer ,bufname)
                  (info ,topic ,bufname)))))))
-
-; Guide Key
-(setq guide-key/guide-key-sequence
-      '("C-c" "C-x r" "C-x v" "C-x 4" "C-c p" "C-x c" "M-s" "C-c C-x"))
-(setq guide-key/popup-window-position 'bottom)
-(guide-key-mode t)
 
 ; Hydra
 (defhydra hydra-apropos (:color blue)
@@ -578,11 +646,26 @@ point is on and summons `hydra-mark-lines'."
 
 
 
+;;;;;;;;;;;;
+;;; HTML ;;;
+;;;;;;;;;;;;
+
+(use-package sgml-mode
+  :commands sgml-mode
+  :config
+  (bind-key "C-c b" 'web-beautify-html sgml-mode-map))
+
+
+
 ;;;;;;;;;;;;;
 ;;; Hydra ;;;
 ;;;;;;;;;;;;;
 
-(require 'hydra)
+(use-package hydra
+  :defer t
+  :config
+  (when (eq (car custom-enabled-themes) 'sanityinc-tomorrow-eighties)
+    (set-face-attribute 'hydra-face-blue nil :foreground "#6699cc")))
 
 
 
@@ -590,51 +673,102 @@ point is on and summons `hydra-mark-lines'."
 ;;; Ido ;;;
 ;;;;;;;;;;;
 
-(ido-mode 'both)
-(ido-everywhere 1)
+(use-package ido
+  :config
 
-; Flx
-(flx-ido-mode 1)
-(setq gc-cons-threshold 7000000)
+  (use-package flx-ido
+    :config
+    (flx-ido-mode 1))
 
-; Functions
-(defun ido-find-file-as-root ()
-  "Like `ido-find-file, but automatically edit file with
-root-privileges if it is not writable by user."
-  (interactive)
-  (let ((file (ido-read-file-name "Edit as root: ")))
-    (unless (file-writable-p file)
-      (setq file (concat "/su:root@localhost:" file)))
-    (find-file file)))
+  (use-package ido-ubiquitous
+    :config
 
-; Key Bindings
-(global-set-key (kbd "C-c f") 'ido-find-file-as-root)
-(global-set-key (kbd "M-x") 'smex)
-(global-set-key (kbd "<menu>") 'smex-major-mode-commands)
+    (use-package ido-completing-read+
+      :config
+      (setq ido-cr+-max-items 50000))
 
-; Ubiquitous
-(ido-ubiquitous-mode 1)
-(push '(disable exact "unhighlight-regexp") ido-ubiquitous-command-overrides)
-(push '(disable prefix "sclang-dump-") ido-ubiquitous-command-overrides)
-(setq ido-cr+-max-items 50000)
+    (ido-ubiquitous-mode 1)
+    (push '(disable exact "unhighlight-regexp") ido-ubiquitous-command-overrides)
+    (push '(disable prefix "sclang-dump-") ido-ubiquitous-command-overrides))
 
-; Smex
-(setq smex-save-file "~/.emacs.d/.smex-items")
+  (use-package smex
+    :bind (("M-x" . smex)
+           ("<menu>" . smex-major-mode-commands))
+    :config
+    (setq smex-save-file "~/.emacs.d/.smex-items"))
+
+  (ido-mode 'both)
+  (ido-everywhere 1)
+
+  ;; Commands
+  (defun ido-find-file-as-root ()
+    "Like `ido-find-file', but automatically edit file with
+  root-privileges if it is not writable by user."
+    (interactive)
+    (let ((file (ido-read-file-name "Edit as root: ")))
+      (unless (file-writable-p file)
+        (setq file (concat "/su:root@localhost:" file)))
+      (find-file file)))
+
+  ;; Key Bindings
+  (bind-key "C-c f" 'ido-find-file-as-root)
+
+  ;; Variables
+  (add-to-list 'ido-ignore-buffers "\*Compile-Log\*")
+  (add-to-list 'ido-ignore-buffers "\*Messages\*")
+  (setq ido-create-new-buffer 'always)
+  (setq ido-enable-flex-matching t)
+  (setq ido-save-directory-list-file "~/.emacs.d/.ido.last")
+  (setq ido-use-filename-at-point 'guess)
+  (setq ido-use-virtual-buffers t))
 
 ; Variables
-(add-to-list 'ido-ignore-buffers "\*Compile-Log\*")
-(add-to-list 'ido-ignore-buffers "\*Messages\*")
-(setq ido-create-new-buffer 'always)
-(setq ido-enable-flex-matching t)
-(setq ido-save-directory-list-file "~/.emacs.d/.ido.last")
-(setq ido-use-filename-at-point 'guess)
-(setq ido-use-virtual-buffers t)
+(setq gc-cons-threshold 7000000)
 
 
 
 ;;;;;;;;;;;;;;;;;
 ;;; Interface ;;;
 ;;;;;;;;;;;;;;;;;
+
+(use-package linum
+  :commands linum-mode
+  :config
+
+  (use-package linum-relative
+    :config
+    (let ((default-background-color (face-attribute 'default :background)))
+      (set-face-attribute
+       'linum-relative-current-face nil :background default-background-color)))
+
+  (let ((default-background-color (face-attribute 'default :background)))
+    (set-face-attribute 'linum nil :background default-background-color)))
+
+(use-package rainbow-delimiters
+  :commands rainbow-delimiters-mode
+  :config
+  (add-hook 'org-mode-hook 'rainbow-delimiters-mode)
+  (add-hook 'prog-mode-hook 'rainbow-delimiters-mode))
+
+(use-package whitespace
+  :commands whitespace-mode
+  :config
+  (modeline-remove-lighter 'whitespace-mode)
+
+  ;; Hooks
+  (add-hook 'prog-mode-hook 'whitespace-mode)
+
+  ;; Variables
+  (setq whitespace-line-column nil)
+  (setq whitespace-style '(face lines-tail)))
+
+; Commands
+(defun toggle-transparency ()
+  (interactive)
+  (let ((opacity (frame-parameter nil 'alpha)))
+    (if (or (not opacity) (= opacity 100))
+        (set-frame-parameter nil 'alpha 80)
+      (set-frame-parameter nil 'alpha 100))))
 
 ; Controls
 (set-scroll-bar-mode nil)
@@ -646,52 +780,6 @@ root-privileges if it is not writable by user."
 
 (defvar default-cursor-color "#F2777A")
 (defvar expandable-thing-before-point-color "#00FF7F")
-
-(defun change-cursor-color-when-can-expand ()
-  (interactive)
-  (set-cursor-color (if (last-thing-expandable-p)
-                        expandable-thing-before-point-color
-                      default-cursor-color)))
-
-(defun last-thing-expandable-p ()
-  (or (abbrev--before-point) (yasnippet-can-fire-p)))
-
-(defun yasnippet-can-fire-p (&optional field)
-  (setq yas--condition-cache-timestamp (current-time))
-  (let (relevant-snippets)
-    (unless (and yas-expand-only-for-last-commands
-                 (not (member last-command yas-expand-only-for-last-commands)))
-      (setq relevant-snippets (if field
-                                  (save-restriction
-                                    (narrow-to-region (yas--field-start field)
-                                                      (yas--field-end field))
-                                    (yas--templates-for-key-at-point))
-                                (yas--templates-for-key-at-point)))
-      (and relevant-snippets (first relevant-snippets)))))
-
-(add-hook 'post-command-hook 'change-cursor-color-when-can-expand)
-
-; Functions
-(defun toggle-transparency ()
-  (interactive)
-  (let ((opacity (frame-parameter nil 'alpha)))
-    (if (or (not opacity) (= opacity 100))
-        (set-frame-parameter nil 'alpha 80)
-      (set-frame-parameter nil 'alpha 100))))
-
-; Hooks
-(add-hook 'linum-mode-hook 'git-gutter-fringe+-change-fringe)
-
-; Linum Relative
-(require 'linum-relative)
-
-; Rainbow
-(require 'rainbow-mode)
-(add-hook 'css-mode-hook 'rainbow-turn-on)
-
-; Rainbow Delimiters
-(add-hook 'org-mode-hook 'rainbow-delimiters-mode)
-(add-hook 'prog-mode-hook 'rainbow-delimiters-mode)
 
 ; Theme
 (defun customize-enabled-theme ()
@@ -706,30 +794,12 @@ root-privileges if it is not writable by user."
               'dired-directory nil :foreground fallback-color)
              (set-face-attribute
               'info-header-xref nil :foreground fallback-color)))
-          ((eq enabled-theme 'sanityinc-tomorrow-eighties)
-           (set-face-attribute 'cfw:face-title nil :foreground "#f99157")
-           (set-face-attribute 'cfw:face-sunday nil :foreground "#cc99cc")
-           (set-face-attribute 'cfw:face-header nil :foreground "#66cccc")
-           (set-face-attribute 'cfw:face-holiday nil :foreground "#ffcc66")
-           (set-face-attribute 'cfw:face-default-day nil :foreground "#66cccc")
-           (set-face-attribute 'cfw:face-select nil :background "#99cc99" :foreground "#393939")
-           (set-face-attribute 'cfw:face-today-title nil :background "#f2777a" :foreground "#393939")
-           (set-face-attribute 'cfw:face-today nil :foreground "#99cc99")
-           (set-face-attribute 'cfw:face-toolbar nil :background "#393939")
-           (set-face-attribute 'cfw:face-toolbar-button-off nil :foreground "#7f7f7f" :weight 'normal)
-           (set-face-attribute 'hydra-face-blue nil :foreground "#6699cc")
-           (set-face-attribute 'org-block-begin-line nil :background "#393939")
-           (set-face-attribute 'org-block-end-line nil :background "#393939"))
           ((eq enabled-theme 'wombat)
            (set-cursor-color cursor-preferred-color)))))
 
 (defun customize-theme ()
-  (let ((default-background-color (face-attribute 'default :background))
-        (linum-background-color (face-attribute 'linum :background)))
-    (set-face-attribute 'fringe nil :background default-background-color)
-    (set-face-attribute 'linum nil :background default-background-color)
-    (set-face-attribute
-     'linum-relative-current-face nil :background linum-background-color)))
+  (let ((default-background-color (face-attribute 'default :background)))
+    (set-face-attribute 'fringe nil :background default-background-color)))
 
 (defadvice load-theme
   (before disable-before-load (theme &optional no-confirm no-enable) activate)
@@ -752,19 +822,13 @@ root-privileges if it is not writable by user."
 (setq initial-scratch-message
       ";; Parentheses are just *hugs* for your function calls!\n\n")
 
-; Whitespace
-(require 'whitespace)
-(setq whitespace-style '(face lines-tail))
-(setq whitespace-line-column nil)
-(add-hook 'prog-mode-hook 'whitespace-mode)
-
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Java Development ;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;
 
-; Functions
+; Commands
 (defun java-goto-class ()
   (interactive)
   (goto-char (point-min))
@@ -772,6 +836,7 @@ root-privileges if it is not writable by user."
   (beginning-of-line)
   (recenter-top-bottom 0))
 
+; Functions
 (defun java-class-to-top ()
   (if (and (eq major-mode 'java-mode)
            (looking-at "^public\\|private\\|protected\\|class"))
@@ -791,34 +856,42 @@ root-privileges if it is not writable by user."
 ;;; JavaScript Development ;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(add-to-list 'auto-mode-alist '("\\.js" . js2-mode))
+(use-package js2-mode
+  :mode "\\.js\\'"
+  :config
 
-; Functions
+  (use-package js2-refactor
+    :config
+    (js2r-add-keybindings-with-prefix "C-c C-r"))
+
+  (use-package tern
+    :load-path "/usr/lib/node_modules/tern/emacs/"
+    :ensure nil
+    :config
+
+    (use-package tern-auto-complete
+      :load-path "/usr/lib/node_modules/tern/emacs/"
+      :ensure nil
+      :config
+      (tern-ac-setup)))
+
+  ;; Hooks
+  (add-hook 'js2-mode-hook 'ac-js2-mode)
+  (add-hook 'js2-mode-hook 'flycheck-mode)
+  (add-hook 'js2-mode-hook 'js2-imenu-extras-mode)
+  (add-hook 'js2-mode-hook 'tern-mode)
+
+  ;; Key Bindings
+  (bind-key "C-c b" 'web-beautify-js js2-mode-map)
+
+  ;; Variables
+  (setq-default js2-basic-offset 2)
+  (setq js2-highlight-level 3))
+
+; Commands
 (defun tern-delete-process ()
   (interactive)
   (delete-process "Tern"))
-
-; Hooks
-(add-hook 'js2-mode-hook 'ac-js2-mode)
-(add-hook 'js2-mode-hook 'flycheck-mode)
-(add-hook 'js2-mode-hook 'js2-imenu-extras-mode)
-(add-hook 'js2-mode-hook 'tern-mode)
-
-; JS2 Refactor
-(require 'js2-refactor)
-(js2r-add-keybindings-with-prefix "C-c C-r")
-
-; Key Bindings
-(eval-after-load 'js2-mode
-  '(define-key js2-mode-map (kbd "C-c b") 'web-beautify-js))
-(eval-after-load 'css-mode
-  '(define-key css-mode-map (kbd "C-c b") 'web-beautify-css))
-(eval-after-load 'sgml-mode
-  '(define-key sgml-mode-map (kbd "C-c b") 'web-beautify-html))
-
-; Variables
-(setq-default js2-basic-offset 2)
-(setq js2-highlight-level 3)
 
 
 
@@ -826,20 +899,26 @@ root-privileges if it is not writable by user."
 ;;; LaTeX ;;;
 ;;;;;;;;;;;;;
 
-; AUCTeX
-(require 'tex)
-(setq-default TeX-master nil)
+; TeX
+(use-package tex-mode
+  :commands latex-mode
+  :config
+
+  ; AUCTeX
+  (use-package tex
+    :ensure auctex
+    :commands TeX-PDF-mode
+    :config
+    (setq-default TeX-master nil))
+
+  (TeX-PDF-mode 1)
+  (outline-minor-mode 1))
 
 ; BibTeX
-(setq bibtex-maintain-sorted-entries t)
-
-; Functions
-(defun configure-tex ()
-  (TeX-PDF-mode t)
-  (outline-minor-mode))
-
-; Hooks
-(add-hook 'LaTeX-mode-hook 'configure-tex)
+(use-package bibtex
+  :commands bibtex-mode
+  :config
+  (setq bibtex-maintain-sorted-entries t))
 
 
 
@@ -876,7 +955,18 @@ root-privileges if it is not writable by user."
 ;;; Modeline ;;;
 ;;;;;;;;;;;;;;;;
 
-; Lighters
+(use-package nyan-mode
+  :config
+  (nyan-mode t)
+  (setq nyan-bar-length 16))
+
+(use-package uniquify
+  :ensure nil
+  :defer t
+  :config
+  (setq uniquify-buffer-name-style 'forward))
+
+; Functions
 (defun modeline-set-lighter (minor-mode lighter)
   (when (assq minor-mode minor-mode-alist)
     (setcar (cdr (assq minor-mode minor-mode-alist)) lighter)))
@@ -887,17 +977,10 @@ root-privileges if it is not writable by user."
 ; Modes
 (column-number-mode t)
 
-; Nyan
-(nyan-mode t)
-(setq nyan-bar-length 16)
-
-; Unique Buffer Names
-(require 'uniquify)
-(setq uniquify-buffer-name-style 'forward)
-
 ; Variables
 (setf (nth 5 mode-line-modes)
       '(:eval (if (buffer-narrowed-p) (string 32 #x27fa) "")))
+
 
 
 ;;;;;;;;;;;;;
@@ -911,6 +994,13 @@ root-privileges if it is not writable by user."
 ;;;;;;;;;;;;;;;;
 ;;; Movement ;;;
 ;;;;;;;;;;;;;;;;
+
+(use-package ace-jump-mode
+  :commands (ace-jump-char-mode ace-jump-word-mode ace-jump-line-mode)
+  :config
+  (setq ace-jump-mode-move-keys (number-sequence ?a ?i))
+  (setq ace-jump-mode-scope 'frame)
+  (setq ace-jump-word-mode-use-query-char nil))
 
 ; Hydra
 (defhydra hydra-ace-jump (:color blue)
@@ -931,245 +1021,298 @@ root-privileges if it is not writable by user."
 (global-set-key (kbd "M-g c") 'goto-char)
 (global-set-key (kbd "M-g l") 'goto-line)
 
-; Variables
-(setq ace-jump-mode-move-keys (number-sequence ?a ?i))
-(setq ace-jump-mode-scope 'frame)
-(setq ace-jump-word-mode-use-query-char nil)
-
 
 
 ;;;;;;;;;;;;;;;;
 ;;; Org Mode ;;;
 ;;;;;;;;;;;;;;;;
 
-(require 'org)
+(use-package org
+  :ensure org-plus-contrib
+  :commands org-mode
+  :bind (("C-c a" . org-agenda)
+         ("C-c l" . org-store-link))
+  :config
 
-; Advice
-(defadvice org-display-inline-images
-  (around handle-openwith
-          (&optional include-linked refresh beg end) activate compile)
-  (openwith-mode -1)
-  ad-do-it
-  (openwith-mode 1))
+  (use-package ob-ditaa
+    :disabled
+    :config
+    (setq org-ditaa-jar-path "/usr/share/java/ditaa/ditaa-0_9.jar"))
 
-(defun org-add-tags (property value)
-  (let* ((props (org-entry-properties))
-         (unnumbered (assoc "UNNUMBERED" props))
-         (tags-entry (assoc "TAGS" props))
-         (tags (if tags-entry (cdr tags-entry) "")))
-    (when (and unnumbered (not (string-match-p ":notoc:" tags)))
-      (org-set-tags-to (concat tags "notoc")))))
+  (use-package ob-plantuml
+    :disabled
+    :config
+    (setq org-plantuml-jar-path "/opt/plantuml/plantuml.jar")
+    (setq plantuml-jar-path "/opt/plantuml/plantuml.jar"))
 
-(advice-add 'org-set-property :after #'org-add-tags)
+  (use-package org-ac
+    :config
+    (org-ac/config-default)
+    (setq org-ac/ac-trigger-command-keys '("\\" "SPC" ":" "[" "+")))
 
-(defun org-export-unnumbered (orig headline info)
-  (and (funcall orig headline info)
-       (not (org-element-property :UNNUMBERED headline))))
+  (use-package org-agenda
+    :ensure nil
+    :config
+    (setq org-agenda-files '("~/org/tasks.org"))
+    (setq org-agenda-include-diary t))
 
-(advice-add 'org-export-numbered-headline-p :around #'org-export-unnumbered)
+  (use-package org-capture
+    :ensure nil
+    :commands org-capture
+    :config
+    ;; Functions
+    (defun format-quote (selection)
+      (if (= (length selection) 0)
+          ""
+        (format "#+BEGIN_QUOTE\n  %s\n  #+END_QUOTE\n\n  " selection)))
 
-(defun org-remove-tags (property)
-  (let* ((props (org-entry-properties))
-         (unnumbered (assoc "UNNUMBERED" props))
-         (tags-entry (assoc "TAGS" props))
-         (tags (if tags-entry (cdr tags-entry) "")))
-    (when (and (not unnumbered) (string-match-p ":notoc:" tags))
-      (org-set-tags-to (replace-regexp-in-string ":notoc:" "" tags)))))
+    ;; Variables
+    (setq org-capture-templates
+          '(("q" "Quote" plain (file "~/org/quotes.org")
+             "%?\n\n-" :empty-lines-before 2 :kill-buffer t)
+            ("j" "Journal" entry (file+datetree "~/org/journal.org")
+             "* %<%H:%M>\n%?")
+            ("l" "Link" entry (file+datetree "~/org/links.org")
+             "* %^{Title}\n  Source: %u, %c\n\n  %(format-quote \"%:initial\")%?"
+             :kill-buffer t))))
 
-(advice-add 'org-delete-property :after #'org-remove-tags)
+  (use-package org-footnote
+    :ensure nil
+    :config
+    (setq org-footnote-define-inline t)
+    (setq org-footnote-auto-label 'random))
 
-; Babel
-(require 'ob-dot)
-(require 'ob-sh)
+  (use-package org-list
+    :ensure nil
+    :config
+    ;; Key Bindings
+    (bind-keys :map org-mode-map
+               ("M-n" . org-next-item)
+               ("M-p" . org-previous-item))
 
-(idle-require 'ob-ditaa)
-(eval-after-load 'ob-ditaa
-  '(progn
-     (setq org-ditaa-jar-path "/usr/share/java/ditaa/ditaa-0_9.jar")))
+    ;; Variables
+    (setq org-cycle-include-plain-lists 'integrate)
+    (setq org-list-allow-alphabetical t)
+    (setq org-list-demote-modify-bullet '(("-" . "+") ("+" . "-")))
+    (setq org-list-use-circular-motion t))
 
-(idle-require 'ob-plantuml)
-(eval-after-load 'ob-plantuml
-  '(progn
-     (setq org-plantuml-jar-path "/opt/plantuml/plantuml.jar")
-     (setq plantuml-jar-path "/opt/plantuml/plantuml.jar")))
+  (use-package ox
+    :ensure nil
+    :commands org-export-dispatch
+    :config
+    (setq org-export-copy-to-kill-ring nil)
+    (setq org-export-dispatch-use-expert-ui t))
 
-(add-to-list 'org-babel-load-languages '(sh . t) t)
-(add-to-list 'org-babel-load-languages '(dot . t) t)
-(add-to-list 'org-babel-load-languages '(ditaa . t) t)
-(add-to-list 'org-babel-load-languages '(plantuml . t) t)
+  (use-package ox-latex
+    :ensure nil
+    :defer t
+    :config
+    (setq org-latex-table-caption-above nil))
 
-(org-babel-do-load-languages
- 'org-babel-load-languages org-babel-load-languages)
+  (use-package ox-md
+    :ensure nil
+    :defer t)
 
-; Drill
-(require 'org-drill)
-(setq org-drill-scope 'directory)
-(setq org-drill-hide-item-headings-p t)
+  ;; Advice
+  (defadvice org-display-inline-images
+      (around handle-openwith
+              (&optional include-linked refresh beg end) activate compile)
+    (openwith-mode -1)
+    ad-do-it
+    (openwith-mode 1))
 
-; Capture
-(require 'org-capture)
+  (defun org-add-tags (property value)
+    (let* ((props (org-entry-properties))
+           (unnumbered (assoc "UNNUMBERED" props))
+           (tags-entry (assoc "TAGS" props))
+           (tags (if tags-entry (cdr tags-entry) "")))
+      (when (and unnumbered (not (string-match-p ":notoc:" tags)))
+        (org-set-tags-to (concat tags "notoc")))))
 
-(defun format-quote (selection)
-  (if (= (length selection) 0)
-      ""
-    (format "#+BEGIN_QUOTE\n  %s\n  #+END_QUOTE\n\n  " selection)))
+  (advice-add 'org-set-property :after #'org-add-tags)
 
-(setq org-capture-templates
-      '(("q" "Quote" plain (file "~/org/quotes.org")
-         "%?\n\n-" :empty-lines-before 2 :kill-buffer t)
-        ("j" "Journal" entry (file+datetree "~/org/journal.org")
-         "* %<%H:%M>\n%?")
-        ("l" "Link" entry (file+datetree "~/org/links.org")
-         "* %^{Title}\n  Source: %u, %c\n\n  %(format-quote \"%:initial\")%?"
-         :kill-buffer t)))
+  (defun org-export-unnumbered (orig headline info)
+    (and (funcall orig headline info)
+         (not (org-element-property :UNNUMBERED headline))))
 
-; Emphasis
-(setcar org-emphasis-regexp-components " \t('\"`{-")
-(setcar (nthcdr 1 org-emphasis-regexp-components) "\[[:alpha:]- \t.,:!?;'\")}\\")
-(org-set-emph-re 'org-emphasis-regexp-components org-emphasis-regexp-components)
+  (advice-add 'org-export-numbered-headline-p :around #'org-export-unnumbered)
 
-; Exports
-(idle-require 'ox-md)
+  (defun org-remove-tags (property)
+    (let* ((props (org-entry-properties))
+           (unnumbered (assoc "UNNUMBERED" props))
+           (tags-entry (assoc "TAGS" props))
+           (tags (if tags-entry (cdr tags-entry) "")))
+      (when (and (not unnumbered) (string-match-p ":notoc:" tags))
+        (org-set-tags-to (replace-regexp-in-string ":notoc:" "" tags)))))
 
-; Faces
-(set-face-attribute 'org-done nil :strike-through t)
-(set-face-attribute 'org-headline-done nil :strike-through t)
+  (advice-add 'org-delete-property :after #'org-remove-tags)
 
-; Functions
-(defun org-copy-link ()
-  "Copy `org-mode' link at point."
-  (interactive)
-  (when (org-in-regexp org-bracket-link-regexp 1)
-    (let ((link (org-link-unescape (org-match-string-no-properties 1))))
-      (kill-new link)
-      (message "Copied link: %s" link))))
+  ;; Babel
+  (add-to-list 'org-babel-load-languages '(sh . t) t)
+  (add-to-list 'org-babel-load-languages '(dot . t) t)
+  (add-to-list 'org-babel-load-languages '(ditaa . t) t)
+  (add-to-list 'org-babel-load-languages '(plantuml . t) t)
 
-(defun org-point-in-speed-command-position-p ()
-  (or (looking-at org-outline-regexp)
-      (looking-at "^#\+")
-      (looking-at "^[[:blank:]]\\{2,\\}")
-      (looking-at "^$")))
+  (org-babel-do-load-languages
+   'org-babel-load-languages org-babel-load-languages)
 
-(defun org-back-to-item ()
-  (interactive)
-  (re-search-backward "^ *[-+*]\\|^ *[1-9]+[)\.] " nil nil 1))
+  ;; Commands
+  (defvar org-blocks-hidden nil)
+  (defvar org-generic-drawer-regexp "^ +:[[:alpha:]]+:")
 
-(defun org-export-all ()
-  "Export all subtrees that are *not* tagged with :noexport:
-or :subtree: to separate files.
+  (defun org-back-to-item ()
+    (interactive)
+    (re-search-backward "^ *[-+*]\\|^ *[1-9]+[)\.] " nil nil 1))
 
-Note that subtrees must have the :EXPORT_FILE_NAME: property set
-to a unique value for this to work properly."
-  (interactive)
-  (org-map-entries (lambda () (org-html-export-to-html nil t))
-                   "-noexport-subtree"))
+  (defun org-copy-link ()
+    "Copy `org-mode' link at point."
+    (interactive)
+    (when (org-in-regexp org-bracket-link-regexp 1)
+      (let ((link (org-link-unescape (org-match-string-no-properties 1))))
+        (kill-new link)
+        (message "Copied link: %s" link))))
 
-(defun org-fill-paragraph-handle-lists (&optional num-paragraphs)
-  (interactive "p")
-  (save-excursion
-    (let ((bound (if mark-active
-                     (- (region-end) 2)
-                   (progn
-                     (org-back-to-item)
-                     (while (>= num-paragraphs 0)
-                       (call-interactively 'org-mark-element)
-                       (setq num-paragraphs (1- num-paragraphs)))
-                     (- (region-end) 2)))))
-      (while (search-forward "\n" bound t)
-        (replace-match " ")))
-    (org-fill-paragraph)))
+  (defun org-export-all ()
+    "Export all subtrees that are *not* tagged with :noexport:
+  or :subtree: to separate files.
 
-(defvar org-generic-drawer-regexp "^ +:[[:alpha:]]+:")
+  Note that subtrees must have the :EXPORT_FILE_NAME: property set
+  to a unique value for this to work properly."
+    (interactive)
+    (org-map-entries (lambda () (org-html-export-to-html nil t))
+                     "-noexport-subtree"))
 
-(defun org-next-drawer (arg)
-  (interactive "p")
-  (org-next-block arg nil org-generic-drawer-regexp))
+  (defun org-fill-paragraph-handle-lists (&optional num-paragraphs)
+    (interactive "p")
+    (save-excursion
+      (let ((bound (if mark-active
+                       (- (region-end) 2)
+                     (progn
+                       (org-back-to-item)
+                       (while (>= num-paragraphs 0)
+                         (call-interactively 'org-mark-element)
+                         (setq num-paragraphs (1- num-paragraphs)))
+                       (- (region-end) 2)))))
+        (while (search-forward "\n" bound t)
+          (replace-match " ")))
+      (org-fill-paragraph)))
 
-(defun org-previous-drawer (arg)
-  (interactive "p")
-  (org-previous-block arg org-generic-drawer-regexp))
+  (defun org-next-drawer (arg)
+    (interactive "p")
+    (org-next-block arg nil org-generic-drawer-regexp))
 
-(defvar org-blocks-hidden nil)
+  (defun org-previous-drawer (arg)
+    (interactive "p")
+    (org-previous-block arg org-generic-drawer-regexp))
 
-(defun org-toggle-blocks ()
-  (interactive)
-  (if org-blocks-hidden
-      (org-show-block-all)
-    (org-hide-block-all))
-  (setq-local org-blocks-hidden (not org-blocks-hidden)))
+  (defun org-toggle-blocks ()
+    (interactive)
+    (if org-blocks-hidden
+        (org-show-block-all)
+      (org-hide-block-all))
+    (setq-local org-blocks-hidden (not org-blocks-hidden)))
 
-(fset 'org-wrap-in-comment-block
-   [?\C-o tab ?< ?o tab ?\C-w ?\C-w ?\C-u ?\C-x ?q ?\C-y ?\C-p ?\C-p ?\C-w ?\C-e ?\C-f])
+  ;; Emphasis
+  (setcar org-emphasis-regexp-components " \t('\"`{-")
+  (setcar (nthcdr 1 org-emphasis-regexp-components) "\[[:alpha:]- \t.,:!?;'\")}\\")
+  (org-set-emph-re 'org-emphasis-regexp-components org-emphasis-regexp-components)
 
-; Hooks
-(add-hook 'org-mode-hook 'org-toggle-blocks)
-(add-hook 'org-mode-hook 'turn-on-auto-fill)
+  ;; Faces
+  (set-face-attribute 'org-done nil :strike-through t)
+  (set-face-attribute 'org-headline-done nil :strike-through t)
+  (when (eq (car custom-enabled-themes) 'sanityinc-tomorrow-eighties)
+    (set-face-attribute 'org-block-begin-line nil :background "#393939")
+    (set-face-attribute 'org-block-end-line nil :background "#393939"))
 
-; Key Bindings
-(defvar org-mode-extra-keys-map (lookup-key org-mode-map (kbd "C-c C-x")))
-(global-set-key (kbd "C-c a") 'org-agenda)
-(global-set-key (kbd "C-c l") 'org-store-link)
-(define-key org-mode-extra-keys-map (kbd "c") 'org-table-copy-down)
-(define-key org-mode-extra-keys-map (kbd "d") 'org-metadown)
-(define-key org-mode-extra-keys-map (kbd "l") 'org-metaleft)
-(define-key org-mode-extra-keys-map (kbd "r") 'org-metaright)
-(define-key org-mode-extra-keys-map (kbd "u") 'org-metaup)
-(define-key org-mode-extra-keys-map (kbd "D") 'org-shiftmetadown)
-(define-key org-mode-extra-keys-map (kbd "L") 'org-shiftmetaleft)
-(define-key org-mode-extra-keys-map (kbd "R") 'org-shiftmetaright)
-(define-key org-mode-extra-keys-map (kbd "U") 'org-shiftmetaup)
-(define-key org-mode-map (kbd "RET") 'org-return-indent)
-(define-key org-mode-map (kbd "<C-tab>") 'pcomplete)
-(define-key org-mode-map (kbd "C-c c") 'org-wrap-in-comment-block)
-(define-key org-mode-map (kbd "C-c d") 'org-toggle-link-display)
-(define-key org-mode-map (kbd "C-M-q") 'org-fill-paragraph-handle-lists)
-(define-key org-mode-map (kbd "M-n") 'org-next-item)
-(define-key org-mode-map (kbd "M-p") 'org-previous-item)
-(define-key org-mode-map (kbd "M-s TAB") 'org-force-cycle-archived)
-(define-key org-mode-map (kbd "M-s t b") 'org-toggle-blocks)
-(define-key org-mode-map (kbd "M-s t h") 'org-insert-todo-heading)
-(define-key org-mode-map (kbd "M-s t s") 'org-insert-todo-subheading)
-(define-key org-mode-map (kbd "s-d") 'org-shiftdown)
-(define-key org-mode-map (kbd "s-l") 'org-shiftleft)
-(define-key org-mode-map (kbd "s-r") 'org-shiftright)
-(define-key org-mode-map (kbd "s-u") 'org-shiftup)
+  ;; Functions
+  (defvar org-bold-markup '(?\* . ?\*))
+  (defvar org-italics-markup '(?/ . ?/))
+  (defvar org-verbatim-markup '(?= . ?=))
 
-; Protocol
-(require 'org-protocol)
+  (defun org-add-electric-pairs ()
+    (let ((org-electric-pairs `(,single-quotes
+                                ,org-verbatim-markup
+                                ,org-italics-markup
+                                ,org-bold-markup)))
+      (setq-local electric-pair-pairs
+                  (append electric-pair-pairs org-electric-pairs))
+      (setq-local electric-pair-text-pairs electric-pair-pairs)))
 
-; Variables
-(setq org-agenda-files '("~/org/tasks.org"))
-(setq org-agenda-include-diary t)
-(setq org-blank-before-new-entry '((heading . t) (plain-list-item . auto)))
-(setq org-catch-invisible-edits 'error)
-(setq org-completion-use-ido t)
-(setq org-confirm-babel-evaluate nil)
-(setq org-cycle-include-plain-lists 'integrate)
-(setq org-export-dispatch-use-expert-ui t)
-(setq org-enforce-todo-checkbox-dependencies t)
-(setq org-enforce-todo-dependencies t)
-(setq org-export-copy-to-kill-ring nil)
-(setq org-fontify-done-headline t)
-(setq org-footnote-define-inline t)
-(setq org-footnote-auto-label 'random)
-(setq org-latex-table-caption-above nil)
-(setq org-list-allow-alphabetical t)
-(setq org-list-demote-modify-bullet '(("-" . "+") ("+" . "-")))
-(setq org-list-use-circular-motion t)
-(setq org-log-into-drawer t)
-(setq org-M-RET-may-split-line '((headline . nil) (item . t) (table . t)))
-(setq org-outline-path-complete-in-steps nil)
-(setq org-return-follows-link t)
-(setq org-special-ctrl-a/e 'reversed)
-(setq org-special-ctrl-k t)
-(setq org-src-fontify-natively t)
-(setq org-todo-repeat-to-state "RECURRING")
-(setq org-track-ordered-property-with-tag t)
-(setq org-use-speed-commands 'org-point-in-speed-command-position-p)
-(add-to-list 'org-speed-commands-user '("d" . org-next-drawer) t)
-(add-to-list 'org-speed-commands-user '("P" . org-previous-drawer) t)
-(add-to-list 'org-structure-template-alist
-             '("o" "#+BEGIN_COMMENT\n?\n#+END_COMMENT") t)
+  (defun org-point-in-speed-command-position-p ()
+    (or (looking-at org-outline-regexp)
+        (looking-at "^#\+")
+        (looking-at "^[[:blank:]]\\{2,\\}")
+        (looking-at "^$")))
+
+  ;; Hooks
+  (add-hook 'org-mode-hook 'org-add-electric-pairs)
+  (add-hook 'org-mode-hook 'org-toggle-blocks)
+  (add-hook 'org-mode-hook 'turn-on-auto-fill)
+
+  ;; Key Bindings
+  (defvar org-mode-extra-keys-map (lookup-key org-mode-map (kbd "C-c C-x")))
+  (bind-keys :map org-mode-extra-keys-map
+             ("c" . org-table-copy-down)
+             ("d" . org-metadown)
+             ("l" . org-metaleft)
+             ("r" . org-metaright)
+             ("u" . org-metaup)
+             ("D" . org-shiftmetadown)
+             ("L" . org-shiftmetaleft)
+             ("R" . org-shiftmetaright)
+             ("U" . org-shiftmetaup))
+  (bind-keys :map org-mode-map
+             ("<C-tab>" . pcomplete)
+             ("RET" . org-return-indent)
+             ("C-c c" . org-wrap-in-comment-block)
+             ("C-c d" . org-toggle-link-display)
+             ("C-M-q" . org-fill-paragraph-handle-lists)
+             ("M-s TAB" . org-force-cycle-archived)
+             ("M-s t b" . org-toggle-blocks)
+             ("M-s t h" . org-insert-todo-heading)
+             ("M-s t s" . org-insert-todo-subheading)
+             ("s-d" . org-shiftdown)
+             ("s-l" . org-shiftleft)
+             ("s-r" . org-shiftright)
+             ("s-u" . org-shiftup))
+
+  ;; Keyboard Macros
+  (fset 'org-wrap-in-comment-block
+        [?\C-o tab ?< ?o tab ?\C-w ?\C-w ?\C-u ?\C-x ?q ?\C-y ?\C-p ?\C-p ?\C-w ?\C-e ?\C-f])
+
+  ;; Variables
+  (setq org-blank-before-new-entry '((heading . t) (plain-list-item . auto)))
+  (setq org-catch-invisible-edits 'error)
+  (setq org-completion-use-ido t)
+  (setq org-confirm-babel-evaluate nil)
+  (setq org-enforce-todo-checkbox-dependencies t)
+  (setq org-enforce-todo-dependencies t)
+  (setq org-fontify-done-headline t)
+  (setq org-log-into-drawer t)
+  (setq org-M-RET-may-split-line '((headline . nil) (item . t) (table . t)))
+  (setq org-outline-path-complete-in-steps nil)
+  (setq org-return-follows-link t)
+  (setq org-special-ctrl-a/e 'reversed)
+  (setq org-special-ctrl-k t)
+  (setq org-src-fontify-natively t)
+  (setq org-todo-repeat-to-state "RECURRING")
+  (setq org-track-ordered-property-with-tag t)
+  (setq org-use-speed-commands 'org-point-in-speed-command-position-p)
+  (add-to-list 'org-speed-commands-user '("d" . org-next-drawer) t)
+  (add-to-list 'org-speed-commands-user '("P" . org-previous-drawer) t)
+  (add-to-list 'org-structure-template-alist
+               '("o" "#+BEGIN_COMMENT\n?\n#+END_COMMENT") t))
+
+(use-package org-drill
+  :ensure org-plus-contrib
+  :commands org-drill
+  :config
+  (setq org-drill-scope 'directory)
+  (setq org-drill-hide-item-headings-p t))
+
+(use-package org-protocol
+  :ensure org-plus-contrib
+  :defer 5)
 
 
 
@@ -1177,17 +1320,20 @@ to a unique value for this to work properly."
 ;;; Overtone ;;;
 ;;;;;;;;;;;;;;;;
 
-(require 'cider)
+(use-package cider
+  :defer t
+  :config
+  (add-to-list 'ac-modes 'cider-mode)
 
-; Hooks
-(add-hook 'cider-mode-hook 'cider-turn-on-eldoc-mode)
-(add-hook 'cider-mode-hook 'ac-cider-setup)
-(add-hook 'cider-repl-mode-hook 'ac-cider-setup)
+  ;; Hooks
+  (add-hook 'cider-mode-hook 'cider-turn-on-eldoc-mode)
+  (add-hook 'cider-mode-hook 'ac-cider-setup)
+  (add-hook 'cider-repl-mode-hook 'ac-cider-setup)
 
-; Variables
-(setq cider-repl-history-file "~/.emacs.d/.cider-history")
-(setq cider-repl-use-pretty-printing t)
-(setq nrepl-buffer-name-show-port t)
+  ;; Variables
+  (setq cider-repl-history-file "~/.emacs.d/.cider-history")
+  (setq cider-repl-use-pretty-printing t)
+  (setq nrepl-buffer-name-show-port t))
 
 
 
@@ -1195,17 +1341,21 @@ to a unique value for this to work properly."
 ;;; Package Manager ;;;
 ;;;;;;;;;;;;;;;;;;;;;;;
 
-(require 'package)
-(add-to-list 'package-archives
-             '("marmalade" . "https://marmalade-repo.org/packages/") t)
-(add-to-list 'package-archives
-             '("melpa" . "http://melpa.org/packages/") t)
-(add-to-list 'package-archives
-             '("org" . "http://orgmode.org/elpa/") t)
+(use-package package
+  :commands list-packages
+  :config
+  (add-to-list 'package-archives
+               '("marmalade" . "https://marmalade-repo.org/packages/") t)
+  (add-to-list 'package-archives
+               '("melpa" . "http://melpa.org/packages/") t)
+  (add-to-list 'package-archives
+               '("org" . "http://orgmode.org/elpa/") t))
 
-; Paradox
-(setq paradox-automatically-star nil)
-(setq paradox-execute-asynchronously nil)
+(use-package paradox
+  :commands paradox-list-packages
+  :config
+  (setq paradox-automatically-star nil)
+  (setq paradox-execute-asynchronously nil))
 
 
 
@@ -1213,27 +1363,37 @@ to a unique value for this to work properly."
 ;;; PDFs ;;;
 ;;;;;;;;;;;;
 
-(pdf-tools-install)
+(use-package doc-view
+  :commands doc-view-mode
+  :config
 
-; Functions
-(defadvice pdf-outline
-    (before prepare-windows
-            (&optional buffer no-select-window-p) activate compile)
-  (delete-other-windows)
-  (split-window-right)
-  (other-window 1))
+  (use-package pdf-tools
+    :commands pdf-tools-install
+    :config
+    ;; Advice
+    (defadvice pdf-outline
+        (before prepare-windows
+                (&optional buffer no-select-window-p) activate compile)
+      (delete-other-windows)
+      (split-window-right)
+      (other-window 1))
 
-(defadvice pdf-outline
-    (after shrink-outline-buffer-horizontally
-           (&optional buffer no-select-window-p) activate compile)
-  (let ((current-width (window-total-width)))
-    (when (> current-width 50)
-      (shrink-window-horizontally (- current-width 50)))))
+    (defadvice pdf-outline
+        (after shrink-outline-buffer-horizontally
+               (&optional buffer no-select-window-p) activate compile)
+      (let ((current-width (window-total-width)))
+        (when (> current-width 50)
+          (shrink-window-horizontally (- current-width 50)))))
 
-; Variables
-(setq doc-view-continuous t)
-(setq pdf-info-restart-process-p t)
-(setq pdf-util-fast-image-format '("png". ".png"))
+    ;; Variables
+    (setq pdf-info-restart-process-p t)
+    (setq pdf-util-fast-image-format '("png" . ".png")))
+
+  ;; Hooks
+  (add-hook 'doc-view-mode-hook 'pdf-tools-install)
+
+  ;; Variables
+  (setq doc-view-continuous t))
 
 
 
@@ -1241,7 +1401,10 @@ to a unique value for this to work properly."
 ;;; Permissions ;;;
 ;;;;;;;;;;;;;;;;;;;
 
-(require 'tramp)
+(use-package tramp
+  :defer 5
+  :commands ido-find-file)
+
 ; Usage: C-x C-f /sudo::/path/to/file
 
 
@@ -1250,60 +1413,105 @@ to a unique value for this to work properly."
 ;;; Programming ;;;
 ;;;;;;;;;;;;;;;;;;;
 
-; Advice
-(defun imenu-toggle-ido-vertical-mode (orig &optional prompt alist)
-  (unwind-protect
-      (progn (ido-vertical-mode 1)
-             (funcall orig prompt alist))
-    (ido-vertical-mode -1)))
+(use-package flycheck
+  :commands flycheck-mode
+  :config
+  ;; Functions
+  (defun flycheck-setup ()
+    (bind-keys :map custom-keys-mode-prefix-map
+               ("f n" . flycheck-next-error)
+               ("f p" . flycheck-previous-error)))
 
-(advice-add 'imenu-choose-buffer-index :around #'imenu-toggle-ido-vertical-mode)
+  ;; Hooks
+  (add-hook 'flycheck-mode-hook 'flycheck-setup))
 
-; Flycheck
-(defun flycheck-setup ()
-  (define-key custom-keys-mode-prefix-map (kbd "f n") 'flycheck-next-error)
-  (define-key custom-keys-mode-prefix-map (kbd "f p") 'flycheck-previous-error))
+(use-package helm-dash
+  :bind ("C-c d" . helm-dash)
+  :init
+  ;; Macros
+  (defvar-local helm-dash-docsets nil)
 
-(add-hook 'flycheck-mode-hook 'flycheck-setup)
+  (defmacro helm-dash-setup (language docsets)
+    "Create function that sets up `helm-dash' for specific LANGUAGE."
+    (let ((fn-name (intern (format "helm-dash-%s" language)))
+	  (current-docsets (mapconcat 'identity docsets ", ")))
+      `(progn
+	 (defun ,fn-name ()
+	   ,(format "Set up `helm-dash' for %s.\n\nDocsets: %s"
+		    language current-docsets)
+	   (setq helm-dash-docsets ,docsets)
+	   (setq helm-current-buffer (current-buffer))))))
 
-; Helm Dash
-(require 'helm-dash)
-(setq helm-dash-common-docsets '("Emacs Lisp" "MySQL" "PostgreSQL" "SQLite"))
-(setq helm-dash-docsets-path "/storage/docsets/")
+  ;; Hooks
+  (add-hook 'sh-mode-hook (helm-dash-setup "bash" ["Bash"]))
+  (add-hook 'clojure-mode-hook (helm-dash-setup "clojure" ["Clojure"]))
+  (add-hook 'java-mode-hook (helm-dash-setup "java" ["Android" "Java" "Play_Java"]))
+  (add-hook 'LaTeX-mode-hook (helm-dash-setup "latex" ["LaTeX"]))
+  (add-hook 'php-mode-hook (helm-dash-setup "php" ["PHP"]))
+  (add-hook 'python-mode-hook (helm-dash-setup "python" ["Django" "Python 2" "Python 3"]))
+  (add-hook 'css-mode-hook (helm-dash-setup "css" ["Bootstrap 3" "CSS"]))
+  (add-hook 'haml-mode-hook (helm-dash-setup "haml" ["Bootstrap 3" "HTML"]))
+  (add-hook 'html-mode-hook (helm-dash-setup "html" ["Bootstrap 3" "HTML"]))
+  (add-hook 'js2-mode-hook (helm-dash-setup "js" ["BackboneJS" "Bootstrap 3" "JavaScript" "jQuery" "UnderscoreJS"]))
 
-(defvar-local helm-dash-docsets nil)
+  ;; Variables
+  (setq helm-dash-common-docsets '("Emacs Lisp" "MySQL" "PostgreSQL" "SQLite"))
+  (setq helm-dash-docsets-path "/storage/docsets/"))
 
-(defmacro helm-dash-setup (language docsets)
-  "Create function that sets up `helm-dash' for specific LANGUAGE."
-  (let ((fn-name (intern (format "helm-dash-%s" language)))
-        (current-docsets (mapconcat 'identity docsets ", ")))
-    `(progn
-       (defun ,fn-name ()
-         ,(format "Set up `helm-dash' for %s.\n\nDocsets: %s"
-                  language current-docsets)
-         (setq helm-dash-docsets ,docsets)
-         (setq helm-current-buffer (current-buffer))))))
+(use-package imenu
+  :commands imenu
+  :config
 
-(add-hook 'sh-mode-hook (helm-dash-setup "bash" ["Bash"]))
-(add-hook 'clojure-mode-hook (helm-dash-setup "clojure" ["Clojure"]))
-(add-hook 'java-mode-hook (helm-dash-setup "java" ["Android" "Java" "Play_Java"]))
-(add-hook 'LaTeX-mode-hook (helm-dash-setup "latex" ["LaTeX"]))
-(add-hook 'php-mode-hook (helm-dash-setup "php" ["PHP"]))
-(add-hook 'python-mode-hook (helm-dash-setup "python" ["Django" "Python 2" "Python 3"]))
-(add-hook 'css-mode-hook (helm-dash-setup "css" ["Bootstrap 3" "CSS"]))
-(add-hook 'haml-mode-hook (helm-dash-setup "html" ["Bootstrap 3" "HTML"]))
-(add-hook 'html-mode-hook (helm-dash-setup "html" ["Bootstrap 3" "HTML"]))
-(add-hook 'js2-mode-hook (helm-dash-setup "js" ["BackboneJS" "Bootstrap 3" "JavaScript" "jQuery" "UnderscoreJS"]))
+  (use-package ido-vertical-mode
+    :config
+    (defun imenu-toggle-ido-vertical-mode (orig &optional prompt alist)
+      (unwind-protect
+          (progn (ido-vertical-mode 1)
+                 (funcall orig prompt alist))
+        (ido-vertical-mode -1)))
 
-(global-set-key (kbd "C-c d") 'helm-dash)
+    (advice-add 'imenu-choose-buffer-index
+                :around #'imenu-toggle-ido-vertical-mode)))
 
-; Indentation
-(setq-default indent-tabs-mode nil)
+(use-package yasnippet
+  :commands yas-minor-mode
+  :init
+  (add-hook 'org-mode-hook 'yas-minor-mode)
+  (add-hook 'prog-mode-hook 'yas-minor-mode)
+  :config
+  (yas-reload-all)
+  (add-to-list 'ac-sources 'ac-source-yasnippet)
+  (modeline-remove-lighter 'yas-minor-mode)
 
-; Parens
-(show-paren-mode t)
+  ;; Functions
+  (defun change-cursor-color-when-can-expand ()
+    (set-cursor-color (if (last-thing-expandable-p)
+			  expandable-thing-before-point-color
+			default-cursor-color)))
 
-; Smart Semicolon
+  (defun last-thing-expandable-p ()
+    (or (abbrev--before-point) (yasnippet-can-fire-p)))
+
+  (defun yasnippet-can-fire-p (&optional field)
+    (setq yas--condition-cache-timestamp (current-time))
+    (let (relevant-snippets)
+      (unless (and yas-expand-only-for-last-commands
+		   (not (member last-command yas-expand-only-for-last-commands)))
+	(setq relevant-snippets (if field
+				    (save-restriction
+				      (narrow-to-region (yas--field-start field)
+							(yas--field-end field))
+				      (yas--templates-for-key-at-point))
+				  (yas--templates-for-key-at-point)))
+	(and relevant-snippets (first relevant-snippets)))))
+
+  ;; Hooks
+  (add-hook 'post-command-hook 'change-cursor-color-when-can-expand)
+
+  ;; Variables
+  (setq yas-prompt-functions '(yas-ido-prompt yas-x-prompt yas-no-prompt)))
+
+; Commands
 (defun tim/electric-semicolon ()
   (interactive)
   (end-of-line)
@@ -1314,23 +1522,21 @@ to a unique value for this to work properly."
   (interactive)
   (local-set-key (kbd ";") 'tim/electric-semicolon))
 
-(add-hook 'java-mode-hook 'tim/enable-electric-semicolon)
-(add-hook 'js2-mode-hook 'tim/enable-electric-semicolon)
-(add-hook 'php-mode-hook 'tim/enable-electric-semicolon)
-
-; Subword Mode
+; Functions
 (defun subword-setup ()
   (subword-mode 1)
   (modeline-remove-lighter 'subword-mode))
 
+; Hooks
+(add-hook 'java-mode-hook 'tim/enable-electric-semicolon)
+(add-hook 'js2-mode-hook 'tim/enable-electric-semicolon)
+(add-hook 'php-mode-hook 'tim/enable-electric-semicolon)
 (add-hook 'prog-mode-hook 'subword-setup)
 
-; Which Function
+; Variables
+(setq-default indent-tabs-mode nil)
+(show-paren-mode t)
 (which-function-mode 1)
-
-; yasnippet
-(yas-global-mode 1)
-(setq yas-prompt-functions '(yas-ido-prompt yas-x-prompt yas-no-prompt))
 
 
 
@@ -1338,15 +1544,18 @@ to a unique value for this to work properly."
 ;;; Project Management ;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-; Projectile
-(projectile-global-mode 1)
-(add-to-list 'projectile-globally-ignored-directories "doxygen")
-(setq projectile-cache-file "~/.emacs.d/.projectile.cache")
-(setq projectile-enable-caching t)
-(setq projectile-known-projects-file "~/.emacs.d/.projectile-bookmarks.eld")
-(setq projectile-mode-line
-      '(:eval (format " %s[%s]"
-                      (string #x1f5c0) (projectile-project-name))))
+(use-package projectile
+  :defer 5
+  :commands (projectile-find-file projectile-switch-project)
+  :config
+  (projectile-global-mode 1)
+  (add-to-list 'projectile-globally-ignored-directories "doxygen")
+  (setq projectile-cache-file "~/.emacs.d/.projectile.cache")
+  (setq projectile-enable-caching t)
+  (setq projectile-known-projects-file "~/.emacs.d/.projectile-bookmarks.eld")
+  (setq projectile-mode-line
+        '(:eval (format " %s[%s]"
+                        (string #x1f5c0) (projectile-project-name)))))
 
 
 
@@ -1354,17 +1563,21 @@ to a unique value for this to work properly."
 ;;; Python Development ;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-; Flycheck Pyflakes
-(require 'flycheck-pyflakes)
-(add-to-list 'flycheck-disabled-checkers 'python-flake8)
-(add-to-list 'flycheck-disabled-checkers 'python-pylint)
+(use-package python
+  :commands python-mode
+  :config
 
-; Hooks
-(add-hook 'python-mode-hook 'flycheck-mode)
+  (use-package flycheck-pyflakes
+    :config
+    (add-to-list 'flycheck-disabled-checkers 'python-flake8)
+    (add-to-list 'flycheck-disabled-checkers 'python-pylint))
 
-; Variables
-(setq python-fill-docstring-style 'django)
-(setq python-shell-interpreter "ipython")
+  ;; Hooks
+  (add-hook 'python-mode-hook 'flycheck-mode)
+
+  ;; Variables
+  (setq python-fill-docstring-style 'django)
+  (setq python-shell-interpreter "ipython"))
 
 
 
@@ -1372,46 +1585,49 @@ to a unique value for this to work properly."
 ;;; Recentf ;;;
 ;;;;;;;;;;;;;;;
 
-(require 'recentf)
+(use-package recentf
+  :init (setq recentf-save-file "~/.emacs.d/.recentf")
+  :config
+  (recentf-mode t)
 
-; Functions
-(defadvice recentf-keep-default-predicate
-    (around recentf-discard-autoloads (file) activate compile)
-  (if (not (string-match-p "-autoloads" (file-name-nondirectory file)))
-      ad-do-it
-    nil))
+  ;; Advice
+  (defadvice recentf-keep-default-predicate
+      (around recentf-discard-autoloads (file) activate compile)
+    (if (not (string-match-p "-autoloads" (file-name-nondirectory file)))
+        ad-do-it
+      nil))
 
-(defadvice recentf-track-opened-file (around set-buffer-file-name activate compile)
-  (if (eq major-mode 'dired-mode)
-      (progn (setq buffer-file-name default-directory)
-             ad-do-it
-             (setq buffer-file-name nil))
-    ad-do-it))
+  (defadvice recentf-track-opened-file
+      (around set-buffer-file-name activate compile)
+    (if (eq major-mode 'dired-mode)
+        (progn (setq buffer-file-name default-directory)
+               ad-do-it
+               (setq buffer-file-name nil))
+      ad-do-it))
 
-(defadvice recentf-track-closed-file (around set-buffer-file-name activate compile)
-  (if (eq major-mode 'dired-mode)
-      (progn (setq buffer-file-name default-directory)
-             ad-do-it
-             (setq buffer-file-name nil))
-    ad-do-it))
+  (defadvice recentf-track-closed-file
+      (around set-buffer-file-name activate compile)
+    (if (eq major-mode 'dired-mode)
+        (progn (setq buffer-file-name default-directory)
+               ad-do-it
+               (setq buffer-file-name nil))
+      ad-do-it))
 
-(defun ido-recentf-open ()
-  "Use `ido-completing-read' to \\[find-file] a recent file."
-  (interactive)
-  (if (find-file (ido-completing-read "Find recent file: " recentf-list))
-      (message "Opening file...")
-    (message "Aborting")))
+  ;; Commands
+  (defun ido-recentf-open ()
+    "Use `ido-completing-read' to \\[find-file] a recent file."
+    (interactive)
+    (if (find-file (ido-completing-read "Find recent file: " recentf-list))
+        (message "Opening file...")
+      (message "Aborting")))
 
-; Key Bindings
-(global-set-key (kbd "C-x C-r") 'ido-recentf-open)
+  ;; Key Bindings
+  (bind-key "C-x C-r" 'ido-recentf-open)
 
-; Variables
-(add-to-list 'recentf-used-hooks '(dired-after-readin-hook recentf-track-opened-file))
-(setq recentf-max-saved-items 150)
-(setq recentf-save-file "~/.emacs.d/.recentf")
-
-; Launch
-(recentf-mode t)
+  ;; Variables
+  (add-to-list 'recentf-used-hooks
+               '(dired-after-readin-hook recentf-track-opened-file))
+  (setq recentf-max-saved-items 150))
 
 
 
@@ -1419,7 +1635,7 @@ to a unique value for this to work properly."
 ;;; Scrolling ;;;
 ;;;;;;;;;;;;;;;;;
 
-; Functions
+; Commands
 (put 'scroll-left 'disabled nil)
 
 ; Hydra
@@ -1442,11 +1658,26 @@ to a unique value for this to work properly."
 ;;; Search ;;;
 ;;;;;;;;;;;;;;
 
-; Anzu
-(setq anzu-mode-lighter "")
-(global-anzu-mode 1)
+(use-package anzu
+  :config
+  (global-anzu-mode 1)
+  (setq anzu-mode-lighter ""))
 
-; Functions
+(use-package helm-swoop
+  :bind ("C-c h" . helm-swoop)
+  :config
+  (bind-key "M-h" 'helm-swoop-from-isearch isearch-mode-map))
+
+(use-package smartscan
+  :config
+  (global-smartscan-mode t)
+  (unbind-key "M-n" smartscan-map)
+  (unbind-key "M-p" smartscan-map)
+  (bind-keys :map smartscan-map
+             ("s-n" . smartscan-symbol-go-forward)
+             ("s-p" . smartscan-symbol-go-backward)))
+
+; Advice
 (defadvice occur (around occur-rename-buffer-after-search-string
                          (regexp &optional nlines)
                          activate compile)
@@ -1461,6 +1692,7 @@ to a unique value for this to work properly."
   (with-current-buffer grep-last-buffer
     (rename-buffer (format "*grep-%s*" regexp))))
 
+; Commands
 (defun toggle-lazy-highlight-cleanup ()
   "Toggle `lazy-highlight-cleanup'.
 - If `t' (ON), Isearch will *not* leave highlights around.
@@ -1480,11 +1712,6 @@ char if successful."
         (isearch-delete-char))
     (isearch-delete-char)))
 
-; Helm Swoop
-(require 'helm-swoop)
-(global-set-key (kbd "C-c h") 'helm-swoop)
-(define-key isearch-mode-map (kbd "M-h") 'helm-swoop-from-isearch)
-
 ; Hooks
 (add-hook 'occur-mode-hook 'next-error-follow-minor-mode)
 
@@ -1493,13 +1720,6 @@ char if successful."
 (define-key isearch-mode-map (kbd "<backspace>") 'isearch-hungry-delete)
 (define-key occur-mode-map "n" 'occur-next)
 (define-key occur-mode-map "p" 'occur-prev)
-
-; Smartscan
-(global-smartscan-mode t)
-(define-key smartscan-map (kbd "M-n") nil)
-(define-key smartscan-map (kbd "M-p") nil)
-(define-key smartscan-map (kbd "s-n") 'smartscan-symbol-go-forward)
-(define-key smartscan-map (kbd "s-p") 'smartscan-symbol-go-backward)
 
 ; Variables
 (setq isearch-allow-scroll t)
@@ -1510,9 +1730,10 @@ char if successful."
 ;;; Server ;;;
 ;;;;;;;;;;;;;;
 
-(require 'server)
-(or (server-running-p)
-    (server-start))
+(use-package server
+  :config
+  (or (server-running-p)
+      (server-start)))
 
 
 
@@ -1520,12 +1741,18 @@ char if successful."
 ;;; Speedbar ;;;
 ;;;;;;;;;;;;;;;;
 
-; Variables
-(eval-after-load 'speedbar
-  '(progn
-     (setq speedbar-tag-hierarchy-method
-           '(speedbar-simple-group-tag-hierarchy speedbar-sort-tag-hierarchy))
-     (setq speedbar-use-images nil)))
+(use-package speedbar
+  :defer t
+  :config
+
+  (use-package sr-speedbar
+    :commands sr-speedbar-open
+    :init
+    (defalias 'speedbar 'sr-speedbar-open))
+
+  (setq speedbar-tag-hierarchy-method
+        '(speedbar-simple-group-tag-hierarchy speedbar-sort-tag-hierarchy))
+  (setq speedbar-use-images nil))
 
 
 
@@ -1533,10 +1760,11 @@ char if successful."
 ;;; SuperCollider ;;;
 ;;;;;;;;;;;;;;;;;;;;;
 
-(idle-require 'sclang)
-(eval-after-load 'sclang
-  '(progn
-     (add-hook 'sclang-mode-hook 'sclang-extensions-mode)))
+(use-package sclang
+  :ensure nil
+  :defer 10
+  :config
+  (add-hook 'sclang-mode-hook 'sclang-extensions-mode))
 
 
 
@@ -1587,47 +1815,89 @@ char if successful."
 ;;; Version Control ;;;
 ;;;;;;;;;;;;;;;;;;;;;;;
 
-(require 'magit)
+(use-package magit
+  :commands magit-status
+  :init
+  (bind-key "g s" 'magit-status custom-keys-mode-prefix-map)
+  :config
 
-; Functions
-(defun magit-log-all ()
-  (interactive)
-  (magit-key-mode-popup-logging)
-  (magit-key-mode-toggle-option 'logging "--all"))
+  (use-package git-commit-mode
+    :config
+    ;; Functions
+    (defun git-commit-add-electric-pairs ()
+      (setq-local electric-pair-pairs
+                  (cons single-backticks electric-pair-pairs)))
 
-(defun magit-ls-files ()
-  "List tracked files of current repository."
-  (interactive)
-  (if (derived-mode-p 'magit-mode)
-      (magit-git-command "ls-files" default-directory)
-    (message "Not in a Magit buffer.")))
+    ;; Hooks
+    (add-hook 'git-commit-mode-hook 'git-commit-add-electric-pairs)
+    (add-hook 'git-commit-mode-hook 'turn-on-orgstruct)
+    (add-hook 'git-commit-mode-hook 'turn-on-auto-fill))
+
+  ;; Commands
+  (defun magit-log-all ()
+    (interactive)
+    (magit-key-mode-popup-logging)
+    (magit-key-mode-toggle-option 'logging "--all"))
+
+  (defun magit-ls-files ()
+    "List tracked files of current repository."
+    (interactive)
+    (if (derived-mode-p 'magit-mode)
+        (magit-git-command "ls-files" default-directory)
+      (message "Not in a Magit buffer.")))
+
+  ;; Hooks
+  (add-hook 'magit-revert-buffer-hook 'git-gutter+-refresh)
+
+  ;; Key Bindings
+  (unbind-key "M-s" magit-mode-map)
+  (unbind-key "M-S" magit-mode-map)
+  (bind-keys :map magit-mode-map
+             ("K" . magit-ls-files)
+             ("l" . magit-log-all))
+
+  ;; Variables
+  (setq magit-auto-revert-mode-lighter "")
+  (setq magit-diff-refine-hunk t)
+  (setq magit-use-overlays nil))
 
 ; git-wip
 (load "~/git-wip/emacs/git-wip.el")
-(require 'git-wip-timemachine)
 
-; Git Gutter
-(require 'git-gutter-fringe+)
+(use-package git-wip-timemachine
+  :ensure nil
+  :load-path "lisp/git-wip-timemachine"
+  :commands git-wip-timemachine)
 
-(defun git-gutter+-setup ()
-  (setq-local git-gutter-fr+-side 'left-fringe))
+(use-package git-gutter+
+  :commands git-gutter+-mode
+  :init
+  (add-hook 'css-mode-hook 'git-gutter+-mode)
+  (add-hook 'html-mode-hook 'git-gutter+-mode)
+  (add-hook 'org-mode-hook 'git-gutter+-mode)
+  (add-hook 'prog-mode-hook 'git-gutter+-mode)
+  :config
 
-(defun git-gutter-fringe+-change-fringe ()
-  (if linum-mode
-      (setq-local git-gutter-fr+-side 'right-fringe)
+  (use-package git-gutter-fringe+
+    :config
+    ;; Functions
+    (defun git-gutter-fringe+-change-fringe ()
+      (if linum-mode
+          (setq-local git-gutter-fr+-side 'right-fringe)
+        (setq-local git-gutter-fr+-side 'left-fringe))
+      (git-gutter+-refresh))
+
+    ;; Hooks
+    (add-hook 'linum-mode-hook 'git-gutter-fringe+-change-fringe))
+
+  (modeline-remove-lighter 'git-gutter+-mode)
+
+  ;; Functions
+  (defun git-gutter+-setup ()
     (setq-local git-gutter-fr+-side 'left-fringe))
-  (git-gutter+-refresh))
 
-(add-hook 'git-gutter+-mode-hook 'git-gutter+-setup)
-(add-hook 'magit-revert-buffer-hook 'git-gutter+-refresh)
-
-; Hooks
-(add-hook 'css-mode-hook 'git-gutter+-mode)
-(add-hook 'html-mode-hook 'git-gutter+-mode)
-(add-hook 'org-mode-hook 'git-gutter+-mode)
-(add-hook 'prog-mode-hook 'git-gutter+-mode)
-(add-hook 'git-commit-mode-hook 'turn-on-orgstruct)
-(add-hook 'git-commit-mode-hook 'turn-on-auto-fill)
+  ;; Hooks
+  (add-hook 'git-gutter+-mode-hook 'git-gutter+-setup))
 
 ; Hydra
 (defhydra hydra-git-gutter+ (:color pink)
@@ -1643,17 +1913,9 @@ char if successful."
 
 ; Key Bindings
 (define-key custom-keys-mode-prefix-map (kbd "g g") 'hydra-git-gutter+/body)
-(define-key custom-keys-mode-prefix-map (kbd "g s") 'magit-status)
-(define-key magit-mode-map (kbd "M-s") nil)
-(define-key magit-mode-map (kbd "M-S") nil)
-(define-key magit-mode-map (kbd "K") 'magit-ls-files)
-(define-key magit-mode-map (kbd "l") 'magit-log-all)
 
 ; Variables
-(setq magit-auto-revert-mode-lighter "")
-(setq magit-diff-refine-hunk t)
 (setq magit-last-seen-setup-instructions "1.4.0")
-(setq magit-use-overlays nil)
 
 
 
@@ -1661,7 +1923,7 @@ char if successful."
 ;;; Visibility ;;;
 ;;;;;;;;;;;;;;;;;;
 
-; Functions
+; Commands
 (put 'narrow-to-page 'disabled nil)
 (put 'narrow-to-region 'disabled nil)
 
@@ -1707,6 +1969,15 @@ With a prefix arg, clear selective display."
 
 
 ;;;;;;;;;;;;;;
+;;; Webdev ;;;
+;;;;;;;;;;;;;;
+
+(use-package web-beautify
+  :commands (web-beautify-css web-beautify-html web-beautify-js))
+
+
+
+;;;;;;;;;;;;;;
 ;;; Wenote ;;;
 ;;;;;;;;;;;;;;
 
@@ -1718,13 +1989,20 @@ With a prefix arg, clear selective display."
 ;;; Windows + Frames ;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;
 
-; Ace Window
-(global-set-key (kbd "C-x o") 'ace-window)
-(set-face-attribute 'aw-leading-char-face nil :height 2.0)
-(setq aw-keys (number-sequence ?a ?i))
-(setq aw-scope 'frame)
+(use-package ace-window
+  :bind ("C-x o" . ace-window)
+  :config
+  (set-face-attribute 'aw-leading-char-face nil :height 2.0)
+  (setq aw-keys (number-sequence ?a ?i))
+  (setq aw-scope 'frame))
 
-; Functions
+(use-package winner
+  :config
+  (winner-mode 1)
+  (bind-key "C-c r" 'winner-redo)
+  (bind-key "C-c u" 'winner-undo))
+
+; Commands
 (defun change-split (&optional arg)
   "Change arrangement of current window and `other-window' from 'stacked' to 'side-by-side'.
 With a prefix arg, change arrangement from 'side-by-side' to 'stacked'."
@@ -1751,15 +2029,6 @@ than one window."
   (interactive)
   (other-window 1)
   (kill-buffer-and-window))
-
-(defun split-root-window (direction size)
-  "Split root window of current frame.
-DIRECTION specifies how root window will be split; possible
-values are 'below and 'right. SIZE specifies height or width of
-window that will be added to the current window layout."
-  (split-window (frame-root-window)
-                (and size (prefix-numeric-value size))
-                direction))
 
 (defun split-root-window-below (&optional size)
   "Split root window vertically.
@@ -1794,6 +2063,16 @@ buffer in current window."
      "%s is up for grabs.")
    (current-buffer)))
 
+; Functions
+(defun split-root-window (direction size)
+  "Split root window of current frame.
+DIRECTION specifies how root window will be split; possible
+values are 'below and 'right. SIZE specifies height or width of
+window that will be added to the current window layout."
+  (split-window (frame-root-window)
+                (and size (prefix-numeric-value size))
+                direction))
+
 ; Hydra
 (defhydra hydra-resize-window ()
   "Make window(s)"
@@ -1815,11 +2094,6 @@ buffer in current window."
 (define-key custom-keys-mode-prefix-map (kbd "s w") 'swap-windows)
 (define-key custom-keys-mode-prefix-map (kbd "t d") 'toggle-window-dedicated)
 
-; Modes
-(winner-mode 1)
-(global-set-key (kbd "C-c r") 'winner-redo)
-(global-set-key (kbd "C-c u") 'winner-undo)
-
 ; Variables
 (setq ediff-split-window-function 'split-window-horizontally)
 (setq ediff-window-setup-function 'ediff-setup-windows-plain)
@@ -1830,12 +2104,35 @@ buffer in current window."
 ;;; Writing ;;;
 ;;;;;;;;;;;;;;;
 
-; Functions
-(defadvice ispell-pdict-save
-  (after flyspell-buffer-again (&optional no-query force-save)
-         activate compile)
-  (flyspell-buffer))
+(use-package flyspell
+  :commands (flyspell-mode flyspell-prog-mode)
+  :config
+  (defadvice ispell-pdict-save
+      (after flyspell-buffer-again (&optional no-query force-save)
+             activate compile)
+    (flyspell-buffer)))
 
+(use-package markdown-mode
+  :commands markdown-mode
+  :config
+  (add-hook 'markdown-mode-hook 'turn-on-auto-fill))
+
+(use-package synosaurus
+  :commands (synosaurus-lookup synosaurus-choose-and-replace))
+
+(use-package writeroom-mode
+  :commands writeroom-mode
+  :config
+  ;; Functions
+  (defun turn-off-git-gutter+ ()
+    (if (not git-gutter+-mode)
+        (git-gutter+-mode t)
+      (git-gutter+-mode -1)))
+
+  ;; Hooks
+  (add-hook 'writeroom-mode-hook 'turn-off-git-gutter+))
+
+; Commands
 (defun ispell-word-then-abbrev (local)
   "Call `ispell-word'. Then create an abbrev for the correction made.
 With prefix P, create local abbrev. Otherwise it will be global."
@@ -1850,50 +2147,29 @@ With prefix P, create local abbrev. Otherwise it will be global."
       (message "\"%s\" now expands to \"%s\" %sally."
                before after (if local "loc" "glob"))))
 
-; Hooks
-(add-hook 'markdown-mode-hook 'turn-on-auto-fill)
+; Hydra
+(defhydra hydra-synosaurus (:color blue)
+  "Synosaurus"
+  ("l" synosaurus-lookup "look up")
+  ("r" synosaurus-choose-and-replace "replace"))
 
 ; Key Bindings
+(global-set-key (kbd "C-c S") 'hydra-synosaurus/body)
 (define-key custom-keys-mode-prefix-map (kbd "a a") 'ispell-word-then-abbrev)
 
 ; Variables
 (setq abbrev-file-name "~/.emacs.d/.abbrev_defs")
 (setq-default abbrev-mode t)
 
-; Synosaurus
-(require 'synosaurus)
-(require 'synosaurus-wordnet)
-(setq synosaurus-lookup-function 'wordnet-lookup)
-
-(defhydra hydra-synosaurus (:color blue)
-  "Synosaurus"
-  ("l" synosaurus-lookup "look up")
-  ("r" synosaurus-choose-and-replace "replace"))
-
-(global-set-key (kbd "C-c S") 'hydra-synosaurus/body)
-
-; Writeroom
-(defun turn-off-git-gutter+ ()
-  (if (not git-gutter+-mode)
-      (git-gutter+-mode t)
-    (git-gutter+-mode -1)))
-
-(add-hook 'writeroom-mode-hook 'turn-off-git-gutter+)
-
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(idle-require-mode 1)
 (custom-keys-mode 1)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (modeline-remove-lighter 'auto-complete-mode)
-(modeline-remove-lighter 'git-gutter+-mode)
-(modeline-remove-lighter 'guide-key-mode)
-(modeline-remove-lighter 'whitespace-mode)
-(modeline-remove-lighter 'yas-minor-mode)
 (modeline-set-lighter 'abbrev-mode " Abbr")
 (modeline-set-lighter 'auto-fill-function (string 32 #x23ce))
 
