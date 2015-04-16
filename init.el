@@ -1522,10 +1522,10 @@ char if successful."
 
 ; Variables
 (eval-after-load 'speedbar
-  (progn
-    (setq speedbar-tag-hierarchy-method
-          '(speedbar-simple-group-tag-hierarchy speedbar-sort-tag-hierarchy))
-    (setq speedbar-use-images nil)))
+  '(progn
+     (setq speedbar-tag-hierarchy-method
+           '(speedbar-simple-group-tag-hierarchy speedbar-sort-tag-hierarchy))
+     (setq speedbar-use-images nil)))
 
 
 
