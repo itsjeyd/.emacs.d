@@ -459,8 +459,6 @@ Goes backward if ARG is negative; error if STR not found."
 (define-key custom-keys-mode-prefix-map (kbd "u") 'hydra-move-text/body)
 (define-key custom-keys-mode-prefix-map (kbd "d") 'hydra-move-text/body)
 (define-key custom-keys-mode-prefix-map (kbd "z") 'zap-to-string)
-(define-key custom-keys-mode-prefix-map (kbd "f e") 'flush-empty-lines)
-(define-key custom-keys-mode-prefix-map (kbd "s u") 'sort-lines-and-uniquify)
 
 ; Variables
 (setq cua-enable-cua-keys nil)
