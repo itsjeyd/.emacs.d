@@ -1444,7 +1444,6 @@ Goes backward if ARG is negative; error if STR not found."
   (add-hook 'clojure-mode-hook (helm-dash-setup "clojure" ["Clojure"]))
   (add-hook 'java-mode-hook (helm-dash-setup "java" ["Android" "Java" "Play_Java"]))
   (add-hook 'LaTeX-mode-hook (helm-dash-setup "latex" ["LaTeX"]))
-  (add-hook 'php-mode-hook (helm-dash-setup "php" ["PHP"]))
   (add-hook 'python-mode-hook (helm-dash-setup "python" ["Django" "Python 2" "Python 3"]))
   (add-hook 'css-mode-hook (helm-dash-setup "css" ["Bootstrap 3" "CSS"]))
   (add-hook 'haml-mode-hook (helm-dash-setup "haml" ["Bootstrap 3" "HTML"]))
@@ -1527,7 +1526,6 @@ Goes backward if ARG is negative; error if STR not found."
 ; Hooks
 (add-hook 'java-mode-hook 'tim/enable-electric-semicolon)
 (add-hook 'js2-mode-hook 'tim/enable-electric-semicolon)
-(add-hook 'php-mode-hook 'tim/enable-electric-semicolon)
 (add-hook 'prog-mode-hook 'subword-setup)
 
 ; Variables
