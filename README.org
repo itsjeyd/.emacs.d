@@ -43,6 +43,7 @@
   | haml-mode             |
   | helm                  |
   | helm-dash             |
+  | helm-projectile       |
   | helm-swoop            |
   | hydra                 |
   | idle-highlight-mode   |

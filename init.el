@@ -1543,9 +1543,15 @@ Goes backward if ARG is negative; error if STR not found."
   :defer 5
   :commands (projectile-find-file projectile-switch-project)
   :config
+
+  (use-package helm-projectile
+    :config
+    (helm-projectile-on))
+
   (projectile-global-mode 1)
   (add-to-list 'projectile-globally-ignored-directories "doxygen")
   (setq projectile-cache-file "~/.emacs.d/.projectile.cache")
+  (setq projectile-completion-system 'helm)
   (setq projectile-enable-caching t)
   (setq projectile-known-projects-file "~/.emacs.d/.projectile-bookmarks.eld")
   (setq projectile-mode-line
