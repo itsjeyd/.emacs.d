@@ -870,7 +870,21 @@ Goes backward if ARG is negative; error if STR not found."
       :load-path "/usr/lib/node_modules/tern/emacs/"
       :ensure nil
       :config
-      (tern-ac-setup)))
+      (tern-ac-setup))
+
+    (unbind-key "C-c C-d" tern-mode-keymap)
+    (unbind-key "C-c C-r" tern-mode-keymap)
+    (bind-keys :prefix-map tern-mode-prefix-keymap
+               :prefix "C-c C-t"
+               :map tern-mode-keymap
+               ("d" . tern-get-docs)
+               ("h" . tern-highlight-refs)
+               ("r" . tern-rename-variable)
+               ("t" . tern-get-type)
+               ("." . tern-find-definition)
+               (":" . tern-find-definition-by-name)
+               ("," . tern-pop-find-definition)
+               ("TAB" . tern-ac-complete)))
 
   ;; Hooks
   (add-hook 'js2-mode-hook 'ac-js2-mode)
@@ -879,7 +893,20 @@ Goes backward if ARG is negative; error if STR not found."
   (add-hook 'js2-mode-hook 'tern-mode)
 
   ;; Key Bindings
-  (bind-key "C-c b" 'web-beautify-js js2-mode-map)
+  (unbind-key "C-c C-t" js2-mode-map)
+  (bind-keys :map js2-mode-map
+             ("RET" . js2-line-break)
+             ("C-a" . js2-beginning-of-line)
+             ("C-e" . js2-end-of-line)
+             ("C-c b" . web-beautify-js)
+             ("C-c C-e" . js2-mode-toggle-element)
+             ("C-c C-l" . js2-display-error-list)
+             ("C-c C-o" . js2-mode-toggle-hide-comments)
+             ("C-x n d" . js2-narrow-to-defun)
+             ("C-M-f" . js2-mode-forward-sexp)
+             ("C-M-h" . js2-mark-defun)
+             ("M-k" . js2r-kill))
+  (bind-key "j n" 'js2-next-error custom-keys-mode-prefix-map)
 
   ;; Variables
   (setq-default js2-basic-offset 2)
