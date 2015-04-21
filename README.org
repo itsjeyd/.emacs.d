@@ -42,6 +42,7 @@
   | guide-key             |
   | haml-mode             |
   | helm                  |
+  | helm-c-yasnippet      |
   | helm-dash             |
   | helm-projectile       |
   | helm-swoop            |

@@ -1475,6 +1475,13 @@ Goes backward if ARG is negative; error if STR not found."
   (add-hook 'org-mode-hook 'yas-minor-mode)
   (add-hook 'prog-mode-hook 'yas-minor-mode)
   :config
+
+  (use-package helm-c-yasnippet
+    :bind ("C-c y" . helm-yas-complete)
+    :config
+    (setq helm-yas-not-display-dups nil)
+    (setq helm-yas-display-key-on-candidate t))
+
   (yas-reload-all)
   (add-to-list 'ac-sources 'ac-source-yasnippet)
   (modeline-remove-lighter 'yas-minor-mode)
