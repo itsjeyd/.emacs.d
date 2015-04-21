@@ -447,11 +447,10 @@ Goes backward if ARG is negative; error if STR not found."
   ("n" next-line "next line")
   ("p" previous-line "previous line"))
 
-(defhydra hydra-move-text (:color pink)
+(defhydra hydra-move-text ()
   "Move text"
   ("u" move-text-up "up")
-  ("d" move-text-down "down")
-  ("C-g" nil "quit"))
+  ("d" move-text-down "down"))
 
 ; Key Bindings
 (global-set-key (kbd "C-w") 'kill-region-with-arg)
