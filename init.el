@@ -883,7 +883,9 @@ Goes backward if ARG is negative; error if STR not found."
 
   ;; Variables
   (setq-default js2-basic-offset 2)
-  (setq js2-highlight-level 3))
+  (setq js2-global-externs '("$" "jQuery" "_"))
+  (setq js2-highlight-level 3)
+  (setq js2-pretty-multiline-declarations 'dynamic))
 
 ; Commands
 (defun tern-delete-process ()
