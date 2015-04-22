@@ -871,6 +871,12 @@ Goes backward if ARG is negative; error if STR not found."
       :config
       (tern-ac-setup))
 
+    ;; Commands
+    (defun tern-delete-process ()
+      (interactive)
+      (delete-process "Tern"))
+
+    ;; Key Bindings
     (unbind-key "C-c C-d" tern-mode-keymap)
     (unbind-key "C-c C-r" tern-mode-keymap)
     (bind-keys :prefix-map tern-mode-prefix-keymap
@@ -912,11 +918,6 @@ Goes backward if ARG is negative; error if STR not found."
   (setq js2-global-externs '("$" "jQuery" "_"))
   (setq js2-highlight-level 3)
   (setq js2-pretty-multiline-declarations 'dynamic))
-
-; Commands
-(defun tern-delete-process ()
-  (interactive)
-  (delete-process "Tern"))
 
 
 
