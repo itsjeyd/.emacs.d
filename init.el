@@ -1480,7 +1480,8 @@ Goes backward if ARG is negative; error if STR not found."
 
   ;; Variables
   (setq helm-dash-common-docsets '("Emacs Lisp" "MySQL" "PostgreSQL" "SQLite"))
-  (setq helm-dash-docsets-path "/storage/docsets/"))
+  (setq helm-dash-docsets-path "/storage/docsets/")
+  (setq helm-dash-min-length 2))
 
 (use-package imenu
   :commands imenu
