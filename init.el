@@ -240,8 +240,13 @@
   :ensure nil
   :bind ("C-x C-j" . dired-jump)
   :config
+  ;; Hooks
   (add-hook 'dired-mode-hook #'dired-omit-mode)
+
+  ;; Key Bindings
   (bind-key "M-o" #'dired-omit-mode dired-mode-map)
+
+  ;; Variables
   (setq dired-omit-files "^\\...+$"))
 
 (use-package direx
