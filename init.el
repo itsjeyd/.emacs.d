@@ -226,9 +226,9 @@
 
   ;; Key Bindings
   (bind-keys :map dired-mode-map
-             (")" . #'dired-hide-details-mode)
-             ((vector 'remap 'beginning-of-buffer) . #'dired-jump-to-top)
-             ((vector 'remap 'end-of-buffer) . #'dired-jump-to-bottom))
+             (")" . dired-hide-details-mode)
+             ((vector 'remap 'beginning-of-buffer) . dired-jump-to-top)
+             ((vector 'remap 'end-of-buffer) . dired-jump-to-bottom))
 
   ;; Variables
   (setq dired-dwim-target t)
@@ -282,9 +282,9 @@
 
   ;; Key Bindings
   (bind-keys :map ac-completing-map
-             ("C-h" . #'ac-help)
-             ("C-v" . #'ac-quick-help-scroll-down)
-             ("M-v" . #'ac-quick-help-scroll-up))
+             ("C-h" . ac-help)
+             ("C-v" . ac-quick-help-scroll-down)
+             ("M-v" . ac-quick-help-scroll-up))
   (bind-key "C-f" #'ac-stop ac-menu-map)
 
   ;; Variables
@@ -884,14 +884,14 @@ Goes backward if ARG is negative; error if STR not found."
     (bind-keys :prefix-map tern-mode-prefix-keymap
                :prefix "C-c C-t"
                :map tern-mode-keymap
-               ("d" . #'tern-get-docs)
-               ("h" . #'tern-highlight-refs)
-               ("r" . #'tern-rename-variable)
-               ("t" . #'tern-get-type)
-               ("." . #'tern-find-definition)
-               (":" . #'tern-find-definition-by-name)
-               ("," . #'tern-pop-find-definition)
-               ("TAB" . #'tern-ac-complete)))
+               ("d" . tern-get-docs)
+               ("h" . tern-highlight-refs)
+               ("r" . tern-rename-variable)
+               ("t" . tern-get-type)
+               ("." . tern-find-definition)
+               (":" . tern-find-definition-by-name)
+               ("," . tern-pop-find-definition)
+               ("TAB" . tern-ac-complete)))
 
   ;; Hooks
   (add-hook 'js2-mode-hook #'ac-js2-mode)
@@ -902,17 +902,17 @@ Goes backward if ARG is negative; error if STR not found."
   ;; Key Bindings
   (unbind-key "C-c C-t" js2-mode-map)
   (bind-keys :map js2-mode-map
-             ("RET" . #'js2-line-break)
-             ("C-a" . #'js2-beginning-of-line)
-             ("C-e" . #'js2-end-of-line)
-             ("C-c b" . #'web-beautify-js)
-             ("C-c C-e" . #'js2-mode-toggle-element)
-             ("C-c C-l" . #'js2-display-error-list)
-             ("C-c C-o" . #'js2-mode-toggle-hide-comments)
-             ("C-x n d" . #'js2-narrow-to-defun)
-             ("C-M-f" . #'js2-mode-forward-sexp)
-             ("C-M-h" . #'js2-mark-defun)
-             ("M-k" . #'js2r-kill))
+             ("RET" . js2-line-break)
+             ("C-a" . js2-beginning-of-line)
+             ("C-e" . js2-end-of-line)
+             ("C-c b" . web-beautify-js)
+             ("C-c C-e" . js2-mode-toggle-element)
+             ("C-c C-l" . js2-display-error-list)
+             ("C-c C-o" . js2-mode-toggle-hide-comments)
+             ("C-x n d" . js2-narrow-to-defun)
+             ("C-M-f" . js2-mode-forward-sexp)
+             ("C-M-h" . js2-mark-defun)
+             ("M-k" . js2r-kill))
   (bind-key "j n" #'js2-next-error custom-keys-mode-prefix-map)
 
   ;; Variables
@@ -1115,8 +1115,8 @@ Goes backward if ARG is negative; error if STR not found."
     :config
     ;; Key Bindings
     (bind-keys :map org-mode-map
-               ("M-n" . #'org-next-item)
-               ("M-p" . #'org-previous-item))
+               ("M-n" . org-next-item)
+               ("M-p" . org-previous-item))
 
     ;; Variables
     (setq org-cycle-include-plain-lists 'integrate)
@@ -1280,29 +1280,29 @@ Goes backward if ARG is negative; error if STR not found."
   ;; Key Bindings
   (defvar org-mode-extra-keys-map (lookup-key org-mode-map (kbd "C-c C-x")))
   (bind-keys :map org-mode-extra-keys-map
-             ("c" . #'org-table-copy-down)
-             ("d" . #'org-metadown)
-             ("l" . #'org-metaleft)
-             ("r" . #'org-metaright)
-             ("u" . #'org-metaup)
-             ("D" . #'org-shiftmetadown)
-             ("L" . #'org-shiftmetaleft)
-             ("R" . #'org-shiftmetaright)
-             ("U" . #'org-shiftmetaup))
+             ("c" . org-table-copy-down)
+             ("d" . org-metadown)
+             ("l" . org-metaleft)
+             ("r" . org-metaright)
+             ("u" . org-metaup)
+             ("D" . org-shiftmetadown)
+             ("L" . org-shiftmetaleft)
+             ("R" . org-shiftmetaright)
+             ("U" . org-shiftmetaup))
   (bind-keys :map org-mode-map
-             ("<C-tab>" . #'pcomplete)
-             ("RET" . #'org-return-indent)
-             ("C-c c" . #'org-wrap-in-comment-block)
-             ("C-c d" . #'org-toggle-link-display)
-             ("C-M-q" . #'org-fill-paragraph-handle-lists)
-             ("M-s TAB" . #'org-force-cycle-archived)
-             ("M-s t b" . #'org-toggle-blocks)
-             ("M-s t h" . #'org-insert-todo-heading)
-             ("M-s t s" . #'org-insert-todo-subheading)
-             ("s-d" . #'org-shiftdown)
-             ("s-l" . #'org-shiftleft)
-             ("s-r" . #'org-shiftright)
-             ("s-u" . #'org-shiftup))
+             ("<C-tab>" . pcomplete)
+             ("RET" . org-return-indent)
+             ("C-c c" . org-wrap-in-comment-block)
+             ("C-c d" . org-toggle-link-display)
+             ("C-M-q" . org-fill-paragraph-handle-lists)
+             ("M-s TAB" . org-force-cycle-archived)
+             ("M-s t b" . org-toggle-blocks)
+             ("M-s t h" . org-insert-todo-heading)
+             ("M-s t s" . org-insert-todo-subheading)
+             ("s-d" . org-shiftdown)
+             ("s-l" . org-shiftleft)
+             ("s-r" . org-shiftright)
+             ("s-u" . org-shiftup))
 
   ;; Keyboard Macros
   (fset 'org-wrap-in-comment-block
@@ -1447,8 +1447,8 @@ Goes backward if ARG is negative; error if STR not found."
   ;; Functions
   (defun flycheck-setup ()
     (bind-keys :map custom-keys-mode-prefix-map
-               ("f n" . #'flycheck-next-error)
-               ("f p" . #'flycheck-previous-error)))
+               ("f n" . flycheck-next-error)
+               ("f p" . flycheck-previous-error)))
 
   ;; Hooks
   (add-hook 'flycheck-mode-hook #'flycheck-setup))
@@ -1714,8 +1714,8 @@ Goes backward if ARG is negative; error if STR not found."
   (unbind-key "M-n" smartscan-map)
   (unbind-key "M-p" smartscan-map)
   (bind-keys :map smartscan-map
-             ("s-n" . #'smartscan-symbol-go-forward)
-             ("s-p" . #'smartscan-symbol-go-backward)))
+             ("s-n" . smartscan-symbol-go-forward)
+             ("s-p" . smartscan-symbol-go-backward)))
 
 ; Advice
 (defadvice occur (around occur-rename-buffer-after-search-string
@@ -1893,8 +1893,8 @@ char if successful."
   (unbind-key "M-s" magit-mode-map)
   (unbind-key "M-S" magit-mode-map)
   (bind-keys :map magit-mode-map
-             ("K" . #'magit-ls-files)
-             ("l" . #'magit-log-all))
+             ("K" . magit-ls-files)
+             ("l" . magit-log-all))
 
   ;; Variables
   (setq magit-auto-revert-mode-lighter "")
