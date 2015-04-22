@@ -76,8 +76,8 @@
     (ibuffer-switch-to-saved-filter-groups "Default"))
 
   ;; Hooks
-  (add-hook 'ibuffer-mode-hook 'ibuffer-group-buffers)
-  (add-hook 'ibuffer-mode-hook 'ibuffer-auto-mode)
+  (add-hook 'ibuffer-mode-hook #'ibuffer-group-buffers)
+  (add-hook 'ibuffer-mode-hook #'ibuffer-auto-mode)
 
   ;; Variables
   (setq-default ibuffer-saved-filter-groups
@@ -97,8 +97,8 @@
   (setq temp-buffer-count (1+ temp-buffer-count)))
 
 ; Key Bindings
-(global-set-key (kbd "C-c t") 'make-temp-buffer)
-(define-key custom-keys-mode-prefix-map (kbd "r b") 'revert-buffer)
+(global-set-key (kbd "C-c t") #'make-temp-buffer)
+(define-key custom-keys-mode-prefix-map (kbd "r b") #'revert-buffer)
 
 ; Variables
 (setq confirm-nonexistent-file-or-buffer nil)
@@ -119,7 +119,7 @@
               (file-newer-than-file-p buffer-file-name byte-file))
           (byte-compile-file buffer-file-name)))))
 
-(add-hook 'after-save-hook 'recompile-elisp-file)
+(add-hook 'after-save-hook #'recompile-elisp-file)
 
 
 
@@ -191,10 +191,10 @@
     :commands rainbow-turn-on)
 
   ;; Hooks
-  (add-hook 'css-mode-hook 'rainbow-turn-on)
+  (add-hook 'css-mode-hook #'rainbow-turn-on)
 
   ;; Key Bindings
-  (bind-key "C-c b" 'web-beautify-css css-mode-map))
+  (bind-key "C-c b" #'web-beautify-css css-mode-map))
 
 
 
@@ -222,13 +222,13 @@
   (put 'dired-find-alternate-file 'disabled nil)
 
   ;; Hooks
-  (add-hook 'dired-mode-hook 'dired-hide-details-mode)
+  (add-hook 'dired-mode-hook #'dired-hide-details-mode)
 
   ;; Key Bindings
   (bind-keys :map dired-mode-map
-             (")" . dired-hide-details-mode)
-             ((vector 'remap 'beginning-of-buffer) . dired-jump-to-top)
-             ((vector 'remap 'end-of-buffer) . dired-jump-to-bottom))
+             (")" . #'dired-hide-details-mode)
+             ((vector 'remap 'beginning-of-buffer) . #'dired-jump-to-top)
+             ((vector 'remap 'end-of-buffer) . #'dired-jump-to-bottom))
 
   ;; Variables
   (setq dired-dwim-target t)
@@ -240,8 +240,8 @@
   :ensure nil
   :bind ("C-x C-j" . dired-jump)
   :config
-  (add-hook 'dired-mode-hook 'dired-omit-mode)
-  (bind-key "M-o" 'dired-omit-mode dired-mode-map)
+  (add-hook 'dired-mode-hook #'dired-omit-mode)
+  (bind-key "M-o" #'dired-omit-mode dired-mode-map)
   (setq dired-omit-files "^\\...+$"))
 
 (use-package direx
@@ -260,7 +260,7 @@
 (use-package anchored-transpose
   :commands anchored-transpose
   :init
-  (bind-key "a t" 'anchored-transpose custom-keys-mode-prefix-map))
+  (bind-key "a t" #'anchored-transpose custom-keys-mode-prefix-map))
 
 (use-package auto-complete-config
   :ensure auto-complete
@@ -277,10 +277,10 @@
 
   ;; Key Bindings
   (bind-keys :map ac-completing-map
-             ("C-h" . ac-help)
-             ("C-v" . ac-quick-help-scroll-down)
-             ("M-v" . ac-quick-help-scroll-up))
-  (bind-key "C-f" 'ac-stop ac-menu-map)
+             ("C-h" . #'ac-help)
+             ("C-v" . #'ac-quick-help-scroll-down)
+             ("M-v" . #'ac-quick-help-scroll-up))
+  (bind-key "C-f" #'ac-stop ac-menu-map)
 
   ;; Variables
   (setq ac-auto-show-menu 0.3)
@@ -292,7 +292,7 @@
 (use-package caps-lock
   :commands caps-lock-mode
   :init
-  (bind-key "c l" 'caps-lock-mode custom-keys-mode-prefix-map))
+  (bind-key "c l" #'caps-lock-mode custom-keys-mode-prefix-map))
 
 (use-package change-inner
   :bind (("C-c i" . change-inner)
@@ -301,7 +301,7 @@
 (use-package expand-region
   :commands er/expand-region
   :init
-  (bind-key "@" 'er/expand-region custom-keys-mode-prefix-map))
+  (bind-key "@" #'er/expand-region custom-keys-mode-prefix-map))
 
 (use-package mark-lines
   :ensure nil
@@ -391,7 +391,7 @@ region, operate on a single line. Otherwise, operate on region."
             (end (line-beginning-position (+ arg 1))))
         (kill-region beg end)
         (message "Killed %d lines." arg))
-    (call-interactively 'kill-region)))
+    (call-interactively #'kill-region)))
 
 (defun kill-ring-save-with-arg (arg)
   (interactive "P")
@@ -400,7 +400,7 @@ region, operate on a single line. Otherwise, operate on region."
             (end (line-beginning-position (+ arg 1))))
         (kill-ring-save beg end)
         (message "Copied %d lines." arg))
-    (call-interactively 'kill-ring-save)))
+    (call-interactively #'kill-ring-save)))
 
 (defun mark-line ()
   "Simple wrapper around `mark-lines-next-line' that marks the line
@@ -435,7 +435,7 @@ Goes backward if ARG is negative; error if STR not found."
       (kill-region start end))))
 
 ; Hooks
-(add-hook 'before-save-hook 'delete-trailing-whitespace)
+(add-hook 'before-save-hook #'delete-trailing-whitespace)
 
 ; Hydra
 (defhydra hydra-mark-lines ()
@@ -450,12 +450,12 @@ Goes backward if ARG is negative; error if STR not found."
   ("d" move-text-down "down"))
 
 ; Key Bindings
-(global-set-key (kbd "C-w") 'kill-region-with-arg)
-(global-set-key (kbd "M-w") 'kill-ring-save-with-arg)
-(define-key custom-keys-mode-prefix-map (kbd "m") 'mark-line)
-(define-key custom-keys-mode-prefix-map (kbd "u") 'hydra-move-text/body)
-(define-key custom-keys-mode-prefix-map (kbd "d") 'hydra-move-text/body)
-(define-key custom-keys-mode-prefix-map (kbd "z") 'zap-to-string)
+(global-set-key (kbd "C-w") #'kill-region-with-arg)
+(global-set-key (kbd "M-w") #'kill-ring-save-with-arg)
+(define-key custom-keys-mode-prefix-map (kbd "m") #'mark-line)
+(define-key custom-keys-mode-prefix-map (kbd "u") #'hydra-move-text/body)
+(define-key custom-keys-mode-prefix-map (kbd "d") #'hydra-move-text/body)
+(define-key custom-keys-mode-prefix-map (kbd "z") #'zap-to-string)
 
 ; Variables
 (setq cua-enable-cua-keys nil)
@@ -493,7 +493,7 @@ Goes backward if ARG is negative; error if STR not found."
 (use-package clojure-mode
   :commands clojure-mode
   :config
-  (add-hook 'clojure-mode-hook 'lispy-mnemonic-mode))
+  (add-hook 'clojure-mode-hook #'lispy-mnemonic-mode))
 
 (use-package eldoc
   :commands eldoc-mode
@@ -501,10 +501,10 @@ Goes backward if ARG is negative; error if STR not found."
   (setq eldoc-minor-mode-string ""))
 
 ; Hooks
-(add-hook 'emacs-lisp-mode-hook 'eldoc-mode)
-(add-hook 'emacs-lisp-mode-hook 'lispy-mnemonic-mode)
-(add-hook 'emacs-lisp-mode-hook 'prettify-symbols-mode)
-(add-hook 'eval-expression-minibuffer-setup-hook 'eldoc-mode)
+(add-hook 'emacs-lisp-mode-hook #'eldoc-mode)
+(add-hook 'emacs-lisp-mode-hook #'lispy-mnemonic-mode)
+(add-hook 'emacs-lisp-mode-hook #'prettify-symbols-mode)
+(add-hook 'eval-expression-minibuffer-setup-hook #'eldoc-mode)
 
 
 
@@ -626,8 +626,8 @@ Goes backward if ARG is negative; error if STR not found."
   ("s" (funcall (info-display-topic "sicp")) "SICP"))
 
 ; Key Bindings
-(global-set-key (kbd "C-h a") 'hydra-apropos/body)
-(define-key custom-keys-mode-prefix-map (kbd "i") 'hydra-info/body)
+(global-set-key (kbd "C-h a") #'hydra-apropos/body)
+(define-key custom-keys-mode-prefix-map (kbd "i") #'hydra-info/body)
 
 ; Variables
 (setq help-window-select t)
@@ -642,7 +642,7 @@ Goes backward if ARG is negative; error if STR not found."
 (use-package sgml-mode
   :commands sgml-mode
   :config
-  (bind-key "C-c b" 'web-beautify-html sgml-mode-map))
+  (bind-key "C-c b" #'web-beautify-html sgml-mode-map))
 
 
 
@@ -700,7 +700,7 @@ Goes backward if ARG is negative; error if STR not found."
       (find-file file)))
 
   ;; Key Bindings
-  (bind-key "C-c f" 'ido-find-file-as-root)
+  (bind-key "C-c f" #'ido-find-file-as-root)
 
   ;; Variables
   (add-to-list 'ido-ignore-buffers "\*Compile-Log\*")
@@ -736,8 +736,8 @@ Goes backward if ARG is negative; error if STR not found."
 (use-package rainbow-delimiters
   :commands rainbow-delimiters-mode
   :config
-  (add-hook 'org-mode-hook 'rainbow-delimiters-mode)
-  (add-hook 'prog-mode-hook 'rainbow-delimiters-mode))
+  (add-hook 'org-mode-hook #'rainbow-delimiters-mode)
+  (add-hook 'prog-mode-hook #'rainbow-delimiters-mode))
 
 (use-package whitespace
   :commands whitespace-mode
@@ -745,7 +745,7 @@ Goes backward if ARG is negative; error if STR not found."
   (modeline-remove-lighter 'whitespace-mode)
 
   ;; Hooks
-  (add-hook 'prog-mode-hook 'whitespace-mode)
+  (add-hook 'prog-mode-hook #'whitespace-mode)
 
   ;; Variables
   (setq whitespace-line-column nil)
@@ -839,9 +839,9 @@ Goes backward if ARG is negative; error if STR not found."
     (c-set-offset 'arglist-intro '+))
 
   ;; Hooks
-  (add-hook 'java-mode-hook 'java-goto-class)
-  (add-hook 'java-mode-hook 'java-set-indentation-behavior)
-  (add-hook 'window-configuration-change-hook 'java-class-to-top))
+  (add-hook 'java-mode-hook #'java-goto-class)
+  (add-hook 'java-mode-hook #'java-set-indentation-behavior)
+  (add-hook 'window-configuration-change-hook #'java-class-to-top))
 
 
 
@@ -879,36 +879,36 @@ Goes backward if ARG is negative; error if STR not found."
     (bind-keys :prefix-map tern-mode-prefix-keymap
                :prefix "C-c C-t"
                :map tern-mode-keymap
-               ("d" . tern-get-docs)
-               ("h" . tern-highlight-refs)
-               ("r" . tern-rename-variable)
-               ("t" . tern-get-type)
-               ("." . tern-find-definition)
-               (":" . tern-find-definition-by-name)
-               ("," . tern-pop-find-definition)
-               ("TAB" . tern-ac-complete)))
+               ("d" . #'tern-get-docs)
+               ("h" . #'tern-highlight-refs)
+               ("r" . #'tern-rename-variable)
+               ("t" . #'tern-get-type)
+               ("." . #'tern-find-definition)
+               (":" . #'tern-find-definition-by-name)
+               ("," . #'tern-pop-find-definition)
+               ("TAB" . #'tern-ac-complete)))
 
   ;; Hooks
-  (add-hook 'js2-mode-hook 'ac-js2-mode)
-  (add-hook 'js2-mode-hook 'flycheck-mode)
-  (add-hook 'js2-mode-hook 'js2-imenu-extras-mode)
-  (add-hook 'js2-mode-hook 'tern-mode)
+  (add-hook 'js2-mode-hook #'ac-js2-mode)
+  (add-hook 'js2-mode-hook #'flycheck-mode)
+  (add-hook 'js2-mode-hook #'js2-imenu-extras-mode)
+  (add-hook 'js2-mode-hook #'tern-mode)
 
   ;; Key Bindings
   (unbind-key "C-c C-t" js2-mode-map)
   (bind-keys :map js2-mode-map
-             ("RET" . js2-line-break)
-             ("C-a" . js2-beginning-of-line)
-             ("C-e" . js2-end-of-line)
-             ("C-c b" . web-beautify-js)
-             ("C-c C-e" . js2-mode-toggle-element)
-             ("C-c C-l" . js2-display-error-list)
-             ("C-c C-o" . js2-mode-toggle-hide-comments)
-             ("C-x n d" . js2-narrow-to-defun)
-             ("C-M-f" . js2-mode-forward-sexp)
-             ("C-M-h" . js2-mark-defun)
-             ("M-k" . js2r-kill))
-  (bind-key "j n" 'js2-next-error custom-keys-mode-prefix-map)
+             ("RET" . #'js2-line-break)
+             ("C-a" . #'js2-beginning-of-line)
+             ("C-e" . #'js2-end-of-line)
+             ("C-c b" . #'web-beautify-js)
+             ("C-c C-e" . #'js2-mode-toggle-element)
+             ("C-c C-l" . #'js2-display-error-list)
+             ("C-c C-o" . #'js2-mode-toggle-hide-comments)
+             ("C-x n d" . #'js2-narrow-to-defun)
+             ("C-M-f" . #'js2-mode-forward-sexp)
+             ("C-M-h" . #'js2-mark-defun)
+             ("M-k" . #'js2r-kill))
+  (bind-key "j n" #'js2-next-error custom-keys-mode-prefix-map)
 
   ;; Variables
   (setq-default js2-basic-offset 2)
@@ -1038,11 +1038,11 @@ Goes backward if ARG is negative; error if STR not found."
   ("]" forward-page "next page"))
 
 ; Key Bindings
-(global-set-key (kbd "M-SPC") 'hydra-ace-jump/body)
-(global-set-key (kbd "C-x [") 'hydra-move-by-page/body)
-(global-set-key (kbd "C-x ]") 'hydra-move-by-page/body)
-(global-set-key (kbd "M-g c") 'goto-char)
-(global-set-key (kbd "M-g l") 'goto-line)
+(global-set-key (kbd "M-SPC") #'hydra-ace-jump/body)
+(global-set-key (kbd "C-x [") #'hydra-move-by-page/body)
+(global-set-key (kbd "C-x ]") #'hydra-move-by-page/body)
+(global-set-key (kbd "M-g c") #'goto-char)
+(global-set-key (kbd "M-g l") #'goto-line)
 
 
 
@@ -1110,8 +1110,8 @@ Goes backward if ARG is negative; error if STR not found."
     :config
     ;; Key Bindings
     (bind-keys :map org-mode-map
-               ("M-n" . org-next-item)
-               ("M-p" . org-previous-item))
+               ("M-n" . #'org-next-item)
+               ("M-p" . #'org-previous-item))
 
     ;; Variables
     (setq org-cycle-include-plain-lists 'integrate)
@@ -1213,7 +1213,7 @@ Goes backward if ARG is negative; error if STR not found."
                      (progn
                        (org-back-to-item)
                        (while (>= num-paragraphs 0)
-                         (call-interactively 'org-mark-element)
+                         (call-interactively #'org-mark-element)
                          (setq num-paragraphs (1- num-paragraphs)))
                        (- (region-end) 2)))))
         (while (search-forward "\n" bound t)
@@ -1268,36 +1268,36 @@ Goes backward if ARG is negative; error if STR not found."
         (looking-at "^$")))
 
   ;; Hooks
-  (add-hook 'org-mode-hook 'org-add-electric-pairs)
-  (add-hook 'org-mode-hook 'org-toggle-blocks)
-  (add-hook 'org-mode-hook 'turn-on-auto-fill)
+  (add-hook 'org-mode-hook #'org-add-electric-pairs)
+  (add-hook 'org-mode-hook #'org-toggle-blocks)
+  (add-hook 'org-mode-hook #'turn-on-auto-fill)
 
   ;; Key Bindings
   (defvar org-mode-extra-keys-map (lookup-key org-mode-map (kbd "C-c C-x")))
   (bind-keys :map org-mode-extra-keys-map
-             ("c" . org-table-copy-down)
-             ("d" . org-metadown)
-             ("l" . org-metaleft)
-             ("r" . org-metaright)
-             ("u" . org-metaup)
-             ("D" . org-shiftmetadown)
-             ("L" . org-shiftmetaleft)
-             ("R" . org-shiftmetaright)
-             ("U" . org-shiftmetaup))
+             ("c" . #'org-table-copy-down)
+             ("d" . #'org-metadown)
+             ("l" . #'org-metaleft)
+             ("r" . #'org-metaright)
+             ("u" . #'org-metaup)
+             ("D" . #'org-shiftmetadown)
+             ("L" . #'org-shiftmetaleft)
+             ("R" . #'org-shiftmetaright)
+             ("U" . #'org-shiftmetaup))
   (bind-keys :map org-mode-map
-             ("<C-tab>" . pcomplete)
-             ("RET" . org-return-indent)
-             ("C-c c" . org-wrap-in-comment-block)
-             ("C-c d" . org-toggle-link-display)
-             ("C-M-q" . org-fill-paragraph-handle-lists)
-             ("M-s TAB" . org-force-cycle-archived)
-             ("M-s t b" . org-toggle-blocks)
-             ("M-s t h" . org-insert-todo-heading)
-             ("M-s t s" . org-insert-todo-subheading)
-             ("s-d" . org-shiftdown)
-             ("s-l" . org-shiftleft)
-             ("s-r" . org-shiftright)
-             ("s-u" . org-shiftup))
+             ("<C-tab>" . #'pcomplete)
+             ("RET" . #'org-return-indent)
+             ("C-c c" . #'org-wrap-in-comment-block)
+             ("C-c d" . #'org-toggle-link-display)
+             ("C-M-q" . #'org-fill-paragraph-handle-lists)
+             ("M-s TAB" . #'org-force-cycle-archived)
+             ("M-s t b" . #'org-toggle-blocks)
+             ("M-s t h" . #'org-insert-todo-heading)
+             ("M-s t s" . #'org-insert-todo-subheading)
+             ("s-d" . #'org-shiftdown)
+             ("s-l" . #'org-shiftleft)
+             ("s-r" . #'org-shiftright)
+             ("s-u" . #'org-shiftup))
 
   ;; Keyboard Macros
   (fset 'org-wrap-in-comment-block
@@ -1349,9 +1349,9 @@ Goes backward if ARG is negative; error if STR not found."
   (add-to-list 'ac-modes 'cider-mode)
 
   ;; Hooks
-  (add-hook 'cider-mode-hook 'cider-turn-on-eldoc-mode)
-  (add-hook 'cider-mode-hook 'ac-cider-setup)
-  (add-hook 'cider-repl-mode-hook 'ac-cider-setup)
+  (add-hook 'cider-mode-hook #'cider-turn-on-eldoc-mode)
+  (add-hook 'cider-mode-hook #'ac-cider-setup)
+  (add-hook 'cider-repl-mode-hook #'ac-cider-setup)
 
   ;; Variables
   (setq cider-repl-history-file "~/.emacs.d/.cider-history")
@@ -1413,7 +1413,7 @@ Goes backward if ARG is negative; error if STR not found."
     (setq pdf-util-fast-image-format '("png" . ".png")))
 
   ;; Hooks
-  (add-hook 'doc-view-mode-hook 'pdf-tools-install)
+  (add-hook 'doc-view-mode-hook #'pdf-tools-install)
 
   ;; Variables
   (setq doc-view-continuous t))
@@ -1442,11 +1442,11 @@ Goes backward if ARG is negative; error if STR not found."
   ;; Functions
   (defun flycheck-setup ()
     (bind-keys :map custom-keys-mode-prefix-map
-               ("f n" . flycheck-next-error)
-               ("f p" . flycheck-previous-error)))
+               ("f n" . #'flycheck-next-error)
+               ("f p" . #'flycheck-previous-error)))
 
   ;; Hooks
-  (add-hook 'flycheck-mode-hook 'flycheck-setup))
+  (add-hook 'flycheck-mode-hook #'flycheck-setup))
 
 (use-package helm-dash
   :bind ("C-c d" . helm-dash)
@@ -1499,8 +1499,8 @@ Goes backward if ARG is negative; error if STR not found."
 (use-package yasnippet
   :commands yas-minor-mode
   :init
-  (add-hook 'org-mode-hook 'yas-minor-mode)
-  (add-hook 'prog-mode-hook 'yas-minor-mode)
+  (add-hook 'org-mode-hook #'yas-minor-mode)
+  (add-hook 'prog-mode-hook #'yas-minor-mode)
   :config
 
   (use-package helm-c-yasnippet
@@ -1536,7 +1536,7 @@ Goes backward if ARG is negative; error if STR not found."
 	(and relevant-snippets (first relevant-snippets)))))
 
   ;; Hooks
-  (add-hook 'post-command-hook 'change-cursor-color-when-can-expand)
+  (add-hook 'post-command-hook #'change-cursor-color-when-can-expand)
 
   ;; Variables
   (setq yas-prompt-functions '(yas-ido-prompt yas-x-prompt yas-no-prompt)))
@@ -1550,7 +1550,7 @@ Goes backward if ARG is negative; error if STR not found."
 
 (defun tim/enable-electric-semicolon ()
   (interactive)
-  (local-set-key (kbd ";") 'tim/electric-semicolon))
+  (local-set-key (kbd ";") #'tim/electric-semicolon))
 
 ; Functions
 (defun subword-setup ()
@@ -1558,9 +1558,9 @@ Goes backward if ARG is negative; error if STR not found."
   (modeline-remove-lighter 'subword-mode))
 
 ; Hooks
-(add-hook 'java-mode-hook 'tim/enable-electric-semicolon)
-(add-hook 'js2-mode-hook 'tim/enable-electric-semicolon)
-(add-hook 'prog-mode-hook 'subword-setup)
+(add-hook 'java-mode-hook #'tim/enable-electric-semicolon)
+(add-hook 'js2-mode-hook #'tim/enable-electric-semicolon)
+(add-hook 'prog-mode-hook #'subword-setup)
 
 ; Variables
 (setq-default indent-tabs-mode nil)
@@ -1608,7 +1608,7 @@ Goes backward if ARG is negative; error if STR not found."
     (add-to-list 'flycheck-disabled-checkers 'python-pylint))
 
   ;; Hooks
-  (add-hook 'python-mode-hook 'flycheck-mode)
+  (add-hook 'python-mode-hook #'flycheck-mode)
 
   ;; Variables
   (setq python-fill-docstring-style 'django)
@@ -1657,7 +1657,7 @@ Goes backward if ARG is negative; error if STR not found."
       (message "Aborting")))
 
   ;; Key Bindings
-  (bind-key "C-x C-r" 'ido-recentf-open)
+  (bind-key "C-x C-r" #'ido-recentf-open)
 
   ;; Variables
   (add-to-list 'recentf-used-hooks
@@ -1680,8 +1680,8 @@ Goes backward if ARG is negative; error if STR not found."
   (">" scroll-right "right"))
 
 ; Key Bindings
-(global-set-key (kbd "C-x <") 'hydra-scroll/body)
-(global-set-key (kbd "C-x >") 'hydra-scroll/body)
+(global-set-key (kbd "C-x <") #'hydra-scroll/body)
+(global-set-key (kbd "C-x >") #'hydra-scroll/body)
 
 ; Variables
 (setq recenter-positions '(top middle bottom))
@@ -1701,7 +1701,7 @@ Goes backward if ARG is negative; error if STR not found."
 (use-package helm-swoop
   :bind ("C-c h" . helm-swoop)
   :config
-  (bind-key "M-h" 'helm-swoop-from-isearch isearch-mode-map))
+  (bind-key "M-h" #'helm-swoop-from-isearch isearch-mode-map))
 
 (use-package smartscan
   :config
@@ -1709,8 +1709,8 @@ Goes backward if ARG is negative; error if STR not found."
   (unbind-key "M-n" smartscan-map)
   (unbind-key "M-p" smartscan-map)
   (bind-keys :map smartscan-map
-             ("s-n" . smartscan-symbol-go-forward)
-             ("s-p" . smartscan-symbol-go-backward)))
+             ("s-n" . #'smartscan-symbol-go-forward)
+             ("s-p" . #'smartscan-symbol-go-backward)))
 
 ; Advice
 (defadvice occur (around occur-rename-buffer-after-search-string
@@ -1748,13 +1748,13 @@ char if successful."
     (isearch-delete-char)))
 
 ; Hooks
-(add-hook 'occur-mode-hook 'next-error-follow-minor-mode)
+(add-hook 'occur-mode-hook #'next-error-follow-minor-mode)
 
 ; Key Bindings
-(global-set-key (kbd "C-c g") 'rgrep)
-(define-key isearch-mode-map (kbd "<backspace>") 'isearch-hungry-delete)
-(define-key occur-mode-map "n" 'occur-next)
-(define-key occur-mode-map "p" 'occur-prev)
+(global-set-key (kbd "C-c g") #'rgrep)
+(define-key isearch-mode-map (kbd "<backspace>") #'isearch-hungry-delete)
+(define-key occur-mode-map "n" #'occur-next)
+(define-key occur-mode-map "p" #'occur-prev)
 
 ; Variables
 (setq isearch-allow-scroll t)
@@ -1799,7 +1799,7 @@ char if successful."
   :ensure nil
   :defer 10
   :config
-  (add-hook 'sclang-mode-hook 'sclang-extensions-mode))
+  (add-hook 'sclang-mode-hook #'sclang-extensions-mode))
 
 
 
@@ -1842,7 +1842,7 @@ char if successful."
   ("w" wikipedia "Wikipedia"))
 
 ; Key Bindings
-(global-set-key (kbd "C-c s") 'hydra-search/body)
+(global-set-key (kbd "C-c s") #'hydra-search/body)
 
 
 
@@ -1853,7 +1853,7 @@ char if successful."
 (use-package magit
   :commands magit-status
   :init
-  (bind-key "g s" 'magit-status custom-keys-mode-prefix-map)
+  (bind-key "g s" #'magit-status custom-keys-mode-prefix-map)
   :config
 
   (use-package git-commit-mode
@@ -1864,9 +1864,9 @@ char if successful."
                   (cons single-backticks electric-pair-pairs)))
 
     ;; Hooks
-    (add-hook 'git-commit-mode-hook 'git-commit-add-electric-pairs)
-    (add-hook 'git-commit-mode-hook 'turn-on-orgstruct)
-    (add-hook 'git-commit-mode-hook 'turn-on-auto-fill))
+    (add-hook 'git-commit-mode-hook #'git-commit-add-electric-pairs)
+    (add-hook 'git-commit-mode-hook #'turn-on-orgstruct)
+    (add-hook 'git-commit-mode-hook #'turn-on-auto-fill))
 
   ;; Commands
   (defun magit-log-all ()
@@ -1882,14 +1882,14 @@ char if successful."
       (message "Not in a Magit buffer.")))
 
   ;; Hooks
-  (add-hook 'magit-revert-buffer-hook 'git-gutter+-refresh)
+  (add-hook 'magit-revert-buffer-hook #'git-gutter+-refresh)
 
   ;; Key Bindings
   (unbind-key "M-s" magit-mode-map)
   (unbind-key "M-S" magit-mode-map)
   (bind-keys :map magit-mode-map
-             ("K" . magit-ls-files)
-             ("l" . magit-log-all))
+             ("K" . #'magit-ls-files)
+             ("l" . #'magit-log-all))
 
   ;; Variables
   (setq magit-auto-revert-mode-lighter "")
@@ -1907,10 +1907,10 @@ char if successful."
 (use-package git-gutter+
   :commands git-gutter+-mode
   :init
-  (add-hook 'css-mode-hook 'git-gutter+-mode)
-  (add-hook 'html-mode-hook 'git-gutter+-mode)
-  (add-hook 'org-mode-hook 'git-gutter+-mode)
-  (add-hook 'prog-mode-hook 'git-gutter+-mode)
+  (add-hook 'css-mode-hook #'git-gutter+-mode)
+  (add-hook 'html-mode-hook #'git-gutter+-mode)
+  (add-hook 'org-mode-hook #'git-gutter+-mode)
+  (add-hook 'prog-mode-hook #'git-gutter+-mode)
   :config
 
   (use-package git-gutter-fringe+
@@ -1923,7 +1923,7 @@ char if successful."
       (git-gutter+-refresh))
 
     ;; Hooks
-    (add-hook 'linum-mode-hook 'git-gutter-fringe+-change-fringe))
+    (add-hook 'linum-mode-hook #'git-gutter-fringe+-change-fringe))
 
   (modeline-remove-lighter 'git-gutter+-mode)
 
@@ -1932,7 +1932,7 @@ char if successful."
     (setq-local git-gutter-fr+-side 'left-fringe))
 
   ;; Hooks
-  (add-hook 'git-gutter+-mode-hook 'git-gutter+-setup))
+  (add-hook 'git-gutter+-mode-hook #'git-gutter+-setup))
 
 ; Hydra
 (defhydra hydra-git-gutter+ (:color pink)
@@ -1947,7 +1947,7 @@ char if successful."
   ("C-g" nil "quit"))
 
 ; Key Bindings
-(define-key custom-keys-mode-prefix-map (kbd "g g") 'hydra-git-gutter+/body)
+(define-key custom-keys-mode-prefix-map (kbd "g g") #'hydra-git-gutter+/body)
 
 ; Variables
 (setq magit-last-seen-setup-instructions "1.4.0")
@@ -1995,8 +1995,8 @@ With a prefix arg, clear selective display."
 (advice-add 'set-selective-display :around #'hide-lines-below-current-column)
 
 ; Key Bindings
-(global-set-key (kbd "C-x n i") 'narrow-to-region-indirect-buffer)
-(define-key custom-keys-mode-prefix-map (kbd "t t") 'toggle-truncate-lines)
+(global-set-key (kbd "C-x n i") #'narrow-to-region-indirect-buffer)
+(define-key custom-keys-mode-prefix-map (kbd "t t") #'toggle-truncate-lines)
 
 ; Variables
 (setq-default truncate-lines t)
@@ -2034,8 +2034,8 @@ With a prefix arg, clear selective display."
 (use-package winner
   :config
   (winner-mode 1)
-  (bind-key "C-c r" 'winner-redo)
-  (bind-key "C-c u" 'winner-undo))
+  (bind-key "C-c r" #'winner-redo)
+  (bind-key "C-c u" #'winner-undo))
 
 ; Commands
 (defun change-split (&optional arg)
@@ -2119,15 +2119,15 @@ window that will be added to the current window layout."
   ("-" shrink-window-if-larger-than-buffer "fit"))
 
 ; Key Bindings
-(global-set-key (kbd "C-c 2") 'split-root-window-below)
-(global-set-key (kbd "C-c 3") 'split-root-window-right)
-(global-set-key (kbd "C-x {") 'hydra-resize-window/body)
-(global-set-key (kbd "C-x }") 'hydra-resize-window/body)
-(global-set-key (kbd "C-x ^") 'hydra-resize-window/body)
-(define-key custom-keys-mode-prefix-map (kbd "c s") 'change-split)
-(define-key custom-keys-mode-prefix-map (kbd "k o") 'kill-other-buffer-and-window)
-(define-key custom-keys-mode-prefix-map (kbd "s w") 'swap-windows)
-(define-key custom-keys-mode-prefix-map (kbd "t d") 'toggle-window-dedicated)
+(global-set-key (kbd "C-c 2") #'split-root-window-below)
+(global-set-key (kbd "C-c 3") #'split-root-window-right)
+(global-set-key (kbd "C-x {") #'hydra-resize-window/body)
+(global-set-key (kbd "C-x }") #'hydra-resize-window/body)
+(global-set-key (kbd "C-x ^") #'hydra-resize-window/body)
+(define-key custom-keys-mode-prefix-map (kbd "c s") #'change-split)
+(define-key custom-keys-mode-prefix-map (kbd "k o") #'kill-other-buffer-and-window)
+(define-key custom-keys-mode-prefix-map (kbd "s w") #'swap-windows)
+(define-key custom-keys-mode-prefix-map (kbd "t d") #'toggle-window-dedicated)
 
 ; Variables
 (setq ediff-split-window-function 'split-window-horizontally)
@@ -2150,7 +2150,7 @@ window that will be added to the current window layout."
 (use-package markdown-mode
   :commands markdown-mode
   :config
-  (add-hook 'markdown-mode-hook 'turn-on-auto-fill))
+  (add-hook 'markdown-mode-hook #'turn-on-auto-fill))
 
 (use-package synosaurus
   :commands (synosaurus-lookup synosaurus-choose-and-replace))
@@ -2165,7 +2165,7 @@ window that will be added to the current window layout."
       (git-gutter+-mode -1)))
 
   ;; Hooks
-  (add-hook 'writeroom-mode-hook 'turn-off-git-gutter+))
+  (add-hook 'writeroom-mode-hook #'turn-off-git-gutter+))
 
 ; Commands
 (defun ispell-word-then-abbrev (local)
@@ -2174,7 +2174,7 @@ With prefix P, create local abbrev. Otherwise it will be global."
   (interactive "P")
   (let ((before (downcase (or (thing-at-point 'word) "")))
         after)
-    (call-interactively 'ispell-word)
+    (call-interactively #'ispell-word)
     (setq after (downcase (or (thing-at-point 'word) "")))
     (unless (string= after before)
       (define-abbrev
@@ -2189,8 +2189,8 @@ With prefix P, create local abbrev. Otherwise it will be global."
   ("r" synosaurus-choose-and-replace "replace"))
 
 ; Key Bindings
-(global-set-key (kbd "C-c S") 'hydra-synosaurus/body)
-(define-key custom-keys-mode-prefix-map (kbd "a a") 'ispell-word-then-abbrev)
+(global-set-key (kbd "C-c S") #'hydra-synosaurus/body)
+(define-key custom-keys-mode-prefix-map (kbd "a a") #'ispell-word-then-abbrev)
 
 ; Variables
 (setq abbrev-file-name "~/.emacs.d/.abbrev_defs")
