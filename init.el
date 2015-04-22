@@ -75,12 +75,9 @@
   (defun ibuffer-group-buffers ()
     (ibuffer-switch-to-saved-filter-groups "Default"))
 
-  (defun ibuffer-turn-on-auto-refresh ()
-    (ibuffer-auto-mode 1))
-
   ;; Hooks
   (add-hook 'ibuffer-mode-hook 'ibuffer-group-buffers)
-  (add-hook 'ibuffer-mode-hook 'ibuffer-turn-on-auto-refresh)
+  (add-hook 'ibuffer-mode-hook 'ibuffer-auto-mode)
 
   ;; Variables
   (setq-default ibuffer-saved-filter-groups
