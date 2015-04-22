@@ -1349,7 +1349,7 @@ Goes backward if ARG is negative; error if STR not found."
   (add-to-list 'ac-modes 'cider-mode)
 
   ;; Hooks
-  (add-hook 'cider-mode-hook #'cider-turn-on-eldoc-mode)
+  (add-hook 'cider-mode-hook #'eldoc-mode)
   (add-hook 'cider-mode-hook #'ac-cider-setup)
   (add-hook 'cider-repl-mode-hook #'ac-cider-setup)
 
