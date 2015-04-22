@@ -820,27 +820,31 @@ Goes backward if ARG is negative; error if STR not found."
 ;;; Java Development ;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;
 
-; Commands
-(defun java-goto-class ()
-  (interactive)
-  (goto-char (point-min))
-  (search-forward "class")
-  (beginning-of-line)
-  (recenter-top-bottom 0))
+(use-package cc-mode
+  :commands java-mode
+  :config
 
-; Functions
-(defun java-class-to-top ()
-  (if (and (eq major-mode 'java-mode)
-           (looking-at "^public\\|private\\|protected\\|class"))
-      (recenter-top-bottom 0)))
+  ;; Commands
+  (defun java-goto-class ()
+    (interactive)
+    (goto-char (point-min))
+    (search-forward "class")
+    (beginning-of-line)
+    (recenter-top-bottom 0))
 
-(defun java-set-indentation-behavior ()
-  (c-set-offset 'arglist-intro '+))
+  ;; Functions
+  (defun java-class-to-top ()
+    (if (and (eq major-mode 'java-mode)
+             (looking-at "^public\\|private\\|protected\\|class"))
+        (recenter-top-bottom 0)))
 
-; Hooks
-(add-hook 'java-mode-hook 'java-goto-class)
-(add-hook 'java-mode-hook 'java-set-indentation-behavior)
-(add-hook 'window-configuration-change-hook 'java-class-to-top)
+  (defun java-set-indentation-behavior ()
+    (c-set-offset 'arglist-intro '+))
+
+  ;; Hooks
+  (add-hook 'java-mode-hook 'java-goto-class)
+  (add-hook 'java-mode-hook 'java-set-indentation-behavior)
+  (add-hook 'window-configuration-change-hook 'java-class-to-top))
 
 
 
