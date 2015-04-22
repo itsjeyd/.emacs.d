@@ -503,13 +503,8 @@ Goes backward if ARG is negative; error if STR not found."
   :config
   (setq eldoc-minor-mode-string ""))
 
-; Functions
-(defun electric-indent-setup ()
-  (setq electric-indent-chars (delq 10 electric-indent-chars)))
-
 ; Hooks
 (add-hook 'emacs-lisp-mode-hook 'eldoc-mode)
-(add-hook 'emacs-lisp-mode-hook 'electric-indent-setup)
 (add-hook 'emacs-lisp-mode-hook 'lispy-mnemonic-mode)
 (add-hook 'emacs-lisp-mode-hook 'prettify-symbols-mode)
 (add-hook 'eval-expression-minibuffer-setup-hook 'eldoc-mode)
