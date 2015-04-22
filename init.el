@@ -834,12 +834,12 @@ Goes backward if ARG is negative; error if STR not found."
            (looking-at "^public\\|private\\|protected\\|class"))
       (recenter-top-bottom 0)))
 
-(defun set-indentation-behavior ()
+(defun java-set-indentation-behavior ()
   (c-set-offset 'arglist-intro '+))
 
 ; Hooks
 (add-hook 'java-mode-hook 'java-goto-class)
-(add-hook 'java-mode-hook 'set-indentation-behavior)
+(add-hook 'java-mode-hook 'java-set-indentation-behavior)
 (add-hook 'window-configuration-change-hook 'java-class-to-top)
 
 
