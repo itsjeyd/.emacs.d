@@ -1315,6 +1315,7 @@ Goes backward if ARG is negative; error if STR not found."
   (setq org-confirm-babel-evaluate nil)
   (setq org-enforce-todo-checkbox-dependencies t)
   (setq org-enforce-todo-dependencies t)
+  (setq org-file-apps '((auto-mode . emacs) ("\\.pdf\\'" . emacs)))
   (setq org-fontify-done-headline t)
   (setq org-log-into-drawer t)
   (setq org-M-RET-may-split-line '((headline . nil) (item . t) (table . t)))
