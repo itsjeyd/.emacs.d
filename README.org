@@ -14,6 +14,7 @@
   | auctex                |
   | auto-complete         |
   | auto-complete-pcmp    |
+  | bind-key              |
   | calfw                 |
   | caps-lock             |
   | cdlatex               |
@@ -48,6 +49,7 @@
   | helm-swoop            |
   | hydra                 |
   | idle-highlight-mode   |
+  | ido-completing-read+  |
   | ido-ubiquitous        |
   | ido-vertical-mode     |
   | iedit                 |
@@ -90,6 +92,7 @@
   | speed-type            |
   | spinner               |
   | sr-speedbar           |
+  | swiper                |
   | synosaurus            |
   | tablist               |
   | ucs-utils             |
