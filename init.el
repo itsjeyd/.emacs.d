@@ -1483,6 +1483,7 @@ Goes backward if ARG is negative; error if STR not found."
   (add-hook 'java-mode-hook (helm-dash-setup "java" ["Android" "Java" "Play_Java"]))
   (add-hook 'LaTeX-mode-hook (helm-dash-setup "latex" ["LaTeX"]))
   (add-hook 'python-mode-hook (helm-dash-setup "python" ["Django" "Python 2" "Python 3"]))
+  (add-hook 'inferior-python-mode-hook (helm-dash-setup "python" ["Django" "Python 2" "Python 3"]))
   (add-hook 'css-mode-hook (helm-dash-setup "css" ["Bootstrap 3" "CSS"]))
   (add-hook 'haml-mode-hook (helm-dash-setup "haml" ["Bootstrap 3" "HTML"]))
   (add-hook 'html-mode-hook (helm-dash-setup "html" ["Bootstrap 3" "HTML"]))
