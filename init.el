@@ -1185,6 +1185,7 @@ Goes backward if ARG is negative; error if STR not found."
   (add-to-list 'org-babel-load-languages '(dot . t) t)
   (add-to-list 'org-babel-load-languages '(ditaa . t) t)
   (add-to-list 'org-babel-load-languages '(plantuml . t) t)
+  (add-to-list 'org-babel-load-languages '(python . t) t)
 
   (org-babel-do-load-languages
    'org-babel-load-languages org-babel-load-languages)
