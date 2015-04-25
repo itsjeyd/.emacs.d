@@ -1031,7 +1031,7 @@ Goes backward if ARG is negative; error if STR not found."
 (use-package ace-jump-mode
   :commands (ace-jump-char-mode ace-jump-word-mode ace-jump-line-mode)
   :config
-  (setq ace-jump-mode-move-keys (number-sequence ?a ?i))
+  (setq ace-jump-mode-move-keys (number-sequence ?a ?z))
   (setq ace-jump-mode-scope 'frame)
   (setq ace-jump-word-mode-use-query-char nil))
 
