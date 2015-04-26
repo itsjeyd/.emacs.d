@@ -1461,7 +1461,7 @@ Goes backward if ARG is negative; error if STR not found."
   (add-hook 'flycheck-mode-hook #'flycheck-setup))
 
 (use-package helm-dash
-  :bind ("C-c d" . helm-dash)
+  :bind ("C-c d" . helm-dash-at-point)
   :init
   ;; Macros
   (defvar-local helm-dash-docsets nil)
