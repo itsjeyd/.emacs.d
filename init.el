@@ -1620,8 +1620,28 @@ Goes backward if ARG is negative; error if STR not found."
     (add-to-list 'flycheck-disabled-checkers 'python-flake8)
     (add-to-list 'flycheck-disabled-checkers 'python-pylint))
 
+  (use-package jedi
+    :config
+
+    (use-package jedi-direx
+      :commands jedi-direx:pop-to-buffer)
+
+    ;; Hooks
+    (add-hook 'jedi-mode-hook #'jedi-direx:setup)
+
+    ;; Key Bindings
+    (bind-key "C-(" #'jedi:get-in-function-call jedi-mode-map)
+    (bind-key "C-)" #'jedi:get-in-function-call jedi-mode-map)
+    (bind-key "C-x D" #'jedi-direx:pop-to-buffer jedi-mode-map)
+
+    ;; Variables
+    (setq jedi:complete-on-dot t)
+    (setq jedi:get-in-function-call-delay 200)
+    (setq jedi:use-shortcuts t))
+
   ;; Hooks
   (add-hook 'python-mode-hook #'flycheck-mode)
+  (add-hook 'python-mode-hook #'jedi:setup)
 
   ;; Variables
   (setq python-fill-docstring-style 'django)

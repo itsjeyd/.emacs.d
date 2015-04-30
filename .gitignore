@@ -8,6 +8,7 @@
 .ido.last
 .mc-lists.el
 .org-id-locations
+.python-environments
 .recentf
 .smex-items
 bookmarks

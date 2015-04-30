@@ -24,6 +24,7 @@
   | dash                  |
   | diminish              |
   | direx                 |
+  | epc                   |
   | epl                   |
   | expand-region         |
   | fill-column-indicator |
@@ -53,6 +54,9 @@
   | ido-ubiquitous        |
   | ido-vertical-mode     |
   | iedit                 |
+  | jedi                  |
+  | jedi-core             |
+  | jedi-direx            |
   | js2-mode              |
   | js2-refactor          |
   | let-alist             |
@@ -79,6 +83,7 @@
   | popup                 |
   | popwin                |
   | projectile            |
+  | python-environment    |
   | queue                 |
   | rainbow-delimiters    |
   | rainbow-mode          |
