@@ -252,6 +252,11 @@
 (use-package direx
   :bind ("C-x C-d" . direx:jump-to-directory)
   :config
+
+  ;; Key Bindings
+  (bind-key "M-n" #'direx:next-sibling-item direx:direx-mode-map)
+  (bind-key "M-p" #'direx:previous-sibling-item direx:direx-mode-map)
+
   (setq direx:closed-icon "▶ ")
   (setq direx:leaf-icon "  ")
   (setq direx:open-icon "▼ "))
