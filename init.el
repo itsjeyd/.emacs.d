@@ -257,6 +257,7 @@
   (bind-key "M-n" #'direx:next-sibling-item direx:direx-mode-map)
   (bind-key "M-p" #'direx:previous-sibling-item direx:direx-mode-map)
 
+  ;; Variables
   (setq direx:closed-icon "▶ ")
   (setq direx:leaf-icon "  ")
   (setq direx:open-icon "▼ "))
