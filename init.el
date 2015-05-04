@@ -254,8 +254,9 @@
   :config
 
   ;; Key Bindings
-  (bind-key "M-n" #'direx:next-sibling-item direx:direx-mode-map)
-  (bind-key "M-p" #'direx:previous-sibling-item direx:direx-mode-map)
+  (bind-keys :map direx:direx-mode-map
+             ("M-n" . direx:next-sibling-item)
+             ("M-p" . direx:previous-sibling-item))
 
   ;; Variables
   (setq direx:closed-icon "▶ ")
@@ -341,11 +342,12 @@
              mc/mark-all-dwim
              set-rectangular-region-anchor)
   :init
-  (bind-key (kbd "e l") 'mc/edit-lines custom-keys-mode-prefix-map)
-  (bind-key (kbd "n l") 'mc/mark-next-like-this custom-keys-mode-prefix-map)
-  (bind-key (kbd "a l") 'mc/mark-all-like-this custom-keys-mode-prefix-map)
-  (bind-key (kbd "a d") 'mc/mark-all-dwim custom-keys-mode-prefix-map)
-  (bind-key (kbd "r a") 'set-rectangular-region-anchor custom-keys-mode-prefix-map))
+  (bind-keys :map custom-keys-mode-prefix-map
+             ("e l" . mc/edit-lines)
+             ("n l" . mc/mark-next-like-this)
+             ("a l" . mc/mark-all-like-this)
+             ("a d" . mc/mark-all-dwim)
+             ("r a" . set-rectangular-region-anchor)))
 
 (use-package iso-transl
   :ensure nil
@@ -1637,9 +1639,10 @@ Goes backward if ARG is negative; error if STR not found."
     (add-hook 'jedi-mode-hook #'jedi-direx:setup)
 
     ;; Key Bindings
-    (bind-key "C-(" #'jedi:get-in-function-call jedi-mode-map)
-    (bind-key "C-)" #'jedi:get-in-function-call jedi-mode-map)
-    (bind-key "C-x D" #'jedi-direx:pop-to-buffer jedi-mode-map)
+    (bind-keys :map jedi-mode-map
+               ("C-(" . jedi:get-in-function-call)
+               ("C-)" . jedi:get-in-function-call)
+               ("C-x D" . jedi-direx:pop-to-buffer))
 
     ;; Variables
     (setq jedi:complete-on-dot t)
