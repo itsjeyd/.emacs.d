@@ -1653,6 +1653,16 @@ Goes backward if ARG is negative; error if STR not found."
   (add-hook 'python-mode-hook #'flycheck-mode)
   (add-hook 'python-mode-hook #'jedi:setup)
 
+  ;; Key Bindings
+  (unbind-key "C-c C-s" python-mode-map)
+  (bind-keys :map python-mode-map
+             ("C-c C-r" . run-python)
+             ("C-c C-s b" . python-shell-send-buffer)
+             ("C-c C-s d" . python-shell-send-defun)
+             ("C-c C-s f" . python-shell-send-file)
+             ("C-c C-s r" . python-shell-send-region)
+             ("C-c C-s s" . python-shell-send-string))
+
   ;; Variables
   (setq python-fill-docstring-style 'django)
   (setq python-shell-interpreter "ipython"))
