@@ -6,7 +6,6 @@
   | 4clojure              |
   | ac-cider              |
   | ac-js2                |
-  | ace-jump-mode         |
   | ace-window            |
   | anchored-transpose    |
   | anzu                  |

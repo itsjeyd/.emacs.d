@@ -492,7 +492,6 @@ Goes backward if ARG is negative; error if STR not found."
 (use-package lispy
   :defer t
   :config
-  (setq avi-background t)
   (setq lispy-avy-keys (number-sequence ?a ?i))
   (setq lispy-avy-style-char 'at)
   (setq lispy-avy-style-paren 'at)
@@ -1034,19 +1033,19 @@ Goes backward if ARG is negative; error if STR not found."
 ;;; Movement ;;;
 ;;;;;;;;;;;;;;;;
 
-(use-package ace-jump-mode
-  :commands (ace-jump-char-mode ace-jump-word-mode ace-jump-line-mode)
+(use-package avy-jump
+  :ensure ace-window
+  :commands (avi-goto-char avi-goto-word-0 avi-goto-line)
   :config
-  (setq ace-jump-mode-move-keys (number-sequence ?a ?z))
-  (setq ace-jump-mode-scope 'frame)
-  (setq ace-jump-word-mode-use-query-char nil))
+  (setq avi-background t)
+  (setq avi-keys (number-sequence ?a ?z)))
 
 ; Hydra
-(defhydra hydra-ace-jump (:color blue)
-  "Ace jump"
-  ("c" ace-jump-char-mode "char")
-  ("w" ace-jump-word-mode "word")
-  ("l" ace-jump-line-mode "line"))
+(defhydra hydra-avy-jump (:color blue)
+  "Avy jump"
+  ("c" avi-goto-char "char")
+  ("w" avi-goto-word-0 "word")
+  ("l" avi-goto-line "line"))
 
 (defhydra hydra-move-by-page ()
   "Move by page"
@@ -1054,7 +1053,7 @@ Goes backward if ARG is negative; error if STR not found."
   ("]" forward-page "next page"))
 
 ; Key Bindings
-(global-set-key (kbd "M-SPC") #'hydra-ace-jump/body)
+(global-set-key (kbd "M-SPC") #'hydra-avy-jump/body)
 (global-set-key (kbd "C-x [") #'hydra-move-by-page/body)
 (global-set-key (kbd "C-x ]") #'hydra-move-by-page/body)
 (global-set-key (kbd "M-g c") #'goto-char)
