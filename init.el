@@ -594,7 +594,10 @@ Goes backward if ARG is negative; error if STR not found."
   (guide-key-mode t)
   (modeline-remove-lighter 'guide-key-mode)
   (setq guide-key/guide-key-sequence
-        '("C-c" "C-c p" "C-x 4" "C-x c" "C-x r" "C-x v" "C-c C-x" "M-s"))
+        '("C-c"
+          "C-c p" "C-x 4" "C-x c" "C-x r" "C-x v"
+          "C-c C-p" "C-c C-r" "C-c C-s" "C-c C-t" "C-c C-x"
+          "M-s"))
   (setq guide-key/popup-window-position 'bottom))
 
 ; Functions
