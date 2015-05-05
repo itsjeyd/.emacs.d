@@ -281,11 +281,12 @@
   (ac-flyspell-workaround)
 
   ;; Advice
-  (defadvice ac-quick-help
-      (around turn-off-line-truncation (&optional force) activate compile)
+  (defun ac-turn-off-line-truncation (orig &optional force)
     (toggle-truncate-lines -1)
-    ad-do-it
+    (funcall orig force)
     (toggle-truncate-lines 1))
+
+  (advice-add 'ac-quick-help :around #'ac-turn-off-line-truncation)
 
   ;; Key Bindings
   (bind-keys :map ac-completing-map
@@ -358,9 +359,10 @@
              ("l" . "⚡" )))
 
 ; Advice
-(defadvice set-mark-command
-  (before record-current-position (arg) activate compile)
+(defun record-current-position (arg)
   (when arg (push-mark)))
+
+(advice-add 'set-mark-command :before #'record-current-position)
 
 (defun goto-beginning-of-word (arg)
   (unless (or (looking-back "\\b")
@@ -810,16 +812,16 @@ Goes backward if ARG is negative; error if STR not found."
   (let ((default-background-color (face-attribute 'default :background)))
     (set-face-attribute 'fringe nil :background default-background-color)))
 
-(defadvice load-theme
-  (before disable-before-load (theme &optional no-confirm no-enable) activate)
+(defun disable-custom-themes (theme &optional no-confirm no-enable)
   (mapc 'disable-theme custom-enabled-themes))
 
-(defadvice load-theme
-  (after load-custom-theme-settings
-         (theme &optional no-confirm no-enable)
-         activate)
+(advice-add 'load-theme :before #'disable-custom-themes)
+
+(defun load-custom-theme-settings (theme &optional no-confirm no-enable)
   (customize-theme)
   (customize-enabled-theme))
+
+(advice-add 'load-theme :after #'load-custom-theme-settings)
 
 (load-theme 'sanityinc-tomorrow-eighties t)
 
@@ -1157,12 +1159,12 @@ Goes backward if ARG is negative; error if STR not found."
     :defer t)
 
   ;; Advice
-  (defadvice org-display-inline-images
-      (around handle-openwith
-              (&optional include-linked refresh beg end) activate compile)
+  (defun org-handle-openwith (orig &optional include-linked refresh beg end)
     (openwith-mode -1)
-    ad-do-it
+    (funcall orig include-linked refresh beg end)
     (openwith-mode 1))
+
+  (advice-add 'org-display-inline-images :around #'org-handle-openwith)
 
   (defun org-add-tags (property value)
     (let* ((props (org-entry-properties))
@@ -1418,19 +1420,19 @@ Goes backward if ARG is negative; error if STR not found."
     :commands pdf-tools-install
     :config
     ;; Advice
-    (defadvice pdf-outline
-        (before prepare-windows
-                (&optional buffer no-select-window-p) activate compile)
+    (defun pdf-outline-prepare-windows (&optional buffer no-select-window-p)
       (delete-other-windows)
       (split-window-right)
       (other-window 1))
 
-    (defadvice pdf-outline
-        (after shrink-outline-buffer-horizontally
-               (&optional buffer no-select-window-p) activate compile)
+    (advice-add 'pdf-outline :before #'pdf-outline-prepare-windows)
+
+    (defun pdf-outline-adjust-window (&optional buffer no-select-window-p)
       (let ((current-width (window-total-width)))
         (when (> current-width 50)
           (shrink-window-horizontally (- current-width 50)))))
+
+    (advice-add 'pdf-outline :after #'pdf-outline-adjust-window)
 
     ;; Variables
     (setq pdf-info-restart-process-p t)
@@ -1682,27 +1684,22 @@ Goes backward if ARG is negative; error if STR not found."
   (recentf-mode t)
 
   ;; Advice
-  (defadvice recentf-keep-default-predicate
-      (around recentf-discard-autoloads (file) activate compile)
+  (defun recentf-discard-autoloads (orig file)
     (if (not (string-match-p "-autoloads" (file-name-nondirectory file)))
-        ad-do-it
+        (funcall orig file)
       nil))
 
-  (defadvice recentf-track-opened-file
-      (around set-buffer-file-name activate compile)
-    (if (eq major-mode 'dired-mode)
-        (progn (setq buffer-file-name default-directory)
-               ad-do-it
-               (setq buffer-file-name nil))
-      ad-do-it))
+  (advice-add 'recentf-keep-default-predicate :around #'recentf-discard-autoloads)
 
-  (defadvice recentf-track-closed-file
-      (around set-buffer-file-name activate compile)
+  (defun recentf-set-buffer-file-name (orig)
     (if (eq major-mode 'dired-mode)
         (progn (setq buffer-file-name default-directory)
-               ad-do-it
+               (funcall orig)
                (setq buffer-file-name nil))
-      ad-do-it))
+      (funcall orig)))
+
+  (advice-add 'recentf-track-opened-file :around #'recentf-set-buffer-file-name)
+  (advice-add 'recentf-track-closed-file :around #'recentf-set-buffer-file-name)
 
   ;; Commands
   (defun ido-recentf-open ()
@@ -1769,19 +1766,19 @@ Goes backward if ARG is negative; error if STR not found."
              ("s-p" . smartscan-symbol-go-backward)))
 
 ; Advice
-(defadvice occur (around occur-rename-buffer-after-search-string
-                         (regexp &optional nlines)
-                         activate compile)
-  ad-do-it
+(defun occur-rename-buffer-after-search-string (orig regexp &optional nlines)
+  (funcall orig regexp nlines)
   (with-current-buffer "*Occur*"
     (rename-buffer (format "*Occur-%s*" regexp))))
 
-(defadvice rgrep (around rgrep-rename-buffer-after-search-string
-                         (regexp &optional files dir confirm)
-                         activate compile)
-  ad-do-it
+(advice-add 'occur :around #'occur-rename-buffer-after-search-string)
+
+(defun rgrep-rename-buffer-after-search-string (orig regexp &optional files dir confirm)
+  (funcall orig regexp files dir confirm)
   (with-current-buffer grep-last-buffer
     (rename-buffer (format "*grep-%s*" regexp))))
+
+(advice-add 'rgrep :around #'rgrep-rename-buffer-after-search-string)
 
 ; Commands
 (defun toggle-lazy-highlight-cleanup ()
@@ -2198,10 +2195,10 @@ window that will be added to the current window layout."
 (use-package flyspell
   :commands (flyspell-mode flyspell-prog-mode)
   :config
-  (defadvice ispell-pdict-save
-      (after flyspell-buffer-again (&optional no-query force-save)
-             activate compile)
-    (flyspell-buffer)))
+  (defun flyspell-buffer-again (&optional no-query force-save)
+    (flyspell-buffer))
+
+  (advice-add 'ispell-pdict-save :after #'flyspell-buffer-again))
 
 (use-package markdown-mode
   :commands markdown-mode
