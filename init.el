@@ -756,7 +756,6 @@ Goes backward if ARG is negative; error if STR not found."
     (set-face-attribute 'linum nil :background default-background-color)))
 
 (use-package rainbow-delimiters
-  :commands rainbow-delimiters-mode
   :config
   (add-hook 'org-mode-hook #'rainbow-delimiters-mode)
   (add-hook 'prog-mode-hook #'rainbow-delimiters-mode))
