@@ -1758,6 +1758,7 @@ Goes backward if ARG is negative; error if STR not found."
 (use-package occur
   :ensure nil
   :commands occur
+  :functions occur-rename-buffer-after-search-string
   :config
   ;; Advice
   (defun occur-rename-buffer-after-search-string
