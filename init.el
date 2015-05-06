@@ -270,9 +270,7 @@
 ;;;;;;;;;;;;;;;
 
 (use-package anchored-transpose
-  :commands anchored-transpose
-  :init
-  (bind-key "a t" #'anchored-transpose custom-keys-mode-prefix-map))
+  :commands anchored-transpose)
 
 (use-package auto-complete-config
   :ensure auto-complete
@@ -336,19 +334,7 @@
   (advice-add 'move-text-up :after #'follow-line))
 
 (use-package multiple-cursors
-  :commands (mc/edit-lines
-             mc/mark-next-like-this
-             mc/mark-previous-like-this
-             mc/mark-all-like-this
-             mc/mark-all-dwim
-             set-rectangular-region-anchor)
-  :init
-  (bind-keys :map custom-keys-mode-prefix-map
-             ("e l" . mc/edit-lines)
-             ("n l" . mc/mark-next-like-this)
-             ("a l" . mc/mark-all-like-this)
-             ("a d" . mc/mark-all-dwim)
-             ("r a" . set-rectangular-region-anchor)))
+  :defer t)
 
 (use-package iso-transl
   :ensure nil
@@ -464,10 +450,83 @@ Goes backward if ARG is negative; error if STR not found."
   ("u" move-text-up "up")
   ("d" move-text-down "down"))
 
+(defhydra hydra-mc ()
+  "MC"
+  ("n" mc/mark-next-like-this "next")
+  ("p" mc/mark-previous-like-this "prev")
+  ("s" hydra-mc-symbols/body "symbols" :color blue)
+  ("w" hydra-mc-words/body "words" :color blue)
+  ("S" hydra-mc-skip/body "skip" :color blue)
+  ("U" hydra-mc-unmark/body "unmark" :color blue)
+  ("o" hydra-mc-operate/body "operate" :color blue)
+  ("C-'" mc-hide-unmatched-lines-mode "hide unmatched"))
+
+(defhydra hydra-mc-symbols ()
+  "MC (symbols)"
+  ("n" mc/mark-next-symbol-like-this "next")
+  ("p" mc/mark-previous-symbol-like-this "prev")
+  ("q" hydra-mc/body "exit" :color blue))
+
+(defhydra hydra-mc-words ()
+  "MC (words)"
+  ("n" mc/mark-next-word-like-this "next")
+  ("p" mc/mark-previous-word-like-this "prev")
+  ("q" hydra-mc/body "exit" :color blue))
+
+(defhydra hydra-mc-skip ()
+  "MC (skip)"
+  ("n" mc/skip-to-next-like-this "next")
+  ("p" mc/skip-to-previous-like-this "prev")
+  ("q" hydra-mc/body "exit" :color blue))
+
+(defhydra hydra-mc-unmark ()
+  "MC (unmark)"
+  ("n" mc/unmark-next-like-this "next")
+  ("p" mc/unmark-previous-like-this "prev")
+  ("q" hydra-mc/body "exit" :color blue))
+
+(defhydra hydra-mc-operate ()
+  "MC (operate)"
+  ("n" mc/insert-numbers "number")
+  ("s" mc/sort-regions "sort")
+  ("r" mc/reverse-regions "reverse")
+  ("q" hydra-mc/body "exit" :color blue))
+
+(defhydra hydra-mc-all ()
+  "MC (all)"
+  ("d" mc/mark-all-dwim "dwim")
+  ("f" mc/mark-all-like-this-in-defun "defun")
+  ("l" mc/mark-all-like-this "like this")
+  ("r" mc/mark-all-in-region "region")
+  ("R" mc/mark-all-in-region-regexp "region (regexp)")
+  ("s" hydra-mc-symbols-all/body "symbols" :color blue)
+  ("w" hydra-mc-words-all/body "words" :color blue))
+
+(defhydra hydra-mc-symbols-all ()
+  "MC (all symbols)"
+  ("l" mc/mark-all-symbols-like-this "like this")
+  ("f" mc/mark-all-symbols-like-this-in-defun "defun")
+  ("q" hydra-mc-all/body "exit" :color blue))
+
+(defhydra hydra-mc-words-all ()
+  "MC (all words)"
+  ("l" mc/mark-all-words-like-this "like this")
+  ("f" mc/mark-all-words-like-this-in-defun "defun")
+  ("q" hydra-mc-all/body "exit" :color blue))
+
+(defhydra hydra-mc-edit (:color blue)
+  "MC (edit)"
+  ("l" mc/edit-lines "lines")
+  ("b" mc/edit-beginnings-of-lines "beginnings")
+  ("e" mc/edit-ends-of-lines "ends"))
+
 ; Key Bindings
 (global-set-key (kbd "C-w") #'kill-region-with-arg)
 (global-set-key (kbd "M-w") #'kill-ring-save-with-arg)
-(define-key custom-keys-mode-prefix-map (kbd "m") #'mark-line)
+(global-set-key (kbd "C-c m") #'mark-line)
+(define-key custom-keys-mode-prefix-map (kbd "m") #'hydra-mc/body)
+(define-key custom-keys-mode-prefix-map (kbd "a") #'hydra-mc-all/body)
+(define-key custom-keys-mode-prefix-map (kbd "e") #'hydra-mc-edit/body)
 (define-key custom-keys-mode-prefix-map (kbd "u") #'hydra-move-text/body)
 (define-key custom-keys-mode-prefix-map (kbd "d") #'hydra-move-text/body)
 (define-key custom-keys-mode-prefix-map (kbd "z") #'zap-to-string)
@@ -2255,7 +2314,7 @@ With prefix P, create local abbrev. Otherwise it will be global."
 
 ; Key Bindings
 (global-set-key (kbd "C-c S") #'hydra-synosaurus/body)
-(define-key custom-keys-mode-prefix-map (kbd "a a") #'ispell-word-then-abbrev)
+(define-key custom-keys-mode-prefix-map (kbd "s a") #'ispell-word-then-abbrev)
 
 ; Variables
 (setq abbrev-file-name "~/.emacs.d/.abbrev_defs")
