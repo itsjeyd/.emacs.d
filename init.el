@@ -765,12 +765,6 @@ Goes backward if ARG is negative; error if STR not found."
     (push '(disable exact "unhighlight-regexp") ido-ubiquitous-command-overrides)
     (push '(disable prefix "sclang-dump-") ido-ubiquitous-command-overrides))
 
-  (use-package smex
-    :bind (("M-x" . smex)
-           ("<menu>" . smex-major-mode-commands))
-    :config
-    (setq smex-save-file "~/.emacs.d/.smex-items"))
-
   (ido-mode 'both)
   (ido-everywhere 1)
 
@@ -795,6 +789,12 @@ Goes backward if ARG is negative; error if STR not found."
   (setq ido-save-directory-list-file "~/.emacs.d/.ido.last")
   (setq ido-use-filename-at-point 'guess)
   (setq ido-use-virtual-buffers t))
+
+(use-package smex
+  :bind (("M-x" . smex)
+         ("<menu>" . smex-major-mode-commands))
+  :config
+  (setq smex-save-file "~/.emacs.d/.smex-items"))
 
 ; Variables
 (setq gc-cons-threshold 7000000)
