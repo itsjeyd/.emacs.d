@@ -1,0 +1,5 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: advice-add
+# key: adv
+# --
+(advice-add '${1:symbol} :${2:where} #'${3:function})$0
