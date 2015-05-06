@@ -1776,6 +1776,18 @@ Goes backward if ARG is negative; error if STR not found."
   (define-key occur-mode-map "n" #'occur-next)
   (define-key occur-mode-map "p" #'occur-prev))
 
+(use-package grep
+  :ensure nil
+  :bind ("C-c g" . rgrep)
+  :config
+  (defun rgrep-rename-buffer-after-search-string
+      (orig regexp &optional files dir confirm)
+    (funcall orig regexp files dir confirm)
+    (with-current-buffer grep-last-buffer
+      (rename-buffer (format "*grep-%s*" regexp))))
+
+  (advice-add 'rgrep :around #'rgrep-rename-buffer-after-search-string))
+
 (use-package smartscan
   :config
   (global-smartscan-mode t)
@@ -1784,13 +1796,6 @@ Goes backward if ARG is negative; error if STR not found."
   (bind-keys :map smartscan-map
              ("s-n" . smartscan-symbol-go-forward)
              ("s-p" . smartscan-symbol-go-backward)))
-
-(defun rgrep-rename-buffer-after-search-string (orig regexp &optional files dir confirm)
-  (funcall orig regexp files dir confirm)
-  (with-current-buffer grep-last-buffer
-    (rename-buffer (format "*grep-%s*" regexp))))
-
-(advice-add 'rgrep :around #'rgrep-rename-buffer-after-search-string)
 
 ; Commands
 (defun toggle-lazy-highlight-cleanup ()
@@ -1813,7 +1818,6 @@ char if successful."
     (isearch-delete-char)))
 
 ; Key Bindings
-(global-set-key (kbd "C-c g") #'rgrep)
 (define-key isearch-mode-map (kbd "<backspace>") #'isearch-hungry-delete)
 (define-key isearch-mode-map (kbd "M-s a") #'avi-isearch)
 
