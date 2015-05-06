@@ -748,6 +748,7 @@ Goes backward if ARG is negative; error if STR not found."
 ;;;;;;;;;;;
 
 (use-package ido
+  :commands (ido-dired ido-find-file ido-switch-buffer)
   :config
 
   (use-package flx-ido
