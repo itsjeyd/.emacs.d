@@ -205,6 +205,33 @@
 (use-package dired
   :ensure nil
   :config
+
+  (use-package peep-dired
+    :commands peep-dired
+    :config
+    (modeline-set-lighter 'peep-dired " 👁")
+
+    ;; Functions
+    (defun turn-off-openwith-mode ()
+      (make-local-variable 'openwith-mode)
+      (if (not peep-dired)
+          (openwith-mode 1)
+        (openwith-mode -1)))
+
+    ;; Hooks
+    (add-hook 'peep-dired-hook #'turn-off-openwith-mode)
+
+    ;; Key Bindings
+    (bind-keys :map peep-dired-mode-map
+               ("n" . peep-dired-next-file)
+               ("p" . peep-dired-prev-file)
+               ("K" . peep-dired-kill-buffers-without-window)
+               ("C-n" . dired-next-line)
+               ("C-p" . dired-previous-line))
+
+    ;; Variables
+    (add-to-list 'peep-dired-ignored-extensions "mp3"))
+
   ;; Commands
   (defun dired-jump-to-top ()
     (interactive)
