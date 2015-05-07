@@ -1853,27 +1853,6 @@ Goes backward if ARG is negative; error if STR not found."
   :config
   (bind-key "M-h" #'helm-swoop-from-isearch isearch-mode-map))
 
-(use-package occur
-  :ensure nil
-  :commands occur
-  :functions occur-rename-buffer-after-search-string
-  :config
-  ;; Advice
-  (defun occur-rename-buffer-after-search-string
-      (orig regexp &optional nlines)
-    (funcall orig regexp nlines)
-    (with-current-buffer "*Occur*"
-      (rename-buffer (format "*Occur-%s*" regexp))))
-
-  (advice-add 'occur :around #'occur-rename-buffer-after-search-string)
-
-  ;; Hooks
-  (add-hook 'occur-mode-hook #'next-error-follow-minor-mode)
-
-  ;; Key Bindings
-  (define-key occur-mode-map "n" #'occur-next)
-  (define-key occur-mode-map "p" #'occur-prev))
-
 (use-package grep
   :ensure nil
   :bind ("C-c g" . rgrep)
@@ -1895,6 +1874,15 @@ Goes backward if ARG is negative; error if STR not found."
              ("s-n" . smartscan-symbol-go-forward)
              ("s-p" . smartscan-symbol-go-backward)))
 
+;; Advice
+(defun occur-rename-buffer-after-search-string
+    (orig regexp &optional nlines)
+  (funcall orig regexp nlines)
+  (with-current-buffer "*Occur*"
+    (rename-buffer (format "*Occur-%s*" regexp))))
+
+(advice-add 'occur :around #'occur-rename-buffer-after-search-string)
+
 ; Commands
 (defun toggle-lazy-highlight-cleanup ()
   "Toggle `lazy-highlight-cleanup'.
@@ -1915,9 +1903,14 @@ char if successful."
         (isearch-delete-char))
     (isearch-delete-char)))
 
+;; Hooks
+(add-hook 'occur-mode-hook #'next-error-follow-minor-mode)
+
 ; Key Bindings
 (define-key isearch-mode-map (kbd "<backspace>") #'isearch-hungry-delete)
 (define-key isearch-mode-map (kbd "M-s a") #'avi-isearch)
+(define-key occur-mode-map "n" #'occur-next)
+(define-key occur-mode-map "p" #'occur-prev)
 
 ; Variables
 (setq isearch-allow-scroll t)
