@@ -75,6 +75,7 @@
   | paradox               |
   | pcache                |
   | pdf-tools             |
+  | peep-dired            |
   | persistent-soft       |
   | pkg-info              |
   | plantuml-mode         |
