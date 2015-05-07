@@ -336,6 +336,13 @@
 (use-package multiple-cursors
   :defer 5
   :config
+
+  (use-package mc-hide-unmatched-lines-mode
+    :ensure multiple-cursors
+    :commands mc-hide-unmatched-lines-mode
+    :config
+    (setq hum/lines-to-expand 1))
+
   ;; Hydra
   (defhydra hydra-mc ()
     "MC"
