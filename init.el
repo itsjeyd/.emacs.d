@@ -1751,6 +1751,20 @@ Goes backward if ARG is negative; error if STR not found."
     (setq jedi:get-in-function-call-delay 200)
     (setq jedi:use-shortcuts t))
 
+  (use-package pony-mode
+    :commands pony-mode
+    :config
+    ;; Commands
+    (defun pony-shell-switch-to-shell ()
+      (interactive)
+      (let ((pony-shell-buffer (get-buffer "*ponysh*")))
+        (if pony-shell-buffer
+            (pop-to-buffer pony-shell-buffer)
+          (call-interactively #'pony-shell))))
+
+    ;; Key Bindings
+    (bind-key "C-c C-p s" #'pony-shell-switch-to-shell pony-minor-mode-map))
+
   ;; Hooks
   (add-hook 'python-mode-hook #'flycheck-mode)
   (add-hook 'python-mode-hook #'jedi:setup)
