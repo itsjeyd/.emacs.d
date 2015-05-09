@@ -13,6 +13,7 @@
   | auctex                |
   | auto-complete         |
   | auto-complete-pcmp    |
+  | avy                   |
   | bind-key              |
   | calfw                 |
   | caps-lock             |

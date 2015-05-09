@@ -1138,18 +1138,18 @@ Goes backward if ARG is negative; error if STR not found."
 ;;;;;;;;;;;;;;;;
 
 (use-package avy-jump
-  :ensure ace-window
-  :commands (avi-goto-char avi-goto-word-0 avi-goto-line)
+  :ensure avy
+  :commands (avy-goto-char avy-goto-word-0 avy-goto-line)
   :config
-  (setq avi-background t)
-  (setq avi-keys (number-sequence ?a ?z)))
+  (setq avy-background t)
+  (setq avy-keys (number-sequence ?a ?z)))
 
 ; Hydra
 (defhydra hydra-avy-jump (:color blue)
   "Avy jump"
-  ("c" avi-goto-char "char")
-  ("w" avi-goto-word-0 "word")
-  ("l" avi-goto-line "line"))
+  ("c" avy-goto-char "char")
+  ("w" avy-goto-word-0 "word")
+  ("l" avy-goto-line "line"))
 
 (defhydra hydra-move-by-page ()
   "Move by page"
@@ -1922,7 +1922,7 @@ char if successful."
 
 ; Key Bindings
 (define-key isearch-mode-map (kbd "<backspace>") #'isearch-hungry-delete)
-(define-key isearch-mode-map (kbd "M-s a") #'avi-isearch)
+(define-key isearch-mode-map (kbd "M-s a") #'avy-isearch)
 (define-key occur-mode-map "n" #'occur-next)
 (define-key occur-mode-map "p" #'occur-prev)
 
