@@ -1142,6 +1142,8 @@ Goes backward if ARG is negative; error if STR not found."
   :commands (avy-goto-char avy-goto-word-0 avy-goto-line)
   :config
   (setq avy-background t)
+  (setq avy-goto-char-style 'at)
+  (setq avy-goto-word-style 'at)
   (setq avy-keys (number-sequence ?a ?z)))
 
 ; Hydra
