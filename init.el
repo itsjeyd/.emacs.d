@@ -1139,7 +1139,7 @@ Goes backward if ARG is negative; error if STR not found."
 
 (use-package avy-jump
   :ensure avy
-  :commands (avy-goto-char avy-goto-word-0 avy-goto-line)
+  :defer t
   :config
   (setq avy-background t)
   (setq avy-goto-char-style 'at)
@@ -1151,7 +1151,10 @@ Goes backward if ARG is negative; error if STR not found."
   "Avy jump"
   ("c" avy-goto-char "char")
   ("w" avy-goto-word-0 "word")
-  ("l" avy-goto-line "line"))
+  ("l" avy-goto-line "line")
+  ("s" avy-goto-subword-0 "subword")
+  ("C" goto-char "goto char")
+  ("L" goto-line "goto line"))
 
 (defhydra hydra-move-by-page ()
   "Move by page"
@@ -1159,11 +1162,9 @@ Goes backward if ARG is negative; error if STR not found."
   ("]" forward-page "next page"))
 
 ; Key Bindings
-(global-set-key (kbd "M-SPC") #'hydra-avy-jump/body)
+(global-set-key (kbd "M-g") #'hydra-avy-jump/body)
 (global-set-key (kbd "C-x [") #'hydra-move-by-page/body)
 (global-set-key (kbd "C-x ]") #'hydra-move-by-page/body)
-(global-set-key (kbd "M-g c") #'goto-char)
-(global-set-key (kbd "M-g l") #'goto-line)
 
 
 
