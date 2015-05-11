@@ -1141,6 +1141,25 @@ Goes backward if ARG is negative; error if STR not found."
   :ensure avy
   :defer t
   :config
+  ;; Commands
+  (defun avy-move-region ()
+    "Select two lines and move the text between them here."
+    (interactive)
+    (avy--with-avy-keys avy-move-region
+      (let ((beg (car (avy--line)))
+            (end (car (avy--line)))
+            (pad (if (bolp) "" "\n")))
+        (move-beginning-of-line nil)
+        (save-excursion
+          (save-excursion
+            (goto-char end)
+            (kill-region beg (line-end-position))
+            (delete-char -1))
+          (insert
+           (current-kill 0)
+           pad)))))
+
+  ;; Variables
   (setq avy-background t)
   (setq avy-goto-char-style 'at)
   (setq avy-goto-word-style 'at)
@@ -1156,6 +1175,16 @@ Goes backward if ARG is negative; error if STR not found."
   ("C" goto-char "goto char")
   ("L" goto-line "goto line"))
 
+(defhydra hydra-avy-copy (:color blue)
+  "Avy copy"
+  ("l" avy-copy-line "line")
+  ("r" avy-copy-region "region"))
+
+(defhydra hydra-avy-move (:color blue)
+  "Avy move"
+  ("l" avy-move-line "line")
+  ("r" avy-move-region "region"))
+
 (defhydra hydra-move-by-page ()
   "Move by page"
   ("[" backward-page "prev page")
@@ -1163,6 +1192,8 @@ Goes backward if ARG is negative; error if STR not found."
 
 ; Key Bindings
 (global-set-key (kbd "M-g") #'hydra-avy-jump/body)
+(global-set-key (kbd "M-s C-w") #'hydra-avy-move/body)
+(global-set-key (kbd "M-s M-w") #'hydra-avy-copy/body)
 (global-set-key (kbd "C-x [") #'hydra-move-by-page/body)
 (global-set-key (kbd "C-x ]") #'hydra-move-by-page/body)
 
