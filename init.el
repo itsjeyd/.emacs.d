@@ -1137,8 +1137,7 @@ Goes backward if ARG is negative; error if STR not found."
 ;;; Movement ;;;
 ;;;;;;;;;;;;;;;;
 
-(use-package avy-jump
-  :ensure avy
+(use-package avy
   :defer t
   :config
   ;; Commands
