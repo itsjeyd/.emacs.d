@@ -1426,6 +1426,7 @@ Goes backward if ARG is negative; error if STR not found."
   (add-hook 'org-mode-hook #'org-add-electric-pairs)
   (add-hook 'org-mode-hook #'org-toggle-blocks)
   (add-hook 'org-mode-hook #'turn-on-auto-fill)
+  (add-hook 'org-mode-hook #'which-function-mode)
 
   ;; Key Bindings
   (defvar org-mode-extra-keys-map (lookup-key org-mode-map (kbd "C-c C-x")))
@@ -1720,11 +1721,11 @@ Goes backward if ARG is negative; error if STR not found."
 (add-hook 'java-mode-hook #'tim/enable-electric-semicolon)
 (add-hook 'js2-mode-hook #'tim/enable-electric-semicolon)
 (add-hook 'prog-mode-hook #'subword-setup)
+(add-hook 'prog-mode-hook #'which-function-mode)
 
 ; Variables
 (setq-default indent-tabs-mode nil)
 (show-paren-mode t)
-(which-function-mode 1)
 
 
 
