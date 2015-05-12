@@ -1797,6 +1797,9 @@ Goes backward if ARG is negative; error if STR not found."
     ;; Key Bindings
     (bind-key "C-c C-p s" #'pony-shell-switch-to-shell pony-minor-mode-map))
 
+  (use-package wenote
+    :ensure nil)
+
   ;; Hooks
   (add-hook 'python-mode-hook #'flycheck-mode)
   (add-hook 'python-mode-hook #'jedi:setup)
@@ -2211,14 +2214,6 @@ With a prefix arg, clear selective display."
 
 (use-package web-beautify
   :commands (web-beautify-css web-beautify-html web-beautify-js))
-
-
-
-;;;;;;;;;;;;;;
-;;; Wenote ;;;
-;;;;;;;;;;;;;;
-
-(load "wenote")
 
 
 

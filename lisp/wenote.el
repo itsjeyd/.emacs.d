@@ -1,5 +1,6 @@
-; Custom elisp for wenote development.
+;;; wenote.el --- Custom elisp for wenote development.
 
+;;;###autoload
 (defun hamlpy-regenerate-html ()
   "Run hamlpy on file in current buffer.
 
@@ -38,3 +39,5 @@
         ".html"))))
 
 (add-hook 'after-save-hook 'hamlpy-regenerate-html)
+
+(provide 'wenote)
