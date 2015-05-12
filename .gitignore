@@ -15,12 +15,13 @@ bookmarks
 history
 tramp
 custom.el
+lisp/profile-dotemacs.el
 
 # Folders
 elpa/
 ensime-servers/
 image-dired/
-lisp/git-wip-timemachine
+lisp/git-wip-timemachine/
 lisp/lispy-mnemonic/
 lisp/mark-lines/
 speed-type/
