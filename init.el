@@ -1158,40 +1158,43 @@ Goes backward if ARG is negative; error if STR not found."
            (current-kill 0)
            pad)))))
 
+  ;; Hydra
+  (defhydra hydra-avy-jump (:color blue)
+    "Avy jump"
+    ("c" avy-goto-char "char")
+    ("w" avy-goto-word-0 "word")
+    ("l" avy-goto-line "line")
+    ("s" avy-goto-subword-0 "subword")
+    ("C" goto-char "goto char")
+    ("L" goto-line "goto line"))
+
+  (defhydra hydra-avy-copy (:color blue)
+    "Avy copy"
+    ("l" avy-copy-line "line")
+    ("r" avy-copy-region "region"))
+
+  (defhydra hydra-avy-move (:color blue)
+    "Avy move"
+    ("l" avy-move-line "line")
+    ("r" avy-move-region "region"))
+
+  (defhydra hydra-move-by-page ()
+    "Move by page"
+    ("[" backward-page "prev page")
+    ("]" forward-page "next page"))
+
+  ;; Key Bindings
+  (bind-key "M-g" #'hydra-avy-jump/body)
+  (bind-keys :map custom-keys-mode-prefix-map
+             ("C-w" . hydra-avy-move/body)
+             ("M-w" . hydra-avy-copy/body))
+  (bind-key "M-s a" #'avy-isearch isearch-mode-map)
+
   ;; Variables
   (setq avy-background t)
   (setq avy-keys (number-sequence ?a ?z))
   (setq avy-style 'at))
 
-; Hydra
-(defhydra hydra-avy-jump (:color blue)
-  "Avy jump"
-  ("c" avy-goto-char "char")
-  ("w" avy-goto-word-0 "word")
-  ("l" avy-goto-line "line")
-  ("s" avy-goto-subword-0 "subword")
-  ("C" goto-char "goto char")
-  ("L" goto-line "goto line"))
-
-(defhydra hydra-avy-copy (:color blue)
-  "Avy copy"
-  ("l" avy-copy-line "line")
-  ("r" avy-copy-region "region"))
-
-(defhydra hydra-avy-move (:color blue)
-  "Avy move"
-  ("l" avy-move-line "line")
-  ("r" avy-move-region "region"))
-
-(defhydra hydra-move-by-page ()
-  "Move by page"
-  ("[" backward-page "prev page")
-  ("]" forward-page "next page"))
-
-; Key Bindings
-(global-set-key (kbd "M-g") #'hydra-avy-jump/body)
-(global-set-key (kbd "M-s C-w") #'hydra-avy-move/body)
-(global-set-key (kbd "M-s M-w") #'hydra-avy-copy/body)
 (global-set-key (kbd "C-x [") #'hydra-move-by-page/body)
 (global-set-key (kbd "C-x ]") #'hydra-move-by-page/body)
 
@@ -1957,7 +1960,6 @@ char if successful."
 
 ; Key Bindings
 (define-key isearch-mode-map (kbd "<backspace>") #'isearch-hungry-delete)
-(define-key isearch-mode-map (kbd "M-s a") #'avy-isearch)
 (define-key occur-mode-map "n" #'occur-next)
 (define-key occur-mode-map "p" #'occur-prev)
 
