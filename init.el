@@ -800,6 +800,45 @@ Goes backward if ARG is negative; error if STR not found."
     (push '(disable exact "unhighlight-regexp") ido-ubiquitous-command-overrides)
     (push '(disable prefix "sclang-dump-") ido-ubiquitous-command-overrides))
 
+  (use-package recentf
+    :init (setq recentf-save-file "~/.emacs.d/.recentf")
+    :config
+    (recentf-mode t)
+
+    ;; Advice
+    (defun recentf-discard-autoloads (orig file)
+      (if (not (string-match-p "-autoloads" (file-name-nondirectory file)))
+          (funcall orig file)
+        nil))
+
+    (advice-add 'recentf-keep-default-predicate :around #'recentf-discard-autoloads)
+
+    (defun recentf-set-buffer-file-name (orig)
+      (if (eq major-mode 'dired-mode)
+          (progn (setq buffer-file-name default-directory)
+                 (funcall orig)
+                 (setq buffer-file-name nil))
+        (funcall orig)))
+
+    (advice-add 'recentf-track-opened-file :around #'recentf-set-buffer-file-name)
+    (advice-add 'recentf-track-closed-file :around #'recentf-set-buffer-file-name)
+
+    ;; Commands
+    (defun ido-recentf-open ()
+      "Use `ido-completing-read' to \\[find-file] a recent file."
+      (interactive)
+      (if (find-file (ido-completing-read "Find recent file: " recentf-list))
+          (message "Opening file...")
+        (message "Aborting")))
+
+    ;; Key Bindings
+    (bind-key "C-x C-r" #'ido-recentf-open)
+
+    ;; Variables
+    (add-to-list 'recentf-used-hooks
+                 '(dired-after-readin-hook recentf-track-opened-file))
+    (setq recentf-max-saved-items 150))
+
   (ido-mode 'both)
   (ido-everywhere 1)
 
@@ -1821,51 +1860,6 @@ Goes backward if ARG is negative; error if STR not found."
   ;; Variables
   (setq python-fill-docstring-style 'django)
   (setq python-shell-interpreter "ipython"))
-
-
-
-;;;;;;;;;;;;;;;
-;;; Recentf ;;;
-;;;;;;;;;;;;;;;
-
-(use-package recentf
-  :init (setq recentf-save-file "~/.emacs.d/.recentf")
-  :config
-  (recentf-mode t)
-
-  ;; Advice
-  (defun recentf-discard-autoloads (orig file)
-    (if (not (string-match-p "-autoloads" (file-name-nondirectory file)))
-        (funcall orig file)
-      nil))
-
-  (advice-add 'recentf-keep-default-predicate :around #'recentf-discard-autoloads)
-
-  (defun recentf-set-buffer-file-name (orig)
-    (if (eq major-mode 'dired-mode)
-        (progn (setq buffer-file-name default-directory)
-               (funcall orig)
-               (setq buffer-file-name nil))
-      (funcall orig)))
-
-  (advice-add 'recentf-track-opened-file :around #'recentf-set-buffer-file-name)
-  (advice-add 'recentf-track-closed-file :around #'recentf-set-buffer-file-name)
-
-  ;; Commands
-  (defun ido-recentf-open ()
-    "Use `ido-completing-read' to \\[find-file] a recent file."
-    (interactive)
-    (if (find-file (ido-completing-read "Find recent file: " recentf-list))
-        (message "Opening file...")
-      (message "Aborting")))
-
-  ;; Key Bindings
-  (bind-key "C-x C-r" #'ido-recentf-open)
-
-  ;; Variables
-  (add-to-list 'recentf-used-hooks
-               '(dired-after-readin-hook recentf-track-opened-file))
-  (setq recentf-max-saved-items 150))
 
 
 
