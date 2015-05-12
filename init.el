@@ -1161,9 +1161,8 @@ Goes backward if ARG is negative; error if STR not found."
 
   ;; Variables
   (setq avy-background t)
-  (setq avy-goto-char-style 'at)
-  (setq avy-goto-word-style 'at)
-  (setq avy-keys (number-sequence ?a ?z)))
+  (setq avy-keys (number-sequence ?a ?z))
+  (setq avy-style 'at))
 
 ; Hydra
 (defhydra hydra-avy-jump (:color blue)
