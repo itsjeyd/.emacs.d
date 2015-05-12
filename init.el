@@ -2139,22 +2139,22 @@ char if successful."
     (setq-local git-gutter-fr+-side 'left-fringe))
 
   ;; Hooks
-  (add-hook 'git-gutter+-mode-hook #'git-gutter+-setup))
+  (add-hook 'git-gutter+-mode-hook #'git-gutter+-setup)
 
-; Hydra
-(defhydra hydra-git-gutter+ (:color pink)
-  "Git Gutter"
-  ("n" git-gutter+-next-hunk "next")
-  ("p" git-gutter+-previous-hunk "prev")
-  ("d" git-gutter+-show-hunk "diff")
-  ("s" git-gutter+-stage-hunks "stage")
-  ("r" git-gutter+-revert-hunks "revert")
-  ("u" git-gutter+-unstage-whole-buffer "unstage buffer")
-  ("m" magit-status "magit" :color blue)
-  ("C-g" nil "quit"))
+  ;; Hydra
+  (defhydra hydra-git-gutter+ (:color pink)
+    "Git Gutter"
+    ("n" git-gutter+-next-hunk "next")
+    ("p" git-gutter+-previous-hunk "prev")
+    ("d" git-gutter+-show-hunk "diff")
+    ("s" git-gutter+-stage-hunks "stage")
+    ("r" git-gutter+-revert-hunks "revert")
+    ("u" git-gutter+-unstage-whole-buffer "unstage buffer")
+    ("m" magit-status "magit" :color blue)
+    ("C-g" nil "quit"))
 
-; Key Bindings
-(define-key custom-keys-mode-prefix-map (kbd "g g") #'hydra-git-gutter+/body)
+  ;; Key Bindings
+  (bind-key "g g" #'hydra-git-gutter+/body custom-keys-mode-prefix-map))
 
 ; Variables
 (setq magit-last-seen-setup-instructions "1.4.0")
