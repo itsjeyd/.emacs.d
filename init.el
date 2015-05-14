@@ -1638,6 +1638,24 @@ Goes backward if ARG is negative; error if STR not found."
   :commands flycheck-mode
   :config
   ;; Functions
+  (defun flycheck-mode-line-status-text (&optional status)
+    "Get a text describing STATUS for use in the mode line.
+
+  STATUS defaults to `flycheck-last-status-change' if omitted or nil."
+    (let ((text (pcase (or status flycheck-last-status-change)
+                  (`not-checked "")
+                  (`no-checker "-")
+                  (`running "*")
+                  (`errored "!")
+                  (`finished
+                   (if flycheck-current-errors
+                       (let-alist (flycheck-count-errors flycheck-current-errors)
+                         (format ":%s/%s" (or .error 0) (or .warning 0)))
+                     ""))
+                  (`interrupted "-")
+                  (`suspicious "?"))))
+      (concat " ⚡" text)))
+
   (defun flycheck-setup ()
     (bind-keys :map custom-keys-mode-prefix-map
                ("f n" . flycheck-next-error)
