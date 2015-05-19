@@ -594,9 +594,9 @@ Goes backward if ARG is negative; error if STR not found."
   :defer t
   :config
   (setq lispy-avy-keys (number-sequence ?a ?i))
-  (setq lispy-avy-style-char 'at)
-  (setq lispy-avy-style-paren 'at)
-  (setq lispy-avy-style-symbol 'at)
+  (setq lispy-avy-style-char 'at-full)
+  (setq lispy-avy-style-paren 'at-full)
+  (setq lispy-avy-style-symbol 'at-full)
   (setq lispy-completion-method 'helm)
   (setq lispy-occur-backend 'helm)
   (setq lispy-window-height-ratio 0.8))
@@ -1232,7 +1232,7 @@ Goes backward if ARG is negative; error if STR not found."
   ;; Variables
   (setq avy-background t)
   (setq avy-keys (number-sequence ?a ?z))
-  (setq avy-style 'at))
+  (setq avy-style 'at-full))
 
 (global-set-key (kbd "C-x [") #'hydra-move-by-page/body)
 (global-set-key (kbd "C-x ]") #'hydra-move-by-page/body)
