@@ -1125,13 +1125,6 @@ Goes backward if ARG is negative; error if STR not found."
 
 
 
-;;;;;;;;;;;;
-;;; MISC ;;;
-;;;;;;;;;;;;
-
-
-
-
 ;;;;;;;;;;;;;;;;
 ;;; Modeline ;;;
 ;;;;;;;;;;;;;;;;
