@@ -1,0 +1,5 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: define-key
+# key: dk
+# --
+(define-key ${1:map} (kbd "$2") #'${3:command})$0
