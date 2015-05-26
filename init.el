@@ -1861,6 +1861,18 @@ Goes backward if ARG is negative; error if STR not found."
   ;; Key Bindings
   (unbind-key "C-c C-s" python-mode-map)
   (bind-keys :map python-mode-map
+             ("M-a" . python-nav-backward-block) ; Default
+             ("M-e" . python-nav-forward-block) ; Default
+             ("C-M-a" . python-nav-backward-defun)
+             ("C-M-b" . python-nav-backward-sexp-safe)
+             ("C-M-e" . python-nav-forward-defun)
+             ("C-M-f" . python-nav-forward-sexp-safe)
+             ("C-M-u" . python-nav-backward-up-list) ; Default
+             ("H-a" . python-nav-beginning-of-statement)
+             ("H-b" . python-nav-backward-statement)
+             ("H-e" . python-nav-end-of-statement)
+             ("H-f" . python-nav-forward-statement)
+             ("C-c RET" . python-nav-if-name-main)
              ("C-c C-r" . run-python)
              ("C-c C-s b" . python-shell-send-buffer)
              ("C-c C-s d" . python-shell-send-defun)
