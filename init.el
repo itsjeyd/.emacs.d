@@ -1860,6 +1860,9 @@ Goes backward if ARG is negative; error if STR not found."
 
   ;; Key Bindings
   (unbind-key "C-c C-f" python-mode-map)
+  (unbind-key "C-c C-j" python-mode-map)
+  (unbind-key "C-c C-l" python-mode-map)
+  (unbind-key "C-c C-p" python-mode-map)
   (unbind-key "C-c C-s" python-mode-map)
   (unbind-key "C-c C-z" python-mode-map)
   (bind-keys :map python-mode-map
