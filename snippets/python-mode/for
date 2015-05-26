@@ -1,0 +1,7 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: for
+# key: for
+# group: control structure
+# --
+for ${var} in ${collection}:
+    $0

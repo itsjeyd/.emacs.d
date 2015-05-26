@@ -1,8 +1,8 @@
 # -*- mode: snippet; require-final-newline: nil -*-
-# name: function_docstring
-# key: fd
-# group: definitions
+# name: static
+# key: sm
 # --
+@staticmethod
 def ${1:name}(${2:args}):
     """
     ${3:...}

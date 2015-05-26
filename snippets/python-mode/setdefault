@@ -1,0 +1,5 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: setdefault
+# key: setd
+# --
+${1:var}.setdefault(${2:key}, []).append(${3:value})$0

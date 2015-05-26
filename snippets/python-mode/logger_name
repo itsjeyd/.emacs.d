@@ -1,0 +1,5 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: logger_name
+# key: ln
+# --
+logger = logging.getLogger(__name__)

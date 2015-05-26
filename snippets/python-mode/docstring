@@ -1,0 +1,7 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: docstring
+# key: doc
+# --
+"""
+$0
+"""

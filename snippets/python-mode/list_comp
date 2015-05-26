@@ -1,0 +1,6 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: list_comp
+# key: lc
+# group: definitions
+# --
+[$3$1$4 for ${1:el} in ${2:collection}]$0

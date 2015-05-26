@@ -1,9 +1,10 @@
 # -*- mode: snippet; require-final-newline: nil -*-
-# name: function_docstring
-# key: fd
-# group: definitions
+# name: classmethod
+# key: cm
+# group: object-oriented
 # --
-def ${1:name}(${2:args}):
+@classmethod
+def ${1:name}(cls${2:, args}):
     """
     ${3:...}
 

@@ -1,0 +1,6 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: assert
+# key: a
+# group: testing
+# --
+assert $0

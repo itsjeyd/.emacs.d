@@ -1,9 +1,9 @@
 # -*- mode: snippet; require-final-newline: nil -*-
-# name: function_docstring
-# key: fd
-# group: definitions
+# name: method_docstring
+# key: md
+# group: object-oriented
 # --
-def ${1:name}(${2:args}):
+def ${1:name}(self${2:, args}):
     """
     ${3:...}
 

@@ -1,0 +1,6 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: assertIn
+# key: ai
+# group: testing
+# --
+self.assertIn(${1:el}, ${2:collection})$0

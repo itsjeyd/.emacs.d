@@ -1,0 +1,7 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: __str__
+# key: str
+# group: dunder methods
+# --
+def __str__(self):
+    $0

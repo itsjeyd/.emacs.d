@@ -1,0 +1,6 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: regexp
+# key: reg
+# group: general
+# --
+${1:var} = re.compile(r"$2")$0

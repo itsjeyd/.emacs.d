@@ -1,0 +1,6 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: numpy
+# key: np
+# group: general
+# --
+import numpy as np$0

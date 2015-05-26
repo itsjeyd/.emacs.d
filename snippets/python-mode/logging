@@ -1,0 +1,7 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: logging
+# key: log
+# --
+logger = logging.getLogger("${1:name}")
+logger.setLevel(logging.${2:level})
+$0

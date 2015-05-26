@@ -1,0 +1,10 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: class_docstring
+# key: cd
+# group: object-oriented
+# --
+class ${1:name}(${2:object}):
+    """
+    ${3:...}
+    """
+    $0

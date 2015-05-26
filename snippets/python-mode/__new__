@@ -1,0 +1,8 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: __new__
+# key: new
+# group: dunder methods
+# --
+def __new__(mcl, name, bases, nmspc):
+    $0
+    return type.__new__(mcl, name, bases, nmspc)

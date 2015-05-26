@@ -1,0 +1,6 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: assertEqual
+# key: ae
+# group: testing
+# --
+self.assertEqual($1, $2)$0

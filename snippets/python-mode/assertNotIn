@@ -1,0 +1,6 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: assertNotIn
+# key: ani
+# group: testing
+# --
+self.assertNotIn(${1:member}, ${2:container})

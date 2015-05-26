@@ -1,0 +1,6 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: self
+# key: s
+# group: object-oriented
+# --
+self

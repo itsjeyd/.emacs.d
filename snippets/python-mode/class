@@ -1,0 +1,7 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: class
+# key: c
+# group: object-oriented
+# --
+class ${1:name}(${2:object}):
+    $0

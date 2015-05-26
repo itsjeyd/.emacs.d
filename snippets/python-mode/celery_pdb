@@ -1,0 +1,6 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: celery_pdb
+# key: cdb
+# group: debug
+# --
+from celery.contrib import rdb; rdb.set_trace()

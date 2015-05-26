@@ -1,0 +1,7 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: __setitem__
+# key: setitem
+# group: dunder methods
+# --
+def __setitem__(self, ${1:key}, ${2:val}):
+    $0

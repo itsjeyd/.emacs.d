@@ -1,0 +1,6 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: with_assertRaises
+# key: war
+# --
+with self.assertRaises(${1:Exception}):
+    $0

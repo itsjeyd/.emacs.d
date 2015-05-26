@@ -1,0 +1,5 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: all
+# key: all
+# --
+all($3$1$4 for ${1:el} in ${2:collection})$0

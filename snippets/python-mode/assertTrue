@@ -1,0 +1,6 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: assertTrue
+# key: at
+# group: testing
+# --
+self.assertTrue($1)$0

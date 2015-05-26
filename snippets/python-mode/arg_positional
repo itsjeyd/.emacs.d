@@ -1,0 +1,6 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: arg_positional
+# key: argp
+# group: argparser
+# --
+parser.add_argument('${1:varname}', $0)

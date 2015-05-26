@@ -1,0 +1,6 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: assertRaises
+# key: ar
+# group: testing
+# --
+self.assertRaises(${1:Exception}, ${2:function})$0

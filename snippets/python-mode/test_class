@@ -1,0 +1,7 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: test_class
+# key: tc
+# group: testing
+# --
+class Test${1:Name}(${2:TestCase}):
+    $0

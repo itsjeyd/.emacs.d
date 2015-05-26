@@ -1,0 +1,6 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: future_with
+# key: fw
+# group: future
+# --
+from __future__ import with_statement

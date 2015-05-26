@@ -1,0 +1,7 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: __contains__
+# key: con
+# group: dunder methods
+# --
+def __contains__(self, el):
+    $0

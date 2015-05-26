@@ -1,0 +1,7 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: __exit__
+# key: exit
+# group: dunder methods
+# --
+def __exit__(self, type, value, traceback):
+    $0

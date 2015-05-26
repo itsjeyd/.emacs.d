@@ -1,0 +1,12 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: __init__docstring
+# key: initd
+# group: definitions
+# --
+def __init__(self${1:, args}):
+    """
+    ${2:...}
+
+    ${1:$(python-args-to-docstring)}
+    """
+    ${3:pass}$0

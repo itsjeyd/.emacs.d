@@ -1,0 +1,7 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: __init__
+# key: init
+# group: definitions
+# --
+def __init__(self${1:, args}):
+    ${2:pass}$0

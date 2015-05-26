@@ -1,0 +1,7 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: test_method
+# key: tm
+# group: testing
+# --
+def test_${1:name}(self):
+    $0

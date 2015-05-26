@@ -1,0 +1,8 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: doctest
+# key: dt
+# group: testing
+# --
+>>> ${1:function calls}
+${2:desired output}
+$0

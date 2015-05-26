@@ -1,0 +1,6 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: __metaclass__
+# key: mc
+# group: object-oriented
+# --
+__metaclass__ = type

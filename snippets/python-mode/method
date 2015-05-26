@@ -1,0 +1,7 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: method
+# key: m
+# group: object-oriented
+# --
+def ${1:name}(self${2:, args}):
+    ${3:pass}$0

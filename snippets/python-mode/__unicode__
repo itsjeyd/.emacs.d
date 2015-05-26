@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: __unicode__
+# key: uni
+# group: dunder methods
+# --
+def __unicode__(self):
+    $0

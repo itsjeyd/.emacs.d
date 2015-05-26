@@ -1,0 +1,6 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: self_assign
+# key: sa
+# group: object-oriented
+# --
+self.$1 = $1
