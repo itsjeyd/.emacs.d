@@ -1859,7 +1859,9 @@ Goes backward if ARG is negative; error if STR not found."
   (add-hook 'python-mode-hook #'jedi:setup)
 
   ;; Key Bindings
+  (unbind-key "C-c C-f" python-mode-map)
   (unbind-key "C-c C-s" python-mode-map)
+  (unbind-key "C-c C-z" python-mode-map)
   (bind-keys :map python-mode-map
              ("M-a" . python-nav-backward-block) ; Default
              ("M-e" . python-nav-forward-block) ; Default
@@ -1873,6 +1875,8 @@ Goes backward if ARG is negative; error if STR not found."
              ("H-e" . python-nav-end-of-statement)
              ("H-f" . python-nav-forward-statement)
              ("C-c RET" . python-nav-if-name-main)
+             ("C-c C-c" . python-shell-switch-to-shell)
+             ("C-c C-d" . python-eldoc-at-point)
              ("C-c C-r" . run-python)
              ("C-c C-s b" . python-shell-send-buffer)
              ("C-c C-s d" . python-shell-send-defun)
