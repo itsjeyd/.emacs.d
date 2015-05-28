@@ -687,7 +687,8 @@ Goes backward if ARG is negative; error if STR not found."
 
 (use-package helm
   :defer 5
-  :bind ("C-c k" . helm-show-kill-ring)
+  :bind (("C-c k" . helm-show-kill-ring)
+         ("C-c SPC" . helm-all-mark-rings))
   :config
 
   (use-package helm-config
