@@ -664,6 +664,23 @@ Goes backward if ARG is negative; error if STR not found."
 
 
 
+;;;;;;;;;;;
+;;; Fun ;;;
+;;;;;;;;;;;
+
+(use-package emoji-cheat-sheet-plus
+  :commands (emoji-cheat-sheet-plus-buffer emoji-cheat-sheet-plus-insert)
+  :init
+  (add-hook 'org-mode-hook #'emoji-cheat-sheet-plus-display-mode)
+  :config
+  (bind-keys :map emoji-cheat-sheet-plus-buffer-mode-map
+             ("b" . backward-char)
+             ("f" . forward-char)
+             ("n" . next-line)
+             ("p" . previous-line)))
+
+
+
 ;;;;;;;;;;;;
 ;;; Helm ;;;
 ;;;;;;;;;;;;
