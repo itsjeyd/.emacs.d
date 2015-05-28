@@ -723,7 +723,6 @@ Goes backward if ARG is negative; error if STR not found."
   ("e" apropos-value "val")
   ("l" apropos-library "lib")
   ("o" apropos-user-option "option")
-  ("u" apropos-user-option "option")
   ("v" apropos-variable "var")
   ("i" info-apropos "info")
   ("t" tags-apropos "tags")
