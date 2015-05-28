@@ -696,10 +696,13 @@ Goes backward if ARG is negative; error if STR not found."
     :config
     (setq helm-apropos-fuzzy-match t)
     (setq helm-buffers-fuzzy-matching t)
+    (setq helm-imenu-fuzzy-matching t)
     (setq helm-lisp-fuzzy-completion t)
     (setq helm-locate-fuzzy-match t)
     (setq helm-projectile-fuzzy-match t)
-    (setq helm-recentf-fuzzy-match t)))
+    (setq helm-recentf-fuzzy-match t)
+    (setq helm-semantic-fuzzy-match t)
+    (setq helm-M-x-fuzzy-match t)))
 
 
 
