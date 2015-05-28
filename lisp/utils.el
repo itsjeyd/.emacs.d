@@ -1,3 +1,46 @@
+;;; utils.el --- Useful commands and functions that I don't need frequently.
+
+
+
+;;;;;;;;;;;;;;;
+;;; Editing ;;;
+;;;;;;;;;;;;;;;
+
+; Commands
+(defun flush-empty-lines ()
+  "Remove empty lines from buffer."
+  (interactive)
+  (save-excursion
+    (goto-char (point-min))
+    (flush-lines "^$")))
+
+(defun sort-lines-and-uniquify ()
+  "Sort lines alphabetically (in ascending order) and remove duplicates."
+  (interactive)
+  (sort-lines nil (point-min) (point-max))
+  (delete-duplicate-lines (point-min) (point-max) nil nil nil t))
+
+(defun unfill-paragraph (&optional region)
+  "Takes a multi-line paragraph and turns it into a single line of text."
+  (interactive)
+  (let ((fill-column (point-max)))
+    (fill-paragraph nil region)))
+
+
+
+;;;;;;;;;;;;;;;;;
+;;; Interface ;;;
+;;;;;;;;;;;;;;;;;
+
+(defun toggle-transparency ()
+  (interactive)
+  (let ((opacity (frame-parameter nil 'alpha)))
+    (if (or (not opacity) (= opacity 100))
+        (set-frame-parameter nil 'alpha 80)
+      (set-frame-parameter nil 'alpha 100))))
+
+
+
 ;;;;;;;;;;;;;;;;;;;;
 ;;; Key Bindings ;;;
 ;;;;;;;;;;;;;;;;;;;;
@@ -30,6 +73,8 @@
                                     (get-text-property (point) 'keymap)
                                     (get-text-property (point) 'local-map)))))
 
+
+
 ;;;;;;;;;;;;
 ;;; MISC ;;;
 ;;;;;;;;;;;;
@@ -40,6 +85,7 @@
     (insert (prin1-char char) " ")))
 
 
+
 ;;;;;;;;;;;;;;;;
 ;;; Security ;;;
 ;;;;;;;;;;;;;;;;
@@ -74,3 +120,5 @@
     (insert (epg-decrypt-string (epg-make-context nil t) cipher))))
 
 ; Adapted from: http://pastebin.com/M1MAaaT6
+
+(provide 'utils)

@@ -455,6 +455,10 @@
              ("a" . "⟶")
              ("l" . "⚡" )))
 
+(use-package utils
+  :ensure nil
+  :commands (flush-empty-lines sort-lines-and-uniquify unfill-paragraph))
+
 ; Advice
 (defun record-current-position (arg)
   (when arg (push-mark)))
@@ -489,13 +493,6 @@ region, operate on a single line. Otherwise, operate on region."
 (defvar single-quotes '(?\' . ?\'))
 
 ; Commands
-(defun flush-empty-lines ()
-  "Remove empty lines from buffer."
-  (interactive)
-  (save-excursion
-    (goto-char (point-min))
-    (flush-lines "^$")))
-
 (defun kill-region-with-arg (arg)
   (interactive "P")
   (if arg
@@ -520,18 +517,6 @@ point is on and summons `hydra-mark-lines'."
   (interactive)
   (mark-lines-next-line 1)
   (hydra-mark-lines/body))
-
-(defun sort-lines-and-uniquify ()
-  "Sort lines alphabetically (in ascending order) and remove duplicates."
-  (interactive)
-  (sort-lines nil (point-min) (point-max))
-  (delete-duplicate-lines (point-min) (point-max) nil nil nil t))
-
-(defun unfill-paragraph (&optional region)
-  "Takes a multi-line paragraph and turns it into a single line of text."
-  (interactive)
-  (let ((fill-column (point-max)))
-    (fill-paragraph nil region)))
 
 (defun zap-to-string (arg str)
   "Kill up to but not including ARG'th occurrence of STR.
@@ -932,12 +917,6 @@ Goes backward if ARG is negative; error if STR not found."
   (setq whitespace-style '(face lines-tail)))
 
 ; Commands
-(defun toggle-transparency ()
-  (interactive)
-  (let ((opacity (frame-parameter nil 'alpha)))
-    (if (or (not opacity) (= opacity 100))
-        (set-frame-parameter nil 'alpha 80)
-      (set-frame-parameter nil 'alpha 100))))
 
 ; Controls
 (set-scroll-bar-mode nil)
