@@ -1763,7 +1763,8 @@ Goes backward if ARG is negative; error if STR not found."
   (add-hook 'post-command-hook #'change-cursor-color-when-can-expand)
 
   ;; Variables
-  (setq yas-prompt-functions '(yas-ido-prompt yas-x-prompt yas-no-prompt)))
+  (setq yas-prompt-functions '(yas-ido-prompt yas-x-prompt yas-no-prompt))
+  (setq yas-triggers-in-field t))
 
 ; Commands
 (defun tim/electric-semicolon ()
