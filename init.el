@@ -685,16 +685,20 @@ Goes backward if ARG is negative; error if STR not found."
 ;;; Helm ;;;
 ;;;;;;;;;;;;
 
-(use-package helm-config
-  :ensure helm
+(use-package helm
+  :defer 5
   :bind ("C-c k" . helm-show-kill-ring)
   :config
-  (setq helm-apropos-fuzzy-match t)
-  (setq helm-buffers-fuzzy-matching t)
-  (setq helm-lisp-fuzzy-completion t)
-  (setq helm-locate-fuzzy-match t)
-  (setq helm-projectile-fuzzy-match t)
-  (setq helm-recentf-fuzzy-match t))
+
+  (use-package helm-config
+    :ensure helm
+    :config
+    (setq helm-apropos-fuzzy-match t)
+    (setq helm-buffers-fuzzy-matching t)
+    (setq helm-lisp-fuzzy-completion t)
+    (setq helm-locate-fuzzy-match t)
+    (setq helm-projectile-fuzzy-match t)
+    (setq helm-recentf-fuzzy-match t)))
 
 
 
