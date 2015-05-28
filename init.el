@@ -674,6 +674,13 @@ point is on and summons `hydra-mark-lines'."
     (setq helm-semantic-fuzzy-match t)
     (setq helm-M-x-fuzzy-match t)))
 
+(use-package helm-firefox
+  :commands helm-firefox-bookmarks
+  :config
+  (defun helm-get-firefox-user-init-dir ()
+    "Return name of Firefox profile to list bookmarks for."
+    "~/.mozilla/firefox/mwad0hks.default/"))
+
 
 
 ;;;;;;;;;;;;

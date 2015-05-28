@@ -48,6 +48,7 @@
   | helm                   |
   | helm-c-yasnippet       |
   | helm-dash              |
+  | helm-firefox           |
   | helm-projectile        |
   | helm-swoop             |
   | hydra                  |
