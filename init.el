@@ -1782,7 +1782,6 @@ Goes backward if ARG is negative; error if STR not found."
     (insert ";")))
 
 (defun tim/enable-electric-semicolon ()
-  (interactive)
   (local-set-key (kbd ";") #'tim/electric-semicolon))
 
 ; Functions
