@@ -1946,6 +1946,13 @@ point is on and summons `hydra-mark-lines'."
 
 (advice-add 'occur :around #'occur-rename-buffer-after-search-string)
 
+(defun isearch-fake-success (orig)
+  (let ((isearch-success t)
+        (isearch-error nil))
+    (funcall orig)))
+
+(advice-add 'isearch-abort :around #'isearch-fake-success)
+
 ; Commands
 (defun isearch-toggle-lazy-highlight-cleanup ()
   "Toggle `lazy-highlight-cleanup'.
