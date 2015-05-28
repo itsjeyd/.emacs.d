@@ -327,6 +327,9 @@
   (setq ac-quick-help-delay 1.0)
   (setq ac-use-menu-map t))
 
+(use-package avy-zap
+  :bind ("M-z" . avy-zap-up-to-char-dwim))
+
 (use-package caps-lock
   :commands caps-lock-mode
   :init
@@ -345,10 +348,6 @@
   :ensure nil
   :load-path "lisp/mark-lines"
   :commands mark-lines-next-line)
-
-(use-package misc
-  :ensure nil
-  :bind ("M-z" . zap-up-to-char))
 
 (use-package move-text
   :commands (move-text-up move-text-down)
@@ -518,19 +517,6 @@ point is on and summons `hydra-mark-lines'."
   (mark-lines-next-line 1)
   (hydra-mark-lines/body))
 
-(defun zap-to-string (arg str)
-  "Kill up to but not including ARG'th occurrence of STR.
-Case is ignored if `case-fold-search' is non-nil in the current buffer.
-Goes backward if ARG is negative; error if STR not found."
-  (interactive "p\nsZap to string: ")
-  (save-excursion
-    (let* ((start (point))
-           (len (length str))
-           (end (if (< arg 0)
-                    (+ (search-forward str nil nil arg) len)
-                  (- (search-forward str nil nil arg) len))))
-      (kill-region start end))))
-
 ; Hooks
 (add-hook 'before-save-hook #'delete-trailing-whitespace)
 
@@ -552,7 +538,6 @@ Goes backward if ARG is negative; error if STR not found."
 (global-set-key (kbd "C-c m") #'mark-line)
 (define-key custom-keys-mode-prefix-map (kbd "u") #'hydra-move-text/body)
 (define-key custom-keys-mode-prefix-map (kbd "d") #'hydra-move-text/body)
-(define-key custom-keys-mode-prefix-map (kbd "z") #'zap-to-string)
 
 ; Variables
 (setq cua-enable-cua-keys nil)
