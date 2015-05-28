@@ -57,6 +57,7 @@
   | ido-ubiquitous         |
   | ido-vertical-mode      |
   | iedit                  |
+  | interleave             |
   | jedi                   |
   | jedi-core              |
   | jedi-direx             |

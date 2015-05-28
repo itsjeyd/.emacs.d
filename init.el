@@ -1400,6 +1400,14 @@ point is on and summons `hydra-mark-lines'."
           (replace-match " ")))
       (org-fill-paragraph)))
 
+  (defun org-interleave ()
+    (interactive)
+    (unless (featurep 'pdf-view)
+      (pdf-tools-install))
+    (if (and (featurep 'interleave) interleave)
+        (message "Interleave is already running.")
+      (interleave)))
+
   (defun org-next-drawer (arg)
     (interactive "p")
     (org-next-block arg nil org-generic-drawer-regexp))
@@ -1573,34 +1581,52 @@ point is on and summons `hydra-mark-lines'."
 (use-package doc-view
   :commands doc-view-mode
   :config
-
-  (use-package pdf-tools
-    :commands pdf-tools-install
-    :config
-    ;; Advice
-    (defun pdf-outline-prepare-windows (&optional buffer no-select-window-p)
-      (delete-other-windows)
-      (split-window-right)
-      (other-window 1))
-
-    (advice-add 'pdf-outline :before #'pdf-outline-prepare-windows)
-
-    (defun pdf-outline-adjust-window (&optional buffer no-select-window-p)
-      (let ((current-width (window-total-width)))
-        (when (> current-width 50)
-          (shrink-window-horizontally (- current-width 50)))))
-
-    (advice-add 'pdf-outline :after #'pdf-outline-adjust-window)
-
-    ;; Variables
-    (setq pdf-info-restart-process-p t)
-    (setq pdf-util-fast-image-format '("png" . ".png")))
-
   ;; Hooks
   (add-hook 'doc-view-mode-hook #'pdf-tools-install)
 
   ;; Variables
   (setq doc-view-continuous t))
+
+(use-package interleave
+  :commands interleave
+  :config
+  (defun interleave-handle-openwith (orig &optional arg)
+    (openwith-mode -1)
+    (funcall orig arg)
+    (openwith-mode 1))
+
+  (advice-add 'interleave :around #'interleave-handle-openwith)
+
+  (defun interleave--quit-handle-emojis (orig)
+    (with-current-buffer *interleave--org-buffer*
+      (emoji-cheat-sheet-plus-display-mode -1))
+    (funcall orig)
+    (with-current-buffer *interleave--org-buffer*
+      (emoji-cheat-sheet-plus-display-mode 1)))
+
+  (advice-add 'interleave--quit :around #'interleave--quit-handle-emojis))
+
+(use-package pdf-tools
+  :commands pdf-tools-install
+  :config
+  ;; Advice
+  (defun pdf-outline-prepare-windows (&optional buffer no-select-window-p)
+    (delete-other-windows)
+    (split-window-right)
+    (other-window 1))
+
+  (advice-add 'pdf-outline :before #'pdf-outline-prepare-windows)
+
+  (defun pdf-outline-adjust-window (&optional buffer no-select-window-p)
+    (let ((current-width (window-total-width)))
+      (when (> current-width 50)
+        (shrink-window-horizontally (- current-width 50)))))
+
+  (advice-add 'pdf-outline :after #'pdf-outline-adjust-window)
+
+  ;; Variables
+  (setq pdf-info-restart-process-p t)
+  (setq pdf-util-fast-image-format '("png" . ".png")))
 
 
 
