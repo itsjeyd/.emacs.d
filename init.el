@@ -643,6 +643,9 @@ point is on and summons `hydra-mark-lines'."
   :init
   (add-hook 'org-mode-hook #'emoji-cheat-sheet-plus-display-mode)
   :config
+  (modeline-remove-lighter 'emoji-cheat-sheet-plus-display-mode)
+
+  ;; Key Bindings
   (bind-keys :map emoji-cheat-sheet-plus-buffer-mode-map
              ("b" . backward-char)
              ("f" . forward-char)
