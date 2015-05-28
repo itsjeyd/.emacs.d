@@ -1912,7 +1912,7 @@ Goes backward if ARG is negative; error if STR not found."
 
 ; Variables
 (setq recenter-positions '(top middle bottom))
-(setq scroll-preserve-screen-position 1)
+(setq scroll-preserve-screen-position 'always)
 
 
 
