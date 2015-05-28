@@ -1961,7 +1961,7 @@ Goes backward if ARG is negative; error if STR not found."
 (advice-add 'occur :around #'occur-rename-buffer-after-search-string)
 
 ; Commands
-(defun toggle-lazy-highlight-cleanup ()
+(defun isearch-toggle-lazy-highlight-cleanup ()
   "Toggle `lazy-highlight-cleanup'.
 - If `t' (ON), Isearch will *not* leave highlights around.
 - If `nil' (OFF), matches will stay highlighted until the next
