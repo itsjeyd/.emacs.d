@@ -1158,6 +1158,7 @@ point is on and summons `hydra-mark-lines'."
 ;;;;;;;;;;;;;
 
 (add-to-list 'auto-mode-alist '("routes$" . conf-space-mode))
+(setq-default major-mode 'org-mode)
 
 
 
