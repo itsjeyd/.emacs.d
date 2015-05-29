@@ -803,10 +803,8 @@ point is on and summons `hydra-mark-lines'."
     (push '(disable prefix "sclang-dump-") ido-ubiquitous-command-overrides))
 
   (use-package recentf
-    :init (setq recentf-save-file "~/.emacs.d/.recentf")
+    :commands recentf-mode
     :config
-    (recentf-mode t)
-
     ;; Advice
     (defun recentf-discard-autoloads (orig file)
       (if (not (string-match-p "-autoloads" (file-name-nondirectory file)))
@@ -839,10 +837,12 @@ point is on and summons `hydra-mark-lines'."
     ;; Variables
     (add-to-list 'recentf-used-hooks
                  '(dired-after-readin-hook recentf-track-opened-file))
-    (setq recentf-max-saved-items 150))
+    (setq recentf-max-saved-items 150)
+    (setq recentf-save-file "~/.emacs.d/.recentf"))
 
   (ido-mode 'both)
   (ido-everywhere 1)
+  (recentf-mode t)
 
   ;; Commands
   (defun ido-find-file-as-root ()
