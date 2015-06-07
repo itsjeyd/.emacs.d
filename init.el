@@ -1274,13 +1274,13 @@ point is on and summons `hydra-mark-lines'."
 
     ;; Variables
     (setq org-capture-templates
-          '(("z" "Quote" plain (file "~/org/quotes.org")
-             "%?\n\n-" :empty-lines-before 2 :kill-buffer t)
-            ("j" "Journal" entry (file+datetree "~/org/journal.org")
+          '(("j" "Journal" entry (file+datetree "~/org/journal.org")
              "* %<%H:%M>\n%?")
             ("l" "Link" entry (file+datetree "~/org/links.org")
              "* %^{Title}\n  Source: %u, %c\n\n  %(format-quote \"%:initial\")%?"
-             :kill-buffer t))))
+             :kill-buffer t)
+            ("z" "Quote" plain (file "~/org/quotes.org")
+             "%?\n\n-" :empty-lines-before 2 :kill-buffer t))))
 
   (use-package org-footnote
     :ensure nil
