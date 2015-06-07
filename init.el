@@ -1274,7 +1274,7 @@ point is on and summons `hydra-mark-lines'."
 
     ;; Variables
     (setq org-capture-templates
-          '(("q" "Quote" plain (file "~/org/quotes.org")
+          '(("z" "Quote" plain (file "~/org/quotes.org")
              "%?\n\n-" :empty-lines-before 2 :kill-buffer t)
             ("j" "Journal" entry (file+datetree "~/org/journal.org")
              "* %<%H:%M>\n%?")
