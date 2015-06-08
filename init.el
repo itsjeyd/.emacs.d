@@ -93,6 +93,7 @@
   (interactive)
   (let ((temp-buffer-name (format "*temp-%d*" temp-buffer-count)))
     (switch-to-buffer temp-buffer-name)
+    (org-mode)
     (message "New temp buffer (%s) created." temp-buffer-name))
   (setq temp-buffer-count (1+ temp-buffer-count)))
 
@@ -1158,7 +1159,6 @@ point is on and summons `hydra-mark-lines'."
 ;;;;;;;;;;;;;
 
 (add-to-list 'auto-mode-alist '("routes$" . conf-space-mode))
-(setq-default major-mode 'org-mode)
 
 
 
