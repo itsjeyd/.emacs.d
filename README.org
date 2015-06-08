@@ -16,6 +16,7 @@
   | avy                    |
   | avy-zap                |
   | bind-key               |
+  | browse-at-remote       |
   | calfw                  |
   | caps-lock              |
   | cdlatex                |

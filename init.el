@@ -2116,6 +2116,9 @@ char if successful."
 ;;; Version Control ;;;
 ;;;;;;;;;;;;;;;;;;;;;;;
 
+(use-package browse-at-remote
+  :commands browse-at-remote)
+
 (use-package magit
   :commands magit-status
   :init
