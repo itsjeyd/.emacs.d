@@ -1,0 +1,7 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: ready
+# key: ready
+# --
+\$(document).ready(function() {
+  $0
+});
