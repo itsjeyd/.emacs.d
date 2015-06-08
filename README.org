@@ -50,6 +50,7 @@
   | helm-dash              |
   | helm-firefox           |
   | helm-github-stars      |
+  | helm-open-github       |
   | helm-projectile        |
   | helm-swoop             |
   | hydra                  |

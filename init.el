@@ -2220,6 +2220,23 @@ char if successful."
   :config
   (setq helm-github-stars-username "itsjeyd"))
 
+(use-package helm-open-github
+  :commands (helm-open-github-from-commit
+             helm-open-github-from-file
+             helm-open-github-from-issues
+             helm-open-github-from-pull-requests)
+  :config
+  (defun helm-open-github-from-issues (arg)
+  (interactive "P")
+  (let ((host (helm-open-github--host))
+        (url (helm-open-github--remote-url)))
+    (when arg
+      (remhash url helm-open-github--issues-cache))
+    (if (not (string= host "github.com"))
+        (helm-open-github--from-issues-direct host)
+      (helm :sources '(helm-open-github--from-issues-source)
+            :buffer  "*open github*")))))
+
 ; Variables
 (setq magit-last-seen-setup-instructions "1.4.0")
 
