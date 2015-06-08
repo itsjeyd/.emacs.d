@@ -536,6 +536,7 @@ point is on and summons `hydra-mark-lines'."
 ; Key Bindings
 (global-set-key (kbd "C-w") #'kill-region-with-arg)
 (global-set-key (kbd "M-w") #'kill-ring-save-with-arg)
+(global-set-key (kbd "M-=") #'count-words)
 (global-set-key (kbd "C-c m") #'mark-line)
 (define-key custom-keys-mode-prefix-map (kbd "u") #'hydra-move-text/body)
 (define-key custom-keys-mode-prefix-map (kbd "d") #'hydra-move-text/body)
