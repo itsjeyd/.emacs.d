@@ -41,6 +41,7 @@
   | git-commit-mode        |
   | git-gutter+            |
   | git-gutter-fringe+     |
+  | github-browse-file     |
   | git-rebase-mode        |
   | git-timemachine        |
   | google-maps            |

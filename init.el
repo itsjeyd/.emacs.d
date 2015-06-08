@@ -2240,6 +2240,9 @@ char if successful."
       (helm :sources '(helm-open-github--from-issues-source)
             :buffer  "*open github*")))))
 
+(use-package github-browse-file
+  :commands (github-browse-file github-browse-file-blame))
+
 ; Variables
 (setq magit-last-seen-setup-instructions "1.4.0")
 
