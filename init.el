@@ -2381,6 +2381,7 @@ window that will be added to the current window layout."
 (global-set-key (kbd "C-x ^") #'hydra-resize-window/body)
 (define-key custom-keys-mode-prefix-map (kbd "c s") #'change-split)
 (define-key custom-keys-mode-prefix-map (kbd "k o") #'kill-other-buffer-and-window)
+(define-key custom-keys-mode-prefix-map (kbd "k t") #'kill-buffer-and-window)
 (define-key custom-keys-mode-prefix-map (kbd "s w") #'swap-windows)
 (define-key custom-keys-mode-prefix-map (kbd "t d") #'toggle-window-dedicated)
 
