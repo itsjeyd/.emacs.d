@@ -2243,6 +2243,9 @@ char if successful."
 (use-package github-browse-file
   :commands (github-browse-file github-browse-file-blame))
 
+(use-package github-clone
+  :commands github-clone)
+
 ; Variables
 (setq magit-last-seen-setup-instructions "1.4.0")
 

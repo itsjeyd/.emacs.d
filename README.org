@@ -42,6 +42,7 @@
   | git-gutter+            |
   | git-gutter-fringe+     |
   | github-browse-file     |
+  | github-clone           |
   | git-rebase-mode        |
   | git-timemachine        |
   | google-maps            |
