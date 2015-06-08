@@ -49,6 +49,7 @@
   | helm-c-yasnippet       |
   | helm-dash              |
   | helm-firefox           |
+  | helm-github-stars      |
   | helm-projectile        |
   | helm-swoop             |
   | hydra                  |
