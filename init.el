@@ -1264,7 +1264,7 @@ point is on and summons `hydra-mark-lines'."
 
   (use-package org-capture
     :ensure nil
-    :commands org-capture
+    :bind ("C-c c" . org-capture)
     :config
     ;; Functions
     (defun format-quote (selection)
