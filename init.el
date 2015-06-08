@@ -2212,6 +2212,11 @@ char if successful."
   ;; Key Bindings
   (bind-key "g g" #'hydra-git-gutter+/body custom-keys-mode-prefix-map))
 
+(use-package helm-github-stars
+  :commands helm-github-stars
+  :config
+  (setq helm-github-stars-username "itsjeyd"))
+
 ; Variables
 (setq magit-last-seen-setup-instructions "1.4.0")
 
