@@ -1586,11 +1586,9 @@ point is on and summons `hydra-mark-lines'."
 
 (use-package doc-view
   :commands doc-view-mode
-  :config
-  ;; Hooks
+  :init
   (add-hook 'doc-view-mode-hook #'pdf-tools-install)
-
-  ;; Variables
+  :config
   (setq doc-view-continuous t))
 
 (use-package interleave
