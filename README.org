@@ -25,13 +25,17 @@
   | change-inner           |
   | cider                  |
   | clojure-mode           |
+  | concurrent             |
+  | ctable                 |
   | dash                   |
+  | deferred               |
   | diminish               |
   | direx                  |
   | emoji-cheat-sheet-plus |
   | epc                    |
   | epl                    |
   | expand-region          |
+  | f                      |
   | fill-column-indicator  |
   | flx                    |
   | flx-ido                |
@@ -76,6 +80,7 @@
   | lispy                  |
   | list-utils             |
   | log4e                  |
+  | logito                 |
   | magit                  |
   | markdown-mode          |
   | move-text              |
@@ -106,6 +111,7 @@
   | s                      |
   | sclang-extensions      |
   | sclang-snippets        |
+  | seq                    |
   | sicp                   |
   | smartscan              |
   | smex                   |
