@@ -804,6 +804,8 @@ point is on and summons `hydra-mark-lines'."
       (setq ido-cr+-max-items 50000))
 
     (ido-ubiquitous-mode 1)
+
+    ;; Variables
     (push '(disable exact "unhighlight-regexp") ido-ubiquitous-command-overrides)
     (push '(disable prefix "sclang-dump-") ido-ubiquitous-command-overrides))
 
@@ -896,6 +898,7 @@ point is on and summons `hydra-mark-lines'."
       (set-face-attribute
        'linum-relative-current-face nil :background default-background-color)))
 
+  ;; Faces
   (let ((default-background-color (face-attribute 'default :background)))
     (set-face-attribute 'linum nil :background default-background-color)))
 
@@ -1747,7 +1750,6 @@ point is on and summons `hydra-mark-lines'."
     (setq helm-yas-display-key-on-candidate t))
 
   (yas-reload-all)
-  (add-to-list 'ac-sources 'ac-source-yasnippet)
   (modeline-remove-lighter 'yas-minor-mode)
 
   ;; Functions
@@ -1776,6 +1778,7 @@ point is on and summons `hydra-mark-lines'."
   (add-hook 'post-command-hook #'change-cursor-color-when-can-expand)
 
   ;; Variables
+  (add-to-list 'ac-sources 'ac-source-yasnippet)
   (setq yas-prompt-functions '(yas-ido-prompt yas-x-prompt yas-no-prompt))
   (setq yas-triggers-in-field t))
 
@@ -1820,6 +1823,8 @@ point is on and summons `hydra-mark-lines'."
     (helm-projectile-on))
 
   (projectile-global-mode 1)
+
+  ;; Variables
   (add-to-list 'projectile-globally-ignored-directories "doxygen")
   (setq projectile-cache-file "~/.emacs.d/.projectile.cache")
   (setq projectile-completion-system 'helm)
@@ -2051,6 +2056,7 @@ char if successful."
     :init
     (defalias 'speedbar 'sr-speedbar-open))
 
+  ;; Variables
   (setq speedbar-tag-hierarchy-method
         '(speedbar-simple-group-tag-hierarchy speedbar-sort-tag-hierarchy))
   (setq speedbar-use-images nil))
