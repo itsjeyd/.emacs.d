@@ -17,6 +17,8 @@
   | avy-zap                |
   | bind-key               |
   | browse-at-remote       |
+  | bts                    |
+  | bts-github             |
   | calfw                  |
   | caps-lock              |
   | cdlatex                |
@@ -37,6 +39,7 @@
   | flycheck-pyflakes      |
   | font-utils             |
   | fringe-helper          |
+  | gh                     |
   | gh-md                  |
   | git-commit-mode        |
   | git-gutter+            |
@@ -92,6 +95,7 @@
   | pony-mode              |
   | popup                  |
   | popwin                 |
+  | pos-tip                |
   | projectile             |
   | python-environment     |
   | queue                  |
@@ -116,6 +120,7 @@
   | visual-fill-column     |
   | web-beautify           |
   | wgrep                  |
+  | widget-mvc             |
   | writeroom-mode         |
   | yasnippet              |
   | yaxception             |

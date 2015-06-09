@@ -2119,6 +2119,17 @@ char if successful."
 (use-package browse-at-remote
   :commands browse-at-remote)
 
+(use-package bts
+  :commands (bts:summary-open bts:ticket-new)
+  :config
+
+  (use-package bts-github)
+
+  (use-package wid-edit
+    :ensure nil
+    :config
+    (set-face-attribute 'widget-field nil :box nil)))
+
 (use-package magit
   :commands magit-status
   :init
