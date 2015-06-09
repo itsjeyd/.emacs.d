@@ -1311,17 +1311,15 @@ point is on and summons `hydra-mark-lines'."
     :commands org-export-dispatch
     :config
     (setq org-export-copy-to-kill-ring nil)
-    (setq org-export-dispatch-use-expert-ui t))
+    (setq org-export-dispatch-use-expert-ui t)
 
-  (use-package ox-latex
-    :ensure nil
-    :defer t
-    :config
-    (setq org-latex-table-caption-above nil))
+    (use-package ox-latex
+      :ensure nil
+      :config
+      (setq org-latex-table-caption-above nil))
 
-  (use-package ox-md
-    :ensure nil
-    :defer t)
+    (use-package ox-md
+      :ensure nil))
 
   ;; Advice
   (defun org-handle-openwith (orig &optional include-linked refresh beg end)
