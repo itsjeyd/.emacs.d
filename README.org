@@ -84,6 +84,7 @@
   | openwith               |
   | org-ac                 |
   | org-plus-contrib       |
+  | ox-gfm                 |
   | package-build          |
   | paradox                |
   | pcache                 |

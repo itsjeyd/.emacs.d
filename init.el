@@ -1319,7 +1319,9 @@ point is on and summons `hydra-mark-lines'."
       (setq org-latex-table-caption-above nil))
 
     (use-package ox-md
-      :ensure nil))
+      :ensure nil)
+
+    (use-package ox-gfm))
 
   ;; Advice
   (defun org-handle-openwith (orig &optional include-linked refresh beg end)
