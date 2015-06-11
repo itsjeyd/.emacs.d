@@ -2457,6 +2457,11 @@ window that will be added to the current window layout."
 (use-package markdown-mode
   :commands markdown-mode
   :config
+
+  (use-package gh-md
+    :commands (gh-md-render-region gh-md-render-buffer))
+
+  ;; Hooks
   (add-hook 'markdown-mode-hook #'turn-on-auto-fill))
 
 (use-package synosaurus
