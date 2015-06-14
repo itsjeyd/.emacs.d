@@ -1271,8 +1271,12 @@ point is on and summons `hydra-mark-lines'."
   (use-package ob-plantuml
     :disabled
     :config
-    (setq org-plantuml-jar-path "/opt/plantuml/plantuml.jar")
-    (setq plantuml-jar-path "/opt/plantuml/plantuml.jar"))
+
+    (use-package plantuml-mode
+      :config
+      (setq plantuml-jar-path "/opt/plantuml/plantuml.jar"))
+
+    (setq org-plantuml-jar-path "/opt/plantuml/plantuml.jar"))
 
   (use-package org-ac
     :config
