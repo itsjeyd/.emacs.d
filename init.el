@@ -1276,6 +1276,7 @@ point is on and summons `hydra-mark-lines'."
       :config
       (setq plantuml-jar-path "/opt/plantuml/plantuml.jar"))
 
+    (add-to-list 'org-babel-load-languages '(plantuml . t) t)
     (setq org-plantuml-jar-path "/opt/plantuml/plantuml.jar"))
 
   (use-package org-ac
@@ -1382,7 +1383,6 @@ point is on and summons `hydra-mark-lines'."
   ;; Babel
   (add-to-list 'org-babel-load-languages '(sh . t) t)
   (add-to-list 'org-babel-load-languages '(dot . t) t)
-  (add-to-list 'org-babel-load-languages '(plantuml . t) t)
   (add-to-list 'org-babel-load-languages '(python . t) t)
 
   (org-babel-do-load-languages
