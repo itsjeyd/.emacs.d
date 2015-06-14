@@ -2060,8 +2060,8 @@ char if successful."
 ;;;;;;;;;;;;;;;;;;;;;
 
 (use-package sclang
+  :disabled
   :ensure nil
-  :defer 10
   :config
   (add-hook 'sclang-mode-hook #'sclang-extensions-mode))
 
