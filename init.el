@@ -576,6 +576,21 @@ point is on and summons `hydra-mark-lines'."
 (use-package clojure-mode
   :commands clojure-mode
   :config
+
+  (use-package cider
+    :config
+    (add-to-list 'ac-modes 'cider-mode)
+
+    ;; Hooks
+    (add-hook 'cider-mode-hook #'eldoc-mode)
+    (add-hook 'cider-mode-hook #'ac-cider-setup)
+    (add-hook 'cider-repl-mode-hook #'ac-cider-setup)
+
+    ;; Variables
+    (setq cider-repl-history-file "~/.emacs.d/.cider-history")
+    (setq cider-repl-use-pretty-printing t)
+    (setq nrepl-buffer-name-show-port t))
+
   (add-hook 'clojure-mode-hook #'lispy-mnemonic-mode))
 
 (use-package eldoc
@@ -1539,27 +1554,6 @@ point is on and summons `hydra-mark-lines'."
 (use-package org-protocol
   :ensure org-plus-contrib
   :defer 5)
-
-
-
-;;;;;;;;;;;;;;;;
-;;; Overtone ;;;
-;;;;;;;;;;;;;;;;
-
-(use-package cider
-  :defer t
-  :config
-  (add-to-list 'ac-modes 'cider-mode)
-
-  ;; Hooks
-  (add-hook 'cider-mode-hook #'eldoc-mode)
-  (add-hook 'cider-mode-hook #'ac-cider-setup)
-  (add-hook 'cider-repl-mode-hook #'ac-cider-setup)
-
-  ;; Variables
-  (setq cider-repl-history-file "~/.emacs.d/.cider-history")
-  (setq cider-repl-use-pretty-printing t)
-  (setq nrepl-buffer-name-show-port t))
 
 
 
