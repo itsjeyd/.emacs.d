@@ -1265,6 +1265,7 @@ point is on and summons `hydra-mark-lines'."
   (use-package ob-ditaa
     :disabled
     :config
+    (add-to-list 'org-babel-load-languages '(ditaa . t) t)
     (setq org-ditaa-jar-path "/usr/share/java/ditaa/ditaa-0_9.jar"))
 
   (use-package ob-plantuml
@@ -1377,7 +1378,6 @@ point is on and summons `hydra-mark-lines'."
   ;; Babel
   (add-to-list 'org-babel-load-languages '(sh . t) t)
   (add-to-list 'org-babel-load-languages '(dot . t) t)
-  (add-to-list 'org-babel-load-languages '(ditaa . t) t)
   (add-to-list 'org-babel-load-languages '(plantuml . t) t)
   (add-to-list 'org-babel-load-languages '(python . t) t)
 
