@@ -2039,6 +2039,19 @@ char if successful."
 ;;; Utilities ;;;
 ;;;;;;;;;;;;;;;;;
 
+; Advice
+(defun swap-args (fun)
+  (if (not (equal (interactive-form fun) '(interactive "P")))
+      (error "Can only swap args if interactive spec is (interactive \"P\").")
+    (advice-add
+     fun
+     :around
+     (lambda (orig &rest args)
+       "Swap default behavior with \\[universal-argument] behavior."
+       (if (car args)
+           (apply orig (cons nil (cdr args)))
+         (apply orig (cons '(4) (cdr args))))))))
+
 ; Functions
 (defun define-search-service (name url)
   "Create command for looking up query using a specific service."
