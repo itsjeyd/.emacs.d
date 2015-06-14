@@ -1281,8 +1281,7 @@ point is on and summons `hydra-mark-lines'."
   (use-package org-agenda
     :ensure nil
     :config
-    (setq org-agenda-files '("~/org/tasks.org"))
-    (setq org-agenda-include-diary t))
+    (setq org-agenda-files '("~/org/tasks.org")))
 
   (use-package org-capture
     :ensure nil
