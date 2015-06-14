@@ -490,7 +490,6 @@ region, operate on a single line. Otherwise, operate on region."
 (electric-pair-mode 1)
 
 (defvar single-backticks '(?\` . ?\`))
-(defvar single-quotes '(?\' . ?\'))
 
 ; Commands
 (defun kill-region-with-arg (arg)
@@ -1465,8 +1464,7 @@ point is on and summons `hydra-mark-lines'."
   (defvar org-verbatim-markup '(?= . ?=))
 
   (defun org-add-electric-pairs ()
-    (let ((org-electric-pairs `(,single-quotes
-                                ,org-verbatim-markup
+    (let ((org-electric-pairs `(,org-verbatim-markup
                                 ,org-italics-markup
                                 ,org-bold-markup)))
       (setq-local electric-pair-pairs
