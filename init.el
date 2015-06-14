@@ -806,7 +806,9 @@ point is on and summons `hydra-mark-lines'."
 ;;;;;;;;;;;
 
 (use-package ido
-  :commands (ido-dired ido-find-file ido-switch-buffer)
+  :bind (("C-x b" . ido-switch-buffer)
+         ("C-x d" . ido-dired)
+         ("C-x C-f" . ido-find-file))
   :config
 
   (use-package flx-ido
