@@ -353,6 +353,14 @@
   :init
   (bind-key "@" #'er/expand-region custom-keys-mode-prefix-map))
 
+(use-package iso-transl
+  :ensure nil
+  :defer t
+  :config
+  (bind-keys :map iso-transl-ctl-x-8-map
+             ("a" . "⟶")
+             ("l" . "⚡" )))
+
 (use-package mark-lines
   :ensure nil
   :load-path "lisp/mark-lines"
@@ -454,14 +462,6 @@
              ("m" . hydra-mc/body)
              ("a" . hydra-mc-all/body)
              ("e" . hydra-mc-edit/body)))
-
-(use-package iso-transl
-  :ensure nil
-  :defer t
-  :config
-  (bind-keys :map iso-transl-ctl-x-8-map
-             ("a" . "⟶")
-             ("l" . "⚡" )))
 
 (use-package utils
   :ensure nil
