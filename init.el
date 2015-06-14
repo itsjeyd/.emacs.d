@@ -887,7 +887,6 @@ point is on and summons `hydra-mark-lines'."
   (setq ido-create-new-buffer 'always)
   (setq ido-enable-flex-matching t)
   (setq ido-save-directory-list-file "~/.emacs.d/.ido.last")
-  (setq ido-use-filename-at-point 'guess)
   (setq ido-use-virtual-buffers t))
 
 (use-package smex
