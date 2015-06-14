@@ -1297,6 +1297,9 @@ point is on and summons `hydra-mark-lines'."
   (use-package org-list
     :ensure nil
     :config
+    ;; Advice
+    (swap-args 'org-toggle-checkbox)
+
     ;; Key Bindings
     (bind-keys :map org-mode-map
                ("M-n" . org-next-item)
