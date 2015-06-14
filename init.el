@@ -1228,11 +1228,6 @@ point is on and summons `hydra-mark-lines'."
     ("l" avy-move-line "line")
     ("r" avy-move-region "region"))
 
-  (defhydra hydra-move-by-page ()
-    "Move by page"
-    ("[" backward-page "prev page")
-    ("]" forward-page "next page"))
-
   ;; Key Bindings
   (bind-key "M-g" #'hydra-avy-jump/body)
   (bind-keys :map custom-keys-mode-prefix-map
@@ -1244,6 +1239,11 @@ point is on and summons `hydra-mark-lines'."
   (setq avy-background t)
   (setq avy-keys (number-sequence ?a ?z))
   (setq avy-style 'at-full))
+
+(defhydra hydra-move-by-page ()
+  "Move by page"
+  ("[" backward-page "prev page")
+  ("]" forward-page "next page"))
 
 (global-set-key (kbd "C-x [") #'hydra-move-by-page/body)
 (global-set-key (kbd "C-x ]") #'hydra-move-by-page/body)
