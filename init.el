@@ -2453,7 +2453,13 @@ window that will be added to the current window layout."
   (use-package gh-md
     :commands (gh-md-render-region gh-md-render-buffer))
 
+  ;; Functions
+  (defun markdown-add-electric-pairs ()
+    (setq-local electric-pair-pairs
+                (cons single-backticks electric-pair-pairs)))
+
   ;; Hooks
+  (add-hook 'markdown-mode-hook #'markdown-add-electric-pairs)
   (add-hook 'markdown-mode-hook #'turn-on-auto-fill))
 
 (use-package synosaurus
