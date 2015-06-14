@@ -2052,6 +2052,8 @@ char if successful."
            (apply orig (cons nil (cdr args)))
          (apply orig (cons '(4) (cdr args))))))))
 
+(swap-args 'quit-window)
+
 ; Functions
 (defun define-search-service (name url)
   "Create command for looking up query using a specific service."
