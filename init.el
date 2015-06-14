@@ -919,8 +919,6 @@ point is on and summons `hydra-mark-lines'."
   (setq whitespace-line-column nil)
   (setq whitespace-style '(face lines-tail)))
 
-; Commands
-
 ; Controls
 (set-scroll-bar-mode nil)
 (menu-bar-mode 0)
