@@ -340,6 +340,14 @@
   :bind (("C-c i" . change-inner)
          ("C-c o" . change-outer)))
 
+(use-package elec-pair
+  :ensure nil
+  :init
+  (electric-pair-mode 1)
+
+  ;; Pairs
+  (defvar single-backticks '(?\` . ?\`)))
+
 (use-package expand-region
   :commands er/expand-region
   :init
@@ -485,11 +493,6 @@ region, operate on a single line. Otherwise, operate on region."
 
 (advice-add 'kill-region :before #'determine-scope)
 (advice-add 'kill-ring-save :before #'determine-scope)
-
-; Electric Pair Mode
-(electric-pair-mode 1)
-
-(defvar single-backticks '(?\` . ?\`))
 
 ; Commands
 (defun kill-region-with-arg (arg)
