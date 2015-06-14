@@ -67,7 +67,6 @@
   | idle-highlight-mode    |
   | ido-completing-read+   |
   | ido-ubiquitous         |
-  | ido-vertical-mode      |
   | iedit                  |
   | interleave             |
   | jedi                   |

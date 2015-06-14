@@ -1714,21 +1714,6 @@ point is on and summons `hydra-mark-lines'."
   (setq helm-dash-docsets-path "/storage/docsets/")
   (setq helm-dash-min-length 2))
 
-(use-package imenu
-  :commands imenu
-  :config
-
-  (use-package ido-vertical-mode
-    :config
-    (defun imenu-toggle-ido-vertical-mode (orig &optional prompt alist)
-      (unwind-protect
-          (progn (ido-vertical-mode 1)
-                 (funcall orig prompt alist))
-        (ido-vertical-mode -1)))
-
-    (advice-add 'imenu-choose-buffer-index
-                :around #'imenu-toggle-ido-vertical-mode)))
-
 (use-package yasnippet
   :commands yas-minor-mode
   :init
