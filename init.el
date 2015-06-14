@@ -660,7 +660,7 @@ point is on and summons `hydra-mark-lines'."
 (use-package emoji-cheat-sheet-plus
   :commands (emoji-cheat-sheet-plus-buffer emoji-cheat-sheet-plus-insert)
   :init
-  (add-hook 'org-mode-hook #'emoji-cheat-sheet-plus-display-mode)
+  (add-hook 'markdown-mode-hook #'emoji-cheat-sheet-plus-display-mode)
   :config
   (modeline-remove-lighter 'emoji-cheat-sheet-plus-display-mode)
 
