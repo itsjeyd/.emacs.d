@@ -701,6 +701,18 @@ point is on and summons `hydra-mark-lines'."
     (setq helm-semantic-fuzzy-match t)
     (setq helm-M-x-fuzzy-match t))
 
+  ;; Hydra
+  (defhydra hydra-helm-github ()
+    "GitHub"
+    ("c" helm-open-github-from-commit "commit")
+    ("f" helm-open-github-from-file "file")
+    ("i" helm-open-github-from-issues "issue")
+    ("p" helm-open-github-from-pull-requests "pull request")
+    ("s" helm-github-stars "starred repo"))
+
+  ;; Key Bindings
+  (bind-key "g" #'hydra-helm-github/body helm-command-map)
+
   ;; Variables
   (setq helm-truncate-lines t))
 
