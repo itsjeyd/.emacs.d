@@ -8,6 +8,7 @@
   | ac-js2                 |
   | ace-window             |
   | anchored-transpose     |
+  | annotate               |
   | anzu                   |
   | async                  |
   | auctex                 |
