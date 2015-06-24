@@ -478,15 +478,6 @@
 
 (advice-add 'set-mark-command :before #'record-current-position)
 
-(defun goto-beginning-of-word (arg)
-  (unless (or (looking-back "\\b")
-              (looking-back "\\s-") (looking-at "\\s-"))
-    (backward-word)))
-
-(advice-add 'capitalize-word :before #'goto-beginning-of-word)
-(advice-add 'downcase-word :before #'goto-beginning-of-word)
-(advice-add 'upcase-word :before #'goto-beginning-of-word)
-
 (defun determine-scope (beg end &optional region)
   "Determine scope for next invocation of `kill-region' or
 `kill-ring-save': When called interactively with no active

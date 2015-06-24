@@ -6,6 +6,12 @@
 ;;; Editing ;;;
 ;;;;;;;;;;;;;;;
 
+; Advice
+(defun goto-beginning-of-word (arg)
+  (unless (or (looking-back "\\b")
+              (looking-back "\\s-") (looking-at "\\s-"))
+    (backward-word)))
+
 ; Commands
 (defun flush-empty-lines ()
   "Remove empty lines from buffer."
