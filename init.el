@@ -693,7 +693,7 @@ point is on and summons `hydra-mark-lines'."
     (setq helm-M-x-fuzzy-match t))
 
   ;; Hydra
-  (defhydra hydra-helm-github ()
+  (defhydra hydra-helm-github (:color blue)
     "GitHub"
     ("c" helm-open-github-from-commit "commit")
     ("f" helm-open-github-from-file "file")
