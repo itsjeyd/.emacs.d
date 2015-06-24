@@ -2109,7 +2109,7 @@ char if successful."
 ;;;;;;;;;;;;;;;;;;;;;;;
 
 (use-package browse-at-remote
-  :commands browse-at-remote)
+  :commands browse-at-remote browse-at-remote/to-clipboard)
 
 (use-package bts
   :commands (bts:summary-open bts:ticket-new)
