@@ -680,17 +680,7 @@ point is on and summons `hydra-mark-lines'."
   :config
 
   (use-package helm-config
-    :ensure helm
-    :config
-    (setq helm-apropos-fuzzy-match t)
-    (setq helm-buffers-fuzzy-matching t)
-    (setq helm-imenu-fuzzy-matching t)
-    (setq helm-lisp-fuzzy-completion t)
-    (setq helm-locate-fuzzy-match t)
-    (setq helm-projectile-fuzzy-match t)
-    (setq helm-recentf-fuzzy-match t)
-    (setq helm-semantic-fuzzy-match t)
-    (setq helm-M-x-fuzzy-match t))
+    :ensure helm)
 
   ;; Hydra
   (defhydra hydra-helm-github (:color blue)
