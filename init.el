@@ -1168,8 +1168,14 @@ point is on and summons `hydra-mark-lines'."
 ;;; Modes ;;;
 ;;;;;;;;;;;;;
 
+; Advice
+(defun fundamental-mode-setup ()
+  (turn-on-orgstruct++))
+
+(advice-add 'fundamental-mode :after #'fundamental-mode-setup)
+
+; Variables
 (add-to-list 'auto-mode-alist '("routes$" . conf-space-mode))
-(add-to-list 'auto-mode-alist '("\\.eml\\'" . org-mode))
 
 
 
