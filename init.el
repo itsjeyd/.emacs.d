@@ -814,6 +814,7 @@ point is on and summons `hydra-mark-lines'."
 ;;;;;;;;;;;
 
 (use-package ido
+  :defer 5
   :bind (("C-x b" . ido-switch-buffer)
          ("C-x d" . ido-dired)
          ("C-x C-f" . ido-find-file))
