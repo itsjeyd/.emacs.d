@@ -99,6 +99,7 @@
   | pkg-info               |
   | plantuml-mode          |
   | pony-mode              |
+  | pophint                |
   | popup                  |
   | popwin                 |
   | pos-tip                |

@@ -2118,6 +2118,9 @@ char if successful."
 
   (use-package bts-github)
 
+  (use-package pophint-config
+    :ensure pophint)
+
   (use-package wid-edit
     :ensure nil
     :config
