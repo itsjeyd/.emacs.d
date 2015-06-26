@@ -1466,10 +1466,13 @@ point is on and summons `hydra-mark-lines'."
       (setq-local electric-pair-text-pairs electric-pair-pairs)))
 
   (defun org-point-in-speed-command-position-p ()
-    (or (looking-at org-outline-regexp)
-        (looking-at "^#\+")
-        (looking-at "^[[:blank:]]\\{2,\\}")
-        (looking-at "^$")))
+    (if (equal (point) 1)
+        (or (looking-at org-outline-regexp)
+            (looking-at "^#\+"))
+      (or (looking-at org-outline-regexp)
+          (looking-at "^#\+")
+          (looking-at "^[[:blank:]]\\{2,\\}")
+          (looking-at "^$"))))
 
   ;; Hooks
   (add-hook 'org-mode-hook #'org-add-electric-pairs)
