@@ -693,6 +693,7 @@ point is on and summons `hydra-mark-lines'."
 
   ;; Key Bindings
   (bind-key "g" #'hydra-helm-github/body helm-command-map)
+  (bind-key "M-o" #'helm-previous-source helm-map)
 
   ;; Variables
   (setq helm-truncate-lines t))
