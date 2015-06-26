@@ -2123,6 +2123,84 @@ char if successful."
     :config
     (set-face-attribute 'widget-field nil :box nil)))
 
+(use-package git-gutter+
+  :commands git-gutter+-mode
+  :init
+  (add-hook 'css-mode-hook #'git-gutter+-mode)
+  (add-hook 'html-mode-hook #'git-gutter+-mode)
+  (add-hook 'org-mode-hook #'git-gutter+-mode)
+  (add-hook 'prog-mode-hook #'git-gutter+-mode)
+  :config
+
+  (use-package git-gutter-fringe+
+    :config
+    ;; Functions
+    (defun git-gutter-fringe+-change-fringe ()
+      (if linum-mode
+          (setq-local git-gutter-fr+-side 'right-fringe)
+        (setq-local git-gutter-fr+-side 'left-fringe))
+      (git-gutter+-refresh))
+
+    ;; Hooks
+    (add-hook 'linum-mode-hook #'git-gutter-fringe+-change-fringe))
+
+  (modeline-remove-lighter 'git-gutter+-mode)
+
+  ;; Functions
+  (defun git-gutter+-setup ()
+    (setq-local git-gutter-fr+-side 'left-fringe))
+
+  ;; Hooks
+  (add-hook 'git-gutter+-mode-hook #'git-gutter+-setup)
+
+  ;; Hydra
+  (defhydra hydra-git-gutter+ (:color pink)
+    "Git Gutter"
+    ("n" git-gutter+-next-hunk "next")
+    ("p" git-gutter+-previous-hunk "prev")
+    ("d" git-gutter+-show-hunk "diff")
+    ("s" git-gutter+-stage-hunks "stage")
+    ("r" git-gutter+-revert-hunks "revert")
+    ("u" git-gutter+-unstage-whole-buffer "unstage buffer")
+    ("m" magit-status "magit" :color blue)
+    ("C-g" nil "quit"))
+
+  ;; Key Bindings
+  (bind-key "g g" #'hydra-git-gutter+/body custom-keys-mode-prefix-map))
+
+(use-package git-wip-timemachine
+  :ensure nil
+  :load-path "lisp/git-wip-timemachine"
+  :commands git-wip-timemachine)
+
+(use-package github-browse-file
+  :commands (github-browse-file github-browse-file-blame))
+
+(use-package github-clone
+  :commands github-clone)
+
+(use-package helm-github-stars
+  :commands helm-github-stars
+  :config
+  (setq helm-github-stars-username "itsjeyd"))
+
+(use-package helm-open-github
+  :commands (helm-open-github-from-commit
+             helm-open-github-from-file
+             helm-open-github-from-issues
+             helm-open-github-from-pull-requests)
+  :config
+  (defun helm-open-github-from-issues (arg)
+  (interactive "P")
+  (let ((host (helm-open-github--host))
+        (url (helm-open-github--remote-url)))
+    (when arg
+      (remhash url helm-open-github--issues-cache))
+    (if (not (string= host "github.com"))
+        (helm-open-github--from-issues-direct host)
+      (helm :sources '(helm-open-github--from-issues-source)
+            :buffer  "*open github*")))))
+
 (use-package magit
   :commands magit-status
   :init
@@ -2171,84 +2249,6 @@ char if successful."
 
 ; git-wip
 (load "~/git-wip/emacs/git-wip.el")
-
-(use-package git-wip-timemachine
-  :ensure nil
-  :load-path "lisp/git-wip-timemachine"
-  :commands git-wip-timemachine)
-
-(use-package git-gutter+
-  :commands git-gutter+-mode
-  :init
-  (add-hook 'css-mode-hook #'git-gutter+-mode)
-  (add-hook 'html-mode-hook #'git-gutter+-mode)
-  (add-hook 'org-mode-hook #'git-gutter+-mode)
-  (add-hook 'prog-mode-hook #'git-gutter+-mode)
-  :config
-
-  (use-package git-gutter-fringe+
-    :config
-    ;; Functions
-    (defun git-gutter-fringe+-change-fringe ()
-      (if linum-mode
-          (setq-local git-gutter-fr+-side 'right-fringe)
-        (setq-local git-gutter-fr+-side 'left-fringe))
-      (git-gutter+-refresh))
-
-    ;; Hooks
-    (add-hook 'linum-mode-hook #'git-gutter-fringe+-change-fringe))
-
-  (modeline-remove-lighter 'git-gutter+-mode)
-
-  ;; Functions
-  (defun git-gutter+-setup ()
-    (setq-local git-gutter-fr+-side 'left-fringe))
-
-  ;; Hooks
-  (add-hook 'git-gutter+-mode-hook #'git-gutter+-setup)
-
-  ;; Hydra
-  (defhydra hydra-git-gutter+ (:color pink)
-    "Git Gutter"
-    ("n" git-gutter+-next-hunk "next")
-    ("p" git-gutter+-previous-hunk "prev")
-    ("d" git-gutter+-show-hunk "diff")
-    ("s" git-gutter+-stage-hunks "stage")
-    ("r" git-gutter+-revert-hunks "revert")
-    ("u" git-gutter+-unstage-whole-buffer "unstage buffer")
-    ("m" magit-status "magit" :color blue)
-    ("C-g" nil "quit"))
-
-  ;; Key Bindings
-  (bind-key "g g" #'hydra-git-gutter+/body custom-keys-mode-prefix-map))
-
-(use-package helm-github-stars
-  :commands helm-github-stars
-  :config
-  (setq helm-github-stars-username "itsjeyd"))
-
-(use-package helm-open-github
-  :commands (helm-open-github-from-commit
-             helm-open-github-from-file
-             helm-open-github-from-issues
-             helm-open-github-from-pull-requests)
-  :config
-  (defun helm-open-github-from-issues (arg)
-  (interactive "P")
-  (let ((host (helm-open-github--host))
-        (url (helm-open-github--remote-url)))
-    (when arg
-      (remhash url helm-open-github--issues-cache))
-    (if (not (string= host "github.com"))
-        (helm-open-github--from-issues-direct host)
-      (helm :sources '(helm-open-github--from-issues-source)
-            :buffer  "*open github*")))))
-
-(use-package github-browse-file
-  :commands (github-browse-file github-browse-file-blame))
-
-(use-package github-clone
-  :commands github-clone)
 
 ; Variables
 (setq magit-last-seen-setup-instructions "1.4.0")
