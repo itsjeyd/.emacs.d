@@ -2172,6 +2172,9 @@ char if successful."
   ;; Key Bindings
   (bind-key "g g" #'hydra-git-gutter/body custom-keys-mode-prefix-map))
 
+(use-package git-messenger
+  :bind ("C-x v p" . git-messenger:popup-message))
+
 (use-package git-wip-timemachine
   :ensure nil
   :load-path "lisp/git-wip-timemachine"
