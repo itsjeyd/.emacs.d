@@ -133,17 +133,18 @@
   :config
   (setq cfw:face-item-separator-color "#6699cc")
   (setq cfw:render-line-breaker 'cfw:render-line-breaker-wordwrap)
-  (when (eq (car custom-enabled-themes) 'sanityinc-tomorrow-eighties)
-            (set-face-attribute 'cfw:face-title nil :foreground "#f99157")
-            (set-face-attribute 'cfw:face-sunday nil :foreground "#cc99cc")
-            (set-face-attribute 'cfw:face-header nil :foreground "#66cccc")
-            (set-face-attribute 'cfw:face-holiday nil :foreground "#ffcc66")
-            (set-face-attribute 'cfw:face-default-day nil :foreground "#66cccc")
-            (set-face-attribute 'cfw:face-select nil :background "#99cc99" :foreground "#393939")
-            (set-face-attribute 'cfw:face-today-title nil :background "#f2777a" :foreground "#393939")
-            (set-face-attribute 'cfw:face-today nil :foreground "#99cc99")
-            (set-face-attribute 'cfw:face-toolbar nil :background "#393939")
-            (set-face-attribute 'cfw:face-toolbar-button-off nil :foreground "#7f7f7f" :weight 'normal)))
+  (when (or (eq (car custom-enabled-themes) 'base16-hopscotch-dark)
+            (eq (car custom-enabled-themes) 'sanityinc-tomorrow-eighties))
+    (set-face-attribute 'cfw:face-title nil :foreground "#f99157")
+    (set-face-attribute 'cfw:face-sunday nil :foreground "#cc99cc")
+    (set-face-attribute 'cfw:face-header nil :foreground "#66cccc")
+    (set-face-attribute 'cfw:face-holiday nil :foreground "#ffcc66")
+    (set-face-attribute 'cfw:face-default-day nil :foreground "#66cccc")
+    (set-face-attribute 'cfw:face-select nil :background "#99cc99" :foreground "#393939")
+    (set-face-attribute 'cfw:face-today-title nil :background "#f2777a" :foreground "#393939")
+    (set-face-attribute 'cfw:face-today nil :foreground "#99cc99")
+    (set-face-attribute 'cfw:face-toolbar nil :background "#393939")
+    (set-face-attribute 'cfw:face-toolbar-button-off nil :foreground "#7f7f7f" :weight 'normal)))
 
 (use-package calfw-org
   :ensure calfw
@@ -795,7 +796,8 @@ point is on and summons `hydra-mark-lines'."
 (use-package hydra
   :defer t
   :config
-  (when (eq (car custom-enabled-themes) 'sanityinc-tomorrow-eighties)
+  (when (or (eq (car custom-enabled-themes) 'base16-hopscotch-dark)
+            (eq (car custom-enabled-themes) 'sanityinc-tomorrow-eighties))
     (set-face-attribute 'hydra-face-blue nil :foreground "#6699cc")))
 
 
@@ -979,7 +981,7 @@ point is on and summons `hydra-mark-lines'."
 
 (advice-add 'load-theme :after #'load-custom-theme-settings)
 
-(load-theme 'sanityinc-tomorrow-eighties t)
+(load-theme 'base16-hopscotch-dark t)
 
 ; Tooltips
 (tooltip-mode 0)
@@ -1928,6 +1930,12 @@ point is on and summons `hydra-mark-lines'."
 (use-package anzu
   :config
   (global-anzu-mode 1)
+
+  ;; Faces
+  (when (eq (car custom-enabled-themes) 'base16-hopscotch-dark)
+    (set-face-attribute 'anzu-mode-line nil :foreground "#ff7f50"))
+
+  ;; Variables
   (setq anzu-mode-lighter ""))
 
 (use-package helm-swoop
@@ -2235,6 +2243,11 @@ char if successful."
     (if (derived-mode-p 'magit-mode)
         (magit-git-command "ls-files" default-directory)
       (message "Not in a Magit buffer.")))
+
+  ;; Faces
+  (when (eq (car custom-enabled-themes) 'base16-hopscotch-dark)
+    (set-face-attribute 'diff-refine-added nil :foreground "#98fb98")
+    (set-face-attribute 'diff-refine-removed nil :foreground "#ff7f50"))
 
   ;; Hooks
   (add-hook 'magit-revert-buffer-hook #'git-gutter+-refresh)
