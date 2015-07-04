@@ -46,12 +46,11 @@
   | fringe-helper          |
   | gh                     |
   | gh-md                  |
-  | git-commit-mode        |
-  | git-gutter+            |
-  | git-gutter-fringe+     |
+  | git-commit             |
+  | git-gutter             |
+  | git-gutter-fringe      |
   | github-browse-file     |
   | github-clone           |
-  | git-rebase-mode        |
   | git-timemachine        |
   | google-maps            |
   | guide-key              |
@@ -82,6 +81,7 @@
   | log4e                  |
   | logito                 |
   | magit                  |
+  | magit-popup            |
   | markdown-mode          |
   | move-text              |
   | multiple-cursors       |
@@ -129,6 +129,7 @@
   | web-beautify           |
   | wgrep                  |
   | widget-mvc             |
+  | with-editor            |
   | writeroom-mode         |
   | yasnippet              |
   | yaxception             |

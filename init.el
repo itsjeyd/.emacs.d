@@ -2135,50 +2135,42 @@ char if successful."
     :config
     (set-face-attribute 'widget-field nil :box nil)))
 
-(use-package git-gutter+
-  :commands git-gutter+-mode
+(use-package git-gutter
+  :commands git-gutter-mode
   :init
-  (add-hook 'css-mode-hook #'git-gutter+-mode)
-  (add-hook 'html-mode-hook #'git-gutter+-mode)
-  (add-hook 'org-mode-hook #'git-gutter+-mode)
-  (add-hook 'prog-mode-hook #'git-gutter+-mode)
+  (add-hook 'css-mode-hook #'git-gutter-mode)
+  (add-hook 'html-mode-hook #'git-gutter-mode)
+  (add-hook 'org-mode-hook #'git-gutter-mode)
+  (add-hook 'prog-mode-hook #'git-gutter-mode)
   :config
 
-  (use-package git-gutter-fringe+
+  (use-package git-gutter-fringe
     :config
     ;; Functions
-    (defun git-gutter-fringe+-change-fringe ()
+    (defun git-gutter-fringe-change-fringe ()
       (if linum-mode
-          (setq-local git-gutter-fr+-side 'right-fringe)
-        (setq-local git-gutter-fr+-side 'left-fringe))
-      (git-gutter+-refresh))
+          (setq-local git-gutter-fr:side 'right-fringe)
+        (setq-local git-gutter-fr:side 'left-fringe))
+      (git-gutter:update-all-windows))
 
     ;; Hooks
-    (add-hook 'linum-mode-hook #'git-gutter-fringe+-change-fringe))
+    (add-hook 'linum-mode-hook #'git-gutter-fringe-change-fringe))
 
-  (modeline-remove-lighter 'git-gutter+-mode)
-
-  ;; Functions
-  (defun git-gutter+-setup ()
-    (setq-local git-gutter-fr+-side 'left-fringe))
-
-  ;; Hooks
-  (add-hook 'git-gutter+-mode-hook #'git-gutter+-setup)
+  (modeline-remove-lighter 'git-gutter-mode)
 
   ;; Hydra
-  (defhydra hydra-git-gutter+ (:color pink)
+  (defhydra hydra-git-gutter (:color pink)
     "Git Gutter"
-    ("n" git-gutter+-next-hunk "next")
-    ("p" git-gutter+-previous-hunk "prev")
-    ("d" git-gutter+-show-hunk "diff")
-    ("s" git-gutter+-stage-hunks "stage")
-    ("r" git-gutter+-revert-hunks "revert")
-    ("u" git-gutter+-unstage-whole-buffer "unstage buffer")
-    ("m" magit-status "magit" :color blue)
-    ("C-g" nil "quit"))
+    ("n" git-gutter:next-hunk "next")
+    ("p" git-gutter:previous-hunk "prev")
+    ("d" git-gutter:popup-hunk "diff")
+    ("s" git-gutter:stage-hunk "stage")
+    ("r" git-gutter:revert-hunk "revert")
+    ("u" git-gutter:update-all-windows "update" :color blue)
+    ("m" magit-status "magit" :color blue))
 
   ;; Key Bindings
-  (bind-key "g g" #'hydra-git-gutter+/body custom-keys-mode-prefix-map))
+  (bind-key "g g" #'hydra-git-gutter/body custom-keys-mode-prefix-map))
 
 (use-package git-wip-timemachine
   :ensure nil
@@ -2219,7 +2211,7 @@ char if successful."
   (bind-key "g s" #'magit-status custom-keys-mode-prefix-map)
   :config
 
-  (use-package git-commit-mode
+  (use-package git-commit
     :config
     ;; Functions
     (defun git-commit-add-electric-pairs ()
@@ -2228,15 +2220,10 @@ char if successful."
 
     ;; Hooks
     (add-hook 'git-commit-mode-hook #'git-commit-add-electric-pairs)
-    (add-hook 'git-commit-mode-hook #'turn-on-orgstruct)
-    (add-hook 'git-commit-mode-hook #'turn-on-auto-fill))
+    (add-hook 'git-commit-mode-hook #'turn-on-auto-fill)
+    (add-hook 'git-commit-mode-hook #'turn-on-orgstruct))
 
   ;; Commands
-  (defun magit-log-all ()
-    (interactive)
-    (magit-key-mode-popup-logging)
-    (magit-key-mode-toggle-option 'logging "--all"))
-
   (defun magit-ls-files ()
     "List tracked files of current repository."
     (interactive)
@@ -2250,25 +2237,18 @@ char if successful."
     (set-face-attribute 'diff-refine-removed nil :foreground "#ff7f50"))
 
   ;; Hooks
-  (add-hook 'magit-revert-buffer-hook #'git-gutter+-refresh)
+  (add-hook 'magit-refresh-buffer-hook #'git-gutter:update-all-windows)
 
   ;; Key Bindings
   (unbind-key "M-s" magit-mode-map)
   (unbind-key "M-S" magit-mode-map)
-  (bind-keys :map magit-mode-map
-             ("K" . magit-ls-files)
-             ("l" . magit-log-all))
+  (bind-key "K" #'magit-ls-files magit-mode-map)
 
   ;; Variables
-  (setq magit-auto-revert-mode-lighter "")
-  (setq magit-diff-refine-hunk t)
-  (setq magit-use-overlays nil))
+  (setq magit-diff-refine-hunk t))
 
 ; git-wip
 (load "~/git-wip/emacs/git-wip.el")
-
-; Variables
-(setq magit-last-seen-setup-instructions "1.4.0")
 
 
 
@@ -2478,16 +2458,7 @@ window that will be added to the current window layout."
   :commands (synosaurus-lookup synosaurus-choose-and-replace))
 
 (use-package writeroom-mode
-  :commands writeroom-mode
-  :config
-  ;; Functions
-  (defun turn-off-git-gutter+ ()
-    (if (not git-gutter+-mode)
-        (git-gutter+-mode t)
-      (git-gutter+-mode -1)))
-
-  ;; Hooks
-  (add-hook 'writeroom-mode-hook #'turn-off-git-gutter+))
+  :commands writeroom-mode)
 
 ; Commands
 (defun ispell-word-then-abbrev (local)
