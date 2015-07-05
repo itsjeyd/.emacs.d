@@ -50,7 +50,6 @@
   | git-gutter             |
   | git-gutter-fringe      |
   | github-browse-file     |
-  | github-clone           |
   | git-timemachine        |
   | google-maps            |
   | guide-key              |

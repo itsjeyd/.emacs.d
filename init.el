@@ -2183,9 +2183,6 @@ char if successful."
 (use-package github-browse-file
   :commands (github-browse-file github-browse-file-blame))
 
-(use-package github-clone
-  :commands github-clone)
-
 (use-package helm-github-stars
   :commands helm-github-stars
   :config
@@ -2209,7 +2206,7 @@ char if successful."
             :buffer  "*open github*")))))
 
 (use-package magit
-  :commands magit-status
+  :commands (magit-status magit-clone)
   :init
   (bind-key "g s" #'magit-status custom-keys-mode-prefix-map)
   :config
@@ -2227,6 +2224,15 @@ char if successful."
     (add-hook 'git-commit-mode-hook #'turn-on-orgstruct))
 
   ;; Commands
+  (defun magit-clone-github (repository directory)
+    (interactive
+     (let* ((owner (read-string "Owner: "))
+            (repo (read-string "Repo: "))
+            (url (format "https://github.com/%s/%s.git" owner repo)))
+       (list url
+             (ido-read-directory-name "Directory: "))))
+    (magit-clone repository directory))
+
   (defun magit-ls-files ()
     "List tracked files of current repository."
     (interactive)
