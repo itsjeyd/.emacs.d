@@ -328,7 +328,7 @@
   (bind-key "C-f" #'ac-stop ac-menu-map)
 
   ;; Variables
-  (setq ac-auto-show-menum 0.2)
+  (setq ac-auto-show-menu 0.2)
   (setq ac-comphist-file "~/.emacs.d/.ac-comphist.dat")
   (setq ac-ignore-case nil)
   (setq ac-quick-help-delay 0.5)
