@@ -2209,7 +2209,9 @@ char if successful."
 (use-package magit
   :commands (magit-status magit-clone)
   :init
-  (bind-key "g s" #'magit-status custom-keys-mode-prefix-map)
+  (bind-keys :map custom-keys-mode-prefix-map
+             ("g d" . magit-dispatch-popup)
+             ("g s" . magit-status))
   :config
 
   (use-package git-commit
