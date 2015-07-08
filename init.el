@@ -2257,7 +2257,8 @@ char if successful."
   (bind-key "K" #'magit-ls-files magit-mode-map)
 
   ;; Variables
-  (setq magit-diff-refine-hunk t))
+  (setq magit-diff-refine-hunk t)
+  (setq magit-completing-read-function #'magit-ido-completing-read))
 
 ; git-wip
 (load "~/git-wip/emacs/git-wip.el")
