@@ -83,6 +83,7 @@
   (setq-default ibuffer-saved-filter-groups
                 '(("Default"
                    ("Dired" (mode . dired-mode))
+                   ("Magit" (name . "\*magit.+*"))
                    ("Org" (mode . org-mode))
                    ("Temporary" (name . "\*.*\*"))))))
 
