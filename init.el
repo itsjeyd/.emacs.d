@@ -1462,6 +1462,8 @@ point is on and summons `hydra-mark-lines'."
   (when (eq (car custom-enabled-themes) 'sanityinc-tomorrow-eighties)
     (set-face-attribute 'org-block-begin-line nil :background "#393939")
     (set-face-attribute 'org-block-end-line nil :background "#393939"))
+  (when (eq (car custom-enabled-themes) 'base16-hopscotch-dark)
+    (set-face-attribute 'org-verbatim nil :foreground "#797379"))
 
   ;; Functions
   (defvar org-bold-markup '(?\* . ?\*))
