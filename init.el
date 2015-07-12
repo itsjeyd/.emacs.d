@@ -1297,6 +1297,14 @@ point is on and summons `hydra-mark-lines'."
             ("z" "Quote" plain (file "~/org/quotes.org")
              "%?\n\n-" :empty-lines-before 2 :kill-buffer t))))
 
+  (use-package org-clock
+    :ensure nil
+    :bind (("C-c C-x C-d" . org-clock-display)
+           ("C-c C-x C-j" . org-clock-goto)
+           ("C-c C-x C-o" . org-clock-out)
+           ("C-c C-x C-q" . org-clock-cancel)
+           ("C-c C-x C-x" . org-clock-in-last)))
+
   (use-package org-footnote
     :ensure nil
     :config
