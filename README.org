@@ -56,6 +56,7 @@
   | haml-mode              |
   | helm                   |
   | helm-c-yasnippet       |
+  | helm-core              |
   | helm-dash              |
   | helm-firefox           |
   | helm-github-stars      |
