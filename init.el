@@ -1184,7 +1184,7 @@ point is on and summons `hydra-mark-lines'."
   (defun avy-move-region ()
     "Select two lines and move the text between them here."
     (interactive)
-    (avy--with-avy-keys avy-move-region
+    (avy-with avy-move-region
       (let ((beg (car (avy--line)))
             (end (car (avy--line)))
             (pad (if (bolp) "" "\n")))
