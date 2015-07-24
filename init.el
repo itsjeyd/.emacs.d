@@ -992,6 +992,7 @@ point is on and summons `hydra-mark-lines'."
 (setq inhibit-startup-screen t)
 (setq initial-scratch-message
       ";; Parentheses are just *hugs* for your function calls!\n\n")
+(setq frame-resize-pixelwise t)
 
 
 
