@@ -85,6 +85,7 @@
                    ("Dired" (mode . dired-mode))
                    ("Magit" (name . "\*magit.+*"))
                    ("Org" (mode . org-mode))
+                   ("Grep" (name . "\*grep-.*"))
                    ("Temporary" (name . "\*.*\*"))))))
 
 ; Commands
