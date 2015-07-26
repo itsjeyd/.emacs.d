@@ -685,6 +685,13 @@ point is on and summons `hydra-mark-lines'."
   (use-package helm-config
     :ensure helm)
 
+  (use-package helm-firefox
+    :commands helm-firefox-bookmarks
+    :config
+    (defun helm-get-firefox-user-init-dir ()
+      "Return name of Firefox profile to list bookmarks for."
+      "~/.mozilla/firefox/mwad0hks.default/"))
+
   ;; Hydra
   (defhydra hydra-helm-github (:color blue)
     "GitHub"
@@ -700,13 +707,6 @@ point is on and summons `hydra-mark-lines'."
 
   ;; Variables
   (setq helm-truncate-lines t))
-
-(use-package helm-firefox
-  :commands helm-firefox-bookmarks
-  :config
-  (defun helm-get-firefox-user-init-dir ()
-    "Return name of Firefox profile to list bookmarks for."
-    "~/.mozilla/firefox/mwad0hks.default/"))
 
 
 
