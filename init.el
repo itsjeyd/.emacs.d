@@ -1876,9 +1876,14 @@ point is on and summons `hydra-mark-lines'."
   (use-package wenote
     :ensure nil)
 
+  ;; Functions
+  (defun python-add-electric-pairs ()
+    (setq-local electric-pair-pairs
+                (cons single-backticks electric-pair-pairs)))
   ;; Hooks
   (add-hook 'python-mode-hook #'flycheck-mode)
   (add-hook 'python-mode-hook #'jedi:setup)
+  (add-hook 'python-mode-hook #'python-add-electric-pairs)
 
   ;; Key Bindings
   (unbind-key "C-c C-f" python-mode-map)
