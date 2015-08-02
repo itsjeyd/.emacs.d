@@ -2296,6 +2296,7 @@ char if successful."
   (setq magit-process-buffer-name-format "*magit-process: %b*")
   (setq magit-reflog-buffer-name-format "*magit-reflog: %b*")
   (setq magit-refs-buffer-name-format "*magit-refs: %b*")
+  (setq magit-revert-buffers t)
   (setq magit-revision-buffer-name-format "*magit-rev: %b*")
   (setq magit-stash-buffer-name-format "*magit-stash: %b*")
   (setq magit-stashes-buffer-name-format "*magit-stashes: %b*")
