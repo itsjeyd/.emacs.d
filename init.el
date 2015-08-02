@@ -776,7 +776,6 @@ point is on and summons `hydra-mark-lines'."
 
 ; Variables
 (setq help-window-select t)
-(setq apropos-sort-by-scores t)
 (setq find-function-C-source-directory "~/emacs-24.4/src/")
 
 
