@@ -110,6 +110,7 @@
   | rainbow-mode           |
   | request                |
   | s                      |
+  | sass-mode              |
   | sclang-extensions      |
   | sclang-snippets        |
   | seq                    |

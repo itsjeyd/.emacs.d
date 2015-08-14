@@ -200,6 +200,9 @@
   ;; Key Bindings
   (bind-key "C-c b" #'web-beautify-css css-mode-map))
 
+(use-package sass-mode
+  :mode "\\.scss\\'")
+
 
 
 ;;;;;;;;;;;;;
