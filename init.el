@@ -378,14 +378,7 @@
   :commands mark-lines-next-line)
 
 (use-package move-text
-  :commands (move-text-up move-text-down)
-  :config
-  ;; Functions
-  (defun follow-line (arg)
-    (unless mark-active (forward-line (- arg))))
-
-  ;; Hooks
-  (advice-add 'move-text-up :after #'follow-line))
+  :commands (move-text-up move-text-down))
 
 (use-package multiple-cursors
   :defer 5
