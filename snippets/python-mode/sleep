@@ -1,0 +1,5 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: sleep
+# key: sl
+# --
+import time; time.sleep(30)
