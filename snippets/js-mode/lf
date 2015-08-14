@@ -1,0 +1,5 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: console.log function call
+# key: lf
+# --
+console.log('${1:`(which-function)`} called');

@@ -1,0 +1,5 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: print function call
+# key: pf
+# --
+print('${1:`(which-function)`} called')
