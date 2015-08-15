@@ -1510,13 +1510,6 @@ point is on and summons `hydra-mark-lines'."
   (add-to-list 'org-structure-template-alist
                '("o" "#+BEGIN_COMMENT\n?\n#+END_COMMENT") t))
 
-(use-package org-drill
-  :ensure org-plus-contrib
-  :commands org-drill
-  :config
-  (setq org-drill-scope 'directory)
-  (setq org-drill-hide-item-headings-p t))
-
 (use-package org-protocol
   :ensure org-plus-contrib
   :defer 5)
