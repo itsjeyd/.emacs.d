@@ -705,7 +705,7 @@ point is on and summons `hydra-mark-lines'."
     :config
     (defun helm-get-firefox-user-init-dir ()
       "Return name of Firefox profile to list bookmarks for."
-      "~/.mozilla/firefox/mwad0hks.default/"))
+      "~/.mozilla/firefox/29x5sgi7.default/"))
 
   ;; Hydra
   (defhydra hydra-helm-github (:color blue)
