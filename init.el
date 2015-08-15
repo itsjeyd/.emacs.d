@@ -2192,7 +2192,10 @@ char if successful."
     ;; Hooks
     (add-hook 'git-commit-mode-hook #'git-commit-add-electric-pairs)
     (add-hook 'git-commit-mode-hook #'turn-on-auto-fill)
-    (add-hook 'git-commit-mode-hook #'turn-on-orgstruct))
+    (add-hook 'git-commit-mode-hook #'turn-on-orgstruct)
+
+    ;; Variables
+    (setq git-commit-finish-query-functions nil))
 
   ;; Advice
   (defadvice Info-follow-nearest-node (around gitman activate)
