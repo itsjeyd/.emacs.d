@@ -628,26 +628,6 @@ point is on and summons `hydra-mark-lines'."
 
 
 
-;;;;;;;;;;;
-;;; Fun ;;;
-;;;;;;;;;;;
-
-(use-package emoji-cheat-sheet-plus
-  :commands (emoji-cheat-sheet-plus-buffer emoji-cheat-sheet-plus-insert)
-  :init
-  (add-hook 'markdown-mode-hook #'emoji-cheat-sheet-plus-display-mode)
-  :config
-  (modeline-remove-lighter 'emoji-cheat-sheet-plus-display-mode)
-
-  ;; Key Bindings
-  (bind-keys :map emoji-cheat-sheet-plus-buffer-mode-map
-             ("b" . backward-char)
-             ("f" . forward-char)
-             ("n" . next-line)
-             ("p" . previous-line)))
-
-
-
 ;;;;;;;;;;;;
 ;;; Helm ;;;
 ;;;;;;;;;;;;
@@ -1586,16 +1566,7 @@ point is on and summons `hydra-mark-lines'."
     (funcall orig arg)
     (openwith-mode 1))
 
-  (advice-add 'interleave :around #'interleave-handle-openwith)
-
-  (defun interleave--quit-handle-emojis (orig)
-    (with-current-buffer *interleave--org-buffer*
-      (emoji-cheat-sheet-plus-display-mode -1))
-    (funcall orig)
-    (with-current-buffer *interleave--org-buffer*
-      (emoji-cheat-sheet-plus-display-mode 1)))
-
-  (advice-add 'interleave--quit :around #'interleave--quit-handle-emojis))
+  (advice-add 'interleave :around #'interleave-handle-openwith))
 
 (use-package pdf-tools
   :commands pdf-tools-install
