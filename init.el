@@ -2001,18 +2001,6 @@ char if successful."
 
 
 
-;;;;;;;;;;;;;;;;;;;;;
-;;; SuperCollider ;;;
-;;;;;;;;;;;;;;;;;;;;;
-
-(use-package sclang
-  :disabled
-  :ensure nil
-  :config
-  (add-hook 'sclang-mode-hook #'sclang-extensions-mode))
-
-
-
 ;;;;;;;;;;;;;;;;;
 ;;; Utilities ;;;
 ;;;;;;;;;;;;;;;;;
