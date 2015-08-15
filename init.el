@@ -1085,7 +1085,7 @@ point is on and summons `hydra-mark-lines'."
   (bind-key "j n" #'js2-next-error custom-keys-mode-prefix-map)
 
   ;; Variables
-  (setq-default js2-basic-offset 2)
+  (setq-default js2-basic-offset 4)
   (setq js2-global-externs '("$" "jQuery" "_"))
   (setq js2-highlight-level 3)
   (setq js2-pretty-multiline-declarations 'dynamic))
