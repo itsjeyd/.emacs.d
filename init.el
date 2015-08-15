@@ -570,26 +570,6 @@ point is on and summons `hydra-mark-lines'."
   (setq lispy-occur-backend 'helm)
   (setq lispy-window-height-ratio 0.8))
 
-(use-package clojure-mode
-  :commands clojure-mode
-  :config
-
-  (use-package cider
-    :config
-    (add-to-list 'ac-modes 'cider-mode)
-
-    ;; Hooks
-    (add-hook 'cider-mode-hook #'eldoc-mode)
-    (add-hook 'cider-mode-hook #'ac-cider-setup)
-    (add-hook 'cider-repl-mode-hook #'ac-cider-setup)
-
-    ;; Variables
-    (setq cider-repl-history-file "~/.emacs.d/.cider-history")
-    (setq cider-repl-use-pretty-printing t)
-    (setq nrepl-buffer-name-show-port t))
-
-  (add-hook 'clojure-mode-hook #'lispy-mnemonic-mode))
-
 (use-package eldoc
   :commands eldoc-mode
   :config
