@@ -641,6 +641,65 @@ point is on and summons `hydra-mark-lines'."
   (use-package helm-config
     :ensure helm)
 
+  (use-package helm-dash
+    :bind ("C-c d" . helm-dash-at-point)
+    :init
+    ;; Docsets:
+    ;; - Ansible
+    ;; - BackboneJS
+    ;; - Bash
+    ;; - Bootstrap 3
+    ;; - CSS
+    ;; - CoffeeScript
+    ;; - Django
+    ;; - Font_Awesome
+    ;; - HTML
+    ;; - Haml
+    ;; - JavaScript
+    ;; - jQuery
+    ;; - LaTeX
+    ;; - MongoDB
+    ;; - MySQL
+    ;; - PostgreSQL
+    ;; - Python 2
+    ;; - RequireJS
+    ;; - SQLite
+    ;; - Sass
+    ;; - UnderscoreJS
+    ;; - Vagrant
+
+    ;; Macros
+    (defvar-local helm-dash-docsets nil)
+
+    (defmacro helm-dash-setup (language docsets)
+      "Create function that sets up `helm-dash' for specific LANGUAGE."
+      (let ((fn-name (intern (format "helm-dash-%s" language)))
+            (current-docsets (mapconcat 'identity docsets ", ")))
+        `(progn
+           (defun ,fn-name ()
+             ,(format "Set up `helm-dash' for %s.\n\nDocsets: %s"
+                      language current-docsets)
+             (setq helm-dash-docsets ,docsets)
+             (setq helm-current-buffer (current-buffer))))))
+
+    ;; Hooks
+    (add-hook 'sh-mode-hook (helm-dash-setup "bash" ["Bash"]))
+    (add-hook 'coffee-mode-hook #'(helm-dash-setup "coffee" ["CoffeeScript"]))
+    (add-hook 'LaTeX-mode-hook (helm-dash-setup "latex" ["LaTeX"]))
+    (add-hook 'python-mode-hook (helm-dash-setup "python" ["Django" "Python 2"]))
+    (add-hook 'inferior-python-mode-hook (helm-dash-setup "python" ["Django" "Python 2"]))
+    (add-hook 'css-mode-hook (helm-dash-setup "css" ["Bootstrap 3" "CSS" "Sass"]))
+    (add-hook 'sass-mode-hook (helm-dash-setup "sass" ["Bootstrap 3" "CSS" "Sass"]))
+    (add-hook 'haml-mode-hook (helm-dash-setup "haml" ["Bootstrap 3" "Haml" "Font_Awesome"]))
+    (add-hook 'html-mode-hook (helm-dash-setup "html" ["Bootstrap 3" "HTML" "Font_Awesome"]))
+    (add-hook 'js2-mode-hook (helm-dash-setup "js" ["BackboneJS" "Bootstrap 3" "JavaScript" "jQuery" "RequireJS" "UnderscoreJS"]))
+
+    ;; Variables
+    (setq helm-dash-common-docsets '("Ansible" "MySQL" "MongoDB" "PostgreSQL" "SQLite" "Vagrant"))
+    (setq helm-dash-enable-debugging nil)
+    (setq helm-dash-docsets-path "/storage/docsets/")
+    (setq helm-dash-min-length 2))
+
   (use-package helm-firefox
     :commands helm-firefox-bookmarks
     :config
@@ -1628,40 +1687,6 @@ point is on and summons `hydra-mark-lines'."
 
   ;; Hooks
   (add-hook 'flycheck-mode-hook #'flycheck-setup))
-
-(use-package helm-dash
-  :bind ("C-c d" . helm-dash-at-point)
-  :init
-  ;; Macros
-  (defvar-local helm-dash-docsets nil)
-
-  (defmacro helm-dash-setup (language docsets)
-    "Create function that sets up `helm-dash' for specific LANGUAGE."
-    (let ((fn-name (intern (format "helm-dash-%s" language)))
-	  (current-docsets (mapconcat 'identity docsets ", ")))
-      `(progn
-	 (defun ,fn-name ()
-	   ,(format "Set up `helm-dash' for %s.\n\nDocsets: %s"
-		    language current-docsets)
-	   (setq helm-dash-docsets ,docsets)
-	   (setq helm-current-buffer (current-buffer))))))
-
-  ;; Hooks
-  (add-hook 'sh-mode-hook (helm-dash-setup "bash" ["Bash"]))
-  (add-hook 'clojure-mode-hook (helm-dash-setup "clojure" ["Clojure"]))
-  (add-hook 'java-mode-hook (helm-dash-setup "java" ["Android" "Java" "Play_Java"]))
-  (add-hook 'LaTeX-mode-hook (helm-dash-setup "latex" ["LaTeX"]))
-  (add-hook 'python-mode-hook (helm-dash-setup "python" ["Django" "Python 2" "Python 3"]))
-  (add-hook 'inferior-python-mode-hook (helm-dash-setup "python" ["Django" "Python 2" "Python 3"]))
-  (add-hook 'css-mode-hook (helm-dash-setup "css" ["Bootstrap 3" "CSS"]))
-  (add-hook 'haml-mode-hook (helm-dash-setup "haml" ["Bootstrap 3" "HTML"]))
-  (add-hook 'html-mode-hook (helm-dash-setup "html" ["Bootstrap 3" "HTML"]))
-  (add-hook 'js2-mode-hook (helm-dash-setup "js" ["BackboneJS" "Bootstrap 3" "JavaScript" "jQuery" "UnderscoreJS"]))
-
-  ;; Variables
-  (setq helm-dash-common-docsets '("Emacs Lisp" "MySQL" "PostgreSQL" "SQLite"))
-  (setq helm-dash-docsets-path "/storage/docsets/")
-  (setq helm-dash-min-length 2))
 
 (use-package yasnippet
   :commands yas-minor-mode
