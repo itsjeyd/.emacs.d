@@ -124,6 +124,8 @@
   | swiper                 |
   | synosaurus             |
   | tablist                |
+  | tern                   |
+  | tern-auto-complete     |
   | ucs-utils              |
   | unicode-fonts          |
   | use-package            |

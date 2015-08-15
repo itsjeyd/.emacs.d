@@ -975,12 +975,10 @@ point is on and summons `hydra-mark-lines'."
     (js2r-add-keybindings-with-prefix "C-c C-r"))
 
   (use-package tern
-    :load-path "/usr/lib/node_modules/tern/emacs/"
     :ensure nil
     :config
 
     (use-package tern-auto-complete
-      :load-path "/usr/lib/node_modules/tern/emacs/"
       :ensure nil
       :config
       (tern-ac-setup))
