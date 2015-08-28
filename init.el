@@ -1360,6 +1360,11 @@ point is on and summons `hydra-mark-lines'."
 
     (use-package ox-gfm))
 
+  (use-package ox-confluence
+    :ensure nil
+    :commands org-confluence-export-as-confluence
+    :load-path "lisp/ox")
+
   ;; Advice
   (defun org-handle-openwith (orig &optional include-linked refresh beg end)
     (openwith-mode -1)
