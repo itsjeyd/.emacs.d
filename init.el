@@ -1484,9 +1484,11 @@ point is on and summons `hydra-mark-lines'."
   (defvar org-bold-markup '(?\* . ?\*))
   (defvar org-italics-markup '(?/ . ?/))
   (defvar org-verbatim-markup '(?= . ?=))
+  (defvar org-code-markup '(?~ . ?~))
 
   (defun org-add-electric-pairs ()
-    (let ((org-electric-pairs `(,org-verbatim-markup
+    (let ((org-electric-pairs `(,org-code-markup
+                                ,org-verbatim-markup
                                 ,org-italics-markup
                                 ,org-bold-markup)))
       (setq-local electric-pair-pairs
