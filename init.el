@@ -1320,6 +1320,7 @@ point is on and summons `hydra-mark-lines'."
            ("C-c C-x C-q" . org-clock-cancel)
            ("C-c C-x C-x" . org-clock-in-last))
     :config
+    (setq org-clock-mode-line-total 'today)
     (setq org-clock-persist 'history)
     (org-clock-persistence-insinuate))
 
