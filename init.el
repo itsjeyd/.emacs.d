@@ -1318,7 +1318,10 @@ point is on and summons `hydra-mark-lines'."
            ("C-c C-x C-j" . org-clock-goto)
            ("C-c C-x C-o" . org-clock-out)
            ("C-c C-x C-q" . org-clock-cancel)
-           ("C-c C-x C-x" . org-clock-in-last)))
+           ("C-c C-x C-x" . org-clock-in-last))
+    :config
+    (setq org-clock-persist 'history)
+    (org-clock-persistence-insinuate))
 
   (use-package org-footnote
     :ensure nil

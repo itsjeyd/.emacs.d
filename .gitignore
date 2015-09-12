@@ -18,6 +18,7 @@ bookmarks
 history
 tramp
 custom.el
+org-clock-save.el
 lisp/profile-dotemacs.el
 
 # Folders
