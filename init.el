@@ -683,7 +683,7 @@ point is on and summons `hydra-mark-lines'."
 
     ;; Hooks
     (add-hook 'sh-mode-hook (helm-dash-setup "bash" ["Bash"]))
-    (add-hook 'coffee-mode-hook #'(helm-dash-setup "coffee" ["CoffeeScript"]))
+    (add-hook 'coffee-mode-hook (helm-dash-setup "coffee" ["CoffeeScript"]))
     (add-hook 'LaTeX-mode-hook (helm-dash-setup "latex" ["LaTeX"]))
     (add-hook 'python-mode-hook (helm-dash-setup "python" ["Django" "Python 2"]))
     (add-hook 'inferior-python-mode-hook (helm-dash-setup "python" ["Django" "Python 2"]))
