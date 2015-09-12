@@ -2190,6 +2190,7 @@ char if successful."
   :init
   (bind-keys :map custom-keys-mode-prefix-map
              ("g d" . magit-dispatch-popup)
+             ("g f" . magit-find-file)
              ("g s" . magit-status))
   :config
 
