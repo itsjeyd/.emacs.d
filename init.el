@@ -717,6 +717,7 @@ point is on and summons `hydra-mark-lines'."
     ("s" helm-github-stars "starred repo"))
 
   ;; Key Bindings
+  (bind-key "B" #'helm-firefox-bookmarks helm-command-map)
   (bind-key "g" #'hydra-helm-github/body helm-command-map)
   (bind-key "M-o" #'helm-previous-source helm-map)
 
