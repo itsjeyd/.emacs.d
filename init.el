@@ -399,7 +399,8 @@
     ("S" hydra-mc-skip/body "skip" :color blue)
     ("U" hydra-mc-unmark/body "unmark" :color blue)
     ("o" hydra-mc-operate/body "operate" :color blue)
-    ("C-'" mc-hide-unmatched-lines-mode "hide unmatched"))
+    ("C-'" mc-hide-unmatched-lines-mode "hide unmatched")
+    ("q" nil "exit" :color blue))
 
   (defhydra hydra-mc-symbols ()
     "MC (symbols)"
