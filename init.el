@@ -1454,6 +1454,18 @@ point is on and summons `hydra-mark-lines'."
           (replace-match " ")))
       (org-fill-paragraph)))
 
+  (defun org-fill-chat-message (&optional arg)
+    (interactive "p")
+    (let (i)
+      (dotimes (i arg i)
+        (beginning-of-line)
+        (forward-line)
+        (open-line 1)
+        (forward-line -1)
+        (back-to-indentation)
+        (fill-paragraph)
+        (org-forward-element))))
+
   (defun org-interleave ()
     (interactive)
     (unless (featurep 'pdf-view)
@@ -1522,6 +1534,11 @@ point is on and summons `hydra-mark-lines'."
   (add-hook 'org-mode-hook #'turn-on-auto-fill)
   (add-hook 'org-mode-hook #'which-function-mode)
 
+  ;; Hydra
+  (defhydra org-hydra-fill ()
+    "Fill"
+    ("q" org-fill-chat-message "chat message"))
+
   ;; Key Bindings
   (defvar org-mode-extra-keys-map (lookup-key org-mode-map (kbd "C-c C-x")))
   (bind-keys :map org-mode-extra-keys-map
@@ -1543,6 +1560,7 @@ point is on and summons `hydra-mark-lines'."
              ("C-M-q" . org-fill-paragraph-handle-lists)
              ("M-h" . mark-paragraph)
              ("M-s TAB" . org-force-cycle-archived)
+             ("M-s q" . org-hydra-fill/body)
              ("M-s t b" . org-toggle-blocks)
              ("M-s t h" . org-insert-todo-heading)
              ("M-s t s" . org-insert-todo-subheading)
