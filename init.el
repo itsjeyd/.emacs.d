@@ -1830,6 +1830,7 @@ point is on and summons `hydra-mark-lines'."
     ;; Variables
     (setq jedi:complete-on-dot t)
     (setq jedi:get-in-function-call-delay 200)
+    (setq jedi:tooltip-method nil)
     (setq jedi:use-shortcuts t))
 
   (use-package pony-mode
