@@ -936,7 +936,6 @@ point is on and summons `hydra-mark-lines'."
 
 (use-package rainbow-delimiters
   :config
-  (add-hook 'org-mode-hook #'rainbow-delimiters-mode)
   (add-hook 'prog-mode-hook #'rainbow-delimiters-mode))
 
 (use-package whitespace
