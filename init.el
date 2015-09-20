@@ -716,7 +716,8 @@ point is on and summons `hydra-mark-lines'."
   (bind-key "M-o" #'helm-previous-source helm-map)
 
   ;; Variables
-  (setq helm-truncate-lines t))
+  (setq helm-truncate-lines t)
+  (setq helm-grep-save-buffer-name-no-confirm t))
 
 
 
