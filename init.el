@@ -592,26 +592,20 @@ point is on and summons `hydra-mark-lines'."
   (openwith-mode t)
   (setq openwith-associations
         (list (list (openwith-make-extension-regexp '("pdf" "ps"))
-                    "okular" '(file))
+                    "epdfview" '(file))
               (list (openwith-make-extension-regexp '("flac" "mp3" "wav"))
-                    "gmusicbrowser" '(file))
+                    "vlc" '(file))
               (list (openwith-make-extension-regexp '("avi" "flv" "mov" "mp4"
                                                       "mpeg" "mpg" "ogg" "wmv"))
                     "vlc" '(file))
               (list (openwith-make-extension-regexp '("bmp" "jpeg" "jpg" "png"))
-                    "gwenview" '(file))
-              (list (openwith-make-extension-regexp '("chm"))
-                    "kchmviewer" '(file))
+                    "ristretto" '(file))
               (list (openwith-make-extension-regexp '("doc" "docx" "odt"))
-                    "libreoffice" '("--writer" file))
+                    "abiword" '(file))
               (list (openwith-make-extension-regexp '("ods" "xls" "xlsx"))
-                    "libreoffice" '("--calc" file))
+                    "gnumeric" '(file))
               (list (openwith-make-extension-regexp '("odp" "pps" "ppt" "pptx"))
-                    "libreoffice" '("--impress" file))
-              (list (openwith-make-extension-regexp '("odg"))
-                    "libreoffice" '("--draw" file))
-              (list (openwith-make-extension-regexp '("dia"))
-                    "dia" '(file)))))
+                    "libreoffice" '("--impress" file)))))
 
 
 
