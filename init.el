@@ -2168,7 +2168,16 @@ char if successful."
   (bind-key "g g" #'hydra-git-gutter/body custom-keys-mode-prefix-map))
 
 (use-package git-messenger
-  :bind ("C-x v p" . git-messenger:popup-message))
+  :defer 5
+  :config
+  ;; Commands
+  (defun git-messenger:popup-message-with-details ()
+    (interactive)
+    (let ((current-prefix-arg (not current-prefix-arg)))
+      (git-messenger:popup-message)))
+
+  ;; Key Bindings
+  (bind-key "p" #'git-messenger:popup-message-with-details vc-prefix-map))
 
 (use-package git-wip-timemachine
   :ensure nil
