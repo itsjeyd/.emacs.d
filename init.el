@@ -1791,8 +1791,6 @@ point is on and summons `hydra-mark-lines'."
 ;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (use-package projectile
-  :defer 5
-  :commands (projectile-find-file projectile-switch-project)
   :config
 
   (use-package helm-projectile
