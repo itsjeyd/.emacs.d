@@ -2117,19 +2117,6 @@ char if successful."
 (use-package browse-at-remote
   :commands browse-at-remote browse-at-remote/to-clipboard)
 
-(use-package bts
-  :commands (bts:summary-open bts:ticket-new)
-  :config
-
-  (use-package bts-github)
-
-  (use-package pophint-config
-    :ensure pophint)
-
-  (use-package wid-edit
-    :ensure nil
-    :config
-    (set-face-attribute 'widget-field nil :box nil)))
 
 (use-package git-gutter
   :commands git-gutter-mode

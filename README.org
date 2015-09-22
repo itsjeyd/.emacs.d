@@ -18,8 +18,6 @@
   | avy-zap                |
   | bind-key               |
   | browse-at-remote       |
-  | bts                    |
-  | bts-github             |
   | calfw                  |
   | caps-lock              |
   | cdlatex                |
@@ -132,7 +130,6 @@
   | visual-fill-column     |
   | web-beautify           |
   | wgrep                  |
-  | widget-mvc             |
   | with-editor            |
   | writeroom-mode         |
   | yasnippet              |
