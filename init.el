@@ -316,14 +316,6 @@
   (ac-config-default)
   (ac-flyspell-workaround)
 
-  ;; Advice
-  (defun ac-turn-off-line-truncation (orig &optional force)
-    (toggle-truncate-lines -1)
-    (funcall orig force)
-    (toggle-truncate-lines 1))
-
-  (advice-add 'ac-quick-help :around #'ac-turn-off-line-truncation)
-
   ;; Key Bindings
   (bind-keys :map ac-completing-map
              ("C-h" . ac-help)
@@ -931,6 +923,8 @@ point is on and summons `hydra-mark-lines'."
   ;; Faces
   (let ((default-background-color (face-attribute 'default :background)))
     (set-face-attribute 'linum nil :background default-background-color)))
+
+(use-package pos-tip)
 
 (use-package rainbow-delimiters
   :config
