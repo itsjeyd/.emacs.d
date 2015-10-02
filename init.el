@@ -1314,11 +1314,37 @@ point is on and summons `hydra-mark-lines'."
     :bind (("C-c C-x C-d" . org-clock-display)
            ("C-c C-x C-j" . org-clock-goto)
            ("C-c C-x C-o" . org-clock-out)
-           ("C-c C-x C-q" . org-clock-cancel)
-           ("C-c C-x C-x" . org-clock-in-last))
+           ("C-c C-x C-q" . org-clock-cancel-save-buffer)
+           ("C-c C-x C-x" . org-clock-in-last-save-buffer))
     :config
+    ;; Advice
+    (defun org-save-task-buffer ()
+      (let ((working-buffer (current-buffer)))
+        (call-interactively #'org-clock-goto)
+        (call-interactively #'save-buffer)
+        (switch-to-buffer working-buffer)))
+
+    (advice-add 'org-clock-in :after #'save-buffer)
+    (advice-add 'org-store-log-note :after #'org-save-task-buffer)
+
+    ;; Commands
+    (defun org-clock-cancel-save-buffer ()
+      (interactive)
+      (with-current-buffer (org-clocking-buffer)
+        (org-clock-cancel)
+        (call-interactively #'save-buffer)))
+
+    (defun org-clock-in-last-save-buffer ()
+      (interactive)
+      (let ((working-buffer (current-buffer)))
+        (call-interactively #'org-clock-goto)
+        (call-interactively #'org-clock-in) ; No need to call save-buffer explictly here, org-clock-in is advised
+        (switch-to-buffer working-buffer)))
+
+    ;; Variables
     (setq org-clock-mode-line-total 'today)
     (setq org-clock-persist 'history)
+
     (org-clock-persistence-insinuate))
 
   (use-package org-footnote
