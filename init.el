@@ -727,14 +727,11 @@ point is on and summons `hydra-mark-lines'."
 
 (find-function-setup-keys)
 
-(use-package guide-key
+(use-package which-key
   :defer 5
   :config
-  (guide-key-mode t)
-  (modeline-remove-lighter 'guide-key-mode)
-  (setq guide-key/guide-key-sequence '("C-c" "C-x" "M-s"))
-  (setq guide-key/popup-window-position 'bottom)
-  (setq guide-key/recursive-key-sequence-flag t))
+  (which-key-mode t)
+  (modeline-remove-lighter 'which-key-mode))
 
 ; Functions
 (defun info-display-topic (topic)

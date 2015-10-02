@@ -51,7 +51,6 @@
   | github-browse-file     |
   | git-timemachine        |
   | google-maps            |
-  | guide-key              |
   | haml-mode              |
   | helm                   |
   | helm-c-yasnippet       |
@@ -130,6 +129,7 @@
   | visual-fill-column     |
   | web-beautify           |
   | wgrep                  |
+  | which-key              |
   | with-editor            |
   | writeroom-mode         |
   | yasnippet              |
