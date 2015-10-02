@@ -953,6 +953,9 @@ point is on and summons `hydra-mark-lines'."
 (defvar default-cursor-color "#F2777A")
 (defvar expandable-thing-before-point-color "#00FF7F")
 
+; Lines
+(global-hl-line-mode)
+
 ; Theme
 (defun customize-enabled-theme ()
   (let ((enabled-theme (car custom-enabled-themes))
