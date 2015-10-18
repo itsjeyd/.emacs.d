@@ -1726,12 +1726,17 @@ point is on and summons `hydra-mark-lines'."
       (concat " ⚡" text)))
 
   (defun flycheck-setup ()
-    (bind-keys :map custom-keys-mode-prefix-map
-               ("f n" . flycheck-next-error)
-               ("f p" . flycheck-previous-error)))
+    (bind-key "f" #'hydra-flycheck/body custom-keys-mode-prefix-map))
 
   ;; Hooks
-  (add-hook 'flycheck-mode-hook #'flycheck-setup))
+  (add-hook 'flycheck-mode-hook #'flycheck-setup)
+
+  ;; Hydra
+  (defhydra hydra-flycheck ()
+    "Flycheck"
+    ("n" flycheck-next-error "next error")
+    ("p" flycheck-previous-error "previous error")
+    ("q" nil "quit" :color blue)))
 
 (use-package yasnippet
   :commands yas-minor-mode
