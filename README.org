@@ -57,6 +57,7 @@
   | helm-core              |
   | helm-dash              |
   | helm-firefox           |
+  | helm-flycheck          |
   | helm-github-stars      |
   | helm-open-github       |
   | helm-projectile        |

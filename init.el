@@ -1706,6 +1706,9 @@ point is on and summons `hydra-mark-lines'."
 (use-package flycheck
   :commands flycheck-mode
   :config
+
+  (use-package helm-flycheck)
+
   ;; Functions
   (defun flycheck-mode-line-status-text (&optional status)
     "Get a text describing STATUS for use in the mode line.
@@ -1734,6 +1737,7 @@ point is on and summons `hydra-mark-lines'."
   ;; Hydra
   (defhydra hydra-flycheck ()
     "Flycheck"
+    ("l" helm-flycheck "list errors")
     ("n" flycheck-next-error "next error")
     ("p" flycheck-previous-error "previous error")
     ("q" nil "quit" :color blue)))
