@@ -1693,7 +1693,10 @@ point is on and summons `hydra-mark-lines'."
 
 (use-package tramp
   :defer 5
-  :commands ido-find-file)
+  :commands ido-find-file
+  :config
+
+  (use-package vagrant-tramp))
 
 ; Usage: C-x C-f /sudo::/path/to/file
 

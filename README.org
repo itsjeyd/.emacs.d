@@ -128,6 +128,7 @@
   | ucs-utils              |
   | unicode-fonts          |
   | use-package            |
+  | vagrant-tramp          |
   | visual-fill-column     |
   | web-beautify           |
   | wgrep                  |
