@@ -28,6 +28,7 @@
   | ctable                 |
   | dash                   |
   | deferred               |
+  | diffview               |
   | diminish               |
   | direx                  |
   | emoji-cheat-sheet-plus |
