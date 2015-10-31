@@ -1080,6 +1080,10 @@ point is on and summons `hydra-mark-lines'."
   (setq js2-highlight-level 3)
   (setq js2-pretty-multiline-declarations 'dynamic))
 
+(use-package json-mode
+  :config
+  (bind-key "C-c b" #'web-beautify-js json-mode-map))
+
 
 
 ;;;;;;;;;;;;;
