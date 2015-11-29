@@ -628,7 +628,6 @@ point is on and summons `hydra-mark-lines'."
     :ensure helm)
 
   (use-package helm-dash
-    :bind ("C-c d" . helm-dash-at-point)
     :init
     ;; Docsets:
     ;; - Ansible
@@ -679,6 +678,9 @@ point is on and summons `hydra-mark-lines'."
     (add-hook 'haml-mode-hook (helm-dash-setup "haml" ["Bootstrap 3" "Haml" "Font_Awesome"]))
     (add-hook 'html-mode-hook (helm-dash-setup "html" ["Bootstrap 3" "HTML" "Font_Awesome"]))
     (add-hook 'js2-mode-hook (helm-dash-setup "js" ["BackboneJS" "Bootstrap 3" "JavaScript" "jQuery" "RequireJS" "UnderscoreJS"]))
+
+    ;; Key Bindings
+    (bind-key "C-c d" #'helm-dash-at-point)
 
     ;; Variables
     (setq helm-dash-common-docsets '("Ansible" "MySQL" "MongoDB" "PostgreSQL" "SQLite" "Vagrant"))
