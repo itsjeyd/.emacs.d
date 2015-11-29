@@ -619,7 +619,6 @@ point is on and summons `hydra-mark-lines'."
 ;;;;;;;;;;;;
 
 (use-package helm
-  :defer 5
   :bind (("C-c k" . helm-show-kill-ring)
          ("C-c SPC" . helm-all-mark-rings))
   :config
@@ -811,7 +810,6 @@ point is on and summons `hydra-mark-lines'."
 ;;;;;;;;;;;
 
 (use-package ido
-  :defer 5
   :bind (("C-x b" . ido-switch-buffer)
          ("C-x d" . ido-dired)
          ("C-x C-f" . ido-find-file))
@@ -1698,7 +1696,6 @@ point is on and summons `hydra-mark-lines'."
 ;;;;;;;;;;;;;;;;;;;
 
 (use-package tramp
-  :defer 5
   :commands ido-find-file
   :config
 
@@ -2194,7 +2191,6 @@ char if successful."
   (bind-key "g g" #'hydra-git-gutter/body custom-keys-mode-prefix-map))
 
 (use-package git-messenger
-  :defer 5
   :config
   ;; Commands
   (defun git-messenger:popup-message-with-details ()
