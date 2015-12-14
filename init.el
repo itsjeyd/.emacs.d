@@ -694,6 +694,8 @@ point is on and summons `hydra-mark-lines'."
       "Return name of Firefox profile to list bookmarks for."
       "~/.mozilla/firefox/29x5sgi7.default/"))
 
+  (helm-adaptive-mode 1)
+
   ;; Hydra
   (defhydra hydra-helm-github (:color blue)
     "GitHub"

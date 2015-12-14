@@ -15,6 +15,7 @@
 .smex-items
 annotations
 bookmarks
+helm-adaptive-history
 history
 tramp
 custom.el
