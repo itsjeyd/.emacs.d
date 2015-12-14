@@ -892,6 +892,7 @@ point is on and summons `hydra-mark-lines'."
   ;; Variables
   (add-to-list 'ido-ignore-buffers "\*Compile-Log\*")
   (add-to-list 'ido-ignore-buffers "\*Messages\*")
+  (setq ido-auto-merge-work-directories-length -1)
   (setq ido-create-new-buffer 'always)
   (setq ido-enable-flex-matching t)
   (setq ido-save-directory-list-file "~/.emacs.d/.ido.last")
