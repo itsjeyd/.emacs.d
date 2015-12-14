@@ -1875,6 +1875,8 @@ point is on and summons `hydra-mark-lines'."
     (bind-keys :map jedi-mode-map
                ("C-(" . jedi:get-in-function-call)
                ("C-)" . jedi:get-in-function-call)
+               ("C-c /" . helm-jedi-related-names)
+               ("C-c ?" . jedi:show-doc)
                ("C-x D" . jedi-direx:pop-to-buffer))
 
     ;; Variables
