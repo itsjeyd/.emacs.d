@@ -4,4 +4,4 @@
 # group: object-oriented
 # --
 class ${1:name}(${2:object}):
-    $0
+    ${3:pass}$0

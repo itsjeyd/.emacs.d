@@ -1,8 +1,13 @@
 # -*- mode: snippet; require-final-newline: nil -*-
-# name: classmethod
-# key: cm
+# name: classmethod_docstring
+# key: cmd
 # group: object-oriented
 # --
 @classmethod
 def ${1:name}(cls${2:, args}):
-    ${3:pass}$0
+    """
+    ${3:...}
+
+    ${2:$(python-args-to-docstring)}
+    """
+    ${4:pass}$0

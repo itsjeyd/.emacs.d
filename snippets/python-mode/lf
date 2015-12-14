@@ -1,0 +1,5 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: log.error function call
+# key: lf
+# --
+log.error('${1:`(which-function)`} called')
