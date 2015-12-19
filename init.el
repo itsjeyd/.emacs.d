@@ -1241,6 +1241,7 @@ point is on and summons `hydra-mark-lines'."
 
   ;; Variables
   (setq avy-background t)
+  (setq avy-case-fold-search nil)
   (setq avy-keys (number-sequence ?a ?z))
   (setq avy-style 'at-full))
 
