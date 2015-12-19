@@ -2280,7 +2280,7 @@ char if successful."
     (interactive
      (let* ((owner (read-string "Owner: "))
             (repo (read-string "Repo: "))
-            (url (format "https://github.com/%s/%s.git" owner repo)))
+            (url (format "git@github.com:%s/%s.git" owner repo)))
        (list url
              (ido-read-directory-name "Directory: "))))
     (magit-clone repository directory))
