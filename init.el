@@ -85,8 +85,10 @@
                    ("Dired" (mode . dired-mode))
                    ("Magit" (name . "\*magit.+*"))
                    ("Org" (mode . org-mode))
-                   ("Grep" (name . "\*grep-.*"))
-                   ("Temporary" (name . "\*.*\*"))))))
+                   ("Grep" (name . "\*h?grep-?.*"))
+                   ("Helm" (name . "\*helm .*\*"))
+                   ("Temporary" (name . "\*.*\*")))))
+  (setq-default ibuffer-sorting-mode 'major-mode))
 
 ; Commands
 (defvar temp-buffer-count 0)
