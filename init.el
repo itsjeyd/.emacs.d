@@ -2306,19 +2306,9 @@ char if successful."
   (bind-key "K" #'magit-ls-files magit-mode-map)
 
   ;; Variables
-  (setq magit-cherry-buffer-name-format "*magit-cherry: %b*")
   (setq magit-completing-read-function #'magit-ido-completing-read)
-  (setq magit-diff-buffer-name-format "*magit-diff: %b*")
   (setq magit-diff-refine-hunk t)
-  (setq magit-log-buffer-name-format "*magit-log: %b*")
-  (setq magit-process-buffer-name-format "*magit-process: %b*")
-  (setq magit-reflog-buffer-name-format "*magit-reflog: %b*")
-  (setq magit-refs-buffer-name-format "*magit-refs: %b*")
-  (setq magit-revert-buffers t)
-  (setq magit-revision-buffer-name-format "*magit-rev: %b*")
-  (setq magit-stash-buffer-name-format "*magit-stash: %b*")
-  (setq magit-stashes-buffer-name-format "*magit-stashes: %b*")
-  (setq magit-status-buffer-name-format "*magit: %b*"))
+  (setq magit-revert-buffers t))
 
 ; git-wip
 (load "~/git-wip/emacs/git-wip.el")
