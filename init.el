@@ -2155,7 +2155,7 @@ char if successful."
 ;;;;;;;;;;;;;;;;;;;;;;;
 
 (use-package browse-at-remote
-  :commands browse-at-remote browse-at-remote/to-clipboard)
+  :commands browse-at-remote/browse browse-at-remote/kill)
 
 (use-package diffview
   :commands diffview-current)
