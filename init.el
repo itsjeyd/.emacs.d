@@ -1995,6 +1995,7 @@ point is on and summons `hydra-mark-lines'."
   (setq projectile-completion-system 'helm)
   (setq projectile-enable-caching t)
   (setq projectile-enable-idle-timer t)
+  (setq projectile-find-dir-includes-top-level t)
   (setq projectile-known-projects-file "~/.emacs.d/.projectile-bookmarks.eld")
   (setq projectile-mode-line
         '(:eval (format " %s[%s]"
