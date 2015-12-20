@@ -1331,22 +1331,34 @@ point is on and summons `hydra-mark-lines'."
   :defer t
   :config
   ;; Commands
-  (defun avy-move-region ()
-    "Select two lines and move the text between them here."
-    (interactive)
-    (avy-with avy-move-region
-      (let ((beg (car (avy--line)))
-            (end (car (avy--line)))
-            (pad (if (bolp) "" "\n")))
-        (move-beginning-of-line nil)
-        (save-excursion
-          (save-excursion
-            (goto-char end)
-            (kill-region beg (line-end-position))
-            (delete-char -1))
-          (insert
-           (current-kill 0)
-           pad)))))
+  (defun avy-move-region (arg)
+    "Select two lines and move the text between them to point.
+
+  The window scope is determined by `avy-all-windows' or
+  `avy-all-windows-alt' when ARG is non-nil."
+    (interactive "P")
+    (let ((initial-window (selected-window)))
+      (avy-with avy-copy-region
+        (let* ((beg (avy--line arg))
+               (end (avy--line arg))
+               (str (buffer-substring-no-properties
+                     beg
+                     (save-excursion
+                       (goto-char end)
+                       (line-end-position)))))
+          (select-window initial-window)
+          (cond ((eq avy-line-insert-style 'above)
+                 (beginning-of-line)
+                 (save-excursion
+                   (insert str "\n")))
+                ((eq avy-line-insert-style 'below)
+                 (end-of-line)
+                 (newline)
+                 (save-excursion
+                   (insert str)))
+                (t
+                 (user-error "Unexpected `avy-line-insert-style'")))
+          (kill-region beg end)))))
 
   ;; Hydra
   (defhydra hydra-avy-jump (:color blue)
