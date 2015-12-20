@@ -1990,6 +1990,7 @@ point is on and summons `hydra-mark-lines'."
 
   ;; Variables
   (add-to-list 'projectile-globally-ignored-directories "doxygen")
+  (add-to-list 'projectile-globally-ignored-directories "vendor")
   (setq projectile-cache-file "~/.emacs.d/.projectile.cache")
   (setq projectile-completion-system 'helm)
   (setq projectile-enable-caching t)
