@@ -2243,6 +2243,7 @@ char if successful."
   :commands (magit-status magit-clone)
   :init
   (bind-keys :map custom-keys-mode-prefix-map
+             ("g c" . magit-clone-github)
              ("g d" . magit-dispatch-popup)
              ("g f" . magit-find-file)
              ("g s" . magit-status))
