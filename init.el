@@ -2140,6 +2140,10 @@ point is on and summons `hydra-mark-lines'."
   :config
   (bind-key "M-h" #'helm-swoop-from-isearch isearch-mode-map))
 
+(use-package flx-isearch
+  :bind (("C-M-r" . flx-isearch-backward)
+         ("C-M-s" . flx-isearch-forward)))
+
 (use-package grep
   :ensure nil
   :bind ("C-c g" . rgrep)

@@ -40,6 +40,7 @@
   | fill-column-indicator  |
   | flx                    |
   | flx-ido                |
+  | flx-isearch            |
   | flycheck               |
   | flycheck-pyflakes      |
   | font-utils             |
