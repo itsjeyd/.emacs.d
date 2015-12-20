@@ -22,6 +22,7 @@
   | caps-lock              |
   | cdlatex                |
   | change-inner           |
+  | cheatsheet             |
   | cider                  |
   | clojure-mode           |
   | concurrent             |

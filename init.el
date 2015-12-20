@@ -730,6 +730,142 @@ point is on and summons `hydra-mark-lines'."
   (which-key-mode t)
   (modeline-remove-lighter 'which-key-mode))
 
+(use-package cheatsheet
+  :config
+  ;; Dired
+  (cheatsheet-add :group 'Dired
+                  :key "M-x peep-dired"
+                  :description "Turn on mode for previewing files")
+  (cheatsheet-add :group 'Dired
+                  :key "C-x C-d"
+                  :description "Tree view of current directory"))
+  ;; Editing
+  (cheatsheet-add :group 'Editing
+                  :key "M-s @"
+                  :description "Expand region")
+  (cheatsheet-add :group 'Editing
+                  :key "C-c m"
+                  :description "Mark line")
+  ;; Ibuffer
+  (cheatsheet-add :group 'Ibuffer
+                  :key "M-x ibuffer-do-isearch"
+                  :description "Incremental search in marked buffers")
+  (cheatsheet-add :group 'Ibuffer
+                  :key "M-DEL"
+                  :description "Unmark all marked buffers")
+  (cheatsheet-add :group 'Ibuffer
+                  :key "O"
+                  :description "Run occur on marked buffers")
+  (cheatsheet-add :group 'Ibuffer
+                  :key "* s"
+                  :description "Mark temporary buffers")
+  (cheatsheet-add :group 'Ibuffer
+                  :key "="
+                  :description "Diff changes with file on disk")
+  (cheatsheet-add :group 'Ibuffer
+                  :key ","
+                  :description "Rotate between sorting modes")
+  ;; Helm
+  (cheatsheet-add :group 'Helm
+                  :key "C-x c g"
+                  :description "View commit/file/issue/PR/starred repo on GitHub")
+  (cheatsheet-add :group 'Helm
+                  :key "C-x c B"
+                  :description "Access Firefox bookmarks")
+  ;; Movement
+  (cheatsheet-add :group 'Movement
+                  :key "M-s a"
+                  :description "Hand Isearch matches over to Avy")
+  (cheatsheet-add :group 'Movement
+                  :key "M-s C-w"
+                  :description "Move line/region here")
+  (cheatsheet-add :group 'Movement
+                  :key "M-s M-w"
+                  :description "Copy line/region here")
+  (cheatsheet-add :group 'Movement
+                  :key "M-g w"
+                  :description "Go to word")
+  ;; Org
+  (cheatsheet-add :group 'Org
+                  :key "M-x org-confluence-export-as-confluence"
+                  :description "Export buffer or region to confluence")
+  (cheatsheet-add :group 'Org
+                  :key "M-x org-copy-link"
+                  :description "Copy link at point")
+  ;; Programming
+  (cheatsheet-add :group 'Programming
+                  :key "C-c y"
+                  :description "Browse snippets with Helm")
+  ;; Projects
+  (cheatsheet-add :group 'Projects
+                  :key "C-c p v"
+                  :description "View status buffer for project")
+  (cheatsheet-add :group 'Projects
+                  :key "C-c p p"
+                  :description "Switch project")
+  (cheatsheet-add :group 'Projects
+                  :key "C-c p o"
+                  :description "Run occur on project buffers")
+  (cheatsheet-add :group 'Projects
+                  :key "C-c p k"
+                  :description "Kill project buffers")
+  (cheatsheet-add :group 'Projects
+                  :key "C-c p h"
+                  :description "Launch helm-projectile (lists project buffers, project files, projects)")
+  (cheatsheet-add :group 'Projects
+                  :key "C-c p I"
+                  :description "Ibuffer for current project")
+  (cheatsheet-add :group 'Projects
+                  :key "C-c p F"
+                  :description "Find file in known projects")
+  ;; Python
+  (cheatsheet-add :group 'Python
+                  :key "M-x helm-pydoc"
+                  :description "View documentation/source or import module")
+  (cheatsheet-add :group 'Python
+                  :key "C-x D"
+                  :description "View definitions in file as tree")
+  (cheatsheet-add :group 'Python
+                  :key "C-c ?"
+                  :description "View documentation for thing at point")
+  ;; Search
+  (cheatsheet-add :group 'Search
+                  :key "C-c s"
+                  :description "Launch dispatcher for web search")
+  (cheatsheet-add :group 'Search
+                  :key "C-M-s"
+                  :description "Isearch with flex matching (forward)")
+  (cheatsheet-add :group 'Search
+                  :key "C-M-r"
+                  :description "Isearch with flex matching (backward)")
+  ;; Version Control
+  (cheatsheet-add :group 'VC
+                  :key "M-x diffview-current"
+                  :description "View current diff side-by-side")
+  (cheatsheet-add :group 'VC
+                  :key "M-x browse-at-remote/kill"
+                  :description "Copy GitHub URL of current file (includes reference to current line)")
+  (cheatsheet-add :group 'VC
+                  :key "M-x browse-at-remote/browse"
+                  :description "View current file on GitHub")
+  (cheatsheet-add :group 'VC
+                  :key "M-s g f"
+                  :description "View file at specific revision")
+  (cheatsheet-add :group 'VC
+                  :key "M-s g c"
+                  :description "Clone GitHub repo (via SSH)")
+  ;; Windows
+  (cheatsheet-add :group 'Windows
+                  :key "C-c 3"
+                  :description "Split root window below")
+  (cheatsheet-add :group 'Windows
+                  :key "C-c 2"
+                  :description "Split root window right")
+  ;; Writing
+  (cheatsheet-add :group 'Writing
+                  :key "C-c S"
+                  :description "Look up synonyms (using local WordNet installation)")
+
 ; Functions
 (defun info-display-topic (topic)
   "Create command that opens up a separate *info* buffer for TOPIC."
