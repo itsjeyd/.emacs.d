@@ -2706,3 +2706,15 @@ With prefix P, create local abbrev. Otherwise it will be global."
 
 (toggle-frame-maximized)
 (semantic-mode)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(let ((second-frame (make-frame '((minibuffer . nil)))))
+  (with-selected-frame second-frame
+    (toggle-frame-maximized)
+    (cheatsheet-show)
+    (delete-other-windows)
+    (split-window-right)
+    (follow-mode)
+    (goto-char (point-min))
+    (text-scale-adjust 2)))
