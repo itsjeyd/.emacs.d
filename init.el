@@ -621,8 +621,6 @@ point is on and summons `hydra-mark-lines'."
 ;;;;;;;;;;;;
 
 (use-package helm
-  :bind (("C-c k" . helm-show-kill-ring)
-         ("C-c SPC" . helm-all-mark-rings))
   :config
 
   (use-package helm-config
@@ -708,6 +706,8 @@ point is on and summons `hydra-mark-lines'."
     ("s" helm-github-stars "starred repo"))
 
   ;; Key Bindings
+  (bind-key "C-c k" #'helm-show-kill-ring)
+  (bind-key "C-c SPC" #'helm-all-mark-rings)
   (bind-key "B" #'helm-firefox-bookmarks helm-command-map)
   (bind-key "g" #'hydra-helm-github/body helm-command-map)
   (bind-key "M-o" #'helm-previous-source helm-map)
