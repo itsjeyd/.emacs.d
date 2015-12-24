@@ -749,6 +749,9 @@ point is on and summons `hydra-mark-lines'."
                   :description "Tree view of current directory")
   ;; Editing
   (cheatsheet-add :group 'Editing
+                  :key "M-- M-^"
+                  :description "Join line to next line (no need for point to be at EOL)")
+  (cheatsheet-add :group 'Editing
                   :key "M-s @"
                   :description "Expand region")
   (cheatsheet-add :group 'Editing
