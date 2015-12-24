@@ -849,6 +849,10 @@ point is on and summons `hydra-mark-lines'."
   (cheatsheet-add :group 'Search
                   :key "C-M-r"
                   :description "Isearch with flex matching (backward)")
+  ;; Utilities
+  (cheatsheet-add :group 'Utilities
+                  :key "M-x quick-calc"
+                  :description "Do a quick calculation in the minibuffer")
   ;; Version Control
   (cheatsheet-add :group 'VC
                   :key "M-x diffview-current"
