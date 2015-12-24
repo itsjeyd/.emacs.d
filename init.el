@@ -2091,10 +2091,6 @@ point is on and summons `hydra-mark-lines'."
   (bind-keys :map python-mode-map
              ("M-a" . python-nav-backward-block) ; Default
              ("M-e" . python-nav-forward-block) ; Default
-             ("C-M-a" . python-nav-backward-defun)
-             ("C-M-b" . python-nav-backward-sexp-safe)
-             ("C-M-e" . python-nav-forward-defun)
-             ("C-M-f" . python-nav-forward-sexp-safe)
              ("C-M-u" . python-nav-backward-up-list) ; Default
              ("H-a" . python-nav-beginning-of-statement)
              ("H-b" . python-nav-backward-statement)
