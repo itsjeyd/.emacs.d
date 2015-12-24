@@ -746,7 +746,7 @@ point is on and summons `hydra-mark-lines'."
                   :description "Turn on mode for previewing files")
   (cheatsheet-add :group 'Dired
                   :key "C-x C-d"
-                  :description "Tree view of current directory"))
+                  :description "Tree view of current directory")
   ;; Editing
   (cheatsheet-add :group 'Editing
                   :key "M-s @"
@@ -872,7 +872,7 @@ point is on and summons `hydra-mark-lines'."
   ;; Writing
   (cheatsheet-add :group 'Writing
                   :key "C-c S"
-                  :description "Look up synonyms (using local WordNet installation)")
+                  :description "Look up synonyms (using local WordNet installation)"))
 
 ; Functions
 (defun info-display-topic (topic)
