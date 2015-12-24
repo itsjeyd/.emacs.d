@@ -241,6 +241,13 @@
     (add-to-list 'peep-dired-ignored-extensions "mp3"))
 
   ;; Commands
+  (defun dired-delete-test-artifacts ()
+    (interactive)
+    (dired-mark-extension '("log" "png"))
+    (dired-do-delete))
+
+  (defalias 'dired-empty 'dired-delete-test-artifacts)
+
   (defun dired-jump-to-top ()
     (interactive)
     (goto-char (point-min))
@@ -262,6 +269,7 @@
   ;; Key Bindings
   (bind-keys :map dired-mode-map
              (")" . dired-hide-details-mode)
+             ("e" . dired-empty)
              ((vector 'remap 'beginning-of-buffer) . dired-jump-to-top)
              ((vector 'remap 'end-of-buffer) . dired-jump-to-bottom))
 
