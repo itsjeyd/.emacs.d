@@ -1208,7 +1208,6 @@ point is on and summons `hydra-mark-lines'."
                ("TAB" . tern-ac-complete)))
 
   ;; Hooks
-  (add-hook 'js2-mode-hook #'ac-js2-mode)
   (add-hook 'js2-mode-hook #'flycheck-mode)
   (add-hook 'js2-mode-hook #'js2-imenu-extras-mode)
   (add-hook 'js2-mode-hook #'js2-refactor-mode)
