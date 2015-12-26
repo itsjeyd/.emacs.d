@@ -872,6 +872,9 @@ point is on and summons `hydra-mark-lines'."
   (cheatsheet-add :group 'VC
                   :key "M-s g c"
                   :description "Clone GitHub repo (via SSH)")
+  (cheatsheet-add :group 'VC
+                  :key "e"
+                  :description "Compare, stage, or *resolve* using Ediff")
   ;; Windows
   (cheatsheet-add :group 'Windows
                   :key "C-c 3"
