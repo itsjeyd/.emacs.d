@@ -2003,7 +2003,11 @@ point is on and summons `hydra-mark-lines'."
   (projectile-global-mode 1)
 
   ;; Variables
+  (add-to-list 'projectile-globally-ignored-directories "bin")
   (add-to-list 'projectile-globally-ignored-directories "doxygen")
+  (add-to-list 'projectile-globally-ignored-directories "include")
+  (add-to-list 'projectile-globally-ignored-directories "lib")
+  (add-to-list 'projectile-globally-ignored-directories "man")
   (add-to-list 'projectile-globally-ignored-directories "vendor")
   (setq projectile-cache-file "~/.emacs.d/.projectile.cache")
   (setq projectile-completion-system 'helm)
