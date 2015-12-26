@@ -3,14 +3,9 @@
 *cache
 *dat
 *elc
-.bts-project
-.bts-query
-.cider-history
 .ido.last
 .mc-lists.el
-.org-id-locations
 .projectile.projects
-.python-environments
 .recentf
 .smex-items
 annotations
@@ -18,17 +13,13 @@ bookmarks
 helm-adaptive-history
 history
 tramp
-custom.el
 org-clock-save.el
-lisp/profile-dotemacs.el
 
 # Folders
+.python-environments
 elpa/
-ensime-servers/
-image-dired/
 lisp/git-wip-timemachine/
 lisp/lispy-mnemonic/
 lisp/mark-lines/
-speed-type/
 url/
 var/
