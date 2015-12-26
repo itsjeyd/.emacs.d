@@ -2702,9 +2702,9 @@ With prefix P, create local abbrev. Otherwise it will be global."
     (setq after (downcase (or (thing-at-point 'word) "")))
     (unless (string= after before)
       (define-abbrev
-        (if local local-abbrev-table global-abbrev-table) before after))
+        (if local local-abbrev-table global-abbrev-table) before after)
       (message "\"%s\" now expands to \"%s\" %sally."
-               before after (if local "loc" "glob"))))
+               before after (if local "loc" "glob")))))
 
 ; Hydra
 (defhydra hydra-synosaurus (:color blue)
