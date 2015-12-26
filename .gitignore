@@ -3,13 +3,13 @@
 *cache
 *dat
 *elc
-*eld
 .bts-project
 .bts-query
 .cider-history
 .ido.last
 .mc-lists.el
 .org-id-locations
+.projectile.projects
 .python-environments
 .recentf
 .smex-items

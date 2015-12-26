@@ -2014,7 +2014,7 @@ point is on and summons `hydra-mark-lines'."
   (setq projectile-enable-caching t)
   (setq projectile-enable-idle-timer t)
   (setq projectile-find-dir-includes-top-level t)
-  (setq projectile-known-projects-file "~/.emacs.d/.projectile-bookmarks.eld")
+  (setq projectile-known-projects-file "~/.emacs.d/.projectile.projects")
   (setq projectile-mode-line
         '(:eval (format " %s[%s]"
                         (string #x1f5c0) (projectile-project-name))))
