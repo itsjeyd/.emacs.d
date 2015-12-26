@@ -2041,6 +2041,30 @@ point is on and summons `hydra-mark-lines'."
     (use-package jedi-direx
       :commands jedi-direx:pop-to-buffer)
 
+    ;; Functions
+    (defun jedi:get-project-root ()
+      "Use `vc-find-root' function to figure out the project root."
+      (let* ((buf (current-buffer))
+             (buf-dir (expand-file-name (file-name-directory (buffer-file-name (current-buffer)))))
+             (project-root (vc-find-root buf-dir ".git")))
+        (when project-root
+          (expand-file-name project-root))))
+
+    (defun jedi:server-args-setup ()
+      ;; Introduce helper macro for building arglist
+      (defmacro add-args (arg-list arg-name arg-value)
+        `(setq ,arg-list (append ,arg-list (list ,arg-name ,arg-value))))
+      ;; Define server args
+      (let* ((project-root (jedi:get-project-root))
+             (venv-root (concat project-root "venv")))
+        (make-local-variable 'jedi:server-args)
+        (when project-root
+          (message (format "Adding project root to sys.path: %s" project-root))
+          (add-args jedi:server-args "--sys-path" project-root))
+        (when (file-exists-p venv-root)
+          (message (format "Adding virtualenv: %s" venv-root))
+          (add-args jedi:server-args "--virtual-env" venv-root))))
+
     ;; Hooks
     (add-hook 'jedi-mode-hook #'jedi-direx:setup)
 
@@ -2082,6 +2106,7 @@ point is on and summons `hydra-mark-lines'."
   ;; Hooks
   (add-hook 'python-mode-hook #'flycheck-mode)
   (add-hook 'python-mode-hook #'jedi:setup)
+  (add-hook 'python-mode-hook #'jedi:server-args-setup)
   (add-hook 'python-mode-hook #'python-add-electric-pairs)
 
   ;; Key Bindings
