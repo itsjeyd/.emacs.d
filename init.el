@@ -747,6 +747,9 @@ point is on and summons `hydra-mark-lines'."
   (cheatsheet-add :group 'Dired
                   :key "C-x C-d"
                   :description "Tree view of current directory")
+  (cheatsheet-add :group 'Dired
+                  :key "e"
+                  :description "Empty directory (remove test artifacts)")
   ;; Editing
   (cheatsheet-add :group 'Editing
                   :key "M-- M-^"
