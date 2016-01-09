@@ -947,6 +947,7 @@ point is on and summons `hydra-mark-lines'."
   ("l" (funcall (info-display-topic "elisp")) "Elisp")
   ("m" (funcall (info-display-topic "magit")) "Magit")
   ("o" (funcall (info-display-topic "org")) "Org Mode")
+  ("p" (funcall (info-display-topic "python")) "Python")
   ("s" (funcall (info-display-topic "screen")) "Screen")
   ("S" (funcall (info-display-topic "sicp")) "SICP"))
 

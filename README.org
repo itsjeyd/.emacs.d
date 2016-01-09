@@ -107,6 +107,7 @@
   | pos-tip                |
   | projectile             |
   | python-environment     |
+  | python-info            |
   | queue                  |
   | rainbow-delimiters     |
   | rainbow-mode           |
