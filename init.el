@@ -740,6 +740,8 @@ point is on and summons `hydra-mark-lines'."
 
 (use-package cheatsheet
   :config
+  ;; Cheats
+
   ;; Dired
   (cheatsheet-add :group 'Dired
                   :key "M-x peep-dired"
@@ -885,7 +887,23 @@ point is on and summons `hydra-mark-lines'."
   ;; Writing
   (cheatsheet-add :group 'Writing
                   :key "C-c S"
-                  :description "Look up synonyms (using local WordNet installation)"))
+                  :description "Look up synonyms (using local WordNet installation)")
+
+  ;; Functions
+  (defun cheatsheet-show-cheats-in-separate-frame ()
+    (interactive)
+    (let ((cheatsheet-frame (make-frame '((minibuffer . nil)))))
+      (with-selected-frame cheatsheet-frame
+        (toggle-frame-maximized)
+        (cheatsheet-show)
+        (delete-other-windows)
+        (split-window-right)
+        (follow-mode)
+        (goto-char (point-min))
+        (text-scale-adjust 2))))
+
+  ;; Key Bindings
+  (bind-key "<f1>" #'cheatsheet-show-cheats-in-separate-frame))
 
 ; Functions
 (defun info-display-topic (topic)
@@ -2771,15 +2789,3 @@ With prefix P, create local abbrev. Otherwise it will be global."
 
 (toggle-frame-maximized)
 (semantic-mode)
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-(let ((second-frame (make-frame '((minibuffer . nil)))))
-  (with-selected-frame second-frame
-    (toggle-frame-maximized)
-    (cheatsheet-show)
-    (delete-other-windows)
-    (split-window-right)
-    (follow-mode)
-    (goto-char (point-min))
-    (text-scale-adjust 2)))
