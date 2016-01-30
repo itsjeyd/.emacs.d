@@ -1529,6 +1529,12 @@ point is on and summons `hydra-mark-lines'."
         (call-interactively #'org-clock-in) ; No need to call save-buffer explictly here, org-clock-in is advised
         (switch-to-buffer working-buffer)))
 
+    ;; Key Bindings
+    (defvar org-mode-extra-keys-map (lookup-key org-mode-map (kbd "C-c C-x")))
+    (bind-keys :map org-mode-extra-keys-map
+               ("C-q" . org-clock-cancel-save-buffer)
+               ("C-x" . org-clock-in-last-save-buffer))
+
     ;; Variables
     (setq org-clock-mode-line-total 'today)
     (setq org-clock-persist 'history)
