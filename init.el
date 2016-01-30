@@ -1944,6 +1944,7 @@ point is on and summons `hydra-mark-lines'."
 (use-package yasnippet
   :commands yas-minor-mode
   :init
+  (add-hook 'css-mode-hook #'yas-minor-mode)
   (add-hook 'org-mode-hook #'yas-minor-mode)
   (add-hook 'prog-mode-hook #'yas-minor-mode)
   :config
