@@ -2041,7 +2041,7 @@ point is on and summons `hydra-mark-lines'."
   (setq projectile-mode-line
         '(:eval (format " %s[%s]"
                         (string #x1f5c0) (projectile-project-name))))
-  (setq projectile-switch-project-action #'projectile-vc))
+  (setq projectile-switch-project-action #'projectile-dired))
 
 
 
