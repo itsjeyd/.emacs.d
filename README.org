@@ -138,6 +138,7 @@
   | which-key              |
   | with-editor            |
   | writeroom-mode         |
+  | yaml-mode              |
   | yasnippet              |
   | yaxception             |
   |------------------------|
