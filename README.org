@@ -63,6 +63,7 @@
   | helm-github-stars      |
   | helm-open-github       |
   | helm-projectile        |
+  | helm-pydoc             |
   | helm-swoop             |
   | hydra                  |
   | idle-highlight-mode    |

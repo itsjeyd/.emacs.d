@@ -2061,6 +2061,8 @@ point is on and summons `hydra-mark-lines'."
     (add-to-list 'flycheck-disabled-checkers 'python-flake8)
     (add-to-list 'flycheck-disabled-checkers 'python-pylint))
 
+  (use-package helm-pydoc)
+
   (use-package jedi
     :config
 
