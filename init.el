@@ -2514,11 +2514,6 @@ char if successful."
         (magit-git-command "ls-files" default-directory)
       (message "Not in a Magit buffer.")))
 
-  ;; Faces
-  (when (eq (car custom-enabled-themes) 'base16-hopscotch-dark)
-    (set-face-attribute 'diff-refine-added nil :foreground "#98fb98")
-    (set-face-attribute 'diff-refine-removed nil :foreground "#ff7f50"))
-
   ;; Hooks
   (add-hook 'magit-refresh-buffer-hook #'git-gutter:update-all-windows)
 
