@@ -352,6 +352,9 @@
   :bind (("C-c i" . change-inner)
          ("C-c o" . change-outer)))
 
+(use-package comment-dwim-2
+  :bind ("M-;" . comment-dwim-2))
+
 (use-package elec-pair
   :ensure nil
   :init

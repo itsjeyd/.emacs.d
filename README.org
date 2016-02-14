@@ -24,6 +24,7 @@
   | cheatsheet             |
   | cider                  |
   | clojure-mode           |
+  | comment-dwim-2         |
   | concurrent             |
   | ctable                 |
   | dash                   |
