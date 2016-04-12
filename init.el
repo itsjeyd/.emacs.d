@@ -2412,6 +2412,7 @@ char if successful."
   :commands magit-status
   :init
   (bind-keys :map custom-keys-mode-prefix-map
+             ("g b" . magit-blame)
              ("g d" . magit-dispatch-popup)
              ("g f" . magit-find-file)
              ("g s" . magit-status))
