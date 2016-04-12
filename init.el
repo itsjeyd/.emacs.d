@@ -383,11 +383,6 @@
              ("a" . "⟶")
              ("l" . "⚡" )))
 
-(use-package mark-lines
-  :ensure nil
-  :load-path "lisp/mark-lines"
-  :commands mark-lines-next-line)
-
 (use-package move-text
   :commands (move-text-up move-text-down))
 
@@ -520,22 +515,8 @@ region, operate on a single line. Otherwise, operate on region."
         (message "Copied %d lines." arg))
     (call-interactively #'kill-ring-save)))
 
-(defun mark-line ()
-  "Simple wrapper around `mark-lines-next-line' that marks the line
-point is on and summons `hydra-mark-lines'."
-  (interactive)
-  (mark-lines-next-line 1)
-  (hydra-mark-lines/body))
-
 ; Hooks
 (add-hook 'before-save-hook #'delete-trailing-whitespace)
-
-; Hydra
-(defhydra hydra-mark-lines ()
-  "Mark lines"
-  ("m" next-line "next line")
-  ("n" next-line "next line")
-  ("p" previous-line "previous line"))
 
 (defhydra hydra-move-text ()
   "Move text"
@@ -546,7 +527,6 @@ point is on and summons `hydra-mark-lines'."
 (global-set-key (kbd "C-w") #'kill-region-with-arg)
 (global-set-key (kbd "M-w") #'kill-ring-save-with-arg)
 (global-set-key (kbd "M-=") #'count-words)
-(global-set-key (kbd "C-c m") #'mark-line)
 (define-key custom-keys-mode-prefix-map (kbd "u") #'hydra-move-text/body)
 (define-key custom-keys-mode-prefix-map (kbd "d") #'hydra-move-text/body)
 
@@ -719,9 +699,6 @@ point is on and summons `hydra-mark-lines'."
   (cheatsheet-add :group 'Editing
                   :key "M-s @"
                   :description "Expand region")
-  (cheatsheet-add :group 'Editing
-                  :key "C-c m"
-                  :description "Mark line")
   ;; Ibuffer
   (cheatsheet-add :group 'Ibuffer
                   :key "M-x ibuffer-do-isearch"
