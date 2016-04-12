@@ -312,6 +312,13 @@
 ;;; Editing ;;;
 ;;;;;;;;;;;;;;;
 
+(use-package aggressive-indent
+  :config
+  (global-aggressive-indent-mode 1)
+
+  ;; Variables
+  (add-to-list 'aggressive-indent-excluded-modes 'html-mode))
+
 (use-package anchored-transpose
   :commands anchored-transpose)
 
@@ -2786,6 +2793,7 @@ With prefix P, create local abbrev. Otherwise it will be global."
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+(modeline-remove-lighter 'aggressive-indent-mode)
 (modeline-remove-lighter 'auto-complete-mode)
 (modeline-set-lighter 'abbrev-mode " Abbr")
 (modeline-set-lighter 'auto-fill-function (string 32 #x23ce))

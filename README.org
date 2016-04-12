@@ -4,6 +4,7 @@
   | Package              |
   |----------------------|
   | ace-window           |
+  | aggressive-indent    |
   | anchored-transpose   |
   | annotate             |
   | anzu                 |
