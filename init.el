@@ -2542,7 +2542,8 @@ char if successful."
   ;; Variables
   (setq magit-completing-read-function #'magit-ido-completing-read)
   (setq magit-diff-refine-hunk t)
-  (setq magit-revert-buffers t))
+  (setq magit-revert-buffers t)
+  (setq magit-status-show-hashes-in-headers t))
 
 ; git-wip
 (load "~/git-wip/emacs/git-wip.el")
