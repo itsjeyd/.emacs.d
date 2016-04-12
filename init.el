@@ -650,7 +650,7 @@ point is on and summons `hydra-mark-lines'."
     (bind-key "C-c d" #'helm-dash-at-point)
 
     ;; Variables
-    (setq helm-dash-common-docsets '("Ansible" "BackboneJS" "Bash" "Bootstrap 3" "CSS" "CoffeeScript" "Django" "Font_Awesome" "HTML" "Haml" "JavaScript" "jQuery" "LaTeX" "MongoDB" "MySQL" "PostgreSQL" "Python 2" "RequireJS" "SQLite" "Sass" "UnderscoreJS" "Vagrant"))
+    (setq helm-dash-common-docsets '("Ansible" "AngularJS" "BackboneJS" "Bash" "Bootstrap 3" "CSS" "CoffeeScript" "Django" "Font_Awesome" "HTML" "Haml" "JavaScript" "jQuery" "LaTeX" "MongoDB" "MySQL" "PostgreSQL" "Python 2" "RequireJS" "SQLite" "Sass" "UnderscoreJS" "Vagrant"))
     (setq helm-dash-enable-debugging nil)
     (setq helm-dash-docsets-path "/storage/docsets/")
     (setq helm-dash-min-length 2))
