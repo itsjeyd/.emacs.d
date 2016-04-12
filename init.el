@@ -1335,7 +1335,8 @@ point is on and summons `hydra-mark-lines'."
   :ensure nil
   :defer t
   :config
-  (setq uniquify-buffer-name-style 'forward))
+  (setq uniquify-buffer-name-style 'forward)
+  (setq uniquify-strip-common-suffix nil))
 
 ; Functions
 (defun modeline-set-lighter (minor-mode lighter)
