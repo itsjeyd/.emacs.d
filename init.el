@@ -2409,10 +2409,9 @@ char if successful."
               :buffer "*open github*")))))
 
 (use-package magit
-  :commands (magit-status magit-clone)
+  :commands magit-status
   :init
   (bind-keys :map custom-keys-mode-prefix-map
-             ("g c" . magit-clone-github)
              ("g d" . magit-dispatch-popup)
              ("g f" . magit-find-file)
              ("g s" . magit-status))
@@ -2447,15 +2446,6 @@ char if successful."
         ad-do-it)))
 
   ;; Commands
-  (defun magit-clone-github (repository directory)
-    (interactive
-     (let* ((owner (read-string "Owner: "))
-            (repo (read-string "Repo: "))
-            (url (format "git@github.com:%s/%s.git" owner repo)))
-       (list url
-             (ido-read-directory-name "Directory: "))))
-    (magit-clone repository directory))
-
   (defun magit-ls-files ()
     "List tracked files of current repository."
     (interactive)
