@@ -809,8 +809,8 @@ region, operate on a single line. Otherwise, operate on region."
                   :key "M-s g f"
                   :description "View file at specific revision")
   (cheatsheet-add :group 'VC
-                  :key "M-s g c"
-                  :description "Clone GitHub repo (via SSH)")
+                  :key "M-s g b"
+                  :description "Blame file being visited in current buffer")
   (cheatsheet-add :group 'VC
                   :key "e"
                   :description "Compare, stage, or *resolve* using Ediff")
