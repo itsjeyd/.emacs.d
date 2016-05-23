@@ -1166,8 +1166,14 @@ region, operate on a single line. Otherwise, operate on region."
                ("," . tern-pop-find-definition)
                ("TAB" . tern-ac-complete)))
 
+  ;; Functions
+  (defun js2-enable-flycheck-mode ()
+    "Conditionally enable flycheck-mode (skip for remote files)"
+    (when (not (file-remote-p (buffer-file-name)))
+      (flycheck-mode 1)))
+
   ;; Hooks
-  (add-hook 'js2-mode-hook #'flycheck-mode)
+  (add-hook 'js2-mode-hook #'js2-enable-flycheck-mode)
   (add-hook 'js2-mode-hook #'js2-imenu-extras-mode)
   (add-hook 'js2-mode-hook #'js2-refactor-mode)
   (add-hook 'js2-mode-hook #'tern-mode)
@@ -2077,10 +2083,21 @@ region, operate on a single line. Otherwise, operate on region."
   (defun python-add-electric-pairs ()
     (setq-local electric-pair-pairs
                 (cons single-backticks electric-pair-pairs)))
+
+  (defun python-enable-flycheck-mode ()
+    "Conditionally enable flycheck-mode (skip for remote files)"
+    (when (not (file-remote-p (buffer-file-name)))
+      (flycheck-mode 1)))
+
+  (defun python-enable-jedi ()
+    "Conditionally enable jedi (skip for remote files)"
+    (when (not (file-remote-p (buffer-file-name)))
+      (jedi:setup)
+      (jedi:server-args-setup)))
+
   ;; Hooks
-  (add-hook 'python-mode-hook #'flycheck-mode)
-  (add-hook 'python-mode-hook #'jedi:setup)
-  (add-hook 'python-mode-hook #'jedi:server-args-setup)
+  (add-hook 'python-mode-hook #'python-enable-flycheck-mode)
+  (add-hook 'python-mode-hook #'python-enable-jedi)
   (add-hook 'python-mode-hook #'python-add-electric-pairs)
 
   ;; Key Bindings
