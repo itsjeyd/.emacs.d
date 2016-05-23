@@ -1429,11 +1429,6 @@ region, operate on a single line. Otherwise, operate on region."
     (org-ac/config-default)
     (setq org-ac/ac-trigger-command-keys '("\\" "SPC" ":" "[" "+")))
 
-  (use-package org-agenda
-    :ensure nil
-    :config
-    (setq org-agenda-files '("~/org/tasks.org")))
-
   (use-package org-capture
     :ensure nil
     :bind ("C-c c" . org-capture)
