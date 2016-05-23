@@ -336,6 +336,10 @@
   :config
   (ac-config-default)
   (ac-flyspell-workaround)
+  (global-auto-complete-mode -1) ; ac-config-default enables global-auto-complete-mode
+
+  ;; Hooks
+  (add-hook 'prog-mode-hook #'auto-complete-mode)
 
   ;; Key Bindings
   (bind-keys :map ac-completing-map
@@ -1420,6 +1424,7 @@ region, operate on a single line. Otherwise, operate on region."
     (setq org-plantuml-jar-path "/opt/plantuml/plantuml.jar"))
 
   (use-package org-ac
+    :disabled
     :config
     (org-ac/config-default)
     (setq org-ac/ac-trigger-command-keys '("\\" "SPC" ":" "[" "+")))
