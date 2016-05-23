@@ -2377,6 +2377,7 @@ char if successful."
   ;; Hydra
   (defhydra hydra-git-gutter (:color pink)
     "Git Gutter"
+    ("SPC" git-gutter:mark-hunk "mark")
     ("n" git-gutter:next-hunk "next")
     ("p" git-gutter:previous-hunk "prev")
     ("d" git-gutter:popup-hunk "diff")
