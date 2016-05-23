@@ -2473,6 +2473,10 @@ char if successful."
                  (man (match-string 1 node)))
         ad-do-it)))
 
+  (advice-add 'magit-discard :after #'magit-refresh)
+  (advice-add 'magit-stage :after #'magit-refresh)
+  (advice-add 'magit-unstage :after #'magit-refresh)
+
   ;; Commands
   (defun magit-ls-files ()
     "List tracked files of current repository."
@@ -2482,7 +2486,7 @@ char if successful."
       (message "Not in a Magit buffer.")))
 
   ;; Hooks
-  (add-hook 'magit-refresh-buffer-hook #'git-gutter:update-all-windows)
+  (add-hook 'magit-post-refresh-hook #'git-gutter:update-all-windows)
 
   ;; Key Bindings
   (unbind-key "M-s" magit-mode-map)
@@ -2644,6 +2648,9 @@ window that will be added to the current window layout."
   (split-window (frame-root-window)
                 (and size (prefix-numeric-value size))
                 direction))
+
+; Hooks
+(add-hook 'window-configuration-change-hook #'git-gutter:update-all-windows)
 
 ; Hydra
 (defhydra hydra-resize-window ()
