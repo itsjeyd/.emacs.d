@@ -625,7 +625,7 @@ region, operate on a single line. Otherwise, operate on region."
     :ensure helm)
 
   (use-package helm-dash
-    :init
+    :config
     ;; Key Bindings
     (bind-key "C-c d" #'helm-dash-at-point)
 
