@@ -2035,9 +2035,6 @@ region, operate on a single line. Otherwise, operate on region."
           (expand-file-name project-root))))
 
     (defun jedi:server-args-setup ()
-      ;; Introduce helper macro for building arglist
-      (defmacro add-args (arg-list arg-name arg-value)
-        `(setq ,arg-list (append ,arg-list (list ,arg-name ,arg-value))))
       ;; Define server args
       (let* ((project-root (jedi:get-project-root))
              (venv-root (concat project-root "venv")))
@@ -2059,6 +2056,10 @@ region, operate on a single line. Otherwise, operate on region."
                ("C-c /" . helm-jedi-related-names)
                ("C-c ?" . jedi:show-doc)
                ("C-x D" . jedi-direx:pop-to-buffer))
+
+    ;; Macros
+    (defmacro add-args (arg-list arg-name arg-value)
+      `(setq ,arg-list (append ,arg-list (list ,arg-name ,arg-value))))
 
     ;; Variables
     (setq jedi:complete-on-dot t)
