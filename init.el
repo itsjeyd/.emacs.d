@@ -668,6 +668,10 @@ region, operate on a single line. Otherwise, operate on region."
   (setq helm-truncate-lines t)
   (setq helm-grep-save-buffer-name-no-confirm t))
 
+(use-package helm-flx
+  :config
+  (helm-flx-mode 1))
+
 
 
 ;;;;;;;;;;;;
