@@ -2409,9 +2409,6 @@ char if successful."
   :load-path "lisp/git-wip-timemachine"
   :commands git-wip-timemachine)
 
-(use-package github-browse-file
-  :commands (github-browse-file github-browse-file-blame))
-
 (use-package helm-github-stars
   :commands helm-github-stars
   :config

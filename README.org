@@ -46,7 +46,6 @@
   | git-gutter           |
   | git-gutter-fringe    |
   | git-messenger        |
-  | github-browse-file   |
   | git-timemachine      |
   | google-maps          |
   | haml-mode            |
