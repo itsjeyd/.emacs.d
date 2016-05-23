@@ -63,6 +63,9 @@
                                ("-loaddefs.el\\'")
                                ("." . "~/.emacs.d/backups")))
 
+(add-to-list 'backup-directory-alist
+             (cons tramp-file-name-regexp nil))
+
 
 ;;;;;;;;;;;;;;;
 ;;; Buffers ;;;
