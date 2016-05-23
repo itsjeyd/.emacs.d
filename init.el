@@ -482,6 +482,18 @@
              ("a" . hydra-mc-all/body)
              ("e" . hydra-mc-edit/body)))
 
+(use-package smart-dash
+  :ensure nil
+  :load-path "lisp/smart-dash"
+  :config
+
+  ;; Hooks
+  (add-hook 'js2-mode-hook #'smart-dash-mode)
+  (add-hook 'python-mode-hook #'smart-dash-mode)
+
+  ;; Variables
+  (add-to-list 'smart-dash-c-modes 'js2-mode))
+
 (use-package utils
   :ensure nil
   :commands (flush-empty-lines sort-lines-and-uniquify unfill-paragraph))
@@ -761,6 +773,9 @@ region, operate on a single line. Otherwise, operate on region."
   (cheatsheet-add :group 'Programming
                   :key "C-c y"
                   :description "Browse snippets with Helm")
+  (cheatsheet-add :group 'Programming
+                  :key "-"
+                  :description "Insert underscore (works for Python and JS files)")
   ;; Projects
   (cheatsheet-add :group 'Projects
                   :key "C-c p v"

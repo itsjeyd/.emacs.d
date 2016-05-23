@@ -115,6 +115,7 @@
   | sclang-snippets      |
   | seq                  |
   | sicp                 |
+  | smart-dash           |
   | smartscan            |
   | smex                 |
   | speed-type           |
