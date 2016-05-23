@@ -121,7 +121,6 @@
   | spinner              |
   | sr-speedbar          |
   | swiper               |
-  | synosaurus           |
   | tablist              |
   | tern                 |
   | tern-auto-complete   |

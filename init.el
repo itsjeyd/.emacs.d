@@ -833,10 +833,6 @@ region, operate on a single line. Otherwise, operate on region."
   (cheatsheet-add :group 'Windows
                   :key "C-c 2"
                   :description "Split root window right")
-  ;; Writing
-  (cheatsheet-add :group 'Writing
-                  :key "C-c S"
-                  :description "Look up synonyms (using local WordNet installation)")
 
   ;; Functions
   (defun cheatsheet-show-cheats-in-separate-frame ()
@@ -2710,9 +2706,6 @@ window that will be added to the current window layout."
   (add-hook 'markdown-mode-hook #'markdown-add-electric-pairs)
   (add-hook 'markdown-mode-hook #'turn-on-auto-fill))
 
-(use-package synosaurus
-  :commands (synosaurus-lookup synosaurus-choose-and-replace))
-
 (use-package writeroom-mode
   :commands writeroom-mode)
 
@@ -2731,14 +2724,7 @@ With prefix P, create local abbrev. Otherwise it will be global."
       (message "\"%s\" now expands to \"%s\" %sally."
                before after (if local "loc" "glob")))))
 
-; Hydra
-(defhydra hydra-synosaurus (:color blue)
-  "Synosaurus"
-  ("l" synosaurus-lookup "look up")
-  ("r" synosaurus-choose-and-replace "replace"))
-
 ; Key Bindings
-(global-set-key (kbd "C-c S") #'hydra-synosaurus/body)
 (define-key custom-keys-mode-prefix-map (kbd "s a") #'ispell-word-then-abbrev)
 
 ; Variables
