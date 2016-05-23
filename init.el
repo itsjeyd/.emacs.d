@@ -314,7 +314,8 @@
 
 (use-package aggressive-indent
   :config
-  (global-aggressive-indent-mode 1)
+  ;; Hooks
+  (add-hook 'js2-mode-hook #'aggressive-indent-mode)
 
   ;; Variables
   (add-to-list 'aggressive-indent-excluded-modes 'html-mode))
