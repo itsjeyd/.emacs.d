@@ -395,7 +395,6 @@
   :commands (move-text-up move-text-down))
 
 (use-package multiple-cursors
-  :defer 5
   :config
 
   (use-package mc-hide-unmatched-lines-mode
@@ -697,10 +696,8 @@ region, operate on a single line. Otherwise, operate on region."
 (find-function-setup-keys)
 
 (use-package which-key
-  :defer 5
   :config
-  (which-key-mode t)
-  (modeline-remove-lighter 'which-key-mode))
+  (which-key-mode t))
 
 (use-package cheatsheet
   :config
@@ -1532,6 +1529,9 @@ region, operate on a single line. Otherwise, operate on region."
     (setq org-list-demote-modify-bullet '(("-" . "+") ("+" . "-")))
     (setq org-list-use-circular-motion t))
 
+  (use-package org-protocol
+    :ensure org-plus-contrib)
+
   (use-package ox
     :ensure nil
     :commands org-export-dispatch
@@ -1781,10 +1781,6 @@ region, operate on a single line. Otherwise, operate on region."
   (add-to-list 'org-speed-commands-user '("P" . org-previous-drawer) t)
   (add-to-list 'org-structure-template-alist
                '("o" "#+BEGIN_COMMENT\n?\n#+END_COMMENT") t))
-
-(use-package org-protocol
-  :ensure org-plus-contrib
-  :defer 5)
 
 
 
@@ -2770,6 +2766,7 @@ With prefix P, create local abbrev. Otherwise it will be global."
 
 (modeline-remove-lighter 'aggressive-indent-mode)
 (modeline-remove-lighter 'auto-complete-mode)
+(modeline-remove-lighter 'which-key-mode)
 (modeline-set-lighter 'abbrev-mode " Abbr")
 (modeline-set-lighter 'auto-fill-function (string 32 #x23ce))
 
