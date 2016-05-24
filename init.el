@@ -2109,6 +2109,11 @@ region, operate on a single line. Otherwise, operate on region."
     (when (not (file-remote-p (buffer-file-name)))
       (flycheck-mode 1)))
 
+  (defun python-enable-ipython ()
+    "Conditionally use ipython as a shell interpreter (skip for remote files)"
+    (when (not (file-remote-p (buffer-file-name)))
+      (set (make-local-variable 'python-shell-interpreter) "ipython")))
+
   (defun python-enable-jedi ()
     "Conditionally enable jedi (skip for remote files)"
     (when (not (file-remote-p (buffer-file-name)))
@@ -2117,6 +2122,7 @@ region, operate on a single line. Otherwise, operate on region."
 
   ;; Hooks
   (add-hook 'python-mode-hook #'python-enable-flycheck-mode)
+  (add-hook 'python-mode-hook #'python-enable-ipython)
   (add-hook 'python-mode-hook #'python-enable-jedi)
   (add-hook 'python-mode-hook #'python-add-electric-pairs)
 
@@ -2146,8 +2152,7 @@ region, operate on a single line. Otherwise, operate on region."
              ("C-c C-s s" . python-shell-send-string))
 
   ;; Variables
-  (setq python-fill-docstring-style 'django)
-  (setq python-shell-interpreter "ipython"))
+  (setq python-fill-docstring-style 'django))
 
 
 
