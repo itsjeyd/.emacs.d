@@ -1712,10 +1712,10 @@ region, operate on a single line. Otherwise, operate on region."
             (looking-at "^$")))))
 
   ;; Hooks
+  (add-hook 'org-mode-hook #'enable-which-function-mode)
   (add-hook 'org-mode-hook #'org-add-electric-pairs)
   (add-hook 'org-mode-hook #'org-toggle-blocks)
   (add-hook 'org-mode-hook #'turn-on-auto-fill)
-  (add-hook 'org-mode-hook #'which-function-mode)
 
   ;; Hydra
   (defhydra org-hydra-fill ()
@@ -1974,11 +1974,19 @@ region, operate on a single line. Otherwise, operate on region."
   (subword-mode 1)
   (modeline-remove-lighter 'subword-mode))
 
+(defun enable-which-function-mode ()
+  "Conditionally enable which-function mode (skip for remote files)"
+  (let ((file-name (buffer-file-name)))
+    (when (or (not file-name) ; Enable for buffers that are not visiting file
+              (not (file-remote-p file-name)))
+      (make-local-variable 'which-function-mode)
+      (which-function-mode 1))))
+
 ; Hooks
+(add-hook 'prog-mode-hook #'enable-which-function-mode)
 (add-hook 'java-mode-hook #'tim/enable-electric-semicolon)
 (add-hook 'js2-mode-hook #'tim/enable-electric-semicolon)
 (add-hook 'prog-mode-hook #'subword-setup)
-(add-hook 'prog-mode-hook #'which-function-mode)
 
 ; Variables
 (setq-default indent-tabs-mode nil)
