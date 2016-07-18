@@ -1539,6 +1539,11 @@ region, operate on a single line. Otherwise, operate on region."
     (setq org-export-copy-to-kill-ring nil)
     (setq org-export-dispatch-use-expert-ui t)
 
+    (use-package ox-odt
+      :ensure nil
+      :config
+      (setq org-odt-preferred-output-format "docx"))
+
     (use-package ox-latex
       :ensure nil
       :config
