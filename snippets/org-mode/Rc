@@ -1,5 +1,5 @@
 # -*- mode: snippet; require-final-newline: nil -*-
-# name: update PR (WIP)
-# key: uprw
+# name: Review comments
+# key: Rc
 # --
-update PR (WIP)
+Review comments
