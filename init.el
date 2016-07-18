@@ -612,7 +612,7 @@ region, operate on a single line. Otherwise, operate on region."
               (list (openwith-make-extension-regexp '("bmp" "jpeg" "jpg" "png"))
                     "ristretto" '(file))
               (list (openwith-make-extension-regexp '("doc" "docx" "odt"))
-                    "abiword" '(file))
+                    "libreoffice" '("--writer" file))
               (list (openwith-make-extension-regexp '("ods" "xls" "xlsx"))
                     "gnumeric" '(file))
               (list (openwith-make-extension-regexp '("odp" "pps" "ppt" "pptx"))
