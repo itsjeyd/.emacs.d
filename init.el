@@ -2131,9 +2131,9 @@ region, operate on a single line. Otherwise, operate on region."
 
   ;; Hooks
   (add-hook 'python-mode-hook #'python-enable-flycheck-mode)
-  (add-hook 'python-mode-hook #'python-enable-ipython)
   (add-hook 'python-mode-hook #'python-enable-jedi)
   (add-hook 'python-mode-hook #'python-add-electric-pairs)
+  (add-hook 'python-mode-hook #'python-enable-ipython t)
 
   ;; Key Bindings
   (unbind-key "C-c C-f" python-mode-map)
