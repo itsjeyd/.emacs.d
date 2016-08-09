@@ -2203,6 +2203,10 @@ region, operate on a single line. Otherwise, operate on region."
   ;; Variables
   (setq anzu-mode-lighter ""))
 
+(use-package helm-ag
+  :config
+  (setq helm-ag-insert-at-point 'symbol))
+
 (use-package helm-swoop
   :bind ("C-c h" . helm-swoop)
   :config

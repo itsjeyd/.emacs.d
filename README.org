@@ -50,6 +50,7 @@
   | google-maps          |
   | haml-mode            |
   | helm                 |
+  | helm-ag              |
   | helm-c-yasnippet     |
   | helm-core            |
   | helm-dash            |
