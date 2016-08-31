@@ -139,7 +139,7 @@
   :config
   (setq cfw:face-item-separator-color "#6699cc")
   (setq cfw:render-line-breaker 'cfw:render-line-breaker-wordwrap)
-  (when (or (eq (car custom-enabled-themes) 'base16-hopscotch-dark)
+  (when (or (eq (car custom-enabled-themes) 'base16-hopscotch)
             (eq (car custom-enabled-themes) 'sanityinc-tomorrow-eighties))
     (set-face-attribute 'cfw:face-title nil :foreground "#f99157")
     (set-face-attribute 'cfw:face-sunday nil :foreground "#cc99cc")
@@ -936,7 +936,7 @@ region, operate on a single line. Otherwise, operate on region."
 (use-package hydra
   :defer t
   :config
-  (when (or (eq (car custom-enabled-themes) 'base16-hopscotch-dark)
+  (when (or (eq (car custom-enabled-themes) 'base16-hopscotch)
             (eq (car custom-enabled-themes) 'sanityinc-tomorrow-eighties))
     (set-face-attribute 'hydra-face-blue nil :foreground "#6699cc")))
 
@@ -1122,7 +1122,7 @@ region, operate on a single line. Otherwise, operate on region."
 
 (advice-add 'load-theme :after #'load-custom-theme-settings)
 
-(load-theme 'base16-hopscotch-dark t)
+(load-theme 'base16-hopscotch t)
 
 ; Tooltips
 (tooltip-mode 0)
@@ -1688,7 +1688,7 @@ region, operate on a single line. Otherwise, operate on region."
   (when (eq (car custom-enabled-themes) 'sanityinc-tomorrow-eighties)
     (set-face-attribute 'org-block-begin-line nil :background "#393939")
     (set-face-attribute 'org-block-end-line nil :background "#393939"))
-  (when (eq (car custom-enabled-themes) 'base16-hopscotch-dark)
+  (when (eq (car custom-enabled-themes) 'base16-hopscotch)
     (set-face-attribute 'org-verbatim nil :foreground "#797379"))
 
   ;; Functions
@@ -2197,7 +2197,7 @@ region, operate on a single line. Otherwise, operate on region."
   (global-anzu-mode 1)
 
   ;; Faces
-  (when (eq (car custom-enabled-themes) 'base16-hopscotch-dark)
+  (when (eq (car custom-enabled-themes) 'base16-hopscotch)
     (set-face-attribute 'anzu-mode-line nil :foreground "#ff7f50"))
 
   ;; Variables
