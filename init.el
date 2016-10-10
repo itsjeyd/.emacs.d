@@ -59,8 +59,10 @@
 ;;; Backups ;;;
 ;;;;;;;;;;;;;;;
 
-(setq backup-directory-alist '(("-autoloads.el\\'")
+(setq backup-directory-alist '(("_EDITMSG\\'")
+                               ("-autoloads.el\\'")
                                ("-loaddefs.el\\'")
+                               ("/storage/secure/")
                                ("." . "~/.emacs.d/backups")))
 
 (add-to-list 'backup-directory-alist
