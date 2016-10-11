@@ -49,6 +49,7 @@
   | git-timemachine      |
   | google-maps          |
   | haml-mode            |
+  | handlebars-mode      |
   | helm                 |
   | helm-ag              |
   | helm-c-yasnippet     |
