@@ -890,7 +890,7 @@ region, operate on a single line. Otherwise, operate on region."
   ("o" apropos-user-option "opt")
   ("v" apropos-variable "var")
   ("i" info-apropos "info")
-  ("t" tags-apropos "tags")
+  ("t" xref-find-apropos "tags")
   ("z" hydra-customize-apropos/body "customize"))
 
 (defhydra hydra-customize-apropos (:color blue)
