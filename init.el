@@ -1965,9 +1965,12 @@ region, operate on a single line. Otherwise, operate on region."
 ; Commands
 (defun tim/electric-semicolon ()
   (interactive)
-  (end-of-line)
-  (when (not (looking-back ";"))
-    (insert ";")))
+  (let ((limit (save-excursion
+                 (beginning-of-line)
+                 (point))))
+    (end-of-line)
+    (when (not (looking-back ";" limit))
+      (insert ";"))))
 
 (defun tim/enable-electric-semicolon ()
   (local-set-key (kbd ";") #'tim/electric-semicolon))
