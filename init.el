@@ -2120,11 +2120,6 @@ region, operate on a single line. Otherwise, operate on region."
     (when (not (file-remote-p (buffer-file-name)))
       (flycheck-mode 1)))
 
-  (defun python-enable-ipython ()
-    "Conditionally use ipython as a shell interpreter (skip for remote files)"
-    (when (not (file-remote-p (buffer-file-name)))
-      (set (make-local-variable 'python-shell-interpreter) "ipython")))
-
   (defun python-enable-jedi ()
     "Conditionally enable jedi (skip for remote files)"
     (when (not (file-remote-p (buffer-file-name)))
@@ -2135,7 +2130,6 @@ region, operate on a single line. Otherwise, operate on region."
   (add-hook 'python-mode-hook #'python-enable-flycheck-mode)
   (add-hook 'python-mode-hook #'python-enable-jedi)
   (add-hook 'python-mode-hook #'python-add-electric-pairs)
-  (add-hook 'python-mode-hook #'python-enable-ipython t)
 
   ;; Key Bindings
   (unbind-key "C-c C-f" python-mode-map)
