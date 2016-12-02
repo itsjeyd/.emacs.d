@@ -1500,7 +1500,7 @@ region, operate on a single line. Otherwise, operate on region."
 
     ;; Keyboard Macros
     (fset 'org-clock-entry-new-day
-          [?\C-n tab ?\C-n ?\C-n ?\C-o ?\C-p ?\C-p tab ?\C-p ?\C-x ?\C-s])
+          [?\C-s ?: ?L ?O ?G ?B ?O ?O ?K ?: ?\C-m ?\C-a tab ?\C-n ?\C-n ?\C-o ?\C-p ?\C-p tab ?p ?\C-x ?\C-s])
 
     ;; Variables
     (setq org-clock-mode-line-total 'today)
