@@ -1660,9 +1660,9 @@ region, operate on a single line. Otherwise, operate on region."
     (interactive)
     (unless (featurep 'pdf-view)
       (pdf-tools-install))
-    (if (and (featurep 'interleave) interleave)
+    (if (and (featurep 'interleave-mode) interleave-mode)
         (message "Interleave is already running.")
-      (interleave)))
+      (interleave-mode)))
 
   (defun org-next-drawer (arg)
     (interactive "p")
@@ -1824,7 +1824,7 @@ region, operate on a single line. Otherwise, operate on region."
   (setq doc-view-continuous t))
 
 (use-package interleave
-  :commands interleave
+  :commands interleave-mode
   :config
   (defun interleave-handle-openwith (orig &optional arg)
     (openwith-mode -1)
