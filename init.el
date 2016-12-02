@@ -2010,7 +2010,7 @@ region, operate on a single line. Otherwise, operate on region."
     :config
     (helm-projectile-on))
 
-  (projectile-global-mode 1)
+  (projectile-mode 1)
 
   ;; Variables
   (add-to-list 'projectile-globally-ignored-directories "bin")
