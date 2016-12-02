@@ -1615,7 +1615,7 @@ region, operate on a single line. Otherwise, operate on region."
     "Copy `org-mode' link at point."
     (interactive)
     (when (org-in-regexp org-bracket-link-regexp 1)
-      (let ((link (org-link-unescape (org-match-string-no-properties 1))))
+      (let ((link (org-link-unescape (match-string-no-properties 1))))
         (kill-new link)
         (message "Copied link: %s" link))))
 
