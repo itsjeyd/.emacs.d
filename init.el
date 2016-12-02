@@ -1773,6 +1773,7 @@ region, operate on a single line. Otherwise, operate on region."
   (setq org-enforce-todo-dependencies t)
   (setq org-file-apps '((auto-mode . emacs) ("\\.pdf\\'" . emacs)))
   (setq org-fontify-done-headline t)
+  (setq org-hide-emphasis-markers t)
   (setq org-log-into-drawer t)
   (setq org-M-RET-may-split-line '((headline . nil) (item . t) (table . t)))
   (setq org-outline-path-complete-in-steps nil)
