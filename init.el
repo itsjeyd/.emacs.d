@@ -1766,7 +1766,6 @@ region, operate on a single line. Otherwise, operate on region."
   ;; Variables
   (setq org-blank-before-new-entry '((heading . t) (plain-list-item . auto)))
   (setq org-catch-invisible-edits 'error)
-  (setq org-completion-use-ido t)
   (setq org-confirm-babel-evaluate nil)
   (setq org-edit-src-content-indentation 0)
   (setq org-enforce-todo-checkbox-dependencies t)
@@ -1781,7 +1780,6 @@ region, operate on a single line. Otherwise, operate on region."
   (setq org-special-ctrl-a/e 'reversed)
   (setq org-special-ctrl-k t)
   (setq org-src-fontify-natively t)
-  (setq org-src-strip-leading-and-trailing-blank-lines t)
   (setq org-todo-repeat-to-state "RECURRING")
   (setq org-track-ordered-property-with-tag t)
   (setq org-use-speed-commands 'org-point-in-speed-command-position-p)
