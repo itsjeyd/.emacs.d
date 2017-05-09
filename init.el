@@ -1321,6 +1321,7 @@ region, operate on a single line. Otherwise, operate on region."
 (advice-add 'fundamental-mode :after #'fundamental-mode-setup)
 
 ; Variables
+(add-to-list 'auto-mode-alist '("\.env$" . conf-mode))
 (add-to-list 'auto-mode-alist '("routes$" . conf-space-mode))
 
 
