@@ -2010,7 +2010,6 @@ region, operate on a single line. Otherwise, operate on region."
   (add-to-list 'projectile-globally-ignored-directories "bin")
   (add-to-list 'projectile-globally-ignored-directories "doxygen")
   (add-to-list 'projectile-globally-ignored-directories "include")
-  (add-to-list 'projectile-globally-ignored-directories "lib")
   (add-to-list 'projectile-globally-ignored-directories "man")
   (add-to-list 'projectile-globally-ignored-directories "vendor")
   (setq projectile-cache-file "~/.emacs.d/.projectile.cache")
