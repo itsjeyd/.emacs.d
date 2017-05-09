@@ -1952,8 +1952,7 @@ region, operate on a single line. Otherwise, operate on region."
 
   ;; Variables
   (add-to-list 'ac-sources 'ac-source-yasnippet)
-  (setq yas-prompt-functions '(yas-ido-prompt yas-x-prompt yas-no-prompt))
-  (setq yas-triggers-in-field t))
+  (setq yas-prompt-functions '(yas-ido-prompt yas-x-prompt yas-no-prompt)))
 
 ; Commands
 (defun tim/electric-semicolon ()
