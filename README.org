@@ -93,6 +93,7 @@
   | ox-gfm               |
   | package-build        |
   | paradox              |
+  | pass                 |
   | pcache               |
   | pdf-tools            |
   | peep-dired           |
