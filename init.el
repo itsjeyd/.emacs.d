@@ -1411,7 +1411,6 @@ region, operate on a single line. Otherwise, operate on region."
 ;;;;;;;;;;;;;;;;
 
 (use-package org
-  :ensure org-plus-contrib
   :commands org-mode
   :bind (("C-c a" . org-agenda)
          ("C-c l" . org-store-link))
@@ -1531,9 +1530,6 @@ region, operate on a single line. Otherwise, operate on region."
     (setq org-list-allow-alphabetical t)
     (setq org-list-demote-modify-bullet '(("-" . "+") ("+" . "-")))
     (setq org-list-use-circular-motion t))
-
-  (use-package org-protocol
-    :ensure org-plus-contrib)
 
   (use-package ox
     :ensure nil

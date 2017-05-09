@@ -89,7 +89,6 @@
   | nyan-mode            |
   | openwith             |
   | org-ac               |
-  | org-plus-contrib     |
   | ox-gfm               |
   | package-build        |
   | paradox              |
