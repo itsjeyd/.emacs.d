@@ -1719,7 +1719,6 @@ region, operate on a single line. Otherwise, operate on region."
   (add-hook 'org-mode-hook #'enable-which-function-mode)
   (add-hook 'org-mode-hook #'org-add-electric-pairs)
   (add-hook 'org-mode-hook #'org-toggle-blocks)
-  (add-hook 'org-mode-hook #'turn-on-auto-fill)
 
   ;; Hydra
   (defhydra org-hydra-fill ()
@@ -2476,7 +2475,6 @@ char if successful."
 
     ;; Hooks
     (add-hook 'git-commit-mode-hook #'git-commit-add-electric-pairs)
-    (add-hook 'git-commit-mode-hook #'turn-on-auto-fill)
     (add-hook 'git-commit-mode-hook #'turn-on-orgstruct)
 
     ;; Variables
@@ -2733,8 +2731,7 @@ window that will be added to the current window layout."
                 (cons single-backticks electric-pair-pairs)))
 
   ;; Hooks
-  (add-hook 'markdown-mode-hook #'markdown-add-electric-pairs)
-  (add-hook 'markdown-mode-hook #'turn-on-auto-fill))
+  (add-hook 'markdown-mode-hook #'markdown-add-electric-pairs))
 
 (use-package writeroom-mode
   :commands writeroom-mode)
