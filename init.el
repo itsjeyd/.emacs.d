@@ -131,55 +131,6 @@
 
 
 
-;;;;;;;;;;;;;;;;
-;;; Calendar ;;;
-;;;;;;;;;;;;;;;;
-
-(use-package calfw
-  :defer t
-  :config
-  (setq cfw:face-item-separator-color "#6699cc")
-  (setq cfw:render-line-breaker 'cfw:render-line-breaker-wordwrap)
-  (when (or (eq (car custom-enabled-themes) 'base16-hopscotch)
-            (eq (car custom-enabled-themes) 'sanityinc-tomorrow-eighties))
-    (set-face-attribute 'cfw:face-title nil :foreground "#f99157")
-    (set-face-attribute 'cfw:face-sunday nil :foreground "#cc99cc")
-    (set-face-attribute 'cfw:face-header nil :foreground "#66cccc")
-    (set-face-attribute 'cfw:face-holiday nil :foreground "#ffcc66")
-    (set-face-attribute 'cfw:face-default-day nil :foreground "#66cccc")
-    (set-face-attribute 'cfw:face-select nil :background "#99cc99" :foreground "#393939")
-    (set-face-attribute 'cfw:face-today-title nil :background "#f2777a" :foreground "#393939")
-    (set-face-attribute 'cfw:face-today nil :foreground "#99cc99")
-    (set-face-attribute 'cfw:face-toolbar nil :background "#393939")
-    (set-face-attribute 'cfw:face-toolbar-button-off nil :foreground "#7f7f7f" :weight 'normal)))
-
-(use-package calfw-org
-  :ensure calfw
-  :commands cfw:open-org-calendar
-  :config
-  (defun cfw:org-create-source (&optional color)
-    "Create org-agenda source."
-    (make-cfw:source
-     :name "org-agenda"
-     :color (or color "#7aa37a")
-     :data 'cfw:org-schedule-period-to-calendar)))
-
-(use-package calfw-git
-  :ensure nil
-  :load-path "lisp/calfw-git"
-  :commands cfw:git-open-calendar)
-
-; Commands
-(defun open-org-calendar ()
-  "Open calendar in a separate frame."
-  (interactive)
-  (let ((cal-frame (make-frame '((minibuffer . nil)))))
-    (select-frame cal-frame)
-    (cfw:open-org-calendar)
-    (toggle-window-dedicated)))
-
-
-
 ;;;;;;;;;;;;;;;;;;;
 ;;; Common Lisp ;;;
 ;;;;;;;;;;;;;;;;;;;
