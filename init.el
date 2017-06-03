@@ -1195,12 +1195,6 @@ region, operate on a single line. Otherwise, operate on region."
   (TeX-PDF-mode 1)
   (outline-minor-mode 1))
 
-; BibTeX
-(use-package bibtex
-  :commands bibtex-mode
-  :config
-  (setq bibtex-maintain-sorted-entries t))
-
 
 
 ;;;;;;;;;;;;;;;;;;
