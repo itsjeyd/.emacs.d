@@ -434,8 +434,6 @@
              ("e" . hydra-mc-edit/body)))
 
 (use-package smart-dash
-  :ensure nil
-  :load-path "lisp/smart-dash"
   :config
 
   ;; Hooks
