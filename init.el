@@ -1596,14 +1596,6 @@ region, operate on a single line. Otherwise, operate on region."
         (fill-paragraph)
         (org-forward-element))))
 
-  (defun org-interleave ()
-    (interactive)
-    (unless (featurep 'pdf-view)
-      (pdf-tools-install))
-    (if (and (featurep 'interleave-mode) interleave-mode)
-        (message "Interleave is already running.")
-      (interleave-mode)))
-
   (defun org-next-drawer (arg)
     (interactive "p")
     (org-next-block arg nil org-generic-drawer-regexp))
@@ -1759,16 +1751,6 @@ region, operate on a single line. Otherwise, operate on region."
   (add-hook 'doc-view-mode-hook #'pdf-tools-install)
   :config
   (setq doc-view-continuous t))
-
-(use-package interleave
-  :commands interleave-mode
-  :config
-  (defun interleave-handle-openwith (orig &optional arg)
-    (openwith-mode -1)
-    (funcall orig arg)
-    (openwith-mode 1))
-
-  (advice-add 'interleave :around #'interleave-handle-openwith))
 
 (use-package pdf-tools
   :commands pdf-tools-install
