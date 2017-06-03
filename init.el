@@ -62,8 +62,7 @@
 (setq backup-directory-alist '(("_EDITMSG\\'")
                                ("-autoloads.el\\'")
                                ("-loaddefs.el\\'")
-                               ("/storage/secure/")
-                               ("." . "~/.emacs.d/backups")))
+                               ("." . "~/.emacs.d/backups/")))
 
 (add-to-list 'backup-directory-alist
              (cons tramp-file-name-regexp nil))
