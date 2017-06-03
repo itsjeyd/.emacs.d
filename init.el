@@ -2214,26 +2214,6 @@ char if successful."
 
 
 
-;;;;;;;;;;;;;;;;
-;;; Speedbar ;;;
-;;;;;;;;;;;;;;;;
-
-(use-package speedbar
-  :defer t
-  :config
-
-  (use-package sr-speedbar
-    :commands sr-speedbar-open
-    :init
-    (defalias 'speedbar 'sr-speedbar-open))
-
-  ;; Variables
-  (setq speedbar-tag-hierarchy-method
-        '(speedbar-simple-group-tag-hierarchy speedbar-sort-tag-hierarchy))
-  (setq speedbar-use-images nil))
-
-
-
 ;;;;;;;;;;;;;;;;;
 ;;; Utilities ;;;
 ;;;;;;;;;;;;;;;;;

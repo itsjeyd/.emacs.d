@@ -120,7 +120,6 @@
   | smex                 |
   | speed-type           |
   | spinner              |
-  | sr-speedbar          |
   | swiper               |
   | tablist              |
   | tern                 |
