@@ -886,8 +886,7 @@ region, operate on a single line. Otherwise, operate on region."
 (use-package hydra
   :defer t
   :config
-  (when (or (eq (car custom-enabled-themes) 'base16-hopscotch)
-            (eq (car custom-enabled-themes) 'sanityinc-tomorrow-eighties))
+  (when (eq (car custom-enabled-themes) 'base16-hopscotch)
     (set-face-attribute 'hydra-face-blue nil :foreground "#6699cc")))
 
 
@@ -1045,17 +1044,13 @@ region, operate on a single line. Otherwise, operate on region."
 (defun customize-enabled-theme ()
   (let ((enabled-theme (car custom-enabled-themes))
         (cursor-preferred-color "#FF5A0E"))
-    (cond ((eq enabled-theme 'base16-default)
-           (set-cursor-color cursor-preferred-color))
-          ((eq enabled-theme 'tronesque)
+    (cond ((eq enabled-theme 'tronesque)
            (let ((fallback-color
                   (face-attribute 'show-paren-match :background)))
              (set-face-attribute
               'dired-directory nil :foreground fallback-color)
              (set-face-attribute
-              'info-header-xref nil :foreground fallback-color)))
-          ((eq enabled-theme 'wombat)
-           (set-cursor-color cursor-preferred-color)))))
+              'info-header-xref nil :foreground fallback-color))))))
 
 (defun customize-theme ()
   (let ((default-background-color (face-attribute 'default :background)))
@@ -1613,9 +1608,6 @@ region, operate on a single line. Otherwise, operate on region."
   ;; Faces
   (set-face-attribute 'org-done nil :strike-through t)
   (set-face-attribute 'org-headline-done nil :strike-through t)
-  (when (eq (car custom-enabled-themes) 'sanityinc-tomorrow-eighties)
-    (set-face-attribute 'org-block-begin-line nil :background "#393939")
-    (set-face-attribute 'org-block-end-line nil :background "#393939"))
   (when (eq (car custom-enabled-themes) 'base16-hopscotch)
     (set-face-attribute 'org-verbatim nil :foreground "#797379"))
 
