@@ -1229,11 +1229,6 @@ region, operate on a single line. Otherwise, operate on region."
 ;;; Modeline ;;;
 ;;;;;;;;;;;;;;;;
 
-(use-package nyan-mode
-  :config
-  (nyan-mode t)
-  (setq nyan-bar-length 16))
-
 (use-package uniquify
   :ensure nil
   :defer t

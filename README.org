@@ -85,7 +85,6 @@
   | markdown-mode        |
   | move-text            |
   | multiple-cursors     |
-  | nyan-mode            |
   | openwith             |
   | org-ac               |
   | ox-gfm               |
