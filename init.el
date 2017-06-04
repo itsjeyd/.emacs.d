@@ -912,8 +912,7 @@ region, operate on a single line. Otherwise, operate on region."
     (ido-ubiquitous-mode 1)
 
     ;; Variables
-    (push '(disable exact "unhighlight-regexp") ido-ubiquitous-command-overrides)
-    (push '(disable prefix "sclang-dump-") ido-ubiquitous-command-overrides))
+    (push '(disable exact "unhighlight-regexp") ido-ubiquitous-command-overrides))
 
   (use-package recentf
     :commands recentf-mode

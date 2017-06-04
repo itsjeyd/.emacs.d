@@ -8,51 +8,34 @@
   | anchored-transpose   |
   | annotate             |
   | anzu                 |
-  | async                |
   | auctex               |
   | auto-complete        |
-  | auto-complete-pcmp   |
   | avy                  |
   | avy-zap              |
   | bind-key             |
   | browse-at-remote     |
   | caps-lock            |
-  | cdlatex              |
   | change-inner         |
   | cheatsheet           |
   | comment-dwim-2       |
-  | concurrent           |
-  | ctable               |
   | dash                 |
-  | deferred             |
   | diffview             |
-  | diminish             |
   | direx                |
-  | epc                  |
-  | epl                  |
   | expand-region        |
-  | f                    |
-  | flx                  |
   | flx-ido              |
   | flx-isearch          |
   | flycheck             |
   | flycheck-pyflakes    |
-  | font-utils           |
-  | fringe-helper        |
-  | gh                   |
   | gh-md                |
   | git-commit           |
   | git-gutter           |
   | git-gutter-fringe    |
   | git-messenger        |
   | git-timemachine      |
-  | google-maps          |
-  | haml-mode            |
   | handlebars-mode      |
   | helm                 |
   | helm-ag              |
   | helm-c-yasnippet     |
-  | helm-core            |
   | helm-dash            |
   | helm-firefox         |
   | helm-flx             |
@@ -66,77 +49,49 @@
   | idle-highlight-mode  |
   | ido-completing-read+ |
   | ido-ubiquitous       |
-  | iedit                |
-  | interleave           |
+  | ivy                  |
   | jedi                 |
-  | jedi-core            |
   | jedi-direx           |
   | js2-mode             |
   | js2-refactor         |
   | json-mode            |
-  | let-alist            |
   | linum-relative       |
   | lispy                |
-  | list-utils           |
-  | log4e                |
-  | logito               |
   | magit                |
-  | magit-popup          |
   | markdown-mode        |
   | move-text            |
   | multiple-cursors     |
   | openwith             |
   | org-ac               |
   | ox-gfm               |
-  | package-build        |
   | paradox              |
   | pass                 |
-  | pcache               |
   | pdf-tools            |
   | peep-dired           |
-  | persistent-soft      |
-  | pkg-info             |
   | plantuml-mode        |
   | pony-mode            |
   | pophint              |
-  | popup                |
-  | popwin               |
   | pos-tip              |
   | projectile           |
-  | python-environment   |
   | python-info          |
-  | queue                |
   | rainbow-delimiters   |
   | rainbow-mode         |
-  | request              |
-  | s                    |
   | sass-mode            |
-  | sclang-extensions    |
-  | sclang-snippets      |
-  | seq                  |
   | sicp                 |
   | smart-dash           |
   | smartscan            |
   | smex                 |
   | speed-type           |
-  | spinner              |
-  | swiper               |
-  | tablist              |
   | tern                 |
   | tern-auto-complete   |
-  | ucs-utils            |
   | unicode-fonts        |
   | use-package          |
   | vagrant-tramp        |
-  | visual-fill-column   |
   | web-beautify         |
-  | wgrep                |
   | which-key            |
-  | with-editor          |
   | writeroom-mode       |
   | yaml-mode            |
   | yasnippet            |
-  | yaxception           |
   |----------------------|
 
 * Themes
