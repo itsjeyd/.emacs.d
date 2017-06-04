@@ -2638,6 +2638,14 @@ With prefix P, create local abbrev. Otherwise it will be global."
 
 
 
+;;;;;;;;;;;;
+;;; YAML ;;;
+;;;;;;;;;;;;
+
+(use-package yaml-mode)
+
+
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (custom-keys-mode 1)
