@@ -649,6 +649,8 @@ region, operate on a single line. Otherwise, operate on region."
   :config
   (which-key-mode t))
 
+(use-package python-info)
+
 (use-package cheatsheet
   :config
   ;; Cheats
