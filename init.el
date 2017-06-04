@@ -1349,12 +1349,6 @@ region, operate on a single line. Otherwise, operate on region."
          ("C-c l" . org-store-link))
   :config
 
-  (use-package ob-ditaa
-    :disabled
-    :config
-    (add-to-list 'org-babel-load-languages '(ditaa . t) t)
-    (setq org-ditaa-jar-path "/usr/share/java/ditaa/ditaa-0_9.jar"))
-
   (use-package org-ac
     :disabled
     :config
