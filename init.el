@@ -1353,17 +1353,6 @@ region, operate on a single line. Otherwise, operate on region."
     (add-to-list 'org-babel-load-languages '(ditaa . t) t)
     (setq org-ditaa-jar-path "/usr/share/java/ditaa/ditaa-0_9.jar"))
 
-  (use-package ob-plantuml
-    :disabled
-    :config
-
-    (use-package plantuml-mode
-      :config
-      (setq plantuml-jar-path "/opt/plantuml/plantuml.jar"))
-
-    (add-to-list 'org-babel-load-languages '(plantuml . t) t)
-    (setq org-plantuml-jar-path "/opt/plantuml/plantuml.jar"))
-
   (use-package org-ac
     :disabled
     :config

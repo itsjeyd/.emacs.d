@@ -68,7 +68,6 @@
   | pass                 |
   | pdf-tools            |
   | peep-dired           |
-  | plantuml-mode        |
   | pony-mode            |
   | pophint              |
   | pos-tip              |
