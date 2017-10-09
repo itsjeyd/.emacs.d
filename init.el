@@ -2376,7 +2376,7 @@ char if successful."
     "List tracked files of current repository."
     (interactive)
     (if (derived-mode-p 'magit-mode)
-        (magit-git-command "ls-files" default-directory)
+        (magit-git-command "ls-files")
       (message "Not in a Magit buffer.")))
 
   ;; Key Bindings
