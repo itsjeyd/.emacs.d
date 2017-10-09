@@ -2265,10 +2265,9 @@ char if successful."
     :config
     ;; Functions
     (defun git-gutter-fringe-change-fringe ()
-      (if linum-mode
-          (setq-local git-gutter-fr:side 'right-fringe)
-        (setq-local git-gutter-fr:side 'left-fringe))
-      (git-gutter:update-all-windows))
+     (if linum-mode
+         (setq-local git-gutter-fr:side 'right-fringe)
+       (setq-local git-gutter-fr:side 'left-fringe)))
 
     ;; Hooks
     (add-hook 'linum-mode-hook #'git-gutter-fringe-change-fringe))
@@ -2284,7 +2283,6 @@ char if successful."
     ("d" git-gutter:popup-hunk "diff")
     ("s" git-gutter:stage-hunk "stage")
     ("r" git-gutter:revert-hunk "revert")
-    ("u" git-gutter:update-all-windows "update" :color blue)
     ("m" magit-status "magit" :color blue))
 
   ;; Key Bindings
@@ -2382,9 +2380,6 @@ char if successful."
     (if (derived-mode-p 'magit-mode)
         (magit-git-command "ls-files" default-directory)
       (message "Not in a Magit buffer.")))
-
-  ;; Hooks
-  (add-hook 'magit-post-refresh-hook #'git-gutter:update-all-windows)
 
   ;; Key Bindings
   (unbind-key "M-s" magit-mode-map)
@@ -2546,9 +2541,6 @@ window that will be added to the current window layout."
   (split-window (frame-root-window)
                 (and size (prefix-numeric-value size))
                 direction))
-
-; Hooks
-(add-hook 'window-configuration-change-hook #'git-gutter:update-all-windows)
 
 ; Hydra
 (defhydra hydra-resize-window ()
