@@ -1162,6 +1162,14 @@ region, operate on a single line. Otherwise, operate on region."
 
 
 
+;;;;;;;;;;;;;;;;
+;;; Keyboard ;;;
+;;;;;;;;;;;;;;;;
+
+;; (setq mac-command-modifier 'control)
+
+
+
 ;;;;;;;;;;;;;
 ;;; LaTeX ;;;
 ;;;;;;;;;;;;;
