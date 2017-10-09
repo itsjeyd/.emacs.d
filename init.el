@@ -548,20 +548,20 @@ region, operate on a single line. Otherwise, operate on region."
   (openwith-mode t)
   (setq openwith-associations
         (list (list (openwith-make-extension-regexp '("pdf" "ps"))
-                    "epdfview" '(file))
+                    "open" '(file))
               (list (openwith-make-extension-regexp '("flac" "mp3" "wav"))
-                    "vlc" '(file))
+                    "open" '(file))
               (list (openwith-make-extension-regexp '("avi" "flv" "mov" "mp4"
                                                       "mpeg" "mpg" "ogg" "wmv"))
-                    "vlc" '(file))
+                    "open" '(file))
               (list (openwith-make-extension-regexp '("bmp" "jpeg" "jpg" "png"))
-                    "ristretto" '(file))
+                    "open" '(file))
               (list (openwith-make-extension-regexp '("doc" "docx" "odt"))
-                    "libreoffice" '("--writer" file))
+                    "open" '(file))
               (list (openwith-make-extension-regexp '("ods" "xls" "xlsx"))
-                    "gnumeric" '(file))
+                    "open" '(file))
               (list (openwith-make-extension-regexp '("odp" "pps" "ppt" "pptx"))
-                    "libreoffice" '("--impress" file)))))
+                    "open" '(file)))))
 
 
 
