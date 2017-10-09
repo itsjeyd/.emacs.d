@@ -231,7 +231,7 @@
   ;; Variables
   (setq dired-dwim-target t)
   (setq dired-isearch-filenames "dwim")
-  (setq dired-listing-switches "-alh --time-style=long-iso")
+  (setq dired-listing-switches "-alh")
   (setq dired-recursive-copies 'always))
 
 (use-package dired-x
