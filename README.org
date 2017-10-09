@@ -64,7 +64,6 @@
   | org-ac               |
   | ox-gfm               |
   | paradox              |
-  | pass                 |
   | pdf-tools            |
   | peep-dired           |
   | pony-mode            |
