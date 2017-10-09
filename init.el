@@ -2090,6 +2090,7 @@ region, operate on a single line. Otherwise, operate on region."
 
 (use-package helm-ag
   :config
+  (setq helm-ag-base-command "/usr/local/bin/ag --nocolor --nogroup")
   (setq helm-ag-insert-at-point 'symbol))
 
 (use-package helm-swoop
