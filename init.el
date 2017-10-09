@@ -278,11 +278,6 @@
 (use-package anchored-transpose
   :commands anchored-transpose)
 
-(use-package annotate
-  :commands annotate-mode
-  :config
-  (setq annotate-file "~/.emacs.d/annotations"))
-
 (use-package auto-complete-config
   :ensure auto-complete
   :config
