@@ -899,17 +899,12 @@ region, operate on a single line. Otherwise, operate on region."
     :config
     (flx-ido-mode 1))
 
-  (use-package ido-ubiquitous
+  (use-package ido-completing-read+
     :config
-
-    (use-package ido-completing-read+
-      :config
-      (setq ido-cr+-max-items 50000))
-
-    (ido-ubiquitous-mode 1)
-
     ;; Variables
-    (push '(disable exact "unhighlight-regexp") ido-ubiquitous-command-overrides))
+    (setq ido-cr+-max-items 50000)
+
+    (ido-ubiquitous-mode 1))
 
   (use-package recentf
     :commands recentf-mode
