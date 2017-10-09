@@ -569,7 +569,7 @@ region, operate on a single line. Otherwise, operate on region."
 ;;; Fonts ;;;
 ;;;;;;;;;;;;;
 
-(set-face-attribute 'default nil :font "Monaco-10")
+(set-face-attribute 'default nil :font "Monaco-11")
 
 ; Unicode Fonts
 (use-package unicode-fonts
