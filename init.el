@@ -2388,6 +2388,7 @@ char if successful."
   ;; Variables
   (setq magit-completing-read-function #'magit-ido-completing-read)
   (setq magit-diff-refine-hunk t)
+  (setq magit-git-executable "/usr/local/bin/git")
   (setq magit-status-show-hashes-in-headers t))
 
 ; git-wip
