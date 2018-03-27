@@ -232,7 +232,8 @@
   (setq dired-dwim-target t)
   (setq dired-isearch-filenames "dwim")
   (setq dired-listing-switches "-alh")
-  (setq dired-recursive-copies 'always))
+  (setq dired-recursive-copies 'always)
+  (setq dired-use-ls-dired nil))
 
 (use-package dired-x
   :ensure nil
