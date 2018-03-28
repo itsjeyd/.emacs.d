@@ -579,6 +579,19 @@ region, operate on a single line. Otherwise, operate on region."
 
 
 
+;;;;;;;;;;;;;
+;;; GnuPG ;;;
+;;;;;;;;;;;;;
+
+(use-package epa-file
+  :ensure nil
+  :config
+  (custom-set-variables '(epg-gpg-program  "/usr/local/bin/gpg2"))
+  (setf epa-pinentry-mode 'loopback)
+  (epa-file-enable))
+
+
+
 ;;;;;;;;;;;;
 ;;; Helm ;;;
 ;;;;;;;;;;;;
