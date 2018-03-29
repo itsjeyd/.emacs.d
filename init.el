@@ -2059,6 +2059,7 @@ region, operate on a single line. Otherwise, operate on region."
              ("C-c C-s s" . python-shell-send-string))
 
   ;; Variables
+  (setq python-environment-virtualenv (list "/usr/local/bin/virtualenv" "--system-site-packages" "--quiet"))
   (setq python-fill-docstring-style 'django)
   (setq python-shell-completion-native-enable nil))
 
