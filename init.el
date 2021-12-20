@@ -1912,6 +1912,9 @@ region, operate on a single line. Otherwise, operate on region."
 
   (projectile-mode 1)
 
+  ;; Key Bindings
+  (define-key custom-keys-mode-map (kbd "C-c p") projectile-command-map)
+
   ;; Variables
   (add-to-list 'projectile-globally-ignored-directories "bin")
   (add-to-list 'projectile-globally-ignored-directories "doxygen")
