@@ -1108,6 +1108,7 @@ region, operate on a single line. Otherwise, operate on region."
     (js2r-add-keybindings-with-prefix "C-c C-r"))
 
   (use-package tern
+    :disabled
     :ensure nil
     :config
 
@@ -1146,7 +1147,6 @@ region, operate on a single line. Otherwise, operate on region."
   (add-hook 'js2-mode-hook #'js2-enable-flycheck-mode)
   (add-hook 'js2-mode-hook #'js2-imenu-extras-mode)
   (add-hook 'js2-mode-hook #'js2-refactor-mode)
-  (add-hook 'js2-mode-hook #'tern-mode)
 
   ;; Key Bindings
   (unbind-key "C-c C-t" js2-mode-map)
