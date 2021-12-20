@@ -920,6 +920,10 @@ region, operate on a single line. Otherwise, operate on region."
 
     (ido-ubiquitous-mode 1))
 
+  (use-package ido-vertical-mode
+    :config
+    (ido-vertical-mode 1))
+
   (use-package recentf
     :commands recentf-mode
     :config
