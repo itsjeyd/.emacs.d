@@ -1711,9 +1711,9 @@ region, operate on a single line. Otherwise, operate on region."
   :commands list-packages
   :config
   (add-to-list 'package-archives
-               '("melpa" . "http://melpa.org/packages/") t)
+               '("melpa" . "https://melpa.org/packages/") t)
   (add-to-list 'package-archives
-               '("org" . "http://orgmode.org/elpa/") t))
+               '("org" . "https://orgmode.org/elpa/") t))
 
 (use-package paradox
   :commands paradox-list-packages
