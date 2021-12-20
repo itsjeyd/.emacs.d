@@ -1379,13 +1379,13 @@ region, operate on a single line. Otherwise, operate on region."
 
     ;; Variables
     (setq org-capture-templates
-          '(("j" "Journal" entry (file+datetree "~/org/journal.org")
-             "* %<%H:%M>\n%?")
-            ("l" "Link" entry (file+datetree "~/org/links.org")
-             "* %^{Title}\n  Source: %u, %c\n\n  %(format-quote \"%:initial\")%?"
-             :kill-buffer t)
-            ("z" "Quote" plain (file "~/org/quotes.org")
-             "%?\n\n-" :empty-lines-before 2 :kill-buffer t))))
+          '(
+            ("t" "New item" entry (file+headline "~/OpenCraft/today.org" "New items")
+             "** TODO %?" :prepend t :jump-to-captured t)
+            ("n" "New note" entry (file+headline "~/OpenCraft/today.org" "New notes")
+             "** %U\n   %?" :prepend t :jump-to-captured t)
+            )
+          ))
 
   (use-package org-clock
     :ensure nil
