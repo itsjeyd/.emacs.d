@@ -1,0 +1,5 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: silence irrelevant alerts
+# key: sia
+# --
+silence irrelevant alerts
