@@ -1940,11 +1940,6 @@ region, operate on a single line. Otherwise, operate on region."
   :commands python-mode
   :config
 
-  (use-package flycheck-pyflakes
-    :config
-    (add-to-list 'flycheck-disabled-checkers 'python-flake8)
-    (add-to-list 'flycheck-disabled-checkers 'python-pylint))
-
   (use-package helm-pydoc)
 
   (use-package jedi
