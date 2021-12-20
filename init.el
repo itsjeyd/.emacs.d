@@ -1072,7 +1072,7 @@ region, operate on a single line. Otherwise, operate on region."
 
 (advice-add 'load-theme :after #'load-custom-theme-settings)
 
-(load-theme 'base16-hopscotch t)
+(load-theme 'base16-flat t)
 
 ; Tooltips
 (tooltip-mode 0)
