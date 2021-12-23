@@ -1384,9 +1384,9 @@ region, operate on a single line. Otherwise, operate on region."
     ;; Variables
     (setq org-capture-templates
           '(
-            ("t" "New item" entry (file+headline "~/OpenCraft/today.org" "New items")
+            ("t" "New item" entry (file+headline "~/OpenCraft/tickets.org" "Inbox (tasks)")
              "** TODO %?" :prepend t :jump-to-captured t)
-            ("n" "New note" entry (file+headline "~/OpenCraft/today.org" "New notes")
+            ("n" "New note" entry (file+headline "~/OpenCraft/tickets.org" "Inbox (notes)")
              "** %U\n   %?" :prepend t :jump-to-captured t)
             )
           ))
@@ -1681,6 +1681,9 @@ region, operate on a single line. Otherwise, operate on region."
         [?\C-o tab ?< ?o tab ?\C-w ?\C-w ?\C-u ?\C-x ?q ?\C-y ?\C-p ?\C-p ?\C-w ?\C-e ?\C-f])
 
   ;; Variables
+  (setq org-agenda-files
+        '("~/OpenCraft/tickets.org"))
+  (setq org-agenda-skip-scheduled-if-done t)
   (setq org-blank-before-new-entry '((heading . t) (plain-list-item . auto)))
   (setq org-catch-invisible-edits 'error)
   (setq org-confirm-babel-evaluate nil)
@@ -1695,7 +1698,7 @@ region, operate on a single line. Otherwise, operate on region."
   (setq org-outline-path-complete-in-steps t)
   (setq org-refile-allow-creating-parent-nodes 'confirm)
   (setq org-refile-targets
-        '((("~/OpenCraft/tasks.org") . (:maxlevel . 2))))
+        '((("~/OpenCraft/tickets.org") . (:maxlevel . 2))))
   (setq org-refile-use-outline-path t)
   (setq org-return-follows-link t)
   (setq org-reverse-note-order t)
