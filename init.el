@@ -1684,6 +1684,8 @@ region, operate on a single line. Otherwise, operate on region."
   (setq org-agenda-files
         '("~/OpenCraft/tickets.org"))
   (setq org-agenda-skip-scheduled-if-done t)
+  (setq org-agenda-todo-ignore-deadlines 'all)
+  (setq org-agenda-todo-ignore-scheduled 'all)
   (setq org-blank-before-new-entry '((heading . t) (plain-list-item . auto)))
   (setq org-catch-invisible-edits 'error)
   (setq org-confirm-babel-evaluate nil)
