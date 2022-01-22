@@ -1464,7 +1464,7 @@ region, operate on a single line. Otherwise, operate on region."
   (setq projectile-cache-file "~/.emacs.d/.projectile.cache")
   ;; (setq projectile-completion-system 'helm)
   (setq projectile-enable-caching t)
-  (setq projectile-enable-idle-timer t)
+  (setq projectile-enable-idle-timer nil)
   (setq projectile-find-dir-includes-top-level t)
   (setq projectile-known-projects-file "~/.emacs.d/.projectile.projects")
   (setq projectile-mode-line
