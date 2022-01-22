@@ -258,8 +258,8 @@
 ;; (use-package move-text
 ;;   :commands (move-text-up move-text-down))
 
-;; (use-package multiple-cursors
-;;   :config
+(use-package multiple-cursors
+  :config
 
 ;;   (use-package mc-hide-unmatched-lines-mode
 ;;     :ensure multiple-cursors
@@ -267,18 +267,18 @@
 ;;     :config
 ;;     (setq hum/lines-to-expand 1))
 
-;;   ;; Hydra
-;;   (defhydra hydra-mc ()
-;;     "MC"
-;;     ("n" mc/mark-next-like-this "next")
-;;     ("p" mc/mark-previous-like-this "prev")
+  ;; Hydra
+  (defhydra hydra-mc ()
+    "MC"
+    ("n" mc/mark-next-like-this "next")
+    ("p" mc/mark-previous-like-this "prev")
 ;;     ("s" hydra-mc-symbols/body "symbols" :color blue)
 ;;     ("w" hydra-mc-words/body "words" :color blue)
 ;;     ("S" hydra-mc-skip/body "skip" :color blue)
 ;;     ("U" hydra-mc-unmark/body "unmark" :color blue)
 ;;     ("o" hydra-mc-operate/body "operate" :color blue)
 ;;     ("C-'" mc-hide-unmatched-lines-mode "hide unmatched")
-;;     ("q" nil "exit" :color blue))
+    ("q" nil "exit" :color blue))
 
 ;;   (defhydra hydra-mc-symbols ()
 ;;     "MC (symbols)"
@@ -339,11 +339,12 @@
 ;;     ("b" mc/edit-beginnings-of-lines "beginnings")
 ;;     ("e" mc/edit-ends-of-lines "ends"))
 
-;;   ;; Key Bindings
-;;   (bind-keys :map custom-keys-mode-prefix-map
-;;              ("m" . hydra-mc/body)
+  ;; Key Bindings
+  (bind-keys :map custom-keys-mode-prefix-map
+             ("m" . hydra-mc/body)
 ;;              ("a" . hydra-mc-all/body)
-;;              ("e" . hydra-mc-edit/body)))
+;;              ("e" . hydra-mc-edit/body)
+  ))
 
 (use-package utils
   :ensure nil
@@ -721,8 +722,8 @@ region, operate on a single line. Otherwise, operate on region."
 ;;; Hydra ;;;
 ;;;;;;;;;;;;;
 
-;; (use-package hydra
-;;   :defer t)
+(use-package hydra
+  :defer t)
 
 
 
