@@ -1666,6 +1666,12 @@ region, operate on a single line. Otherwise, operate on region."
 
   (advice-add 'rgrep :around #'rgrep-rename-buffer-after-search-string))
 
+(use-package rg
+  :defer t
+  :config
+  ;; Variables
+  (setq rg-executable "/opt/homebrew/bin/rg"))
+
 ;; (use-package smartscan
 ;;   :config
 ;;   (global-smartscan-mode t)
