@@ -1012,15 +1012,15 @@ region, operate on a single line. Otherwise, operate on region."
 ;;                  (user-error "Unexpected `avy-line-insert-style'")))
 ;;           (kill-region beg end)))))
 
-;;   ;; Hydra
-;;   (defhydra hydra-avy-jump (:color blue)
-;;     "Avy jump"
-;;     ("c" avy-goto-char "char")
-;;     ("w" avy-goto-word-0 "word")
-;;     ("l" avy-goto-line "line")
-;;     ("s" avy-goto-subword-0 "subword")
-;;     ("C" goto-char "goto char")
-;;     ("L" goto-line "goto line"))
+  ;; Hydra
+  (defhydra hydra-avy-jump (:color blue)
+    "Avy jump"
+    ("c" avy-goto-char "char")
+    ("w" avy-goto-word-0 "word")
+    ("l" avy-goto-line "line")
+    ("s" avy-goto-subword-0 "subword")
+    ("C" goto-char "goto char")
+    ("L" goto-line "goto line"))
 
 ;;   (defhydra hydra-avy-copy (:color blue)
 ;;     "Avy copy"
@@ -1032,8 +1032,8 @@ region, operate on a single line. Otherwise, operate on region."
 ;;     ("l" avy-move-line "line")
 ;;     ("r" avy-move-region "region"))
 
-;;   ;; Key Bindings
-;;   (bind-key "M-g" #'hydra-avy-jump/body)
+  ;; Key Bindings
+  (bind-key "M-g" #'hydra-avy-jump/body)
 ;;   (bind-keys :map custom-keys-mode-prefix-map
 ;;              ("C-w" . hydra-avy-move/body)
 ;;              ("M-w" . hydra-avy-copy/body))
