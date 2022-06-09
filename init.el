@@ -146,6 +146,18 @@
   :ensure nil
   :config
 
+  (use-package dired-x
+    :ensure nil
+    :config
+    ;; Hooks
+    (add-hook 'dired-mode-hook #'dired-omit-mode)
+
+    ;; Key Bindings
+    (bind-key "M-o" #'dired-omit-mode dired-mode-map)
+
+    ;; Variables
+    (setq dired-omit-files "^\\...+$"))
+
   ;; Commands
   (defun dired-jump-to-top ()
     (interactive)
@@ -166,6 +178,7 @@
   (add-hook 'dired-mode-hook #'dired-hide-details-mode)
 
   ;; Key Bindings
+  (bind-key "C-x C-j" #'dired-jump global-map)
   (bind-keys :map dired-mode-map
              (")" . dired-hide-details-mode)
              ((vector 'remap 'beginning-of-buffer) . dired-jump-to-top)
@@ -177,19 +190,6 @@
   (setq dired-listing-switches "-alh")
   (setq dired-recursive-copies 'always)
   (setq dired-use-ls-dired nil))
-
-(use-package dired-x
-  :ensure nil
-  :bind ("C-x C-j" . dired-jump)
-  :config
-  ;; Hooks
-  (add-hook 'dired-mode-hook #'dired-omit-mode)
-
-  ;; Key Bindings
-  (bind-key "M-o" #'dired-omit-mode dired-mode-map)
-
-  ;; Variables
-  (setq dired-omit-files "^\\...+$"))
 
 
 
