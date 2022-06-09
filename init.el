@@ -37,6 +37,7 @@
 
 (define-minor-mode custom-keys-mode
   "A minor mode for custom key bindings."
+  :group 'keys
   :lighter ""
   :keymap 'custom-keys-mode-map
   :global t)
@@ -1281,8 +1282,8 @@ region, operate on a single line. Otherwise, operate on region."
   ;; (setq org-todo-repeat-to-state "RECURRING")
   (setq org-track-ordered-property-with-tag t)
   (setq org-use-speed-commands 'org-point-in-speed-command-position-p)
-  (add-to-list 'org-speed-commands-user '("d" . org-next-drawer) t)
-  (add-to-list 'org-speed-commands-user '("P" . org-previous-drawer) t))
+  (add-to-list 'org-speed-commands '("d" . org-next-drawer) t)
+  (add-to-list 'org-speed-commands '("P" . org-previous-drawer) t))
 
 
 
@@ -2030,8 +2031,9 @@ Adapted from: http://paste.lisp.org/display/135818."
 
 ; Commands
 (defun change-split (&optional arg)
-  "Change arrangement of current window and `other-window' from 'stacked' to 'side-by-side'.
-With a prefix arg, change arrangement from 'side-by-side' to 'stacked'."
+  "Change arrangement of current window and `other-window' from 'stacked'
+to 'side-by-side'. With a prefix arg, change arrangement from 'side-by-side'
+to 'stacked'."
   (interactive "P")
   (let ((split-function (progn
                           (if arg
