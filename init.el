@@ -1042,7 +1042,6 @@ region, operate on a single line. Otherwise, operate on region."
   ;; Variables
   (setq avy-background t)
   (setq avy-case-fold-search nil)
-  ;; (setq avy-keys (number-sequence ?a ?z))
   )
 
 ;; (defhydra hydra-move-by-page ()
