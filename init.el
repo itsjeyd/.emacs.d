@@ -221,6 +221,9 @@
 (use-package avy-zap
   :bind ("M-z" . avy-zap-up-to-char-dwim))
 
+(use-package browse-kill-ring
+  :bind ("C-c k". browse-kill-ring))
+
 (use-package caps-lock
   :commands caps-lock-mode
   :init
