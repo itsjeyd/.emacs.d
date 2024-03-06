@@ -1263,12 +1263,14 @@ region, operate on a single line. Otherwise, operate on region."
   ;; Variables
   (setq org-agenda-files
         '("~/OpenCraft/tickets.org"))
+  (setq org-agenda-show-future-repeats nil)
   (setq org-agenda-skip-scheduled-if-done t)
   (setq org-agenda-todo-ignore-deadlines 'all)
   (setq org-agenda-todo-ignore-scheduled 'all)
   (setq org-babel-python-command "/usr/bin/python3")
   (setq org-fold-catch-invisible-edits 'error)
   (setq org-confirm-babel-evaluate nil)
+  (setq org-deadline-warning-days 13)
   (setq org-edit-src-content-indentation 0)
   (setq org-enforce-todo-checkbox-dependencies t)
   (setq org-enforce-todo-dependencies t)
