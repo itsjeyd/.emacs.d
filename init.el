@@ -1265,7 +1265,7 @@ region, operate on a single line. Otherwise, operate on region."
   (setq org-agenda-todo-ignore-deadlines 'all)
   (setq org-agenda-todo-ignore-scheduled 'all)
   (setq org-babel-python-command "/usr/bin/python3")
-  (setq org-catch-invisible-edits 'error)
+  (setq org-fold-catch-invisible-edits 'error)
   (setq org-confirm-babel-evaluate nil)
   (setq org-edit-src-content-indentation 0)
   (setq org-enforce-todo-checkbox-dependencies t)
