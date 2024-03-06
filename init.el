@@ -2036,9 +2036,9 @@ Adapted from: http://paste.lisp.org/display/135818."
 
 ; Commands
 (defun change-split (&optional arg)
-  "Change arrangement of current window and `other-window' from 'stacked'
-to 'side-by-side'. With a prefix arg, change arrangement from 'side-by-side'
-to 'stacked'."
+  "Change arrangement of current window and `other-window' from stacked
+to side-by-side. With a prefix arg, change arrangement from side-by-side
+to stacked."
   (interactive "P")
   (let ((split-function (progn
                           (if arg
@@ -2100,7 +2100,7 @@ buffer in current window."
 (defun split-root-window (direction size)
   "Split root window of current frame.
 DIRECTION specifies how root window will be split; possible
-values are 'below and 'right. SIZE specifies height or width of
+values are \='below and \='right. SIZE specifies height or width of
 window that will be added to the current window layout."
   (split-window (frame-root-window)
                 (and size (prefix-numeric-value size))
