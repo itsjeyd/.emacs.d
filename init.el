@@ -1273,7 +1273,7 @@ region, operate on a single line. Otherwise, operate on region."
   (setq org-hide-emphasis-markers t)
   (setq org-log-into-drawer t)
   ;; (setq org-M-RET-may-split-line '((headline . nil) (item . t) (table . t)))
-  (setq org-outline-path-complete-in-steps t)
+  (setq org-outline-path-complete-in-steps nil)
   (setq org-refile-allow-creating-parent-nodes 'confirm)
   (setq org-refile-targets
         '((("~/OpenCraft/tickets.org") . (:maxlevel . 3))))
