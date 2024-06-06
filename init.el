@@ -1166,6 +1166,15 @@ region, operate on a single line. Otherwise, operate on region."
     (setq org-list-demote-modify-bullet '(("-" . "+") ("+" . "-")))
     (setq org-list-use-circular-motion t))
 
+  (use-package org-recur
+    :hook ((org-mode . org-recur-mode)
+           (org-agenda-mode . org-recur-agenda-mode))
+    :demand t
+    :config
+    ;; Key Bindings
+    (define-key org-recur-mode-map (kbd "C-c d") 'org-recur-finish)
+    (define-key org-recur-agenda-mode-map (kbd "C-c d") 'org-recur-finish))
+
   (use-package org-tempo)
 
   (use-package ox
