@@ -1741,6 +1741,8 @@ char if successful."
 
 ; Variables
 (setq isearch-allow-scroll t)
+(setq lazy-highlight-buffer t)
+(setq lazy-highlight-cleanup nil)
 
 
 
