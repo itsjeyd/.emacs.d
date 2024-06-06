@@ -1279,7 +1279,7 @@ region, operate on a single line. Otherwise, operate on region."
   (setq org-outline-path-complete-in-steps nil)
   (setq org-refile-allow-creating-parent-nodes 'confirm)
   (setq org-refile-targets
-        '((("~/OpenCraft/tickets.org") . (:maxlevel . 3))))
+        '((("~/OpenCraft/tickets.org") . (:maxlevel . 4))))
   (setq org-refile-use-outline-path t)
   (setq org-reverse-note-order t)
   (setq org-special-ctrl-a/e t)
