@@ -354,6 +354,7 @@
 
 (use-package utils
   :ensure nil
+  :load-path "lisp/"
   :commands (flush-empty-lines sort-lines-and-uniquify unfill-paragraph))
 
 ; Advice
