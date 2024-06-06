@@ -1270,7 +1270,7 @@ region, operate on a single line. Otherwise, operate on region."
   (setq org-babel-python-command "/usr/bin/python3")
   (setq org-fold-catch-invisible-edits 'error)
   (setq org-confirm-babel-evaluate nil)
-  (setq org-deadline-warning-days 13)
+  (setq org-deadline-warning-days 7)
   (setq org-edit-src-content-indentation 0)
   (setq org-enforce-todo-checkbox-dependencies t)
   (setq org-enforce-todo-dependencies t)
