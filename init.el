@@ -282,7 +282,7 @@
 ;;     ("w" hydra-mc-words/body "words" :color blue)
 ;;     ("S" hydra-mc-skip/body "skip" :color blue)
 ;;     ("U" hydra-mc-unmark/body "unmark" :color blue)
-;;     ("o" hydra-mc-operate/body "operate" :color blue)
+    ("o" hydra-mc-operate/body "operate" :color blue)
 ;;     ("C-'" mc-hide-unmatched-lines-mode "hide unmatched")
     ("q" nil "exit" :color blue))
 
@@ -310,12 +310,12 @@
 ;;     ("p" mc/unmark-previous-like-this "prev")
 ;;     ("q" hydra-mc/body "exit" :color blue))
 
-;;   (defhydra hydra-mc-operate ()
-;;     "MC (operate)"
-;;     ("n" mc/insert-numbers "number")
-;;     ("s" mc/sort-regions "sort")
-;;     ("r" mc/reverse-regions "reverse")
-;;     ("q" hydra-mc/body "exit" :color blue))
+  (defhydra hydra-mc-operate ()
+    "MC (operate)"
+    ("n" mc/insert-numbers "number")
+    ("s" mc/sort-regions "sort")
+    ("r" mc/reverse-regions "reverse")
+    ("q" hydra-mc/body "exit" :color blue))
 
 ;;   (defhydra hydra-mc-all ()
 ;;     "MC (all)"
