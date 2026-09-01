@@ -89,8 +89,13 @@
   (setq-default ibuffer-saved-filter-groups
                 '(("Default"
                    ("Dired" (mode . dired-mode))
+                   ("Elisp" (mode . emacs-lisp-mode))
                    ("Magit" (name . "\*magit.+*"))
                    ("Org" (mode . org-mode))
+                   ("Markdown" (mode . markdown-mode))
+                   ("JIRA" (mode . jira-markup-mode))
+                   ("JSON" (mode . json-mode))
+                   ("Python" (mode . python-mode))
                    ("Grep" (name . "\*h?grep-?.*"))
                    ("Helm" (name . "\*helm .*\*"))
                    ("Temporary" (name . "\*.*\*")))))
