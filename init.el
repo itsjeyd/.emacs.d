@@ -736,6 +736,7 @@ region, operate on a single line. Otherwise, operate on region."
 
 ; Variables
 (add-to-list 'auto-mode-alist '("\.env$" . conf-mode))
+(add-to-list 'auto-mode-alist '("\.jira$" . jira-markup-mode))
 
 
 
