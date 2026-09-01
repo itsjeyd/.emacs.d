@@ -138,14 +138,6 @@
 
 
 
-;;;;;;;;;;;;;;;;;;;
-;;; Common Lisp ;;;
-;;;;;;;;;;;;;;;;;;;
-
-;; (use-package cl-lib)
-
-
-
 ;;;;;;;;;;;;;
 ;;; Dired ;;;
 ;;;;;;;;;;;;;
@@ -204,9 +196,6 @@
 ;;;;;;;;;;;;;;;
 ;;; Editing ;;;
 ;;;;;;;;;;;;;;;
-
-;; (use-package anchored-transpose
-;;   :commands anchored-transpose)
 
 (use-package auto-complete-config
   :ensure auto-complete
@@ -275,43 +264,22 @@
 (use-package multiple-cursors
   :config
 
-;;   (use-package mc-hide-unmatched-lines-mode
-;;     :ensure multiple-cursors
-;;     :commands mc-hide-unmatched-lines-mode
-;;     :config
-;;     (setq hum/lines-to-expand 1))
-
   ;; Hydra
   (defhydra hydra-mc ()
     "MC"
     ("n" mc/mark-next-like-this "next")
     ("p" mc/mark-previous-like-this "prev")
-;;     ("s" hydra-mc-symbols/body "symbols" :color blue)
-;;     ("w" hydra-mc-words/body "words" :color blue)
 ;;     ("S" hydra-mc-skip/body "skip" :color blue)
 ;;     ("U" hydra-mc-unmark/body "unmark" :color blue)
     ("o" hydra-mc-operate/body "operate" :color blue)
-;;     ("C-'" mc-hide-unmatched-lines-mode "hide unmatched")
     ("q" nil "exit" :color blue))
 
-;;   (defhydra hydra-mc-symbols ()
-;;     "MC (symbols)"
-;;     ("n" mc/mark-next-symbol-like-this "next")
-;;     ("p" mc/mark-previous-symbol-like-this "prev")
-;;     ("q" hydra-mc/body "exit" :color blue))
-
-;;   (defhydra hydra-mc-words ()
-;;     "MC (words)"
-;;     ("n" mc/mark-next-word-like-this "next")
-;;     ("p" mc/mark-previous-word-like-this "prev")
-;;     ("q" hydra-mc/body "exit" :color blue))
 
 ;;   (defhydra hydra-mc-skip ()
 ;;     "MC (skip)"
 ;;     ("n" mc/skip-to-next-like-this "next")
 ;;     ("p" mc/skip-to-previous-like-this "prev")
 ;;     ("q" hydra-mc/body "exit" :color blue))
-
 ;;   (defhydra hydra-mc-unmark ()
 ;;     "MC (unmark)"
 ;;     ("n" mc/unmark-next-like-this "next")
@@ -328,36 +296,13 @@
 ;;   (defhydra hydra-mc-all ()
 ;;     "MC (all)"
 ;;     ("d" mc/mark-all-dwim "dwim")
-;;     ("f" mc/mark-all-like-this-in-defun "defun")
 ;;     ("l" mc/mark-all-like-this "like this")
 ;;     ("r" mc/mark-all-in-region "region")
-;;     ("R" mc/mark-all-in-region-regexp "region (regexp)")
-;;     ("s" hydra-mc-symbols-all/body "symbols" :color blue)
-;;     ("w" hydra-mc-words-all/body "words" :color blue))
-
-;;   (defhydra hydra-mc-symbols-all ()
-;;     "MC (all symbols)"
-;;     ("l" mc/mark-all-symbols-like-this "like this")
-;;     ("f" mc/mark-all-symbols-like-this-in-defun "defun")
-;;     ("q" hydra-mc-all/body "exit" :color blue))
-
-;;   (defhydra hydra-mc-words-all ()
-;;     "MC (all words)"
-;;     ("l" mc/mark-all-words-like-this "like this")
-;;     ("f" mc/mark-all-words-like-this-in-defun "defun")
-;;     ("q" hydra-mc-all/body "exit" :color blue))
-
-;;   (defhydra hydra-mc-edit (:color blue)
-;;     "MC (edit)"
-;;     ("l" mc/edit-lines "lines")
-;;     ("b" mc/edit-beginnings-of-lines "beginnings")
-;;     ("e" mc/edit-ends-of-lines "ends"))
 
   ;; Key Bindings
   (bind-keys :map custom-keys-mode-prefix-map
              ("m" . hydra-mc/body)
 ;;              ("a" . hydra-mc-all/body)
-;;              ("e" . hydra-mc-edit/body)
   ))
 
 (use-package utils
@@ -475,11 +420,6 @@ region, operate on a single line. Otherwise, operate on region."
 
 (set-face-attribute 'default nil :font "Monaco-11")
 
-; Unicode Fonts
-;; (use-package unicode-fonts
-;;   :config
-;;   (unicode-fonts-setup))
-
 
 
 ;;;;;;;;;;;;
@@ -492,30 +432,16 @@ region, operate on a single line. Otherwise, operate on region."
 ;;   (use-package helm-config
 ;;     :ensure helm)
 
-;;   (use-package helm-firefox
-;;     :commands helm-firefox-bookmarks
-;;     :config
-;;     (defun helm-get-firefox-user-init-dir ()
-;;       "Return name of Firefox profile to list bookmarks for."
-;;       "~/.mozilla/firefox/29x5sgi7.default/"))
-
-
 ;;   (helm-adaptive-mode 1)
 
 ;;   ;; Key Bindings
 ;;   (bind-key "C-c k" #'helm-show-kill-ring)
 ;;   (bind-key "C-c SPC" #'helm-all-mark-rings)
-;;   (bind-key "B" #'helm-firefox-bookmarks helm-command-map)
 ;;   (bind-key "M-o" #'helm-previous-source helm-map)
 
 ;;   ;; Variables
 ;;   (setq helm-truncate-lines t)
-;;   (setq helm-grep-save-buffer-name-no-confirm t))
-
-;; (use-package helm-flx
-;;   :config
-;;   (helm-flx-mode 1))
-
+;;   (setq helm-grep-save-buffer-name-no-confirm t)))
 
 
 ;;;;;;;;;;;;
@@ -526,148 +452,7 @@ region, operate on a single line. Otherwise, operate on region."
 
 (use-package which-key
   :config
-  (which-key-mode t)) ; Seems to be messing with frame/window configuration?
-
-;; (use-package cheatsheet
-;;   :config
-;;   ;; Cheats
-
-;;   ;; Editing
-;;   (cheatsheet-add :group 'Editing
-;;                   :key "M-- M-^"
-;;                   :description "Join line to next line (no need for point to be at EOL)")
-;;   (cheatsheet-add :group 'Editing
-;;                   :key "M-s @"
-;;                   :description "Expand region")
-;;   ;; Ibuffer
-;;   (cheatsheet-add :group 'Ibuffer
-;;                   :key "M-x ibuffer-do-isearch"
-;;                   :description "Incremental search in marked buffers")
-;;   (cheatsheet-add :group 'Ibuffer
-;;                   :key "M-DEL"
-;;                   :description "Unmark all marked buffers")
-;;   (cheatsheet-add :group 'Ibuffer
-;;                   :key "O"
-;;                   :description "Run occur on marked buffers")
-;;   (cheatsheet-add :group 'Ibuffer
-;;                   :key "* s"
-;;                   :description "Mark temporary buffers")
-;;   (cheatsheet-add :group 'Ibuffer
-;;                   :key "="
-;;                   :description "Diff changes with file on disk")
-;;   (cheatsheet-add :group 'Ibuffer
-;;                   :key ","
-;;                   :description "Rotate between sorting modes")
-;;   ;; Helm
-;;   (cheatsheet-add :group 'Helm
-;;                   :key "C-x c B"
-;;                   :description "Access Firefox bookmarks")
-;;   ;; Movement
-;;   (cheatsheet-add :group 'Movement
-;;                   :key "M-s a"
-;;                   :description "Hand Isearch matches over to Avy")
-;;   (cheatsheet-add :group 'Movement
-;;                   :key "M-s C-w"
-;;                   :description "Move line/region here")
-;;   (cheatsheet-add :group 'Movement
-;;                   :key "M-s M-w"
-;;                   :description "Copy line/region here")
-;;   (cheatsheet-add :group 'Movement
-;;                   :key "M-g w"
-;;                   :description "Go to word")
-;;   ;; Org
-;;   (cheatsheet-add :group 'Org
-;;                   :key "M-x org-copy-link"
-;;                   :description "Copy link at point")
-;;   ;; Programming
-;;   (cheatsheet-add :group 'Programming
-;;                   :key "C-c y"
-;;                   :description "Browse snippets with Helm")
-;;   ;; Projects
-;;   (cheatsheet-add :group 'Projects
-;;                   :key "C-c p v"
-;;                   :description "View status buffer for project")
-;;   (cheatsheet-add :group 'Projects
-;;                   :key "C-c p p"
-;;                   :description "Switch project")
-;;   (cheatsheet-add :group 'Projects
-;;                   :key "C-c p o"
-;;                   :description "Run occur on project buffers")
-;;   (cheatsheet-add :group 'Projects
-;;                   :key "C-c p k"
-;;                   :description "Kill project buffers")
-;;   (cheatsheet-add :group 'Projects
-;;                   :key "C-c p h"
-;;                   :description "Launch helm-projectile (lists project buffers, project files, projects)")
-;;   (cheatsheet-add :group 'Projects
-;;                   :key "C-c p I"
-;;                   :description "Ibuffer for current project")
-;;   (cheatsheet-add :group 'Projects
-;;                   :key "C-c p F"
-;;                   :description "Find file in known projects")
-;;   ;; Python
-;;   (cheatsheet-add :group 'Python
-;;                   :key "M-x helm-pydoc"
-;;                   :description "View documentation/source or import module")
-;;   (cheatsheet-add :group 'Python
-;;                   :key "C-x D"
-;;                   :description "View definitions in file as tree")
-;;   (cheatsheet-add :group 'Python
-;;                   :key "C-c ?"
-;;                   :description "View documentation for thing at point")
-;;   ;; Search
-;;   (cheatsheet-add :group 'Search
-;;                   :key "C-c s"
-;;                   :description "Launch dispatcher for web search")
-;;   (cheatsheet-add :group 'Search
-;;                   :key "C-M-s"
-;;                   :description "Isearch with flex matching (forward)")
-;;   (cheatsheet-add :group 'Search
-;;                   :key "C-M-r"
-;;                   :description "Isearch with flex matching (backward)")
-;;   ;; Utilities
-;;   (cheatsheet-add :group 'Utilities
-;;                   :key "M-x quick-calc"
-;;                   :description "Do a quick calculation in the minibuffer")
-;;   ;; Version Control
-;;   (cheatsheet-add :group 'VC
-;;                   :key "M-x browse-at-remote/kill"
-;;                   :description "Copy GitHub URL of current file (includes reference to current line)")
-;;   (cheatsheet-add :group 'VC
-;;                   :key "M-x browse-at-remote/browse"
-;;                   :description "View current file on GitHub")
-;;   (cheatsheet-add :group 'VC
-;;                   :key "M-s g f"
-;;                   :description "View file at specific revision")
-;;   (cheatsheet-add :group 'VC
-;;                   :key "M-s g b"
-;;                   :description "Blame file being visited in current buffer")
-;;   (cheatsheet-add :group 'VC
-;;                   :key "e"
-;;                   :description "Compare, stage, or *resolve* using Ediff")
-;;   ;; Windows
-;;   (cheatsheet-add :group 'Windows
-;;                   :key "C-c 3"
-;;                   :description "Split root window below")
-;;   (cheatsheet-add :group 'Windows
-;;                   :key "C-c 2"
-;;                   :description "Split root window right")
-
-;;   ;; Functions
-;;   (defun cheatsheet-show-cheats-in-separate-frame ()
-;;     (interactive)
-;;     (let ((cheatsheet-frame (make-frame '((minibuffer . nil)))))
-;;       (with-selected-frame cheatsheet-frame
-;;         (toggle-frame-maximized)
-;;         (cheatsheet-show)
-;;         (delete-other-windows)
-;;         (split-window-right)
-;;         (follow-mode)
-;;         (goto-char (point-min))
-;;         (text-scale-adjust 2))))
-
-;;   ;; Key Bindings
-;;   (bind-key "<f1>" #'cheatsheet-show-cheats-in-separate-frame))
+  (which-key-mode t))
 
 ; Functions
 (defun info-display-topic (topic)
@@ -685,26 +470,6 @@ region, operate on a single line. Otherwise, operate on region."
                  (info ,topic ,bufname)))))))
 
 ; Hydra
-;; (defhydra hydra-apropos (:color blue)
-;;   "Apropos"
-;;   ("a" apropos "apropos")
-;;   ("c" apropos-command "cmd")
-;;   ("d" apropos-documentation "doc")
-;;   ("e" apropos-value "val")
-;;   ("l" apropos-library "lib")
-;;   ("o" apropos-user-option "opt")
-;;   ("v" apropos-variable "var")
-;;   ("i" info-apropos "info")
-;;   ("t" xref-find-apropos "tags")
-;;   ("z" hydra-customize-apropos/body "customize"))
-
-;; (defhydra hydra-customize-apropos (:color blue)
-;;   "Apropos (customize)"
-;;   ("a" customize-apropos "apropos")
-;;   ("f" customize-apropos-faces "faces")
-;;   ("g" customize-apropos-groups "groups")
-;;   ("o" customize-apropos-options "options"))
-
 ;; (defhydra hydra-info (:color blue)
 ;;   "Info"
 ;;   ("e" (funcall (info-display-topic "emacs")) "Emacs")
@@ -714,22 +479,10 @@ region, operate on a single line. Otherwise, operate on region."
 ;;   ("S" (funcall (info-display-topic "sicp")) "SICP"))
 
 ;; ; Key Bindings
-;; (global-set-key (kbd "C-h a") #'hydra-apropos/body)
 ;; (define-key custom-keys-mode-prefix-map (kbd "i") #'hydra-info/body)
 
 ; Variables
 (setq help-window-select t)
-
-
-
-;;;;;;;;;;;;
-;;; HTML ;;;
-;;;;;;;;;;;;
-
-;; (use-package sgml-mode
-;;   :commands sgml-mode
-;;   :config
-;;   (bind-key "C-c b" #'web-beautify-html sgml-mode-map))
 
 
 
@@ -993,43 +746,11 @@ region, operate on a single line. Otherwise, operate on region."
 (use-package avy
   :defer t
   :config
-  ;; Commands
-;;   (defun avy-move-region (arg)
-;;     "Select two lines and move the text between them to point.
-
-;;   The window scope is determined by `avy-all-windows' or
-;;   `avy-all-windows-alt' when ARG is non-nil."
-;;     (interactive "P")
-;;     (let ((initial-window (selected-window)))
-;;       (avy-with avy-copy-region
-;;         (let* ((beg (avy--line arg))
-;;                (end (avy--line arg))
-;;                (str (buffer-substring-no-properties
-;;                      beg
-;;                      (save-excursion
-;;                        (goto-char end)
-;;                        (line-end-position)))))
-;;           (select-window initial-window)
-;;           (cond ((eq avy-line-insert-style 'above)
-;;                  (beginning-of-line)
-;;                  (save-excursion
-;;                    (insert str "\n")))
-;;                 ((eq avy-line-insert-style 'below)
-;;                  (end-of-line)
-;;                  (newline)
-;;                  (save-excursion
-;;                    (insert str)))
-;;                 (t
-;;                  (user-error "Unexpected `avy-line-insert-style'")))
-;;           (kill-region beg end)))))
-
   ;; Hydra
   (defhydra hydra-avy-jump (:color blue)
     "Avy jump"
     ("c" avy-goto-char "char")
-    ("w" avy-goto-word-0 "word")
     ("l" avy-goto-line "line")
-    ("s" avy-goto-subword-0 "subword")
     ("C" goto-char "goto char")
     ("L" goto-line "goto line"))
 
@@ -1048,20 +769,10 @@ region, operate on a single line. Otherwise, operate on region."
 ;;   (bind-keys :map custom-keys-mode-prefix-map
 ;;              ("C-w" . hydra-avy-move/body)
 ;;              ("M-w" . hydra-avy-copy/body))
-;;   (bind-key "M-s a" #'avy-isearch isearch-mode-map)
 
   ;; Variables
   (setq avy-background t)
-  (setq avy-case-fold-search nil)
-  )
-
-;; (defhydra hydra-move-by-page ()
-;;   "Move by page"
-;;   ("[" backward-page "prev page")
-;;   ("]" forward-page "next page"))
-
-;; (global-set-key (kbd "C-x [") #'hydra-move-by-page/body)
-;; (global-set-key (kbd "C-x ]") #'hydra-move-by-page/body)
+  (setq avy-case-fold-search nil))
 
 
 
@@ -1338,57 +1049,12 @@ region, operate on a single line. Otherwise, operate on region."
 ;;; Programming ;;;
 ;;;;;;;;;;;;;;;;;;;
 
-;; (use-package flycheck
-;;   :commands flycheck-mode
-;;   :config
-
-;;   (use-package helm-flycheck)
-
-;;   ;; Functions
-;;   (defun flycheck-mode-line-status-text (&optional status)
-;;     "Get a text describing STATUS for use in the mode line.
-
-;;   STATUS defaults to `flycheck-last-status-change' if omitted or nil."
-;;     (let ((text (pcase (or status flycheck-last-status-change)
-;;                   (`not-checked "")
-;;                   (`no-checker "-")
-;;                   (`running "*")
-;;                   (`errored "!")
-;;                   (`finished
-;;                    (if flycheck-current-errors
-;;                        (let-alist (flycheck-count-errors flycheck-current-errors)
-;;                          (format ":%s/%s" (or .error 0) (or .warning 0)))
-;;                      ""))
-;;                   (`interrupted "-")
-;;                   (`suspicious "?"))))
-;;       (concat " ⚡" text)))
-
-;;   (defun flycheck-setup ()
-;;     (bind-key "f" #'hydra-flycheck/body custom-keys-mode-prefix-map))
-
-;;   ;; Hooks
-;;   (add-hook 'flycheck-mode-hook #'flycheck-setup)
-
-;;   ;; Hydra
-;;   (defhydra hydra-flycheck ()
-;;     "Flycheck"
-;;     ("l" helm-flycheck "list errors")
-;;     ("n" flycheck-next-error "next error")
-;;     ("p" flycheck-previous-error "previous error")
-;;     ("q" nil "quit" :color blue)))
-
 (use-package yasnippet
   :ensure t
   :commands (yas-global-mode yas-minor-mode yas-expand)
   :init
   (yas-global-mode 1)
   :config
-
-  ;; (use-package helm-c-yasnippet
-  ;;   :bind ("C-c y" . helm-yas-complete)
-  ;;   :config
-  ;;   (setq helm-yas-not-display-dups nil)
-  ;;   (setq helm-yas-display-key-on-candidate t))
   (modeline-remove-lighter 'yas-minor-mode)
 
   ;; Functions
@@ -1417,21 +1083,7 @@ region, operate on a single line. Otherwise, operate on region."
   (add-hook 'post-command-hook #'change-cursor-color-when-can-expand)
 
   ;; Variables
-;;  (add-to-list 'ac-sources 'ac-source-yasnippet)
   (setq yas-prompt-functions '(yas-ido-prompt yas-x-prompt yas-no-prompt)))
-
-; Commands
-(defun tim/electric-semicolon ()
-  (interactive)
-  (let ((limit (save-excursion
-                 (beginning-of-line)
-                 (point))))
-    (end-of-line)
-    (when (not (looking-back ";" limit))
-      (insert ";"))))
-
-;; (defun tim/enable-electric-semicolon ()
-;;   (local-set-key (kbd ";") #'tim/electric-semicolon))
 
 ; Functions
 (defun subword-setup ()
@@ -1448,8 +1100,6 @@ region, operate on a single line. Otherwise, operate on region."
 
 ; Hooks
 (add-hook 'prog-mode-hook #'enable-which-function-mode)
-;; (add-hook 'java-mode-hook #'tim/enable-electric-semicolon)
-;; (add-hook 'js2-mode-hook #'tim/enable-electric-semicolon)
 (add-hook 'prog-mode-hook #'subword-setup)
 
 ; Variables
@@ -1501,16 +1151,6 @@ region, operate on a single line. Otherwise, operate on region."
 ; Commands
 (put 'scroll-left 'disabled nil)
 
-;; ; Hydra
-;; (defhydra hydra-scroll ()
-;;   "Scroll"
-;;   ("<" scroll-left "left")
-;;   (">" scroll-right "right"))
-
-;; ; Key Bindings
-;; (global-set-key (kbd "C-x <") #'hydra-scroll/body)
-;; (global-set-key (kbd "C-x >") #'hydra-scroll/body)
-
 ; Variables
 (setq recenter-positions '(top middle bottom))
 (setq scroll-preserve-screen-position 'always)
@@ -1531,20 +1171,6 @@ region, operate on a single line. Otherwise, operate on region."
 
   ;; Variables
   (setq anzu-mode-lighter ""))
-
-;; (use-package helm-ag
-;;   :config
-;;   (setq helm-ag-base-command "/usr/local/bin/ag --nocolor --nogroup")
-;;   (setq helm-ag-insert-at-point 'symbol))
-
-;; (use-package helm-swoop
-;;   :bind ("C-c h" . helm-swoop)
-;;   :config
-;;   (bind-key "M-h" #'helm-swoop-from-isearch isearch-mode-map))
-
-;; (use-package flx-isearch
-;;   :bind (("C-M-r" . flx-isearch-backward)
-;;          ("C-M-s" . flx-isearch-forward)))
 
 (use-package grep
   :ensure nil
@@ -1654,43 +1280,6 @@ char if successful."
 
 (swap-args 'quit-window)
 
-; Functions
-(defun define-search-service (name url)
-  "Create command for looking up query using a specific service."
-  (eval `(defun ,(intern (downcase name)) ()
-           ,(format "Look up query or contents of region (if any) on %s." name)
-           (interactive)
-           (let ((query (if mark-active
-                            (buffer-substring (region-beginning) (region-end))
-                          (read-string (format "%s: " ,name)))))
-             (browse-url (concat ,url query))))))
-
-(define-search-service
-  "Google" "http://www.google.com/search?ie=utf-8&oe=utf-8&q=")
-;; (define-search-service
-;;   "StartPage" "https://startpage.com/do/metasearch.pl?query=")
-(define-search-service
-  "Thesaurus" "http://thesaurus.com/browse/")
-(define-search-service
-  "Urbandictionary" "http://www.urbandictionary.com/define.php?term=")
-(define-search-service
-  "Wiktionary" "https://en.wiktionary.org/wiki/")
-(define-search-service
-  "Wikipedia" "https://en.wikipedia.org/wiki/")
-
-;; ; Hydra
-;; (defhydra hydra-search (:color blue)
-;;   "Search"
-;;   ("g" google "Google")
-;;   ("s" startpage "StartPage")
-;;   ("t" thesaurus "Thesaurus")
-;;   ("u" urbandictionary "Urbandictionary")
-;;   ("d" wiktionary "Wiktionary")
-;;   ("w" wikipedia "Wikipedia"))
-
-;; ; Key Bindings
-;; (global-set-key (kbd "C-c s") #'hydra-search/body)
-
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;
@@ -1700,82 +1289,10 @@ char if successful."
 (use-package browse-at-remote
   :commands browse-at-remote/browse browse-at-remote/kill)
 
-;; (use-package diffview
-;;   :commands diffview-current)
-
-;; (use-package git-gutter
-;;   :commands git-gutter-mode
-;;   :init
-;;   (add-hook 'css-mode-hook #'git-gutter-mode)
-;;   (add-hook 'html-mode-hook #'git-gutter-mode)
-;;   (add-hook 'org-mode-hook #'git-gutter-mode)
-;;   (add-hook 'prog-mode-hook #'git-gutter-mode)
-;;   :config
-
-;;   (use-package git-gutter-fringe
-;;     :config
-;;     ;; Functions
-;;     (defun git-gutter-fringe-change-fringe ()
-;;      (if linum-mode
-;;          (setq-local git-gutter-fr:side 'right-fringe)
-;;        (setq-local git-gutter-fr:side 'left-fringe)))
-
-;;     ;; Hooks
-;;     (add-hook 'linum-mode-hook #'git-gutter-fringe-change-fringe))
-
-;;   (modeline-remove-lighter 'git-gutter-mode)
-
-;;   ;; Hydra
-;;   (defhydra hydra-git-gutter (:color pink)
-;;     "Git Gutter"
-;;     ("SPC" git-gutter:mark-hunk "mark")
-;;     ("n" git-gutter:next-hunk "next")
-;;     ("p" git-gutter:previous-hunk "prev")
-;;     ("d" git-gutter:popup-hunk "diff")
-;;     ("s" git-gutter:stage-hunk "stage")
-;;     ("r" git-gutter:revert-hunk "revert")
-;;     ("m" magit-status "magit" :color blue))
-
-;;   ;; Key Bindings
-;;   (bind-key "g g" #'hydra-git-gutter/body custom-keys-mode-prefix-map))
-
-;; (use-package git-messenger
-;;   :config
-;;   ;; Commands
-;;   (defun git-messenger:popup-message-with-details ()
-;;     (interactive)
-;;     (let ((current-prefix-arg (not current-prefix-arg)))
-;;       (git-messenger:popup-message)))
-
-;;   ;; Key Bindings
-;;   (bind-key "p" #'git-messenger:popup-message-with-details vc-prefix-map))
-
 ;; (use-package git-wip-timemachine
 ;;   :ensure nil
 ;;   :load-path "lisp/git-wip-timemachine"
 ;;   :commands git-wip-timemachine)
-
-;; (use-package helm-github-stars
-;;   :commands helm-github-stars
-;;   :config
-;;   (setq helm-github-stars-username "itsjeyd"))
-
-;; (use-package helm-open-github
-;;   :commands (helm-open-github-from-commit
-;;              helm-open-github-from-file
-;;              helm-open-github-from-issues
-;;              helm-open-github-from-pull-requests)
-;;   :config
-;;   (defun helm-open-github-from-issues (arg)
-;;     (interactive "P")
-;;     (let ((host (helm-open-github--host))
-;;           (url (helm-open-github--remote-url)))
-;;       (when arg
-;;         (remhash url helm-open-github--issues-cache))
-;;       (if (not (string= host "github.com"))
-;;           (helm-open-github--from-issues-direct host)
-;;         (helm :sources '(helm-open-github--from-issues-source)
-;;               :buffer "*open github*")))))
 
 (use-package magit
   :commands magit-status
@@ -1877,31 +1394,12 @@ Adapted from: http://paste.lisp.org/display/135818."
     (deactivate-mark)
     (goto-char (point-min))))
 
-;; (defun hide-lines-below-current-column (orig &optional arg)
-;;   "Use selective display to hide lines below current column.
-;; With a prefix arg, clear selective display."
-;;   (interactive "P")
-;;   (if arg
-;;       (funcall orig -1)
-;;     (funcall orig (+ (current-column) 1))))
-
-;; (advice-add 'set-selective-display :around #'hide-lines-below-current-column)
-
 ; Key Bindings
 (global-set-key (kbd "C-x n i") #'narrow-to-region-indirect-buffer)
 (define-key custom-keys-mode-prefix-map (kbd "t t") #'toggle-truncate-lines)
 
 ; Variables
 (setq-default truncate-lines t)
-
-
-
-;;;;;;;;;;;;;;
-;;; Webdev ;;;
-;;;;;;;;;;;;;;
-
-;; (use-package web-beautify
-;;   :commands (web-beautify-css web-beautify-html web-beautify-js))
 
 
 
@@ -2026,20 +1524,9 @@ window that will be added to the current window layout."
 ;;; Writing ;;;
 ;;;;;;;;;;;;;;;
 
-;; (use-package flyspell
-;;   :commands (flyspell-mode flyspell-prog-mode)
-;;   :config
-;;   (defun flyspell-buffer-again (&optional no-query force-save)
-;;     (flyspell-buffer))
-
-;;   (advice-add 'ispell-pdict-save :after #'flyspell-buffer-again))
-
 (use-package markdown-mode
   :commands markdown-mode
   :config
-
-  ;; (use-package gh-md
-  ;;   :commands (gh-md-render-region gh-md-render-buffer))
 
   ;; ;; Functions
   ;; (defun markdown-add-electric-pairs ()
@@ -2049,9 +1536,6 @@ window that will be added to the current window layout."
   ;; ;; Hooks
   ;; (add-hook 'markdown-mode-hook #'markdown-add-electric-pairs)
   )
-
-;; (use-package writeroom-mode
-;;   :commands writeroom-mode)
 
 ;; ; Commands
 ;; (defun ispell-word-then-abbrev (local)
