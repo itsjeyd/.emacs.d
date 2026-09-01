@@ -1,3 +1,5 @@
+;; -*- lexical-binding: t; -*-
+
 (package-initialize)
 (setq package-enable-at-startup nil)
 
@@ -20,6 +22,7 @@
 ;;;;;;;;;;;;;
 
 ;; (add-to-list 'load-path "~/.emacs.d/lisp/")
+(add-to-list 'load-path "~/.emacs.d/elpa/yasnippet-0.14.3")
 
 
 
@@ -1370,11 +1373,10 @@ region, operate on a single line. Otherwise, operate on region."
 ;;     ("q" nil "quit" :color blue)))
 
 (use-package yasnippet
-  :commands yas-minor-mode
+  :ensure t
+  :commands (yas-global-mode yas-minor-mode yas-expand)
   :init
-  ;; (add-hook 'css-mode-hook #'yas-minor-mode)
-  (add-hook 'org-mode-hook #'yas-minor-mode)
-  (add-hook 'prog-mode-hook #'yas-minor-mode)
+  (yas-global-mode 1)
   :config
 
   ;; (use-package helm-c-yasnippet
@@ -1382,8 +1384,6 @@ region, operate on a single line. Otherwise, operate on region."
   ;;   :config
   ;;   (setq helm-yas-not-display-dups nil)
   ;;   (setq helm-yas-display-key-on-candidate t))
-
-  (yas-reload-all)
   (modeline-remove-lighter 'yas-minor-mode)
 
   ;; Functions
