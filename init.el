@@ -991,10 +991,18 @@ region, operate on a single line. Otherwise, operate on region."
              ("s-u" . org-shiftup))
 
   ;; Variables
+  (setq org-agenda-deadline-leaders '("Due today:  " "In %3d days: " "%2d days ago: "))
   (setq org-agenda-files
         '("~/OpenCraft/tickets.org"))
+  (setq org-agenda-prefix-format
+        '((agenda . " %i   %?-12t% s")
+          (todo . " %i %-12:c")
+          (tags . " %i %-12:c")
+          (search . " %i %-12:c")))
+  (setq org-agenda-scheduled-leaders '("Sched: " "Sched (%dx): "))
   (setq org-agenda-show-future-repeats nil)
   (setq org-agenda-skip-scheduled-if-done t)
+  (setq org-agenda-skip-deadline-if-done t)
   (setq org-agenda-todo-ignore-deadlines 'all)
   (setq org-agenda-todo-ignore-scheduled 'all)
   (setq org-babel-python-command "/usr/bin/python3")
