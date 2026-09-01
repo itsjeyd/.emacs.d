@@ -255,7 +255,7 @@
   (bind-keys :map iso-transl-ctl-x-8-map
              ("a" . "⟶")
              ("b" . "💡")
-             ("c" . "☑️")
+             ("c" . "✓")
              ("l" . "⚡" )))
 
 ;; (use-package move-text
