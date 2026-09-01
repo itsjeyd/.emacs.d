@@ -269,22 +269,22 @@
     "MC"
     ("n" mc/mark-next-like-this "next")
     ("p" mc/mark-previous-like-this "prev")
-;;     ("S" hydra-mc-skip/body "skip" :color blue)
-;;     ("U" hydra-mc-unmark/body "unmark" :color blue)
+    ("S" hydra-mc-skip/body "skip" :color blue)
+    ("U" hydra-mc-unmark/body "unmark" :color blue)
     ("o" hydra-mc-operate/body "operate" :color blue)
     ("q" nil "exit" :color blue))
 
+  (defhydra hydra-mc-skip ()
+    "MC (skip)"
+    ("n" mc/skip-to-next-like-this "next")
+    ("p" mc/skip-to-previous-like-this "prev")
+    ("q" hydra-mc/body "exit" :color blue))
 
-;;   (defhydra hydra-mc-skip ()
-;;     "MC (skip)"
-;;     ("n" mc/skip-to-next-like-this "next")
-;;     ("p" mc/skip-to-previous-like-this "prev")
-;;     ("q" hydra-mc/body "exit" :color blue))
-;;   (defhydra hydra-mc-unmark ()
-;;     "MC (unmark)"
-;;     ("n" mc/unmark-next-like-this "next")
-;;     ("p" mc/unmark-previous-like-this "prev")
-;;     ("q" hydra-mc/body "exit" :color blue))
+  (defhydra hydra-mc-unmark ()
+    "MC (unmark)"
+    ("n" mc/unmark-next-like-this "next")
+    ("p" mc/unmark-previous-like-this "prev")
+    ("q" hydra-mc/body "exit" :color blue))
 
   (defhydra hydra-mc-operate ()
     "MC (operate)"
@@ -293,16 +293,16 @@
     ("r" mc/reverse-regions "reverse")
     ("q" hydra-mc/body "exit" :color blue))
 
-;;   (defhydra hydra-mc-all ()
-;;     "MC (all)"
-;;     ("d" mc/mark-all-dwim "dwim")
-;;     ("l" mc/mark-all-like-this "like this")
-;;     ("r" mc/mark-all-in-region "region")
+  (defhydra hydra-mc-all ()
+    "MC (all)"
+    ("d" mc/mark-all-dwim "dwim")
+    ("l" mc/mark-all-like-this "like this")
+    ("r" mc/mark-all-in-region "region"))
 
   ;; Key Bindings
   (bind-keys :map custom-keys-mode-prefix-map
              ("m" . hydra-mc/body)
-;;              ("a" . hydra-mc-all/body)
+             ("a" . hydra-mc-all/body)
   ))
 
 (use-package utils
@@ -470,16 +470,16 @@ region, operate on a single line. Otherwise, operate on region."
                  (info ,topic ,bufname)))))))
 
 ; Hydra
-;; (defhydra hydra-info (:color blue)
-;;   "Info"
-;;   ("e" (funcall (info-display-topic "emacs")) "Emacs")
-;;   ("l" (funcall (info-display-topic "elisp")) "Elisp")
-;;   ("m" (funcall (info-display-topic "magit")) "Magit")
-;;   ("o" (funcall (info-display-topic "org")) "Org Mode")
-;;   ("S" (funcall (info-display-topic "sicp")) "SICP"))
+(defhydra hydra-info (:color blue)
+  "Info"
+  ("e" (funcall (info-display-topic "emacs")) "Emacs")
+  ("l" (funcall (info-display-topic "elisp")) "Elisp")
+  ("m" (funcall (info-display-topic "magit")) "Magit")
+  ("o" (funcall (info-display-topic "org")) "Org Mode")
+  ("S" (funcall (info-display-topic "sicp")) "SICP"))
 
-;; ; Key Bindings
-;; (define-key custom-keys-mode-prefix-map (kbd "i") #'hydra-info/body)
+; Key Bindings
+(define-key custom-keys-mode-prefix-map (kbd "i") #'hydra-info/body)
 
 ; Variables
 (setq help-window-select t)
@@ -754,21 +754,21 @@ region, operate on a single line. Otherwise, operate on region."
     ("C" goto-char "goto char")
     ("L" goto-line "goto line"))
 
-;;   (defhydra hydra-avy-copy (:color blue)
-;;     "Avy copy"
-;;     ("l" avy-copy-line "line")
-;;     ("r" avy-copy-region "region"))
+  (defhydra hydra-avy-copy (:color blue)
+    "Avy copy"
+    ("l" avy-copy-line "line")
+    ("r" avy-copy-region "region"))
 
-;;   (defhydra hydra-avy-move (:color blue)
-;;     "Avy move"
-;;     ("l" avy-move-line "line")
-;;     ("r" avy-move-region "region"))
+  (defhydra hydra-avy-move (:color blue)
+    "Avy move"
+    ("l" avy-move-line "line")
+    ("r" avy-move-region "region"))
 
   ;; Key Bindings
   (bind-key "M-g" #'hydra-avy-jump/body)
-;;   (bind-keys :map custom-keys-mode-prefix-map
-;;              ("C-w" . hydra-avy-move/body)
-;;              ("M-w" . hydra-avy-copy/body))
+  (bind-keys :map custom-keys-mode-prefix-map
+             ("C-w" . hydra-avy-move/body)
+             ("M-w" . hydra-avy-copy/body))
 
   ;; Variables
   (setq avy-background t)
@@ -1190,14 +1190,14 @@ region, operate on a single line. Otherwise, operate on region."
   ;; Variables
   (setq rg-executable "/opt/homebrew/bin/rg"))
 
-;; (use-package smartscan
-;;   :config
-;;   (global-smartscan-mode t)
-;;   (unbind-key "M-n" smartscan-map)
-;;   (unbind-key "M-p" smartscan-map)
-;;   (bind-keys :map smartscan-map
-;;              ("s-n" . smartscan-symbol-go-forward)
-;;              ("s-p" . smartscan-symbol-go-backward)))
+(use-package smartscan
+  :config
+  (global-smartscan-mode t)
+  (unbind-key "M-n" smartscan-map)
+  (unbind-key "M-p" smartscan-map)
+  (bind-keys :map smartscan-map
+             ("s-n" . smartscan-symbol-go-forward)
+             ("s-p" . smartscan-symbol-go-backward)))
 
 ;; Advice
 (defun occur-rename-buffer-after-search-string
@@ -1492,22 +1492,22 @@ window that will be added to the current window layout."
                 (and size (prefix-numeric-value size))
                 direction))
 
-;; ; Hydra
-;; (defhydra hydra-resize-window ()
-;;   "Make window(s)"
-;;   ("}" enlarge-window-horizontally "wider")
-;;   ("{" shrink-window-horizontally "narrower")
-;;   ("^" enlarge-window "taller")
-;;   ("v" shrink-window "shorter")
-;;   ("+" balance-windows "balanced")
-;;   ("-" shrink-window-if-larger-than-buffer "fit"))
+; Hydra
+(defhydra hydra-resize-window ()
+  "Make window(s)"
+  ("}" enlarge-window-horizontally "wider")
+  ("{" shrink-window-horizontally "narrower")
+  ("^" enlarge-window "taller")
+  ("v" shrink-window "shorter")
+  ("+" balance-windows "balanced")
+  ("-" shrink-window-if-larger-than-buffer "fit"))
 
 ; Key Bindings
 (global-set-key (kbd "C-c 2") #'split-root-window-below)
 (global-set-key (kbd "C-c 3") #'split-root-window-right)
-;; (global-set-key (kbd "C-x {") #'hydra-resize-window/body)
-;; (global-set-key (kbd "C-x }") #'hydra-resize-window/body)
-;; (global-set-key (kbd "C-x ^") #'hydra-resize-window/body)
+(global-set-key (kbd "C-x {") #'hydra-resize-window/body)
+(global-set-key (kbd "C-x }") #'hydra-resize-window/body)
+(global-set-key (kbd "C-x ^") #'hydra-resize-window/body)
 (define-key custom-keys-mode-prefix-map (kbd "c s") #'change-split)
 (define-key custom-keys-mode-prefix-map (kbd "k o") #'kill-other-buffer-and-window)
 (define-key custom-keys-mode-prefix-map (kbd "k t") #'kill-buffer-and-window)
