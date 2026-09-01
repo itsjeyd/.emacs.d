@@ -658,7 +658,7 @@ region, operate on a single line. Otherwise, operate on region."
 
 ;; (advice-add 'load-theme :after #'load-custom-theme-settings)
 
-(load-theme 'kaolin-valley-light t)
+(load-theme 'kaolin-mono-light t)
 
 ; Tooltips
 (tooltip-mode nil)
