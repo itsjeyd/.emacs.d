@@ -522,7 +522,7 @@ region, operate on a single line. Otherwise, operate on region."
 ;;; Help ;;;
 ;;;;;;;;;;;;
 
-(find-function-setup-keys)
+(find-function-mode)
 
 (use-package which-key
   :config
