@@ -258,8 +258,8 @@
              ("c" . "✓")
              ("l" . "⚡" )))
 
-;; (use-package move-text
-;;   :commands (move-text-up move-text-down))
+(use-package move-text
+  :commands (move-text-up move-text-down))
 
 (use-package multiple-cursors
   :config
@@ -351,17 +351,18 @@ region, operate on a single line. Otherwise, operate on region."
 ; Hooks
 (add-hook 'before-save-hook #'delete-trailing-whitespace)
 
-;; (defhydra hydra-move-text ()
-;;   "Move text"
-;;   ("u" move-text-up "up")
-;;   ("d" move-text-down "down"))
+(defhydra hydra-move-text ()
+  "Move text"
+  ("u" move-text-up "up")
+  ("d" move-text-down "down")
+  ("q" nil "exit" :color blue))
 
 ; Key Bindings
 (global-set-key (kbd "C-w") #'kill-region-with-arg)
 (global-set-key (kbd "M-w") #'kill-ring-save-with-arg)
 (global-set-key (kbd "M-=") #'count-words)
-;; (define-key custom-keys-mode-prefix-map (kbd "u") #'hydra-move-text/body)
-;; (define-key custom-keys-mode-prefix-map (kbd "d") #'hydra-move-text/body)
+(define-key custom-keys-mode-prefix-map (kbd "u") #'hydra-move-text/body)
+(define-key custom-keys-mode-prefix-map (kbd "d") #'hydra-move-text/body)
 
 ; Variables
 (setq cua-enable-cua-keys nil)
