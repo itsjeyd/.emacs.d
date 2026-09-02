@@ -297,7 +297,8 @@
     "MC (all)"
     ("d" mc/mark-all-dwim "dwim")
     ("l" mc/mark-all-like-this "like this")
-    ("r" mc/mark-all-in-region "region"))
+    ("r" mc/mark-all-in-region "region")
+    ("q" nil "exit" :color blue))
 
   ;; Key Bindings
   (bind-keys :map custom-keys-mode-prefix-map
@@ -476,7 +477,8 @@ region, operate on a single line. Otherwise, operate on region."
   ("l" (funcall (info-display-topic "elisp")) "Elisp")
   ("m" (funcall (info-display-topic "magit")) "Magit")
   ("o" (funcall (info-display-topic "org")) "Org Mode")
-  ("S" (funcall (info-display-topic "sicp")) "SICP"))
+  ("S" (funcall (info-display-topic "sicp")) "SICP")
+  ("q" nil "exit" :color blue))
 
 ; Key Bindings
 (define-key custom-keys-mode-prefix-map (kbd "i") #'hydra-info/body)
